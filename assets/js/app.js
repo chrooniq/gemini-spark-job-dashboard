@@ -194,33 +194,33 @@ function getCompanyTechBadge(companyName, companyColor) {
   
   if (c.includes('human') || c.includes('intelligence')) {
     return {
-      gradient: 'linear-gradient(135deg, #1e3a8a, #3b82f6)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4c0 1.1-.4 2.1-1.1 2.8L17 11h-3v3h-4v-3H7l2.1-2.2A4 4 0 0 1 8 6a4 4 0 0 1 4-4z"/><circle cx="12" cy="18" r="3"/></svg>`
+      gradient: 'linear-gradient(135deg, #1e3a8a, #2563eb)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.1-.4 2.1-1.1 2.8L17 11h-3v3h-4v-3H7l2.1-2.2A4 4 0 0 1 8 6a4 4 0 0 1 4-4z"/><circle cx="12" cy="18" r="3"/></svg>`
     };
   } else if (c.includes('huzzle')) {
     return {
-      gradient: 'linear-gradient(135deg, #701a75, #ec4899)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
+      gradient: 'linear-gradient(135deg, #701a75, #d946ef)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
     };
   } else if (c.includes('fasttrack') || c.includes('business')) {
     return {
-      gradient: 'linear-gradient(135deg, #14532d, #22c55e)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>`
+      gradient: 'linear-gradient(135deg, #065f46, #10b981)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/><line x1="19" y1="12" x2="5" y2="12"/></svg>`
     };
   } else if (c.includes('remotive') || c.includes('remote')) {
     return {
-      gradient: 'linear-gradient(135deg, #0f766e, #14b8a6)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`
+      gradient: 'linear-gradient(135deg, #0f766e, #06b6d4)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`
     };
   } else if (c.includes('jobicy') || c.includes('himalayas')) {
     return {
-      gradient: 'linear-gradient(135deg, #c2410c, #f97316)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`
+      gradient: 'linear-gradient(135deg, #9a3412, #f97316)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`
     };
   } else {
     return {
-      gradient: 'linear-gradient(135deg, #1b3027, #2d4f41)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`
+      gradient: 'linear-gradient(135deg, #1b3027, #16a34a)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`
     };
   }
 }

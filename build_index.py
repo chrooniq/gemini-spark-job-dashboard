@@ -2,7 +2,7 @@
 """
 Gemini Spark — Cleaned Streamlined Multi-Page SaaS Career Intelligence Portal Builder
 5 Core Dedicated Pages (Dashboard, All Jobs, New Matches, Saved Jobs, Applied Jobs),
-Animated Sidebar, Pixel-Style Tech Badges, Clean Topbar, and Embedded Stylesheet.
+Animated Sidebar, High-Definition Pixel Tech Badges, Clean Topbar, and Embedded Stylesheet.
 """
 
 import os
@@ -61,7 +61,7 @@ index_html = f"""<!DOCTYPE html>
     <aside class="sidebar" aria-label="Portal Navigation">
       <div>
         <!-- Brand Logo -->
-        <div class="sidebar-brand-row">
+        <div class="sidebar-brand-row" onclick="navigateTo('dashboard')">
           <div class="brand-dot-logo"></div>
           <div class="brand-title-text">jobi</div>
         </div>
@@ -71,7 +71,7 @@ index_html = f"""<!DOCTYPE html>
           <div class="sidebar-avatar">SM</div>
           <div class="sidebar-user-name">
             <span>Sohaib Mahmood</span>
-            <svg class="svg-icon" style="width: 12px; height: 12px;" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+            <svg class="svg-icon" style="width: 12px; height: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
           <div class="sidebar-user-role">GoHighLevel Developer</div>
         </div>
@@ -80,34 +80,34 @@ index_html = f"""<!DOCTYPE html>
         <nav class="sidebar-nav-group">
           <!-- 1. Dashboard -->
           <button class="nav-link-btn active" data-route="dashboard">
-            <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
             <span>Dashboard</span>
           </button>
 
           <!-- 2. All Jobs -->
           <button class="nav-link-btn" data-route="jobs">
-            <svg class="svg-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
             <span>All Jobs</span>
             <span class="nav-counter-pill" id="cntSidebarAllJobs">11</span>
           </button>
 
           <!-- 3. New Matches -->
           <button class="nav-link-btn" data-route="matches">
-            <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             <span>New Matches</span>
             <span class="nav-counter-pill" id="cntSidebarNewMatches">11</span>
           </button>
 
           <!-- 4. Saved Jobs -->
           <button class="nav-link-btn" data-route="saved">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
             <span>Saved Jobs</span>
             <span class="nav-counter-pill" id="cntSidebarSaved">0</span>
           </button>
 
           <!-- 5. Applied Jobs (Application Tracker) -->
           <button class="nav-link-btn" data-route="applied">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             <span>Applied Jobs</span>
             <span class="nav-counter-pill" id="cntSidebarApplied">0</span>
           </button>
@@ -127,7 +127,7 @@ index_html = f"""<!DOCTYPE html>
         </div>
 
         <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="sidebar-sub-btn">
-          <svg class="svg-icon" style="width: 15px; height: 15px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <svg class="svg-icon" style="width: 15px; height: 15px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           <span>Live Portfolio</span>
         </a>
       </div>
@@ -153,7 +153,7 @@ index_html = f"""<!DOCTYPE html>
 
           <!-- ⚡ Scrape New Jobs Button -->
           <button id="btnScrapeJobs" class="btn-scrape-cta" title="Scrape & refresh GoHighLevel jobs in real-time">
-            <svg class="svg-icon" style="width: 14px; height: 14px; stroke: #ffffff; fill: none;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             <span>Scrape New Jobs</span>
           </button>
         </div>
@@ -193,7 +193,7 @@ index_html = f"""<!DOCTYPE html>
               <div class="stat-sub-label">Fresh GHL Jobs (0–7D)</div>
             </div>
             <div class="stat-lime-circle">
-              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
           </div>
 
@@ -203,7 +203,7 @@ index_html = f"""<!DOCTYPE html>
               <div class="stat-sub-label">New Discovered</div>
             </div>
             <div class="stat-lime-circle">
-              <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </div>
           </div>
 
@@ -213,7 +213,7 @@ index_html = f"""<!DOCTYPE html>
               <div class="stat-sub-label">Active Opportunities</div>
             </div>
             <div class="stat-lime-circle">
-              <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             </div>
           </div>
 
@@ -223,7 +223,7 @@ index_html = f"""<!DOCTYPE html>
               <div class="stat-sub-label">Top Fit Score</div>
             </div>
             <div class="stat-lime-circle">
-              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
           </div>
         </div>
@@ -286,7 +286,7 @@ index_html = f"""<!DOCTYPE html>
       </section>
 
       <!-- ====================================================================
-           PAGE 2: ALL JOBS (Main Database with Comprehensive Filter Toolbar)
+           PAGE 2: ALL JOBS (Main Database with Clean Toolbar)
            ==================================================================== -->
       <section class="view-content" id="page-jobs" style="display: none;">
         <!-- Header -->
@@ -304,56 +304,54 @@ index_html = f"""<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- Full Filter & Sort Toolbar (With Dedicated Search) -->
+        <!-- Clean Compact Toolbar -->
         <div class="all-jobs-toolbar">
-          <div class="toolbar-upper-row">
-            <!-- Dedicated Job Search Input -->
-            <div class="toolbar-search-wrap">
-              <svg class="search-svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" id="jobsSearchInput" class="toolbar-search-input" placeholder="Search by title, skill, company...">
-            </div>
+          <!-- Dedicated Job Search Input -->
+          <div class="toolbar-search-wrap">
+            <svg class="search-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="jobsSearchInput" class="toolbar-search-input" placeholder="Search by title, skill, company...">
+          </div>
 
-            <div class="toolbar-controls-group">
-              <!-- Freshness Filter -->
-              <select id="filterFreshness" class="filter-select">
-                <option value="all">Freshness: All (0–7D)</option>
-                <option value="today">Today (0D)</option>
-                <option value="1-3-days">1–3 Days Ago</option>
-                <option value="4-7-days">4–7 Days Ago</option>
-              </select>
+          <div class="toolbar-controls-group">
+            <!-- Freshness Filter -->
+            <select id="filterFreshness" class="filter-select">
+              <option value="all">Freshness: All (0–7D)</option>
+              <option value="today">Today (0D)</option>
+              <option value="1-3-days">1–3 Days Ago</option>
+              <option value="4-7-days">4–7 Days Ago</option>
+            </select>
 
-              <!-- Match Score Filter -->
-              <select id="filterMatch" class="filter-select">
-                <option value="all">Match: All Scores</option>
-                <option value="90">90%+ Match</option>
-                <option value="80">80%+ Match</option>
-                <option value="70">70%+ Match</option>
-              </select>
+            <!-- Match Score Filter -->
+            <select id="filterMatch" class="filter-select">
+              <option value="all">Match: All Scores</option>
+              <option value="90">90%+ Match</option>
+              <option value="80">80%+ Match</option>
+              <option value="70">70%+ Match</option>
+            </select>
 
-              <!-- Work Mode Filter -->
-              <select id="filterWorkMode" class="filter-select">
-                <option value="all">Work Mode: All</option>
-                <option value="remote">100% Remote</option>
-                <option value="hybrid">Hybrid</option>
-                <option value="onsite">Onsite</option>
-              </select>
+            <!-- Work Mode Filter -->
+            <select id="filterWorkMode" class="filter-select">
+              <option value="all">Work Mode: All</option>
+              <option value="remote">100% Remote</option>
+              <option value="hybrid">Hybrid</option>
+              <option value="onsite">Onsite</option>
+            </select>
 
-              <!-- Sorting -->
-              <select id="sortJobsSelect" class="filter-select">
-                <option value="newest">Sort: Newest First</option>
-                <option value="match-desc">Sort: Highest Match</option>
-                <option value="salary-desc">Sort: Highest Salary</option>
-                <option value="company-az">Sort: Company A-Z</option>
-              </select>
-            </div>
+            <!-- Sorting -->
+            <select id="sortJobsSelect" class="filter-select">
+              <option value="newest">Sort: Newest First</option>
+              <option value="match-desc">Sort: Highest Match</option>
+              <option value="salary-desc">Sort: Highest Salary</option>
+              <option value="company-az">Sort: Company A-Z</option>
+            </select>
 
             <!-- View Layout Toggle (Grid vs List) -->
             <div class="view-toggle-wrap">
               <button class="view-toggle-btn active" id="btnViewGrid" title="Grid View">
-                <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
               </button>
               <button class="view-toggle-btn" id="btnViewList" title="List View">
-                <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
               </button>
             </div>
           </div>
@@ -367,7 +365,7 @@ index_html = f"""<!DOCTYPE html>
         <!-- Empty State -->
         <div class="empty-state" id="allJobsEmpty" style="display: none;">
           <div class="empty-icon-wrap">
-            <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
           <h3>No matching GoHighLevel jobs found</h3>
           <p>Try adjusting your search criteria or trigger a live scrape across public feeds.</p>
@@ -408,7 +406,7 @@ index_html = f"""<!DOCTYPE html>
 
         <div class="empty-state" id="savedJobsEmpty" style="display: none;">
           <div class="empty-icon-wrap">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
           </div>
           <h3>No saved opportunities yet</h3>
           <p>Click the bookmark icon or "☆ Save" button on any job card in All Jobs to pin it here.</p>
@@ -619,4 +617,4 @@ index_html = f"""<!DOCTYPE html>
 with open(index_html_path, "w", encoding="utf-8") as f:
     f.write(index_html)
 
-print("✓ index.html successfully compiled with 5 streamlined tabs, pixel-style card badges, and simplified topbar.")
+print("✓ index.html successfully compiled with fixed SVG attributes and clean All Jobs toolbar.")
