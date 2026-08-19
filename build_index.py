@@ -3,6 +3,7 @@
 Gemini Spark — HTML Index Builder
 Compiles the "Jobi" styled Dashboard matching the reference design layout:
 Soft Sage Canvas, Crisp White Panels, Forest Green Accents, and Neon Lime Badges.
+Embeds full CSS directly in <style> to prevent any unstyled flash on GitHub Pages.
 """
 
 import os
@@ -20,12 +21,19 @@ if sys.platform == "win32":
 base_dir = os.path.dirname(os.path.abspath(__file__))
 latest_json_path = os.path.join(base_dir, "data", "latest.json")
 index_html_path = os.path.join(base_dir, "index.html")
+css_path = os.path.join(base_dir, "assets", "css", "style.css")
 
 if os.path.exists(latest_json_path):
     with open(latest_json_path, "r", encoding="utf-8") as f:
         latest_json_str = f.read()
 else:
     latest_json_str = '{"metadata": {}, "jobs": []}'
+
+if os.path.exists(css_path):
+    with open(css_path, "r", encoding="utf-8") as f:
+        embedded_css = f.read()
+else:
+    embedded_css = ""
 
 index_html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -38,6 +46,9 @@ index_html = f"""<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="./assets/css/style.css">
+  <style>
+{embedded_css}
+  </style>
   <script>
     // Embedded fallback store for direct file:// and static server viewing
     window.FALLBACK_DATA = {latest_json_str};
@@ -384,4 +395,4 @@ index_html = f"""<!DOCTYPE html>
 with open(index_html_path, "w", encoding="utf-8") as f:
     f.write(index_html)
 
-print("✓ index.html successfully compiled with Jobi dashboard layout.")
+print("✓ index.html successfully compiled with embedded CSS and Jobi layout.")

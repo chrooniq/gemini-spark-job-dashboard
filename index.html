@@ -9,14 +9,1224 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="./assets/css/style.css">
+  <style>
+/* ==========================================================================
+   GEMINI SPARK — GOHIGHLEVEL CAREER INTELLIGENCE DASHBOARD
+   Design System: "Jobi" Style Clean SaaS Dashboard (Dribbble Concept)
+   Color Palette:
+     Canvas: Soft Sage Gray-Green (#D2DED7)
+     Panels/Cards: Crisp White (#FFFFFF) & Soft Tint (#F8FAF8)
+     Primary Accent: Deep Forest Green (#233D32)
+     Highlight Badges: Neon Lime (#CBF32F)
+   ========================================================================== */
+
+:root {
+  --bg-canvas: #d2ded7;
+  --bg-panel: #ffffff;
+  --bg-subtle: #f8faf8;
+  --bg-input: #f0f4f2;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fcfdfc;
+
+  --text-main: #192a24;
+  --text-muted: #6b7c75;
+  --text-light: #94a39d;
+  --text-inverse: #ffffff;
+
+  --forest-green: #233d32;
+  --forest-green-hover: #192c24;
+  --forest-green-subtle: #e9f0ed;
+  
+  --neon-lime: #cbf32f;
+  --neon-lime-hover: #bde623;
+  --neon-lime-subtle: #f4fdcf;
+  --neon-lime-border: #b8e61e;
+
+  --emerald: #10b981;
+  --emerald-subtle: #dcfce7;
+  --amber: #f59e0b;
+  --amber-subtle: #fef3c7;
+  --rose: #f43f5e;
+  --rose-subtle: #ffe4e6;
+  --blue: #2563eb;
+  --blue-subtle: #eff6ff;
+
+  --border-subtle: #eef3f0;
+  --border-card: #e8f0ec;
+  --border-focus: #233d32;
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+
+  --shadow-sm: 0 2px 6px rgba(25, 42, 36, 0.03);
+  --shadow-md: 0 6px 20px rgba(25, 42, 36, 0.05);
+  --shadow-lg: 0 12px 36px rgba(25, 42, 36, 0.08);
+  --shadow-drawer: -8px 0 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-canvas) !important;
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding: 24px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+/* Main Outer App Frame (Exact Jobi Shape) */
+.dashboard-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  background-color: var(--bg-panel);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  min-height: calc(100vh - 48px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================================================================
+   LEFT SIDEBAR
+   ========================================================================== */
+.app-sidebar {
+  width: 220px;
+  background-color: #ffffff;
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px 16px;
+  flex-shrink: 0;
+}
+
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 6px;
+}
+
+.brand-dot-icon {
+  width: 26px;
+  height: 26px;
+  background-color: var(--neon-lime);
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-dot-icon::after {
+  content: '';
+  width: 13px;
+  height: 13px;
+  background-color: var(--forest-green);
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 6.5px;
+}
+
+.brand-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--forest-green);
+}
+
+/* User Profile Widget */
+.user-profile-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 6px 0;
+}
+
+.user-avatar-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #233d32, #3b6051);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(35, 61, 50, 0.12);
+  margin-bottom: 6px;
+  border: 2px solid #ffffff;
+}
+
+.user-name-box {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.user-name-box span:last-child {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.user-role-sub {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  font-weight: 600;
+  margin-top: 1px;
+}
+
+/* Navigation Links */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-item-btn:hover {
+  background-color: var(--bg-subtle);
+  color: var(--text-main);
+}
+
+.nav-item-btn.active {
+  background-color: var(--forest-green);
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 3px 8px rgba(35, 61, 50, 0.18);
+}
+
+.nav-item-btn .nav-icon {
+  font-size: 0.95rem;
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-badge-pill {
+  margin-left: auto;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 7px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.nav-item-btn.active .nav-badge-pill {
+  background: var(--neon-lime);
+  color: var(--forest-green);
+}
+
+/* Sidebar Bottom */
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.profile-completion-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 10px 12px;
+}
+
+.completion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.completion-pct {
+  color: var(--forest-green);
+  font-weight: 800;
+}
+
+.completion-track {
+  height: 5px;
+  background: #e2e8e5;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.completion-fill {
+  height: 100%;
+  background: var(--neon-lime);
+  border-radius: 9999px;
+}
+
+.sidebar-exit-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  transition: all 0.15s ease;
+}
+
+.sidebar-exit-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* ==========================================================================
+   MAIN VIEWPORT
+   ========================================================================== */
+.app-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fbfcfb;
+  overflow-y: auto;
+}
+
+/* Main Top Navigation */
+.main-top-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 32px 14px 32px;
+  gap: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.main-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.main-nav-link:hover, .main-nav-link.active {
+  color: var(--forest-green);
+  font-weight: 700;
+}
+
+.top-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-search-wrap {
+  position: relative;
+  width: 200px;
+}
+
+.top-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.82rem;
+  color: var(--text-light);
+  pointer-events: none;
+}
+
+.top-search-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px 0 34px;
+  background: var(--bg-input);
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  color: var(--text-main);
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.top-search-input:focus {
+  background: #ffffff;
+  border-color: var(--forest-green);
+  box-shadow: 0 0 0 2px var(--forest-green-subtle);
+  outline: none;
+}
+
+.icon-circle-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+}
+
+.btn-post-job {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--forest-green);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  box-shadow: 0 3px 8px rgba(35, 61, 50, 0.18);
+  transition: all 0.2s ease;
+}
+
+.btn-post-job:hover {
+  background: var(--forest-green-hover);
+  transform: translateY(-1px);
+}
+
+.btn-post-job.loading {
+  opacity: 0.75;
+  cursor: wait;
+}
+
+/* ==========================================================================
+   DASHBOARD BODY
+   ========================================================================== */
+.dashboard-content-body {
+  padding: 6px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Title & Live Status */
+.dashboard-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+}
+
+.live-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--forest-green-subtle);
+  border: 1px solid rgba(35, 61, 50, 0.1);
+  color: var(--forest-green);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--emerald);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--emerald);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ==========================================================================
+   4 TOP STAT / METRIC CARDS (Exact "Jobi" Style)
+   ========================================================================== */
+.stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-card-jobi {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.stat-card-jobi:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #dce7e1;
+}
+
+.stat-card-left .stat-num {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-main);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.1;
+}
+
+.stat-card-left .stat-lbl {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.stat-lime-badge {
+  width: 42px;
+  height: 42px;
+  background-color: var(--neon-lime);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--forest-green);
+  box-shadow: 0 2px 6px rgba(203, 243, 47, 0.35);
+}
+
+/* ==========================================================================
+   MIDDLE SECTION: CHART & RECENT MATCHES LIST
+   ========================================================================== */
+.analytics-middle-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 18px;
+}
+
+.panel-card {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.panel-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.time-pill-group {
+  display: flex;
+  align-items: center;
+  background: var(--bg-input);
+  padding: 3px;
+  border-radius: 9999px;
+  gap: 2px;
+}
+
+.time-pill {
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+}
+
+.time-pill.active {
+  background: var(--forest-green);
+  color: #ffffff;
+}
+
+.chart-container-box {
+  height: 190px;
+  position: relative;
+}
+
+/* Recent Matches Mini List */
+.recent-jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mini-job-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 11px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.mini-job-item:hover {
+  background: #ffffff;
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.mini-job-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mini-company-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: #ffffff;
+}
+
+.mini-job-info h4 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.mini-job-info p {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.mini-job-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mini-score-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--neon-lime-subtle);
+  color: var(--forest-green);
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--neon-lime-border);
+}
+
+/* ==========================================================================
+   FEED CONTROLS & GHL JOB CARDS
+   ========================================================================== */
+.feed-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.feed-heading {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.filter-pills-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter-btn-pill {
+  padding: 5px 12px;
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-btn-pill:hover {
+  border-color: var(--forest-green);
+  color: var(--forest-green);
+}
+
+.filter-btn-pill.active {
+  background: var(--forest-green);
+  color: #ffffff;
+  border-color: var(--forest-green);
+  font-weight: 700;
+}
+
+/* Job Cards Grid */
+.job-cards-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 16px;
+}
+
+.jobi-card {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.22s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.jobi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #cde0d7;
+}
+
+.jobi-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.jobi-company-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jobi-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+.jobi-company-meta h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.jobi-company-meta span {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.jobi-card-badges {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.jobi-fresh-tag {
+  font-size: 0.66rem;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+}
+
+.jobi-fresh-tag.today {
+  background: var(--neon-lime-subtle);
+  color: var(--forest-green);
+  border: 1px solid var(--neon-lime-border);
+}
+
+.jobi-fresh-tag.recent {
+  background: var(--emerald-subtle);
+  color: var(--emerald);
+}
+
+.jobi-fresh-tag.days47 {
+  background: var(--amber-subtle);
+  color: var(--amber);
+}
+
+.jobi-score-box {
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: 0.9rem;
+  background: var(--forest-green);
+  color: #ffffff;
+}
+
+.jobi-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.jobi-meta-pills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.jobi-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+}
+
+.jobi-card-why {
+  font-size: 0.76rem;
+  color: #4a5c54;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.jobi-skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.jobi-skill-tag {
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: var(--forest-green-subtle);
+  color: var(--forest-green);
+}
+
+.jobi-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+  gap: 8px;
+}
+
+.jobi-status-select {
+  height: 30px;
+  padding: 0 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.jobi-status-select.applied {
+  border-color: var(--emerald);
+  color: var(--emerald);
+  font-weight: 700;
+}
+
+.jobi-action-btns {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jobi-save-btn {
+  padding: 5px 10px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.jobi-save-btn:hover {
+  background: #ffffff;
+  color: var(--text-main);
+}
+
+.jobi-save-btn.saved {
+  background: var(--amber-subtle);
+  color: var(--amber);
+  border-color: #fcd34d;
+}
+
+.jobi-apply-btn {
+  padding: 5px 14px;
+  background: var(--forest-green);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: var(--radius-xs);
+  transition: all 0.15s ease;
+}
+
+.jobi-apply-btn:hover {
+  background: var(--forest-green-hover);
+}
+
+/* ==========================================================================
+   SLIDE-OVER JOB DRAWER
+   ========================================================================== */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(25, 42, 36, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.drawer-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.job-drawer {
+  position: fixed;
+  top: 0;
+  right: -580px;
+  width: 540px;
+  max-width: 90vw;
+  height: 100%;
+  background: #ffffff;
+  border-left: 1px solid var(--border-card);
+  box-shadow: var(--shadow-drawer);
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.job-drawer.open {
+  right: 0;
+}
+
+.drawer-header {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.drawer-close-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: all 0.15s ease;
+}
+
+.drawer-close-btn:hover {
+  background: #e2e8e5;
+  color: var(--text-main);
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px;
+}
+
+.drawer-title-box {
+  margin-bottom: 18px;
+}
+
+.drawer-title-box h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.drawer-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-bottom: 18px;
+}
+
+.drawer-meta-item {
+  font-size: 0.76rem;
+}
+
+.drawer-meta-item .meta-k {
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.drawer-meta-item .meta-v {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.drawer-section-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.drawer-breakdown-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+.breakdown-row {
+  margin-bottom: 8px;
+}
+
+.breakdown-row:last-child {
+  margin-bottom: 0;
+}
+
+.breakdown-flex {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  margin-bottom: 2px;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.breakdown-track {
+  height: 5px;
+  background: #e2e8e5;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.breakdown-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: var(--forest-green);
+}
+
+.breakdown-fill.high {
+  background: var(--emerald);
+}
+
+.drawer-footer {
+  padding: 16px 22px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #ffffff;
+}
+
+/* ==========================================================================
+   EMPTY STATE & TOAST
+   ========================================================================== */
+.empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  background: #ffffff;
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-lg);
+  margin-bottom: 24px;
+}
+
+.empty-icon {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.empty-state h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.empty-state p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin: 0 auto 16px auto;
+}
+
+.toast-notice {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--forest-green);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 200;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.toast-notice.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .stat-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .analytics-middle-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  body {
+    padding: 10px;
+  }
+  .dashboard-wrapper {
+    flex-direction: column;
+    min-height: auto;
+  }
+  .app-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .main-top-navbar {
+    padding: 14px 18px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .dashboard-content-body {
+    padding: 14px 18px;
+  }
+  .stat-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .job-cards-deck {
+    grid-template-columns: 1fr;
+  }
+}
+
+  </style>
   <script>
     // Embedded fallback store for direct file:// and static server viewing
     window.FALLBACK_DATA = {
   "metadata": {
     "search_date": "2026-08-20",
-    "search_time": "01:17 PKT",
-    "search_time_slug": "01-17",
-    "last_updated": "20 Aug 2026, 01:17 AM PKT",
+    "search_time": "01:21 PKT",
+    "search_time_slug": "01-21",
+    "last_updated": "20 Aug 2026, 01:21 AM PKT",
     "next_update": "20 Aug 2026, 03:00 AM PKT",
     "next_update_iso": "2026-08-20T03:00:00+00:00",
     "schedule_interval_hours": 3,
@@ -121,7 +1331,7 @@
       "source": "Workable Direct ATS",
       "app_url": "https://apply.workable.com/humanintelligence/j/E08961ABAC",
       "original_url": "https://apply.workable.com/humanintelligence/j/E08961ABAC",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 88.5,
       "score_breakdown": {
@@ -213,7 +1423,7 @@
       "source": "Workable Direct ATS",
       "app_url": "https://apply.workable.com/humanintelligence/j/D264BCF75C",
       "original_url": "https://apply.workable.com/humanintelligence/j/D264BCF75C",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 98.0,
       "score_breakdown": {
@@ -307,7 +1517,7 @@
       "source": "Workable Direct ATS",
       "app_url": "https://apply.workable.com/humanintelligence/j/C762E31B96",
       "original_url": "https://apply.workable.com/humanintelligence/j/C762E31B96",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 95.5,
       "score_breakdown": {
@@ -397,7 +1607,7 @@
       "source": "Jobgether",
       "app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "original_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 93.5,
       "score_breakdown": {
@@ -486,7 +1696,7 @@
       "source": "Workable Direct ATS",
       "app_url": "https://jobs.workable.com/view/h7PDQ3QSkauCNvZwoss4P1/remote-marketing-automation-specialist---ghl-in-colombia-at-huzzle",
       "original_url": "https://jobs.workable.com/view/h7PDQ3QSkauCNvZwoss4P1/remote-marketing-automation-specialist---ghl-in-colombia-at-huzzle",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 88.0,
       "score_breakdown": {
@@ -577,7 +1787,7 @@
       "source": "Employment Hero",
       "app_url": "https://employmenthero.com/jobs/position/fasttrack-business-holdings-pte-ltd-gohighlevel-expert-funnel-builder-remote-adj7x/",
       "original_url": "https://employmenthero.com/jobs/position/fasttrack-business-holdings-pte-ltd-gohighlevel-expert-funnel-builder-remote-adj7x/",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 87.0,
       "score_breakdown": {
@@ -667,7 +1877,7 @@
       "source": "JobLeads",
       "app_url": "https://www.jobleads.com/us/job/remote-gohighlevel-n8n-automation-engineer--northern--e4629b3d752e57a75aed4bdc8821f0205",
       "original_url": "https://www.jobleads.com/us/job/remote-gohighlevel-n8n-automation-engineer--northern--e4629b3d752e57a75aed4bdc8821f0205",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 93.5,
       "score_breakdown": {
@@ -757,7 +1967,7 @@
       "source": "Remote.com",
       "app_url": "https://remote.com/jobs/mymarketingpass-c1ymnbf2/sr-gohighlevel-automator-n8n-api-etc-j1fr1v9w",
       "original_url": "https://remote.com/jobs/mymarketingpass-c1ymnbf2/sr-gohighlevel-automator-n8n-api-etc-j1fr1v9w",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 93.5,
       "score_breakdown": {
@@ -845,7 +2055,7 @@
       "source": "Remotive",
       "app_url": "https://remotive.com/remote/jobs/marketing/go-high-level-marketing-automation-specialist-5093156",
       "original_url": "https://remotive.com/remote/jobs/marketing/go-high-level-marketing-automation-specialist-5093156",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 87.0,
       "score_breakdown": {
@@ -933,7 +2143,7 @@
       "source": "Workable Direct ATS",
       "app_url": "https://apply.workable.com/pavago/j/05E08A61F4",
       "original_url": "https://apply.workable.com/pavago/j/05E08A61F4",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 86.5,
       "score_breakdown": {
@@ -1023,7 +2233,7 @@
       "source": "BeBee / HireGummy",
       "app_url": "https://bebee.com/pk/jobs/web-developer-and-ghl-build-specialist-hiregummy-islamabad--theirstack-740076269",
       "original_url": "https://bebee.com/pk/jobs/web-developer-and-ghl-build-specialist-hiregummy-islamabad--theirstack-740076269",
-      "discovered_at": "2026-08-20 01:17 PKT",
+      "discovered_at": "2026-08-20 01:21 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 83.5,
       "score_breakdown": {
