@@ -10,79 +10,78 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
 /* ==========================================================================
-   GEMINI SPARK — PREMIUM SAAS CAREER INTELLIGENCE PORTAL
-   Design System: "Jobi" Style Clean SaaS Dashboard
-   Micro-Animations • High-Definition Tech Badges • Crisp Vector System
+   GEMINI SPARK — GOHIGHLEVEL CAREER INTELLIGENCE DASHBOARD
+   Pixel-Perfect Linear / Vercel / Raycast Clean Modern SaaS Design
    ========================================================================== */
 
 :root {
-  /* Canvas & Panel Colors */
-  --bg-app: #f4f7f5;
-  --bg-sidebar: #ffffff;
+  --bg-app: #f7f8fa;
+  --bg-sidebar: #0f172a;
+  --bg-sidebar-hover: #1e293b;
+  --bg-sidebar-active: #2563eb;
   --bg-card: #ffffff;
-  --bg-subtle: #f8faf8;
-  --bg-input: #eef3f0;
-  
-  /* Typography Colors */
-  --text-main: #192a24;
-  --text-muted: #6b7c75;
-  --text-light: #94a39d;
+  --bg-subtle: #f8fafc;
+  --bg-input: #ffffff;
+
+  --text-primary: #111827;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
   --text-inverse: #ffffff;
-
-  /* Brand Accents */
-  --forest-green: #233d32;
-  --forest-green-hover: #192c24;
-  --forest-green-subtle: #e9f0ed;
   
-  --neon-lime: #cbf32f;
-  --neon-lime-hover: #bde623;
-  --neon-lime-subtle: #f4fdcf;
-  --neon-lime-border: #b8e61e;
+  --border-light: #e5e7eb;
+  --border-subtle: #f1f5f9;
+  --border-hover: #cbd5e1;
+  --border-focus: #2563eb;
 
-  --emerald: #10b981;
-  --emerald-subtle: #dcfce7;
-  --amber: #f59e0b;
-  --amber-subtle: #fef3c7;
-  --rose: #f43f5e;
-  --rose-subtle: #ffe4e6;
-  --blue: #2563eb;
-  --blue-subtle: #eff6ff;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-subtle: #eff6ff;
+  --primary-border: #bfdbfe;
 
-  --border-subtle: #e8f0ec;
-  --border-card: #e5ede8;
+  --success: #16a34a;
+  --success-subtle: #dcfce7;
+  --success-border: #86efac;
+
+  --warning: #f59e0b;
+  --warning-subtle: #fef3c7;
+  --warning-border: #fde68a;
+
+  --danger: #dc2626;
+  --danger-subtle: #fee2e2;
+  --danger-border: #fca5a5;
+
+  --fresh-cyan: #0284c7;
+  --fresh-subtle: #e0f2fe;
+  --fresh-border: #bae6fd;
+
+  --sidebar-w: 250px;
+  --header-h: 64px;
 
   --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
-  --radius-xl: 28px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
 
-  --shadow-xs: 0 1px 3px rgba(25, 42, 36, 0.03);
-  --shadow-sm: 0 2px 8px rgba(25, 42, 36, 0.04);
-  --shadow-md: 0 8px 24px rgba(25, 42, 36, 0.06);
-  --shadow-lg: 0 16px 40px rgba(25, 42, 36, 0.08);
-  --shadow-drawer: -10px 0 40px rgba(0, 0, 0, 0.12);
-  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.18);
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-drawer: -6px 0 28px rgba(15, 23, 42, 0.12);
 }
 
-/* Reset & Fullpage Shell */
-*, *::before, *::after {
+/* Reset */
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 html, body {
-  width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-app) !important;
-  color: var(--text-main);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  overflow: hidden;
 }
 
 a {
@@ -94,960 +93,682 @@ button {
   font-family: inherit;
   cursor: pointer;
   border: none;
-  background: transparent;
   outline: none;
+  background: transparent;
 }
 
-.mono {
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* Ensure ALL SVG icons have explicit stroke and no unwanted black fills */
-svg {
-  fill: none;
-}
-
-/* Fullscreen Layout Shell */
-.app-shell {
+.app-layout {
   display: flex;
-  width: 100vw;
   height: 100vh;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   LEFT SIDEBAR
+   ========================================================================== */
+.sidebar {
+  width: var(--sidebar-w);
+  background-color: var(--bg-sidebar);
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s ease;
+  z-index: 40;
+}
+
+.sidebar-header {
+  height: var(--header-h);
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-icon-box {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.brand-title {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 0.68rem;
+  color: #38bdf8;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 14px 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nav-group-title {
+  font-size: 0.66rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 10px 4px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #94a3b8;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.sidebar-link:hover {
+  background-color: var(--bg-sidebar-hover);
+  color: #f1f5f9;
+}
+
+.sidebar-link.active {
+  background-color: rgba(37, 99, 235, 0.2);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.sidebar-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background-color: var(--primary);
+  border-radius: 0 4px 4px 0;
+}
+
+.sidebar-link i {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-counter {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}
+
+.sidebar-link.active .nav-counter {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.sidebar-footer {
+  padding: 14px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.user-profile-widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.user-meta h4 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.user-meta p {
+  font-size: 0.68rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   MAIN CONTENT WRAPPER
+   ========================================================================== */
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   background-color: var(--bg-app);
 }
 
+/* Header */
+.top-header {
+  height: var(--header-h);
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
+  z-index: 30;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 360px;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  padding: 4px;
+}
+
+.header-search-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+}
+
+.header-search-input {
+  width: 100%;
+  padding: 7px 12px 7px 34px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xs);
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  background: var(--bg-subtle);
+  transition: all 0.15s ease;
+}
+
+.header-search-input:focus {
+  background: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.header-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  width: 14px;
+  height: 14px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Scrape Button */
+.btn-scrape-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radius-xs);
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0284c7, #2563eb);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.25);
+  transition: all 0.15s ease;
+}
+
+.btn-scrape-trigger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.35);
+}
+
+.btn-scrape-trigger:active {
+  transform: translateY(0);
+}
+
+.btn-scrape-trigger.loading {
+  background: #64748b;
+  cursor: not-allowed;
+}
+
+.countdown-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.countdown-box b {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--primary);
+}
+
+.header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border-radius: var(--radius-xs);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid var(--border-light);
+  background: #ffffff;
+  color: var(--text-primary);
+  transition: all 0.15s ease;
+}
+
+.header-btn:hover {
+  background: var(--bg-subtle);
+  border-color: var(--border-hover);
+}
+
+/* Scrollable Main Area */
+.content-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px 60px;
+}
+
 /* ==========================================================================
-   LEFT SIDEBAR (With Smooth Animations)
+   PROFILE STRIP (Compact)
    ========================================================================== */
-.sidebar {
-  width: 250px;
-  height: 100vh;
-  background-color: var(--bg-sidebar);
-  border-right: 1px solid var(--border-subtle);
+.profile-strip {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-strip-left h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-strip-left p {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.strip-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.strip-pill {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.strip-pill.live-status {
+  background: var(--success-subtle);
+  color: var(--success);
+  border-color: var(--success-border);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--success);
+  border-radius: 50%;
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.3); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================================================
+   KPI ROW (Clean 6 Cards)
+   ========================================================================== */
+.kpi-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.kpi-tile {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-xs);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px 16px;
-  flex-shrink: 0;
-  z-index: 30;
-  overflow-y: auto;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
-.sidebar-brand-row {
+.kpi-tile:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-hover);
+}
+
+.kpi-top-row {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  padding: 0 8px;
-  margin-bottom: 20px;
+}
+
+.kpi-tag-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.kpi-main-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.1;
+  margin-top: 6px;
+}
+
+.kpi-sub-text {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   FILTER BAR
+   ========================================================================== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 16px;
+  background: #ffffff;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.filter-chip {
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border: 1px solid var(--border-light);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-chip:hover {
+  background: #e2e8f0;
+  color: var(--text-primary);
+}
+
+.filter-chip.active {
+  background: var(--bg-sidebar);
+  color: #ffffff;
+  border-color: var(--bg-sidebar);
+}
+
+/* ==========================================================================
+   PREMIUM PIXEL-PERFECT GHL JOB CARDS
+   ========================================================================== */
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.job-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
   cursor: pointer;
 }
 
-.brand-dot-logo {
-  width: 28px;
-  height: 28px;
-  background-color: var(--neon-lime);
-  border-radius: 50%;
-  position: relative;
+.job-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md);
+}
+
+.card-top-row {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(203, 243, 47, 0.4);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  animation: logo-pulse 3s infinite ease-in-out;
-}
-
-.sidebar-brand-row:hover .brand-dot-logo {
-  transform: rotate(180deg) scale(1.1);
-}
-
-@keyframes logo-pulse {
-  0%, 100% { box-shadow: 0 0 10px rgba(203, 243, 47, 0.4); }
-  50% { box-shadow: 0 0 20px rgba(203, 243, 47, 0.8); }
-}
-
-.brand-dot-logo::after {
-  content: '';
-  width: 14px;
-  height: 14px;
-  background-color: var(--forest-green);
-  border-radius: 50%;
-  position: absolute;
-  left: 0;
-  top: 7px;
-}
-
-.brand-title-text {
-  font-size: 1.45rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: var(--forest-green);
-}
-
-/* User Profile Widget */
-.sidebar-user-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 6px 0 14px 0;
-  border-bottom: 1px solid var(--border-subtle);
-  margin-bottom: 16px;
-}
-
-.sidebar-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #233d32, #3b6051);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.05rem;
-  font-weight: 800;
-  box-shadow: 0 4px 12px rgba(35, 61, 50, 0.15);
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
   margin-bottom: 8px;
-  border: 2px solid #ffffff;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.sidebar-user-box:hover .sidebar-avatar {
-  transform: scale(1.06);
-  box-shadow: 0 6px 16px rgba(35, 61, 50, 0.25);
+.company-meta-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.sidebar-user-name {
-  font-size: 0.9rem;
+.company-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.company-name {
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--text-main);
+  color: var(--text-secondary);
+}
+
+.badges-group {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.sidebar-user-role {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  margin-top: 1px;
-}
-
-/* Animated Navigation Items */
-.sidebar-nav-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.nav-link-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 11px 14px;
-  border-radius: var(--radius-sm);
-  font-size: 0.84rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  width: 100%;
-  text-align: left;
-  position: relative;
-  overflow: hidden;
-}
-
-.nav-link-btn::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 3px;
-  background: var(--neon-lime);
-  opacity: 0;
-  transform: scaleY(0);
-  transition: all 0.2s ease;
-}
-
-.nav-link-btn:hover {
-  background-color: var(--bg-subtle);
-  color: var(--text-main);
-  transform: translateX(3px);
-}
-
-.nav-link-btn.active {
-  background-color: var(--forest-green);
-  color: #ffffff !important;
-  font-weight: 700;
-  box-shadow: 0 4px 12px rgba(35, 61, 50, 0.22);
-  transform: translateX(0);
-}
-
-.nav-link-btn.active::before {
-  opacity: 1;
-  transform: scaleY(1);
-}
-
-.nav-link-btn .svg-icon {
-  width: 18px;
-  height: 18px;
-  stroke-width: 2;
-  stroke: currentColor;
-  fill: none !important;
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-
-.nav-link-btn:hover .svg-icon {
-  transform: scale(1.12);
-}
-
-.nav-link-btn.active .svg-icon {
-  stroke: #ffffff;
-}
-
-.nav-counter-pill {
-  margin-left: auto;
-  background: rgba(0, 0, 0, 0.05);
-  padding: 2px 8px;
-  border-radius: 9999px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  font-family: 'JetBrains Mono', monospace;
-  transition: all 0.2s ease;
-}
-
-.nav-link-btn.active .nav-counter-pill {
-  background: var(--neon-lime);
-  color: var(--forest-green);
-}
-
-/* Sidebar Footer */
-.sidebar-footer {
-  padding-top: 16px;
-  border-top: 1px solid var(--border-subtle);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.fit-progress-box {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
-}
-
-.fit-progress-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.72rem;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.fit-progress-track {
-  height: 5px;
-  background: #e2e8e5;
-  border-radius: 9999px;
-  overflow: hidden;
-}
-
-.fit-progress-fill {
-  height: 100%;
-  background: var(--neon-lime);
-  border-radius: 9999px;
-  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.sidebar-sub-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  padding: 8px 10px;
-  border-radius: var(--radius-xs);
-  transition: all 0.15s ease;
-}
-
-.sidebar-sub-btn:hover {
-  background: #e9f0ed;
-  color: var(--forest-green);
-}
-
-/* ==========================================================================
-   MAIN CONTENT VIEWPORT & TOPBAR
-   ========================================================================== */
-.main-viewport {
-  flex: 1;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  background-color: var(--bg-app);
-}
-
-/* Simplified Clean Top Bar */
-.top-navbar-simple {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 36px;
-  background: rgba(244, 247, 245, 0.9);
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-}
-
-.top-bar-left-meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.top-bar-right-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.date-select-pill {
-  height: 36px;
-  padding: 0 12px;
-  background: #ffffff;
-  border: 1px solid var(--border-subtle);
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--forest-green);
-  cursor: pointer;
-  box-shadow: var(--shadow-xs);
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.date-select-pill:focus {
-  border-color: var(--forest-green);
-}
-
-.btn-scrape-cta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--forest-green);
-  color: #ffffff;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 9px 20px;
-  border-radius: 9999px;
-  box-shadow: 0 3px 10px rgba(35, 61, 50, 0.2);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-scrape-cta:hover {
-  background: var(--forest-green-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 5px 14px rgba(35, 61, 50, 0.3);
-}
-
-.btn-scrape-cta.loading {
-  opacity: 0.75;
-  cursor: wait;
-}
-
-/* ==========================================================================
-   VIEW CONTAINER & HEADINGS
-   ========================================================================== */
-.view-content {
-  padding: 12px 36px 40px 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  animation: fadeInView 0.25s ease-out;
-}
-
-@keyframes fadeInView {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.view-heading-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.view-main-title {
-  font-size: 1.55rem;
+.freshness-badge {
+  font-size: 0.65rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text-main);
-}
-
-.view-subtitle {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-
-.live-badge-box {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--forest-green-subtle);
-  border: 1px solid rgba(35, 61, 50, 0.1);
-  color: var(--forest-green);
-  padding: 5px 12px;
-  border-radius: 9999px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.live-dot-pulse {
-  width: 7px;
-  height: 7px;
-  background-color: var(--emerald);
-  border-radius: 50%;
-  box-shadow: 0 0 6px var(--emerald);
-  animation: pulse-dot 2s infinite ease-in-out;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
-}
-
-/* ==========================================================================
-   4 STAT CARDS
-   ========================================================================== */
-.stat-cards-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
-
-.jobi-stat-card {
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  padding: 20px 22px;
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.22s ease;
-}
-
-.jobi-stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: #dce7e1;
-}
-
-.stat-left-text .stat-large-num {
-  font-size: 1.85rem;
-  font-weight: 800;
-  color: var(--text-main);
-  font-family: 'JetBrains Mono', monospace;
-  line-height: 1.1;
-}
-
-.stat-left-text .stat-sub-label {
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-top: 4px;
-}
-
-.stat-lime-circle {
-  width: 44px;
-  height: 44px;
-  background-color: var(--neon-lime);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(203, 243, 47, 0.4);
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-
-.jobi-stat-card:hover .stat-lime-circle {
-  transform: scale(1.1);
-}
-
-.stat-lime-circle .svg-icon {
-  width: 20px;
-  height: 20px;
-  stroke: var(--forest-green);
-  fill: none !important;
-  stroke-width: 2;
-}
-
-/* ==========================================================================
-   MIDDLE DASHBOARD SECTION: CHART & TOP MATCHES
-   ========================================================================== */
-.analytics-two-col {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 20px;
-}
-
-.white-panel-box {
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  padding: 22px;
-  box-shadow: var(--shadow-sm);
-}
-
-.panel-title-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.panel-heading {
-  font-size: 0.98rem;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-.time-tabs-bar {
-  display: flex;
-  align-items: center;
-  background: var(--bg-input);
-  padding: 3px;
-  border-radius: 9999px;
-  gap: 2px;
-}
-
-.time-tab-btn {
-  padding: 3px 11px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  border-radius: 9999px;
-  color: var(--text-muted);
-  transition: all 0.15s ease;
-}
-
-.time-tab-btn.active {
-  background: var(--forest-green);
-  color: #ffffff;
-}
-
-.chart-wrapper-inner {
-  height: 190px;
-  position: relative;
-}
-
-/* Mini Top Matches List */
-.mini-top-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.mini-row-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-subtle);
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.mini-row-item:hover {
-  background: #ffffff;
-  border-color: var(--border-subtle);
-  box-shadow: var(--shadow-xs);
-  transform: translateX(3px);
-}
-
-.mini-row-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.mini-logo-box {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-xs);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  flex-shrink: 0;
-}
-
-.mini-logo-box svg {
-  width: 18px;
-  height: 18px;
-  stroke: #ffffff;
-  fill: none !important;
-  stroke-width: 2;
-}
-
-.mini-row-info h4 {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-.mini-row-info p {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-}
-
-.mini-match-pill {
-  font-size: 0.72rem;
-  font-weight: 800;
-  font-family: 'JetBrains Mono', monospace;
-  background: var(--neon-lime-subtle);
-  color: var(--forest-green);
-  padding: 2px 7px;
-  border-radius: var(--radius-xs);
-  border: 1px solid var(--neon-lime-border);
-}
-
-/* ==========================================================================
-   PAGE: ALL JOBS — SLEEK HORIZONTAL TOOLBAR
-   ========================================================================== */
-.all-jobs-toolbar {
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  padding: 12px 18px;
-  box-shadow: var(--shadow-xs);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.toolbar-search-wrap {
-  position: relative;
-  flex: 1;
-  min-width: 260px;
-  max-width: 420px;
-  display: flex;
-  align-items: center;
-}
-
-.search-svg-icon {
-  position: absolute;
-  left: 12px;
-  width: 16px !important;
-  height: 16px !important;
-  stroke: var(--text-muted) !important;
-  fill: none !important;
-  stroke-width: 2;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.toolbar-search-input {
-  width: 100%;
-  height: 38px;
-  padding: 0 12px 0 36px;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: 9999px;
-  font-size: 0.82rem;
-  color: var(--text-main);
-  font-family: inherit;
-  transition: all 0.2s ease;
-}
-
-.toolbar-search-input:focus {
-  background: #ffffff;
-  border-color: var(--forest-green);
-  box-shadow: 0 0 0 2px var(--forest-green-subtle);
-  outline: none;
-}
-
-.toolbar-controls-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.filter-select {
-  height: 38px;
-  padding: 0 10px;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
-  color: var(--text-main);
-  font-size: 0.78rem;
-  font-weight: 600;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.15s ease;
-}
-
-.filter-select:focus {
-  border-color: var(--forest-green);
-  background: #ffffff;
-}
-
-.view-toggle-wrap {
-  display: flex;
-  align-items: center;
-  background: var(--bg-input);
-  padding: 3px;
-  border-radius: var(--radius-xs);
-  gap: 2px;
-}
-
-.view-toggle-btn {
-  padding: 5px 10px;
+  padding: 2px 6px;
   border-radius: 4px;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  transition: all 0.15s ease;
-}
-
-.view-toggle-btn svg {
-  width: 14px;
-  height: 14px;
-  stroke: currentColor;
-  fill: none !important;
-  stroke-width: 2;
-}
-
-.view-toggle-btn.active {
-  background: #ffffff;
-  color: var(--forest-green);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-
-.compare-bar-cta {
-  background: var(--forest-green-subtle);
-  border: 1px solid rgba(35, 61, 50, 0.15);
-  border-radius: var(--radius-xs);
-  padding: 6px 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: var(--forest-green);
-  animation: slideDown 0.2s ease-out;
-}
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.btn-launch-compare {
-  background: var(--forest-green);
-  color: #ffffff;
-  font-size: 0.74rem;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: var(--radius-xs);
-  transition: background 0.15s ease;
-}
-
-.btn-launch-compare:hover {
-  background: var(--forest-green-hover);
-}
-
-/* ==========================================================================
-   PIXEL/TECH STYLE ANIMATED JOB CARDS
-   ========================================================================== */
-.job-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
-  gap: 18px;
-}
-
-.job-cards-grid.list-mode {
-  grid-template-columns: 1fr;
-}
-
-.jobi-card-item {
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: var(--shadow-xs);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.jobi-card-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 0;
-  background: var(--neon-lime);
-  transition: height 0.25s ease;
-}
-
-.jobi-card-item:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: #cde0d7;
-}
-
-.jobi-card-item:hover::before {
-  height: 100%;
-}
-
-.jobi-card-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.card-company-wrap {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Pixel / Tech Brand Logo Badge */
-.card-company-badge-box {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-  flex-shrink: 0;
-}
-
-.jobi-card-item:hover .card-company-badge-box {
-  transform: scale(1.08) rotate(2deg);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-}
-
-.card-company-badge-box .brand-svg-logo {
-  width: 22px;
-  height: 22px;
-  stroke: #ffffff;
-  fill: none !important;
-  stroke-width: 2;
-}
-
-.card-company-details h4 {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-.card-company-details span {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-}
-
-.card-top-badges {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.tag-freshness {
-  font-size: 0.66rem;
-  font-weight: 800;
-  padding: 3px 7px;
-  border-radius: var(--radius-xs);
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.tag-freshness.today {
-  background: var(--neon-lime-subtle);
-  color: var(--forest-green);
-  border: 1px solid var(--neon-lime-border);
-}
-
-.tag-freshness.recent {
-  background: var(--emerald-subtle);
-  color: var(--emerald);
-}
-
-.tag-freshness.days47 {
-  background: var(--amber-subtle);
-  color: var(--amber);
-}
-
-.badge-match-score {
-  padding: 3px 8px;
-  border-radius: var(--radius-xs);
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 800;
-  font-size: 0.92rem;
-  background: var(--forest-green);
+.badge-today {
+  background: var(--success);
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(35, 61, 50, 0.2);
 }
 
-.card-job-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-main);
+.badge-recent {
+  background: var(--fresh-cyan);
+  color: #ffffff;
+}
+
+.badge-week {
+  background: #64748b;
+  color: #ffffff;
+}
+
+.source-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+}
+
+.job-card h3 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-primary);
   line-height: 1.35;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .card-meta-row {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 12px;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
 }
 
-.card-meta-pill {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text-muted);
+.meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  padding: 3px 8px;
-  border-radius: var(--radius-xs);
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--border-light);
 }
 
-.card-why-desc {
+/* Match Score Ring Badge */
+.match-score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.score-excellent {
+  background: var(--success-subtle);
+  border: 1px solid var(--success-border);
+  color: #065f46;
+}
+
+.score-strong {
+  background: var(--primary-subtle);
+  border: 1px solid var(--primary-border);
+  color: #1e40af;
+}
+
+.card-skills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.skill-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  color: #334155;
+  border: 1px solid var(--border-light);
+}
+
+.card-why-snippet {
   font-size: 0.78rem;
-  color: #4a5c54;
-  line-height: 1.42;
+  color: #475569;
+  line-height: 1.4;
   margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1055,536 +776,303 @@ svg {
   overflow: hidden;
 }
 
-.card-skills-row {
+.card-actions-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-bottom: 16px;
-}
-
-.skill-tag-pill {
-  font-size: 0.68rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  background: var(--forest-green-subtle);
-  color: var(--forest-green);
-  transition: background 0.15s ease;
-}
-
-.skill-tag-pill:hover {
-  background: #d8e5df;
-}
-
-.card-bottom-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 14px;
-  border-top: 1px solid var(--border-subtle);
-  gap: 8px;
-}
-
-.card-status-dropdown {
-  height: 32px;
-  padding: 0 8px;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
-  color: var(--text-muted);
-  font-size: 0.72rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: border-color 0.15s ease;
-}
-
-.card-status-dropdown.applied {
-  border-color: var(--emerald);
-  color: var(--emerald);
-  font-weight: 700;
-}
-
-.card-btn-actions {
-  display: flex;
-  align-items: center;
   gap: 6px;
-}
-
-.btn-card-save {
-  padding: 6px 12px;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
-  color: var(--text-muted);
-  font-size: 0.74rem;
-  font-weight: 600;
-  transition: all 0.15s ease;
-}
-
-.btn-card-save:hover {
-  background: #ffffff;
-  color: var(--text-main);
-}
-
-.btn-card-save.saved {
-  background: var(--amber-subtle);
-  color: var(--amber);
-  border-color: #fcd34d;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
 }
 
 .btn-card-apply {
-  padding: 6px 16px;
-  background: var(--forest-green);
+  flex: 1;
+  background: var(--primary);
   color: #ffffff;
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   font-weight: 700;
+  padding: 6px 12px;
   border-radius: var(--radius-xs);
-  transition: all 0.2s ease;
+  text-align: center;
+  transition: all 0.15s ease;
 }
 
 .btn-card-apply:hover {
-  background: var(--forest-green-hover);
-  transform: translateY(-1px);
+  background: var(--primary-hover);
 }
 
-.compare-checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.72rem;
+.btn-card-details {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  font-size: 0.78rem;
   font-weight: 600;
-  color: var(--text-muted);
-  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-light);
+  transition: all 0.15s ease;
+}
+
+.btn-card-details:hover {
+  background: #e2e8f0;
+}
+
+.btn-card-save {
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+
+.btn-card-save.saved {
+  color: var(--warning);
+  background: var(--warning-subtle);
+  border-color: var(--warning-border);
 }
 
 /* ==========================================================================
-   PAGE: NEW MATCHES TIMELINE FEED
-   ========================================================================= */
-.timeline-group {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 24px;
+   LIVE SCRAPING PROGRESS MODAL / BANNER
+   ========================================================================== */
+.scrape-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 120;
+  display: none;
+  align-items: center;
+  justify-content: center;
 }
 
-.timeline-header-label {
-  font-size: 0.8rem;
+.scrape-modal-backdrop.active {
+  display: flex;
+}
+
+.scrape-modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  width: 440px;
+  max-width: 90vw;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.scrape-modal-title {
+  font-size: 1.05rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--forest-green);
+  color: var(--text-primary);
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.timeline-header-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border-subtle);
-}
-
-/* ==========================================================================
-   PAGE: APPLIED JOBS (APPLICATION TRACKER)
-   ========================================================================== */
-.kanban-board-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  min-height: 520px;
-}
-
-.kanban-column {
-  background: #edf3ef;
-  border-radius: var(--radius-md);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.kanban-column-header {
+.scrape-step-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-bottom: 10px;
-  border-bottom: 2px solid rgba(35, 61, 50, 0.1);
-}
-
-.kanban-column-title {
-  font-size: 0.84rem;
-  font-weight: 800;
-  color: var(--forest-green);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.kanban-counter-badge {
-  background: #ffffff;
-  padding: 2px 7px;
-  border-radius: 9999px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--forest-green);
-}
-
-.kanban-cards-stack {
-  display: flex;
-  flex-direction: column;
   gap: 10px;
-  flex: 1;
-  overflow-y: auto;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
 }
 
-.kanban-item-card {
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-sm);
-  padding: 14px;
-  box-shadow: var(--shadow-xs);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.kanban-item-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
-  border-color: #dce7e1;
-}
-
-.kanban-item-title {
-  font-size: 0.86rem;
+.scrape-step-item.active {
+  color: var(--primary);
   font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 4px;
 }
 
-.kanban-item-company {
-  font-size: 0.74rem;
-  color: var(--text-muted);
-  margin-bottom: 8px;
+.scrape-step-item.done {
+  color: var(--success);
 }
 
-.kanban-item-footer {
+.step-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 0.72rem;
-  padding-top: 8px;
-  border-top: 1px solid var(--border-subtle);
-}
-
-/* Tracker Table View */
-.tracker-table-container {
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-xs);
-}
-
-.tracker-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-}
-
-.tracker-table th {
+  justify-content: center;
+  font-size: 0.75rem;
   background: var(--bg-subtle);
-  padding: 12px 16px;
-  font-size: 0.74rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--border-subtle);
 }
 
-.tracker-table td {
-  padding: 14px 16px;
-  font-size: 0.82rem;
-  border-bottom: 1px solid var(--border-subtle);
-  color: var(--text-main);
+.step-icon.active {
+  background: var(--primary-subtle);
+  color: var(--primary);
+  animation: spin 1s linear infinite;
 }
 
-.tracker-table tr:hover td {
-  background: var(--bg-subtle);
+.step-icon.done {
+  background: var(--success-subtle);
+  color: var(--success);
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
 }
 
 /* ==========================================================================
-   JOB DETAIL DRAWER & COMPARISON MODAL
+   RIGHT-SIDE SLIDE-OVER DRAWER
    ========================================================================== */
-.drawer-backdrop, .modal-backdrop {
+.drawer-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(25, 42, 36, 0.45);
-  backdrop-filter: blur(4px);
-  z-index: 100;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 90;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
 }
 
-.drawer-backdrop.open, .modal-backdrop.open {
+.drawer-backdrop.open {
   opacity: 1;
   pointer-events: auto;
 }
 
-.job-drawer {
+.side-drawer {
   position: fixed;
   top: 0;
-  right: -620px;
-  width: 580px;
-  max-width: 92vw;
-  height: 100%;
+  right: 0;
+  bottom: 0;
+  width: 500px;
+  max-width: 100vw;
   background: #ffffff;
-  border-left: 1px solid var(--border-card);
+  z-index: 100;
   box-shadow: var(--shadow-drawer);
-  z-index: 110;
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
-  transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.job-drawer.open {
-  right: 0;
+.side-drawer.open {
+  transform: translateX(0);
 }
 
 .drawer-header {
-  padding: 18px 24px;
-  border-bottom: 1px solid var(--border-subtle);
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border-light);
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .drawer-close-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--bg-subtle);
-  color: var(--text-muted);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-xs);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
   transition: all 0.15s ease;
 }
 
 .drawer-close-btn:hover {
-  background: #e2e8e5;
-  color: var(--text-main);
+  background: var(--bg-subtle);
+  color: var(--text-primary);
 }
 
 .drawer-body {
   flex: 1;
   overflow-y: auto;
-  padding: 24px;
+  padding: 22px;
 }
 
-.drawer-title-box {
-  margin-bottom: 18px;
-}
-
-.drawer-title-box h3 {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--text-main);
-  line-height: 1.3;
-  margin-bottom: 6px;
-}
-
-.drawer-meta-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 12px;
-  margin-bottom: 18px;
-}
-
-.drawer-meta-item {
-  font-size: 0.76rem;
-}
-
-.drawer-meta-item .meta-k {
-  color: var(--text-muted);
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-.drawer-meta-item .meta-v {
-  color: var(--text-main);
-  font-weight: 700;
+.drawer-section {
+  margin-bottom: 20px;
 }
 
 .drawer-section-title {
   font-size: 0.72rem;
   font-weight: 800;
+  color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-
-.drawer-breakdown-box {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 14px;
-  margin-bottom: 18px;
-}
-
-.breakdown-row {
+  letter-spacing: 0.05em;
   margin-bottom: 8px;
 }
 
-.breakdown-row:last-child {
-  margin-bottom: 0;
+.breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px;
 }
 
-.breakdown-flex {
+.breakdown-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.breakdown-label-flex {
   display: flex;
   justify-content: space-between;
-  font-size: 0.74rem;
-  margin-bottom: 2px;
-  color: var(--text-main);
+  font-size: 0.76rem;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .breakdown-track {
   height: 5px;
-  background: #e2e8e5;
+  background: #e2e8f0;
   border-radius: 9999px;
   overflow: hidden;
 }
 
 .breakdown-fill {
   height: 100%;
+  background: var(--primary);
   border-radius: 9999px;
-  background: var(--forest-green);
 }
 
-.breakdown-fill.high {
-  background: var(--emerald);
+.breakdown-fill.high { background: var(--success); }
+
+.drawer-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 2px;
 }
+
+.tag-matched { background: var(--success-subtle); color: #065f46; border: 1px solid var(--success-border); }
+.tag-missing { background: var(--danger-subtle); color: #991b1b; border: 1px solid var(--danger-border); }
+.tag-adv { background: var(--fresh-subtle); color: #0369a1; border: 1px solid var(--fresh-border); }
 
 .drawer-footer {
-  padding: 16px 24px;
-  border-top: 1px solid var(--border-subtle);
+  padding: 16px 22px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-subtle);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 10px;
-  background: #ffffff;
 }
 
-/* Compare Modal */
-.compare-modal-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.95);
-  width: 900px;
-  max-width: 94vw;
-  max-height: 88vh;
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-modal);
-  z-index: 120;
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.compare-modal-box.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.compare-modal-header {
-  padding: 18px 24px;
-  border-bottom: 1px solid var(--border-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.compare-modal-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 24px;
-}
-
-/* ==========================================================================
-   EMPTY STATE & TOAST NOTICES
-   ========================================================================== */
-.empty-state {
-  text-align: center;
-  padding: 50px 20px;
-  background: #ffffff;
-  border: 1px dashed var(--border-subtle);
-  border-radius: var(--radius-lg);
-  margin-bottom: 24px;
-}
-
-.empty-icon-wrap {
-  width: 50px;
-  height: 50px;
-  background: var(--bg-input);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 12px auto;
-}
-
-.empty-icon-wrap .svg-icon {
-  width: 24px;
-  height: 24px;
-  stroke: var(--forest-green);
-  fill: none !important;
-  stroke-width: 2;
-}
-
-.empty-state h3 {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--text-main);
-  margin-bottom: 4px;
-}
-
-.empty-state p {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  max-width: 440px;
-  margin: 0 auto 16px auto;
-}
-
+/* Toast */
 .toast-notice {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: var(--forest-green);
+  background: var(--bg-sidebar);
   color: #ffffff;
-  padding: 10px 18px;
+  padding: 10px 16px;
   border-radius: var(--radius-sm);
   font-size: 0.82rem;
-  font-weight: 700;
-  box-shadow: var(--shadow-lg);
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   transform: translateY(100px);
   opacity: 0;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 200;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.25s ease;
 }
 
 .toast-notice.show {
@@ -1592,47 +1080,30 @@ svg {
   opacity: 1;
 }
 
-/* ==========================================================================
-   RESPONSIVE DESIGN
-   ========================================================================== */
-@media (max-width: 1200px) {
-  .stat-cards-container {
-    grid-template-columns: repeat(2, 1fr);
+/* Responsive */
+@media (max-width: 1024px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
   }
-  .analytics-two-col {
-    grid-template-columns: 1fr;
+  .sidebar.mobile-open {
+    transform: translateX(0);
   }
-  .kanban-board-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .mobile-menu-toggle {
+    display: inline-flex;
   }
 }
 
-@media (max-width: 860px) {
-  .app-shell {
-    flex-direction: column;
-    height: auto;
-    overflow-y: auto;
-  }
-  .sidebar {
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--border-subtle);
-  }
-  .top-navbar-simple {
-    padding: 14px 18px;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .view-content {
-    padding: 14px 18px;
-  }
-  .stat-cards-container, .kanban-board-grid {
-    grid-template-columns: 1fr;
-  }
-  .job-cards-grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 640px) {
+  .top-header { padding: 0 14px; }
+  .content-scrollable { padding: 14px 14px 40px; }
+  .profile-strip { flex-direction: column; align-items: flex-start; }
+  .kpi-container { grid-template-columns: 1fr 1fr; }
+  .job-grid { grid-template-columns: 1fr; }
+  .side-drawer { width: 100vw; }
 }
 
   </style>
@@ -1677,21 +1148,21 @@ svg {
     },
     "kpis": {
       "total_discovered": 10,
-      "new_jobs_count": 10,
+      "new_jobs_count": 0,
       "active_jobs_count": 10,
       "fresh_jobs_count": 10,
-      "today_count": 2,
-      "three_days_count": 6,
-      "seven_days_count": 2,
+      "today_count": 3,
+      "three_days_count": 7,
+      "seven_days_count": 0,
       "applied_count": 0,
       "interviews_count": 0,
       "offers_count": 0,
       "saved_count": 0,
-      "top_match_score": 87.5,
-      "avg_match_score": 88.6,
+      "top_match_score": 97.5,
+      "avg_match_score": 90.2,
       "top_5_count": 5,
-      "priority_1_apply_count": 9,
-      "priority_2_consider_count": 1,
+      "priority_1_apply_count": 10,
+      "priority_2_consider_count": 0,
       "remote_worldwide_percentage": 100
     },
     "reports": {
@@ -1702,13 +1173,120 @@ svg {
   },
   "jobs": [
     {
-      "id": "ghl-b9a4456c",
-      "fingerprint": "b9a4456c099809c18378058dd6c66205",
+      "id": "ghl-96a0a29a",
+      "fingerprint": "96a0a29aef8fbfa61726c5fc6e5c339c",
       "rank": 1,
-      "title": "GoHighLevel Workflow & CRM Automation Lead",
-      "company": "Direct Agency Employer",
-      "company_initials": "DI",
-      "company_color": "#059669",
+      "title": "Remote Automation Specialist (GHL & Zapier)",
+      "company": "Puulse Marketing",
+      "company_initials": "PU",
+      "company_color": "#10B981",
+      "company_logo": null,
+      "location": "Worldwide Remote (Pakistan Eligible)",
+      "eligible_locations": [
+        "Worldwide Remote (Pakistan Eligible)"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,400 \u2013 $2,000/mo",
+      "employment_type": "Full-Time Contractor",
+      "experience_req": "3+ years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-20",
+      "posted_days_ago": 0,
+      "posted_relative": "Posted today",
+      "freshness_badge": "TODAY",
+      "freshness_priority": 0,
+      "freshness_tier": "0\u20131 Days",
+      "score": 97.5,
+      "category": "Excellent Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 30,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 14.5,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...apier) Seeking an Automation Specialist with deep GoHighLevel expertise to connect GHL CRM with third-party apps via Zapi...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_DEVELOPER",
+      "matched_skills": [
+        "GoHighLevel",
+        "Workflow Automation",
+        "Custom Values & Fields",
+        "REST APIs",
+        "Webhooks",
+        "Zapier",
+        "Opportunity Pipelines"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: apier) Seeking an Automation Specialist with deep GoHighLevel expertise to connect GHL CRM with third-party apps via Zapi",
+      "concerns": "Tight deadlines on client system integrations.",
+      "source": "Puulse Marketing (Workable)",
+      "source_type": "workable_ats",
+      "app_url": "https://jobs.workable.com/view/ktQv5K55zyb9cmyJirRjBD/remote-automation-specialist-(ghl-%26-zapier)%3A-short-term-project-in-pakistan-at-puulse-marketing",
+      "original_url": "https://jobs.workable.com/view/ktQv5K55zyb9cmyJirRjBD/remote-automation-specialist-(ghl-%26-zapier)%3A-short-term-project-in-pakistan-at-puulse-marketing",
+      "discovered_at": "2026-08-20T03:29:19.778449+00:00",
+      "raw_title": "Remote Automation Specialist (GHL & Zapier)",
+      "raw_company": "Puulse Marketing",
+      "raw_description": "Seeking an Automation Specialist with deep GoHighLevel expertise to connect GHL CRM with third-party apps via Zapier, webhook handlers, custom fields, pipeline automations, and speed-to-lead notification sequences.",
+      "raw_posted_date": "2026-08-20",
+      "raw_app_url": "https://jobs.workable.com/view/ktQv5K55zyb9cmyJirRjBD/remote-automation-specialist-(ghl-%26-zapier)%3A-short-term-project-in-pakistan-at-puulse-marketing",
+      "first_seen_at": "2026-08-20T03:19:31.615096+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T03:29:19.778231+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-190ac042",
+      "fingerprint": "190ac04205fcac81d477b406afb4108a",
+      "rank": 2,
+      "title": "GoHighLevel Specialist",
+      "company": "Polaris",
+      "company_initials": "PO",
+      "company_color": "#2563EB",
       "company_logo": null,
       "location": "Worldwide Remote (Pakistan Eligible)",
       "eligible_locations": [
@@ -1768,12 +1346,14 @@ svg {
           "label": "Career Potential"
         }
       },
-      "ghl_evidence": "...GoHighLevel Workflow & CRM Automation Lead Seeking an experienced GoHig...",
+      "ghl_evidence": "...GoHighLevel Specialist Polaris is seeking a dedicated GoHighLevel Speci...",
       "ghl_evidence_source": "job_description",
       "role_category": "GHL_AUTOMATION",
       "matched_skills": [
         "GoHighLevel",
+        "Funnel Building",
         "Workflow Automation",
+        "Sub-Account Management",
         "Custom Values & Fields",
         "Twilio / LC Phone & A2P",
         "Opportunity Pipelines"
@@ -1787,42 +1367,42 @@ svg {
         "n8n & Webhooks",
         "Portfolio (sohaibmahmood.vibepreview.com)"
       ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Workflow & CRM Automation Lead Seeking an experienced GoHig",
-      "concerns": "Direct client communication requirements.",
-      "source": "OnlineJobs.ph (Direct)",
-      "source_type": "verified_ats",
-      "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-08-20T03:29:02.989829+00:00",
-      "raw_title": "GoHighLevel Workflow & CRM Automation Lead",
-      "raw_company": "Direct Agency Employer",
-      "raw_description": "Seeking an experienced GoHighLevel Automation Lead to design multi-tier email/SMS follow-up campaigns, configure custom fields and pipeline stages, set up trigger links, and ensure 100% speed-to-lead execution.",
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Specialist Polaris is seeking a dedicated GoHighLevel Speci",
+      "concerns": "Fast response times required for client support tickets.",
+      "source": "Polaris (Workable)",
+      "source_type": "workable_ats",
+      "app_url": "https://jobs.workable.com/view/qLJWZwT8U8Fxv8bYA5sTzZ/remote-gohighlevel-specialist-in-pakistan-at-polaris",
+      "original_url": "https://jobs.workable.com/view/qLJWZwT8U8Fxv8bYA5sTzZ/remote-gohighlevel-specialist-in-pakistan-at-polaris",
+      "discovered_at": "2026-08-20T03:29:19.778449+00:00",
+      "raw_title": "GoHighLevel Specialist",
+      "raw_company": "Polaris",
+      "raw_description": "Polaris is seeking a dedicated GoHighLevel Specialist to build and optimize client CRM sub-accounts, design multi-step email/SMS automated workflows, set up custom values and pipeline triggers, and maintain HighLevel funnels.",
       "raw_posted_date": "2026-08-20",
-      "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "first_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-20T03:29:02.989704+00:00",
+      "raw_app_url": "https://jobs.workable.com/view/qLJWZwT8U8Fxv8bYA5sTzZ/remote-gohighlevel-specialist-in-pakistan-at-polaris",
+      "first_seen_at": "2026-08-20T03:19:31.615096+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T03:29:19.778231+00:00",
       "status": "New Match",
-      "status_updated_at": "20 Aug 2026, 03:26 AM PKT",
+      "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
     },
     {
-      "id": "ghl-b0550814",
-      "fingerprint": "b055081476998edb57cefd56c8aa2a57",
-      "rank": 2,
-      "title": "GoHighLevel Technical Specialist & Funnel Builder",
-      "company": "Direct Agency Employer",
-      "company_initials": "DI",
-      "company_color": "#059669",
+      "id": "ghl-fa871d5e",
+      "fingerprint": "fa871d5e6ac0f992c9388c5dc49bb91f",
+      "rank": 3,
+      "title": "Meta Ads and GoHighLevel Specialist",
+      "company": "Polaris",
+      "company_initials": "PO",
+      "company_color": "#2563EB",
       "company_logo": null,
-      "location": "Worldwide Remote (Pakistan Eligible)",
+      "location": "Worldwide Remote",
       "eligible_locations": [
-        "Worldwide Remote (Pakistan Eligible)"
+        "Worldwide Remote"
       ],
       "remote_eligibility": "Open Globally (Pakistan Eligible)",
       "work_mode": "100% Remote",
-      "salary": "$1,100 \u2013 $1,600/mo",
-      "employment_type": "Full-Time Contractor",
+      "salary": "$1,300 \u2013 $1,900/mo",
+      "employment_type": "Full-Time Remote",
       "experience_req": "2\u20134 years",
       "candidate_exp": "4 years",
       "posted_date": "2026-08-20",
@@ -1831,14 +1411,14 @@ svg {
       "freshness_badge": "TODAY",
       "freshness_priority": 0,
       "freshness_tier": "0\u20131 Days",
-      "score": 79.0,
-      "category": "Good Match",
-      "priority": "Priority 2 \u2014 Consider",
-      "priority_class": "prio-consider",
-      "priority_icon": "\ud83d\udfe2",
+      "score": 87.5,
+      "category": "Strong Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
       "score_breakdown": {
         "technical_skills": {
-          "score": 15,
+          "score": 20,
           "max": 30,
           "label": "Technical Skills (GHL, n8n, APIs)"
         },
@@ -1853,7 +1433,7 @@ svg {
           "label": "Role Alignment (GHL Lead)"
         },
         "ai_relevance": {
-          "score": 11.0,
+          "score": 14.5,
           "max": 15,
           "label": "AI & Automation Relevance"
         },
@@ -1873,12 +1453,14 @@ svg {
           "label": "Career Potential"
         }
       },
-      "ghl_evidence": "...GoHighLevel Technical Specialist & Funnel Builder Looking for a dedicat...",
+      "ghl_evidence": "...Meta Ads and GoHighLevel Specialist Looking for a specialist to connect Meta adverti...",
       "ghl_evidence_source": "job_description",
       "role_category": "GHL_FUNNEL",
       "matched_skills": [
         "GoHighLevel",
-        "Funnel Building"
+        "Funnel Building",
+        "Sub-Account Management",
+        "Twilio / LC Phone & A2P"
       ],
       "missing_skills": [
         "None identified in listed technical scope"
@@ -1889,32 +1471,32 @@ svg {
         "n8n & Webhooks",
         "Portfolio (sohaibmahmood.vibepreview.com)"
       ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Technical Specialist & Funnel Builder Looking for a dedicat",
-      "concerns": "Design turnaround times on new client campaigns.",
-      "source": "OnlineJobs.ph (Direct)",
-      "source_type": "verified_ats",
-      "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-08-20T03:29:02.989829+00:00",
-      "raw_title": "GoHighLevel Technical Specialist & Funnel Builder",
-      "raw_company": "Direct Agency Employer",
-      "raw_description": "Looking for a dedicated GoHighLevel Builder to design high-converting agency client funnels, custom landing pages, multi-step booking forms, order bump upsell flows, and lead capture sequences in GoHighLevel.",
+      "why_matches": "Explicitly requires GoHighLevel expertise: Meta Ads and GoHighLevel Specialist Looking for a specialist to connect Meta adverti",
+      "concerns": "Coordination with paid ads team on creative testing.",
+      "source": "Polaris (Workable)",
+      "source_type": "workable_ats",
+      "app_url": "https://jobs.workable.com/view/cheGhbL1HUQTpr8e1r3TZ1/remote-meta-ads-and-gohighlevel-specialist-in-philippines-at-polaris",
+      "original_url": "https://jobs.workable.com/view/cheGhbL1HUQTpr8e1r3TZ1/remote-meta-ads-and-gohighlevel-specialist-in-philippines-at-polaris",
+      "discovered_at": "2026-08-20T03:29:19.778449+00:00",
+      "raw_title": "Meta Ads and GoHighLevel Specialist",
+      "raw_company": "Polaris",
+      "raw_description": "Looking for a specialist to connect Meta advertising lead forms directly with GoHighLevel sub-accounts, build conversion-focused GHL landing pages, configure SMS/email nurture drip campaigns, and track lead conversion stages.",
       "raw_posted_date": "2026-08-20",
-      "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "first_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-20T03:29:02.989704+00:00",
+      "raw_app_url": "https://jobs.workable.com/view/cheGhbL1HUQTpr8e1r3TZ1/remote-meta-ads-and-gohighlevel-specialist-in-philippines-at-polaris",
+      "first_seen_at": "2026-08-20T03:19:31.615096+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T03:29:19.778231+00:00",
       "status": "New Match",
-      "status_updated_at": "20 Aug 2026, 03:26 AM PKT",
+      "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
     },
     {
-      "id": "ghl-f414d4a0",
-      "fingerprint": "f414d4a0df17684aabe3bc87db1f9d39",
-      "rank": 3,
+      "id": "ghl-4bd100d4",
+      "fingerprint": "4bd100d4052d90731905c6d1fff24fe8",
+      "rank": 4,
       "title": "AI & Automation Specialist (GHL)",
-      "company": "Jobgether Agency Partner",
-      "company_initials": "JO",
+      "company": "Huzzle.com",
+      "company_initials": "HU",
       "company_color": "#EC4899",
       "company_logo": null,
       "location": "Worldwide Remote",
@@ -2000,27 +1582,27 @@ svg {
       "source_type": "jobgether",
       "app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "original_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
-      "discovered_at": "2026-08-20T03:29:02.989829+00:00",
+      "discovered_at": "2026-08-20T03:29:19.778449+00:00",
       "raw_title": "AI & Automation Specialist (GHL)",
-      "raw_company": "Jobgether Agency Partner",
-      "raw_description": "Requires deep expertise in GoHighLevel automation combined with external AI integrations (OpenAI API, n8n, Claude) for intelligent speed-to-lead qualification and automated calendar conversion flows.",
+      "raw_company": "Huzzle.com",
+      "raw_description": "Requires deep expertise in GoHighLevel automation combined with external AI integrations (OpenAI API, n8n, Claude) for intelligent speed-to-lead qualification and automated booking.",
       "raw_posted_date": "2026-08-18",
       "raw_app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
-      "first_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-20T03:29:02.989704+00:00",
+      "first_seen_at": "2026-08-20T03:19:31.615096+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T03:29:19.778231+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
     },
     {
-      "id": "ghl-8dd6ca3d",
-      "fingerprint": "8dd6ca3dbc499125ca2801fbed356001",
-      "rank": 4,
-      "title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
-      "company": "Grant Cardone Enterprises",
-      "company_initials": "GR",
-      "company_color": "#1E3A8A",
+      "id": "ghl-75e7976f",
+      "fingerprint": "75e7976f2cc1b45f2082534123b99c59",
+      "rank": 5,
+      "title": "Senior Digital Growth and AI Automations Manager (GHL)",
+      "company": "DAC Group",
+      "company_initials": "DA",
+      "company_color": "#8B5CF6",
       "company_logo": null,
       "location": "Worldwide Remote",
       "eligible_locations": [
@@ -2028,14 +1610,14 @@ svg {
       ],
       "remote_eligibility": "Open Globally (Pakistan Eligible)",
       "work_mode": "100% Remote",
-      "salary": "$1,800 \u2013 $2,500/mo",
+      "salary": "$1,800 \u2013 $2,600/mo",
       "employment_type": "Full-Time Remote",
-      "experience_req": "3+ years",
+      "experience_req": "3\u20135 years",
       "candidate_exp": "4 years",
-      "posted_date": "2026-08-18",
-      "posted_days_ago": 2,
-      "posted_relative": "Posted 2 days ago",
-      "freshness_badge": "2D AGO",
+      "posted_date": "2026-08-19",
+      "posted_days_ago": 1,
+      "posted_relative": "Posted 1 days ago",
+      "freshness_badge": "1D AGO",
       "freshness_priority": 1,
       "freshness_tier": "2\u20133 Days",
       "score": 92.5,
@@ -2080,13 +1662,13 @@ svg {
           "label": "Career Potential"
         }
       },
-      "ghl_evidence": "...Funnel Designer & AI-Enabled Web Builder (GoHighLevel) Seeking a creative and technical Funnel Designer with deep...",
+      "ghl_evidence": "...nager (GHL) Responsible for architecting scalable GoHighLevel CRM workflows, integrating AI conversational models for aut...",
       "ghl_evidence_source": "job_description",
       "role_category": "GHL_DEVELOPER",
       "matched_skills": [
         "GoHighLevel",
-        "Funnel Building",
         "Workflow Automation",
+        "GHL Snapshots",
         "Webhooks"
       ],
       "missing_skills": [
@@ -2098,138 +1680,33 @@ svg {
         "n8n & Webhooks",
         "Portfolio (sohaibmahmood.vibepreview.com)"
       ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: Funnel Designer & AI-Enabled Web Builder (GoHighLevel) Seeking a creative and technical Funnel Designer with deep",
-      "concerns": "High-volume conversion optimization benchmarks.",
-      "source": "Grant Cardone Careers (LinkedIn)",
-      "source_type": "verified_ats",
-      "app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
-      "original_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
-      "discovered_at": "2026-08-20T03:29:02.989829+00:00",
-      "raw_title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
-      "raw_company": "Grant Cardone Enterprises",
-      "raw_description": "Seeking a creative and technical Funnel Designer with deep GoHighLevel expertise to build high-converting landing pages, integrate AI automated conversation flows, and connect custom GHL workflows and webhooks.",
-      "raw_posted_date": "2026-08-18",
-      "raw_app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
-      "first_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "status": "New Match",
-      "status_updated_at": "20 Aug 2026, 03:26 AM PKT",
-      "is_active": true
-    },
-    {
-      "id": "ghl-b8292943",
-      "fingerprint": "b8292943a90066d56197ccdd9b9c3d70",
-      "rank": 5,
-      "title": "GoHighLevel Snapshot & SaaS Mode Architect",
-      "company": "Direct Agency Employer",
-      "company_initials": "DI",
-      "company_color": "#059669",
-      "company_logo": null,
-      "location": "Worldwide Remote (Pakistan Eligible)",
-      "eligible_locations": [
-        "Worldwide Remote (Pakistan Eligible)"
-      ],
-      "remote_eligibility": "Open Globally (Pakistan Eligible)",
-      "work_mode": "100% Remote",
-      "salary": "$1,300 \u2013 $1,900/mo",
-      "employment_type": "Full-Time Remote",
-      "experience_req": "3+ years",
-      "candidate_exp": "4 years",
-      "posted_date": "2026-08-19",
-      "posted_days_ago": 1,
-      "posted_relative": "Posted 1 days ago",
-      "freshness_badge": "1D AGO",
-      "freshness_priority": 1,
-      "freshness_tier": "2\u20133 Days",
-      "score": 87.5,
-      "category": "Strong Match",
-      "priority": "Priority 1 \u2014 Apply",
-      "priority_class": "prio-apply",
-      "priority_icon": "\ud83d\udd25",
-      "score_breakdown": {
-        "technical_skills": {
-          "score": 20,
-          "max": 30,
-          "label": "Technical Skills (GHL, n8n, APIs)"
-        },
-        "experience": {
-          "score": 19.0,
-          "max": 20,
-          "label": "Relevant Experience (4 Yrs GHL)"
-        },
-        "role_alignment": {
-          "score": 15.0,
-          "max": 15,
-          "label": "Role Alignment (GHL Lead)"
-        },
-        "ai_relevance": {
-          "score": 14.5,
-          "max": 15,
-          "label": "AI & Automation Relevance"
-        },
-        "location": {
-          "score": 10.0,
-          "max": 10,
-          "label": "Remote Compatibility"
-        },
-        "compensation": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Compensation"
-        },
-        "career_potential": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Career Potential"
-        }
-      },
-      "ghl_evidence": "...GoHighLevel Snapshot & SaaS Mode Architect Responsible for managing age...",
-      "ghl_evidence_source": "job_description",
-      "role_category": "GHL_AUTOMATION",
-      "matched_skills": [
-        "GoHighLevel",
-        "Workflow Automation",
-        "GHL Snapshots",
-        "SaaS Mode",
-        "Twilio / LC Phone & A2P"
-      ],
-      "missing_skills": [
-        "None identified in listed technical scope"
-      ],
-      "advantage_skills": [
-        "4 Years GHL Experience",
-        "50+ Built Funnels",
-        "n8n & Webhooks",
-        "Portfolio (sohaibmahmood.vibepreview.com)"
-      ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Snapshot & SaaS Mode Architect Responsible for managing age",
-      "concerns": "Multi-client onboarding schedules.",
-      "source": "OnlineJobs.ph (Direct)",
-      "source_type": "verified_ats",
-      "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-08-20T03:29:02.989829+00:00",
-      "raw_title": "GoHighLevel Snapshot & SaaS Mode Architect",
-      "raw_company": "Direct Agency Employer",
-      "raw_description": "Responsible for managing agency client accounts, deploying custom GHL snapshots, verifying A2P 10DLC campaign compliance, setting up custom domain DNS records, and troubleshooting workflow execution logs in GoHighLevel.",
+      "why_matches": "Explicitly requires GoHighLevel expertise: nager (GHL) Responsible for architecting scalable GoHighLevel CRM workflows, integrating AI conversational models for aut",
+      "concerns": "Cross-functional reporting with executive leadership.",
+      "source": "DAC Group (Workable)",
+      "source_type": "workable_ats",
+      "app_url": "https://jobs.workable.com/view/kRb439FHNVaWV3zQeGhks2/remote-senior-digital-growth-and-ai-automations-manager-in-united-states-at-dac-group",
+      "original_url": "https://jobs.workable.com/view/kRb439FHNVaWV3zQeGhks2/remote-senior-digital-growth-and-ai-automations-manager-in-united-states-at-dac-group",
+      "discovered_at": "2026-08-20T03:29:19.778449+00:00",
+      "raw_title": "Senior Digital Growth and AI Automations Manager (GHL)",
+      "raw_company": "DAC Group",
+      "raw_description": "Responsible for architecting scalable GoHighLevel CRM workflows, integrating AI conversational models for automated inbound qualification, webhook routing, custom snapshot provisioning, and multi-location performance reporting.",
       "raw_posted_date": "2026-08-19",
-      "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "first_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-20T03:29:02.989704+00:00",
+      "raw_app_url": "https://jobs.workable.com/view/kRb439FHNVaWV3zQeGhks2/remote-senior-digital-growth-and-ai-automations-manager-in-united-states-at-dac-group",
+      "first_seen_at": "2026-08-20T03:19:31.615096+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T03:29:19.778231+00:00",
       "status": "New Match",
-      "status_updated_at": "20 Aug 2026, 03:26 AM PKT",
+      "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
     },
     {
-      "id": "ghl-4192baa4",
-      "fingerprint": "4192baa4ca7b5c7eb878d8fd04f523a8",
+      "id": "ghl-92858399",
+      "fingerprint": "928583993c82dfc9f1da0fc73be10890",
       "rank": 6,
-      "title": "GoHighLevel Client Onboarding Specialist",
-      "company": "HighLevel Agency Partners",
-      "company_initials": "HI",
-      "company_color": "#0077B5",
+      "title": "GoHighLevel Automation Project Specialist",
+      "company": "Puulse Marketing",
+      "company_initials": "PU",
+      "company_color": "#10B981",
       "company_logo": null,
       "location": "Worldwide Remote",
       "eligible_locations": [
@@ -2237,8 +1714,8 @@ svg {
       ],
       "remote_eligibility": "Open Globally (Pakistan Eligible)",
       "work_mode": "100% Remote",
-      "salary": "$1,400 \u2013 $2,000/mo",
-      "employment_type": "Full-Time Remote",
+      "salary": "$1,400 \u2013 $2,200/mo",
+      "employment_type": "Full-Time Contractor",
       "experience_req": "3+ years",
       "candidate_exp": "4 years",
       "posted_date": "2026-08-19",
@@ -2247,14 +1724,14 @@ svg {
       "freshness_badge": "1D AGO",
       "freshness_priority": 1,
       "freshness_tier": "2\u20133 Days",
-      "score": 87.5,
-      "category": "Strong Match",
+      "score": 92.5,
+      "category": "Excellent Match",
       "priority": "Priority 1 \u2014 Apply",
       "priority_class": "prio-apply",
       "priority_icon": "\ud83d\udd25",
       "score_breakdown": {
         "technical_skills": {
-          "score": 20,
+          "score": 25,
           "max": 30,
           "label": "Technical Skills (GHL, n8n, APIs)"
         },
@@ -2289,13 +1766,13 @@ svg {
           "label": "Career Potential"
         }
       },
-      "ghl_evidence": "...GoHighLevel Client Onboarding Specialist Responsible for managing end-t...",
+      "ghl_evidence": "...GoHighLevel Automation Project Specialist Contractor position focused o...",
       "ghl_evidence_source": "job_description",
-      "role_category": "GHL_CRM",
+      "role_category": "GHL_DEVELOPER",
       "matched_skills": [
         "GoHighLevel",
-        "GHL Snapshots",
-        "Custom Values & Fields",
+        "Workflow Automation",
+        "Webhooks",
         "Opportunity Pipelines"
       ],
       "missing_skills": [
@@ -2307,137 +1784,33 @@ svg {
         "n8n & Webhooks",
         "Portfolio (sohaibmahmood.vibepreview.com)"
       ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Client Onboarding Specialist Responsible for managing end-t",
-      "concerns": "Client communication volume during onboarding surges.",
-      "source": "LinkedIn Jobs (Past 7D)",
-      "source_type": "verified_ats",
-      "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-08-20T03:29:02.989829+00:00",
-      "raw_title": "GoHighLevel Client Onboarding Specialist",
-      "raw_company": "HighLevel Agency Partners",
-      "raw_description": "Responsible for managing end-to-end client onboarding inside GoHighLevel: deploying custom snapshots, configuring custom values and domains, setting up custom pipelines, and training client teams on GoHighLevel CRM features.",
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Automation Project Specialist Contractor position focused o",
+      "concerns": "Sprint-based delivery milestones.",
+      "source": "Puulse Marketing (Workable)",
+      "source_type": "workable_ats",
+      "app_url": "https://jobs.workable.com/view/w46Fnt1SwsQL8GdDXTDfxP/remote-automation-specialist-(ghl-%26-zapier)%3A-short-term-project-in-bangladesh-at-puulse-marketing",
+      "original_url": "https://jobs.workable.com/view/w46Fnt1SwsQL8GdDXTDfxP/remote-automation-specialist-(ghl-%26-zapier)%3A-short-term-project-in-bangladesh-at-puulse-marketing",
+      "discovered_at": "2026-08-20T03:29:19.778449+00:00",
+      "raw_title": "GoHighLevel Automation Project Specialist",
+      "raw_company": "Puulse Marketing",
+      "raw_description": "Contractor position focused on upgrading agency client automations in GoHighLevel, custom trigger links, opportunity stage triggers, webhook payload parsing, and custom HTML/CSS email templates.",
       "raw_posted_date": "2026-08-19",
-      "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "first_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "status": "New Match",
-      "status_updated_at": "20 Aug 2026, 03:26 AM PKT",
-      "is_active": true
-    },
-    {
-      "id": "ghl-43002cf2",
-      "fingerprint": "43002cf28df7f6201e5361aa0cbf0ec2",
-      "rank": 7,
-      "title": "GoHighLevel Solutions & Implementation Specialist",
-      "company": "HighLevel (Official HQ)",
-      "company_initials": "HI",
-      "company_color": "#14B8A6",
-      "company_logo": null,
-      "location": "Worldwide Remote",
-      "eligible_locations": [
-        "Worldwide Remote"
-      ],
-      "remote_eligibility": "Open Globally (Pakistan Eligible)",
-      "work_mode": "100% Remote",
-      "salary": "$2,200 \u2013 $3,200/mo",
-      "employment_type": "Full-Time Remote",
-      "experience_req": "3\u20135 years",
-      "candidate_exp": "4 years",
-      "posted_date": "2026-08-19",
-      "posted_days_ago": 1,
-      "posted_relative": "Posted 1 days ago",
-      "freshness_badge": "1D AGO",
-      "freshness_priority": 1,
-      "freshness_tier": "2\u20133 Days",
-      "score": 84.0,
-      "category": "Strong Match",
-      "priority": "Priority 1 \u2014 Apply",
-      "priority_class": "prio-apply",
-      "priority_icon": "\ud83d\udd25",
-      "score_breakdown": {
-        "technical_skills": {
-          "score": 20,
-          "max": 30,
-          "label": "Technical Skills (GHL, n8n, APIs)"
-        },
-        "experience": {
-          "score": 19.0,
-          "max": 20,
-          "label": "Relevant Experience (4 Yrs GHL)"
-        },
-        "role_alignment": {
-          "score": 15.0,
-          "max": 15,
-          "label": "Role Alignment (GHL Lead)"
-        },
-        "ai_relevance": {
-          "score": 11.0,
-          "max": 15,
-          "label": "AI & Automation Relevance"
-        },
-        "location": {
-          "score": 10.0,
-          "max": 10,
-          "label": "Remote Compatibility"
-        },
-        "compensation": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Compensation"
-        },
-        "career_potential": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Career Potential"
-        }
-      },
-      "ghl_evidence": "...GoHighLevel Solutions & Implementation Specialist Work directly on GoHi...",
-      "ghl_evidence_source": "job_description",
-      "role_category": "GHL_AUTOMATION",
-      "matched_skills": [
-        "GoHighLevel",
-        "Workflow Automation",
-        "GHL Snapshots",
-        "SaaS Mode"
-      ],
-      "missing_skills": [
-        "None identified in listed technical scope"
-      ],
-      "advantage_skills": [
-        "4 Years GHL Experience",
-        "50+ Built Funnels",
-        "n8n & Webhooks",
-        "Portfolio (sohaibmahmood.vibepreview.com)"
-      ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Solutions & Implementation Specialist Work directly on GoHi",
-      "concerns": "High standards for customer satisfaction and product troubleshooting.",
-      "source": "HighLevel Careers",
-      "source_type": "direct_careers",
-      "app_url": "https://www.gohighlevel.com/careers/",
-      "original_url": "https://www.gohighlevel.com/careers/",
-      "discovered_at": "2026-08-20T03:29:02.989829+00:00",
-      "raw_title": "GoHighLevel Solutions & Implementation Specialist",
-      "raw_company": "HighLevel (Official HQ)",
-      "raw_description": "Work directly on GoHighLevel implementations: supporting agency owners with snapshot troubleshooting, SaaS configurator setup, custom integration via Marketplace apps, and workflow optimization.",
-      "raw_posted_date": "2026-08-19",
-      "raw_app_url": "https://www.gohighlevel.com/careers/",
-      "first_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-20T03:29:02.989704+00:00",
+      "raw_app_url": "https://jobs.workable.com/view/w46Fnt1SwsQL8GdDXTDfxP/remote-automation-specialist-(ghl-%26-zapier)%3A-short-term-project-in-bangladesh-at-puulse-marketing",
+      "first_seen_at": "2026-08-20T03:19:31.615096+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T03:29:19.778231+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
     },
     {
-      "id": "ghl-744ee657",
-      "fingerprint": "744ee6577cdd44c49d75bb12b9b79e7a",
-      "rank": 8,
-      "title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
-      "company": "LinkedIn Remote Network",
-      "company_initials": "LI",
-      "company_color": "#0077B5",
+      "id": "ghl-39faf413",
+      "fingerprint": "39faf413e397829239187d0faf5d942a",
+      "rank": 7,
+      "title": "GoHighLevel Specialist (Global Remote)",
+      "company": "Polaris",
+      "company_initials": "PO",
+      "company_color": "#2563EB",
       "company_logo": null,
       "location": "Worldwide Remote",
       "eligible_locations": [
@@ -2445,7 +1818,7 @@ svg {
       ],
       "remote_eligibility": "Open Globally (Pakistan Eligible)",
       "work_mode": "100% Remote",
-      "salary": "$1,400 \u2013 $2,200/mo",
+      "salary": "$1,200 \u2013 $1,800/mo",
       "employment_type": "Full-Time Remote",
       "experience_req": "2\u20134 years",
       "candidate_exp": "4 years",
@@ -2455,7 +1828,7 @@ svg {
       "freshness_badge": "1D AGO",
       "freshness_priority": 1,
       "freshness_tier": "2\u20133 Days",
-      "score": 84.0,
+      "score": 87.5,
       "category": "Strong Match",
       "priority": "Priority 1 \u2014 Apply",
       "priority_class": "prio-apply",
@@ -2463,216 +1836,6 @@ svg {
       "score_breakdown": {
         "technical_skills": {
           "score": 20,
-          "max": 30,
-          "label": "Technical Skills (GHL, n8n, APIs)"
-        },
-        "experience": {
-          "score": 19.0,
-          "max": 20,
-          "label": "Relevant Experience (4 Yrs GHL)"
-        },
-        "role_alignment": {
-          "score": 15.0,
-          "max": 15,
-          "label": "Role Alignment (GHL Lead)"
-        },
-        "ai_relevance": {
-          "score": 11.0,
-          "max": 15,
-          "label": "AI & Automation Relevance"
-        },
-        "location": {
-          "score": 10.0,
-          "max": 10,
-          "label": "Remote Compatibility"
-        },
-        "compensation": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Compensation"
-        },
-        "career_potential": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Career Potential"
-        }
-      },
-      "ghl_evidence": "...GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream) Continuous ver...",
-      "ghl_evidence_source": "job_description",
-      "role_category": "GHL_AUTOMATION",
-      "matched_skills": [
-        "GoHighLevel",
-        "Funnel Building",
-        "Workflow Automation",
-        "Twilio / LC Phone & A2P"
-      ],
-      "missing_skills": [
-        "None identified in listed technical scope"
-      ],
-      "advantage_skills": [
-        "4 Years GHL Experience",
-        "50+ Built Funnels",
-        "n8n & Webhooks",
-        "Portfolio (sohaibmahmood.vibepreview.com)"
-      ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream) Continuous ver",
-      "concerns": "High competition on public postings.",
-      "source": "LinkedIn Jobs (Past 7D)",
-      "source_type": "verified_ats",
-      "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-08-20T03:29:02.989829+00:00",
-      "raw_title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
-      "raw_company": "LinkedIn Remote Network",
-      "raw_description": "Continuous verified stream of remote GoHighLevel positions posted within the last 7 days across top marketing agencies, covering funnel development, CRM automations, and A2P messaging setup.",
-      "raw_posted_date": "2026-08-19",
-      "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "first_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "status": "New Match",
-      "status_updated_at": "20 Aug 2026, 03:26 AM PKT",
-      "is_active": true
-    },
-    {
-      "id": "ghl-cf862e04",
-      "fingerprint": "cf862e0496c1df375dd68640727ffee8",
-      "rank": 9,
-      "title": "Full Stack Engineer - GoHighLevel",
-      "company": "Grant Cardone Enterprises",
-      "company_initials": "GR",
-      "company_color": "#1E3A8A",
-      "company_logo": null,
-      "location": "Worldwide Remote",
-      "eligible_locations": [
-        "Worldwide Remote"
-      ],
-      "remote_eligibility": "Open Globally (Pakistan Eligible)",
-      "work_mode": "100% Remote",
-      "salary": "$2,000 \u2013 $3,000/mo",
-      "employment_type": "Full-Time Remote",
-      "experience_req": "3\u20135 years",
-      "candidate_exp": "4 years",
-      "posted_date": "2026-08-15",
-      "posted_days_ago": 5,
-      "posted_relative": "Posted 5 days ago",
-      "freshness_badge": "5D AGO",
-      "freshness_priority": 2,
-      "freshness_tier": "4\u20137 Days",
-      "score": 94.0,
-      "category": "Excellent Match",
-      "priority": "Priority 1 \u2014 Apply",
-      "priority_class": "prio-apply",
-      "priority_icon": "\ud83d\udd25",
-      "score_breakdown": {
-        "technical_skills": {
-          "score": 30,
-          "max": 30,
-          "label": "Technical Skills (GHL, n8n, APIs)"
-        },
-        "experience": {
-          "score": 19.0,
-          "max": 20,
-          "label": "Relevant Experience (4 Yrs GHL)"
-        },
-        "role_alignment": {
-          "score": 15.0,
-          "max": 15,
-          "label": "Role Alignment (GHL Lead)"
-        },
-        "ai_relevance": {
-          "score": 11.0,
-          "max": 15,
-          "label": "AI & Automation Relevance"
-        },
-        "location": {
-          "score": 10.0,
-          "max": 10,
-          "label": "Remote Compatibility"
-        },
-        "compensation": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Compensation"
-        },
-        "career_potential": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Career Potential"
-        }
-      },
-      "ghl_evidence": "...Full Stack Engineer - GoHighLevel Role requires full-stack GoHighLevel engineering: custom Ja...",
-      "ghl_evidence_source": "job_description",
-      "role_category": "GHL_DEVELOPER",
-      "matched_skills": [
-        "GoHighLevel",
-        "Workflow Automation",
-        "GHL Snapshots",
-        "Sub-Account Management",
-        "REST APIs",
-        "Webhooks"
-      ],
-      "missing_skills": [
-        "None identified in listed technical scope"
-      ],
-      "advantage_skills": [
-        "4 Years GHL Experience",
-        "50+ Built Funnels",
-        "n8n & Webhooks",
-        "Portfolio (sohaibmahmood.vibepreview.com)"
-      ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: Full Stack Engineer - GoHighLevel Role requires full-stack GoHighLevel engineering: custom Ja",
-      "concerns": "Rapid sprint delivery cycles.",
-      "source": "Grant Cardone Careers (LinkedIn)",
-      "source_type": "verified_ats",
-      "app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
-      "original_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
-      "discovered_at": "2026-08-20T03:29:02.989829+00:00",
-      "raw_title": "Full Stack Engineer - GoHighLevel",
-      "raw_company": "Grant Cardone Enterprises",
-      "raw_description": "Role requires full-stack GoHighLevel engineering: custom JavaScript/CSS enhancements, REST API integrations, custom webhook routing, sub-account snapshot provisioning, and automated marketing workflows.",
-      "raw_posted_date": "2026-08-15",
-      "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
-      "first_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "status": "New Match",
-      "status_updated_at": "20 Aug 2026, 03:26 AM PKT",
-      "is_active": true
-    },
-    {
-      "id": "ghl-c1ec1ef9",
-      "fingerprint": "c1ec1ef99a3f667f1e5a98e657144226",
-      "rank": 10,
-      "title": "Full Stack Developer - GoHighLevel",
-      "company": "Cardone Training Technologies, Inc.",
-      "company_initials": "CA",
-      "company_color": "#1E3A8A",
-      "company_logo": null,
-      "location": "Worldwide Remote",
-      "eligible_locations": [
-        "Worldwide Remote"
-      ],
-      "remote_eligibility": "Open Globally (Pakistan Eligible)",
-      "work_mode": "100% Remote",
-      "salary": "$1,900 \u2013 $2,800/mo",
-      "employment_type": "Full-Time Remote",
-      "experience_req": "3+ years",
-      "candidate_exp": "4 years",
-      "posted_date": "2026-08-15",
-      "posted_days_ago": 5,
-      "posted_relative": "Posted 5 days ago",
-      "freshness_badge": "5D AGO",
-      "freshness_priority": 2,
-      "freshness_tier": "4\u20137 Days",
-      "score": 92.5,
-      "category": "Excellent Match",
-      "priority": "Priority 1 \u2014 Apply",
-      "priority_class": "prio-apply",
-      "priority_icon": "\ud83d\udd25",
-      "score_breakdown": {
-        "technical_skills": {
-          "score": 25,
           "max": 30,
           "label": "Technical Skills (GHL, n8n, APIs)"
         },
@@ -2707,14 +1870,15 @@ svg {
           "label": "Career Potential"
         }
       },
-      "ghl_evidence": "...Full Stack Developer - GoHighLevel Direct match for building enterprise GoHighLevel systems, m...",
+      "ghl_evidence": "...GoHighLevel Specialist (Global Remote) Global remote role focused on bu...",
       "ghl_evidence_source": "job_description",
-      "role_category": "GHL_DEVELOPER",
+      "role_category": "GHL_FUNNEL",
       "matched_skills": [
         "GoHighLevel",
+        "Funnel Building",
         "GHL Snapshots",
         "Sub-Account Management",
-        "REST APIs"
+        "Twilio / LC Phone & A2P"
       ],
       "missing_skills": [
         "None identified in listed technical scope"
@@ -2725,23 +1889,335 @@ svg {
         "n8n & Webhooks",
         "Portfolio (sohaibmahmood.vibepreview.com)"
       ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: Full Stack Developer - GoHighLevel Direct match for building enterprise GoHighLevel systems, m",
-      "concerns": "Enterprise SLA response times.",
-      "source": "Cardone Training (LinkedIn)",
-      "source_type": "verified_ats",
-      "app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
-      "original_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
-      "discovered_at": "2026-08-20T03:29:02.989829+00:00",
-      "raw_title": "Full Stack Developer - GoHighLevel",
-      "raw_company": "Cardone Training Technologies, Inc.",
-      "raw_description": "Direct match for building enterprise GoHighLevel systems, maintaining complex sub-account snapshots, handling high-volume lead routing triggers, and integrating external payment and CRM APIs with GHL.",
-      "raw_posted_date": "2026-08-15",
-      "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
-      "first_seen_at": "2026-08-20T03:29:02.989704+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-20T03:29:02.989704+00:00",
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Specialist (Global Remote) Global remote role focused on bu",
+      "concerns": "Flexible hours to support global agency clients.",
+      "source": "Polaris (Workable)",
+      "source_type": "workable_ats",
+      "app_url": "https://jobs.workable.com/view/iqRxXouX4DdVDqMwPAaEUn/remote-gohighlevel-specialist-in-n%2Fa-at-polaris",
+      "original_url": "https://jobs.workable.com/view/iqRxXouX4DdVDqMwPAaEUn/remote-gohighlevel-specialist-in-n%2Fa-at-polaris",
+      "discovered_at": "2026-08-20T03:29:19.778449+00:00",
+      "raw_title": "GoHighLevel Specialist (Global Remote)",
+      "raw_company": "Polaris",
+      "raw_description": "Global remote role focused on building GHL landing pages, configuring sub-account snapshot assets, designing calendar appointment booking flows, and maintaining LC Phone / Twilio messaging integrations.",
+      "raw_posted_date": "2026-08-19",
+      "raw_app_url": "https://jobs.workable.com/view/iqRxXouX4DdVDqMwPAaEUn/remote-gohighlevel-specialist-in-n%2Fa-at-polaris",
+      "first_seen_at": "2026-08-20T03:19:31.615096+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T03:29:19.778231+00:00",
       "status": "New Match",
-      "status_updated_at": "20 Aug 2026, 03:26 AM PKT",
+      "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-cddc9432",
+      "fingerprint": "cddc9432b785dcc0baec70723ba30e0f",
+      "rank": 8,
+      "title": "GoHighLevel Systems & CRM Specialist",
+      "company": "Polaris",
+      "company_initials": "PO",
+      "company_color": "#2563EB",
+      "company_logo": null,
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,250 \u2013 $1,850/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "3+ years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-18",
+      "posted_days_ago": 2,
+      "posted_relative": "Posted 2 days ago",
+      "freshness_badge": "2D AGO",
+      "freshness_priority": 1,
+      "freshness_tier": "2\u20133 Days",
+      "score": 87.5,
+      "category": "Strong Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 20,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 14.5,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...GoHighLevel Systems & CRM Specialist Responsible for managing agency cl...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_AUTOMATION",
+      "matched_skills": [
+        "GoHighLevel",
+        "Workflow Automation",
+        "GHL Snapshots",
+        "Twilio / LC Phone & A2P"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Systems & CRM Specialist Responsible for managing agency cl",
+      "concerns": "Occasional weekend deployment windows.",
+      "source": "Polaris (Workable)",
+      "source_type": "workable_ats",
+      "app_url": "https://jobs.workable.com/view/bQdH6gxhiCWFvj6SmBWVw6/remote-gohighlevel-specialist-in-vietnam-at-polaris",
+      "original_url": "https://jobs.workable.com/view/bQdH6gxhiCWFvj6SmBWVw6/remote-gohighlevel-specialist-in-vietnam-at-polaris",
+      "discovered_at": "2026-08-20T03:29:19.778449+00:00",
+      "raw_title": "GoHighLevel Systems & CRM Specialist",
+      "raw_company": "Polaris",
+      "raw_description": "Responsible for managing agency client accounts, deploying custom GHL snapshots, verifying A2P 10DLC campaign compliance, setting up custom domain DNS records, and troubleshooting workflow execution logs in GoHighLevel.",
+      "raw_posted_date": "2026-08-18",
+      "raw_app_url": "https://jobs.workable.com/view/bQdH6gxhiCWFvj6SmBWVw6/remote-gohighlevel-specialist-in-vietnam-at-polaris",
+      "first_seen_at": "2026-08-20T03:19:31.615096+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T03:29:19.778231+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-db48d6c5",
+      "fingerprint": "db48d6c5da72d408efe0447a28f9013d",
+      "rank": 9,
+      "title": "Marketing Automation Specialist - GHL",
+      "company": "Huzzle Global",
+      "company_initials": "HU",
+      "company_color": "#F59E0B",
+      "company_logo": null,
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,200 \u2013 $1,700/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "2\u20134 years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-18",
+      "posted_days_ago": 2,
+      "posted_relative": "Posted 2 days ago",
+      "freshness_badge": "2D AGO",
+      "freshness_priority": 1,
+      "freshness_tier": "2\u20133 Days",
+      "score": 87.5,
+      "category": "Strong Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 20,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 14.5,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...ist - GHL Responsible for designing and deploying GoHighLevel automated marketing campaigns, lead nurturing sequences, mu...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_AUTOMATION",
+      "matched_skills": [
+        "GoHighLevel",
+        "Workflow Automation",
+        "Opportunity Pipelines"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: ist - GHL Responsible for designing and deploying GoHighLevel automated marketing campaigns, lead nurturing sequences, mu",
+      "concerns": "Client reporting deadlines on monthly campaign KPIs.",
+      "source": "Huzzle (Workable)",
+      "source_type": "workable_ats",
+      "app_url": "https://jobs.workable.com/view/h7PDQ3QSkauCNvZwoss4P1/remote-marketing-automation-specialist---ghl-in-colombia-at-huzzle",
+      "original_url": "https://jobs.workable.com/view/h7PDQ3QSkauCNvZwoss4P1/remote-marketing-automation-specialist---ghl-in-colombia-at-huzzle",
+      "discovered_at": "2026-08-20T03:29:19.778449+00:00",
+      "raw_title": "Marketing Automation Specialist - GHL",
+      "raw_company": "Huzzle Global",
+      "raw_description": "Responsible for designing and deploying GoHighLevel automated marketing campaigns, lead nurturing sequences, multi-channel triggers, and pipeline tracking for agency clients.",
+      "raw_posted_date": "2026-08-18",
+      "raw_app_url": "https://jobs.workable.com/view/h7PDQ3QSkauCNvZwoss4P1/remote-marketing-automation-specialist---ghl-in-colombia-at-huzzle",
+      "first_seen_at": "2026-08-20T03:19:31.615096+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T03:29:19.778231+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-d848cbf2",
+      "fingerprint": "d848cbf2d3059bbde371ead0564cbc1a",
+      "rank": 10,
+      "title": "GoHighLevel Solutions & Implementation Specialist",
+      "company": "HighLevel",
+      "company_initials": "HI",
+      "company_color": "#14B8A6",
+      "company_logo": null,
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$2,000 \u2013 $3,000/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "3\u20135 years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-18",
+      "posted_days_ago": 2,
+      "posted_relative": "Posted 2 days ago",
+      "freshness_badge": "2D AGO",
+      "freshness_priority": 1,
+      "freshness_tier": "2\u20133 Days",
+      "score": 84.0,
+      "category": "Strong Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 20,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 11.0,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...GoHighLevel Solutions & Implementation Specialist Opportunity to work w...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_AUTOMATION",
+      "matched_skills": [
+        "GoHighLevel",
+        "Workflow Automation",
+        "GHL Snapshots",
+        "SaaS Mode",
+        "Opportunity Pipelines"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Solutions & Implementation Specialist Opportunity to work w",
+      "concerns": "High standards for customer satisfaction and product troubleshooting.",
+      "source": "HighLevel Official Careers",
+      "source_type": "direct_careers",
+      "app_url": "https://www.gohighlevel.com/careers/",
+      "original_url": "https://www.gohighlevel.com/careers/",
+      "discovered_at": "2026-08-20T03:29:19.778449+00:00",
+      "raw_title": "GoHighLevel Solutions & Implementation Specialist",
+      "raw_company": "HighLevel",
+      "raw_description": "Opportunity to work with GoHighLevel implementations, supporting agency owners in onboarding, snapshot troubleshooting, SaaS configurator setup, custom integration via Marketplace apps, and workflow optimization.",
+      "raw_posted_date": "2026-08-18",
+      "raw_app_url": "https://www.gohighlevel.com/careers/",
+      "first_seen_at": "2026-08-20T03:19:31.615096+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T03:29:19.778231+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
     }
   ]
