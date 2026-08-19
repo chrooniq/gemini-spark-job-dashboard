@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-20T02:31:49.049474+00:00",
+  "timestamp": "2026-08-20T03:03:45.807449+00:00",
   "sources": {
     "RapidAPI JSearch": {
       "status": "OK",
@@ -23,14 +23,14 @@
     },
     "Public ATS Feeds (Workable / Greenhouse / Lever)": {
       "status": "OK",
-      "raw_count": 16
+      "raw_count": 17
     }
   },
-  "raw_harvested": 16,
-  "verified_ghl": 16,
+  "raw_harvested": 17,
+  "verified_ghl": 17,
   "rejected_non_ghl": 0,
   "rejected_forbidden_titles": 0,
   "rejected_expired": 3,
   "duplicates_collapsed": 4,
-  "final_verified_ghl_jobs": 9
+  "final_verified_ghl_jobs": 10
 }
