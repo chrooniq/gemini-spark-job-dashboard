@@ -1,0 +1,30 @@
+{
+  "category": "cv",
+  "source": "Master Resume",
+  "topic": "Professional Summary & Core Highlights",
+  "verified": true,
+  "data": {
+    "headline": "GoHighLevel Developer & CRM Automation Specialist",
+    "years_of_experience": 4,
+    "summary": "Results-driven GoHighLevel Developer and CRM Automation Specialist with 4 years of hands-on experience building scalable sub-account architectures, custom snapshots, high-converting funnels, and complex backend workflows. Successfully delivered 50+ websites/funnels, 200+ multi-step automations, and managed 40+ GHL sub-accounts across agencies and SMBs.",
+    "core_metrics": {
+      "ghl_experience_years": 4,
+      "funnels_websites_built": "50+",
+      "workflows_automated": "200+",
+      "subaccounts_managed": "40+",
+      "students_mentored": "21,000+"
+    },
+    "core_competencies": [
+      "GoHighLevel SaaS Mode & Custom Snapshots",
+      "Sub-Account Multi-Tenant Architecture",
+      "High-Converting Sales Funnels & Landing Pages",
+      "Multi-Branch Workflow Automations & Triggers",
+      "Custom Values, Custom Fields & Opportunity Pipelines",
+      "Twilio / LC Phone & A2P 10DLC Compliance",
+      "n8n & Zapier Custom Webhook Workflows",
+      "REST API Integrations & Webhook Handlers",
+      "OpenAI / Claude LLM AI Conversation Flows",
+      "Speed-to-Lead Lead Nurture & Qualification Systems"
+    ]
+  }
+}

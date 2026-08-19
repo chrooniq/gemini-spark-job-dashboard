@@ -1,0 +1,657 @@
+[
+  {
+    "application_id": "app-ghl-3724bdc6-20260820025051",
+    "job_id": "ghl-3724bdc6",
+    "company": "HumanIntelligence",
+    "job_title": "GoHighLevel Automation Specialist | CRM, Funnels & AI Systems",
+    "application_url": "https://apply.workable.com/humanintelligence/j/E08961ABAC",
+    "timestamp": "2026-08-19T21:50:51.123431+00:00",
+    "mode": "DRY_RUN",
+    "status": "Ready for Review (Dry-Run Tested)",
+    "resume_used": "Sohaib_Mahmood_GHL_Funnel_Builder_Resume.pdf",
+    "portfolio_used": "https://sohaibmahmood.vibepreview.com/",
+    "form_fields_extracted": [],
+    "answers_prepared": [],
+    "overall_confidence": 98.0,
+    "requires_review": false,
+    "screenshot_path": "C:\\Users\\Sohaib Mahmood\\Documents\\antigravity\\epic-bardeen\\data\\applications\\screenshots\\app-ghl-3724bdc6-20260820025051.png",
+    "submission_verified": false
+  },
+  {
+    "application_id": "app-ghl-3724bdc6-20260820025143",
+    "job_id": "ghl-3724bdc6",
+    "company": "HumanIntelligence",
+    "job_title": "GoHighLevel Automation Specialist | CRM, Funnels & AI Systems",
+    "application_url": "https://apply.workable.com/humanintelligence/j/E08961ABAC/apply/",
+    "timestamp": "2026-08-19T21:51:43.599536+00:00",
+    "mode": "DRY_RUN",
+    "status": "Ready for Review (Dry-Run Tested)",
+    "resume_used": "Sohaib_Mahmood_GHL_Funnel_Builder_Resume.pdf",
+    "portfolio_used": "https://sohaibmahmood.vibepreview.com/",
+    "form_fields_extracted": [
+      {
+        "field_identifier": "firstname",
+        "field_type": "text",
+        "classified_category": "FULL_NAME",
+        "generated_answer": "Sohaib Mahmood",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "field_identifier": "lastname",
+        "field_type": "text",
+        "classified_category": "FULL_NAME",
+        "generated_answer": "Sohaib Mahmood",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "field_identifier": "email",
+        "field_type": "email",
+        "classified_category": "EMAIL",
+        "generated_answer": "sohaibmahmood5911@gmail.com",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "field_identifier": "phone",
+        "field_type": "tel",
+        "classified_category": "PHONE",
+        "generated_answer": "+923000000000",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "field_identifier": "address",
+        "field_type": "text",
+        "classified_category": "LOCATION",
+        "generated_answer": "Lahore, Pakistan (100% Remote / UTC+5)",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "field_identifier": "city",
+        "field_type": "text",
+        "classified_category": "LOCATION",
+        "generated_answer": "Lahore, Pakistan (100% Remote / UTC+5)",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "field_identifier": "postcode",
+        "field_type": "text",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "country",
+        "field_type": "text",
+        "classified_category": "LOCATION",
+        "generated_answer": "Lahore, Pakistan (100% Remote / UTC+5)",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "field_identifier": "input_files_input_Y7rbOIAj8Gz27HjI",
+        "field_type": "file",
+        "classified_category": "RESUME_UPLOAD",
+        "generated_answer": "Sohaib_Mahmood_GHL_Funnel_Builder_Resume.pdf",
+        "confidence": 100,
+        "sources": [
+          "rag_engine"
+        ]
+      },
+      {
+        "field_identifier": "CA_43671",
+        "field_type": "text",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "summary",
+        "field_type": "text",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: Results-driven GoHighLevel Developer and CRM Automation Specialist with 4 years of hands-on experience building scalable sub-account architectures, cu...",
+        "confidence": 75,
+        "sources": [
+          "Professional Summary & Core Highlights \u2014 summary",
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies"
+        ]
+      },
+      {
+        "field_identifier": "input_files_input_MZGVDwyouwjtB18f",
+        "field_type": "file",
+        "classified_category": "RESUME_UPLOAD",
+        "generated_answer": "Sohaib_Mahmood_GHL_Funnel_Builder_Resume.pdf",
+        "confidence": 100,
+        "sources": [
+          "rag_engine"
+        ]
+      },
+      {
+        "field_identifier": "cover_letter",
+        "field_type": "text",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079837",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079837",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079838",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079838",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079839",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079839",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079840",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079840",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079841",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079841",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079842",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079842",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079843",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079843",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079844",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079844",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079845",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079845",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079846",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079846",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079847",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079847",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079848",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079848",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079849",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079849",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079850",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079850",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079851",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079851",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079852",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079852",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079853",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079853",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079854",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079854",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079855",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079855",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079856",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "field_identifier": "QA_12079856",
+        "field_type": "radio",
+        "classified_category": "CUSTOM_QUESTION",
+        "generated_answer": "Grounded in verified experience: [\"GoHighLevel Developer\", \"GHL Automation Specialist\", \"GHL CRM Architect\", \"GoHighLevel Funnel Builder\", \"AI & Workflow Automation Specialist\"]...",
+        "confidence": 75,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      }
+    ],
+    "answers_prepared": [],
+    "overall_confidence": 98.0,
+    "requires_review": false,
+    "screenshot_path": "C:\\Users\\Sohaib Mahmood\\Documents\\antigravity\\epic-bardeen\\data\\applications\\screenshots\\app-ghl-3724bdc6-20260820025143.png",
+    "submission_verified": false
+  }
+]

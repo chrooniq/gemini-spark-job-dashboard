@@ -1,0 +1,21 @@
+{
+  "category": "work_preferences",
+  "source": "Candidate Profile",
+  "topic": "Work Preferences & Availability",
+  "verified": true,
+  "data": {
+    "work_type": "100% Remote Contractor / Full-Time",
+    "hours_per_week": "40 hrs/week (Full-Time)",
+    "location": "Lahore, Pakistan (UTC+5)",
+    "timezone_overlap": "4–6 hours overlap with US EST/PST, UK GMT, and AEST",
+    "notice_period": "Immediate (within 1 week)",
+    "target_compensation_range": "$1,200 – $2,500 USD / month",
+    "preferred_roles": [
+      "GoHighLevel Developer",
+      "GHL Automation Specialist",
+      "GHL CRM Architect",
+      "GoHighLevel Funnel Builder",
+      "AI & Workflow Automation Specialist"
+    ]
+  }
+}

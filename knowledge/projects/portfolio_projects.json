@@ -1,0 +1,37 @@
+{
+  "category": "projects",
+  "source": "Portfolio Showcase",
+  "topic": "Verified GoHighLevel & AI Automation Projects",
+  "verified": true,
+  "data": {
+    "featured_projects": [
+      {
+        "project_id": "proj-ghl-snapshot-realestate",
+        "title": "Real Estate Agency SaaS Snapshot",
+        "category": "GHL SaaS & Snapshots",
+        "stack": ["GoHighLevel", "SaaS Mode", "Custom Values", "Opportunity Pipelines", "Twilio / LC Phone"],
+        "description": "Complete agency snapshot featuring automated lead intake, dynamic custom values, appointment reminders, and automated pipeline stage updates.",
+        "results": "Deployed across 15+ agency sub-accounts, reducing client setup time from 3 days to 15 minutes.",
+        "portfolio_url": "https://sohaibmahmood.vibepreview.com/"
+      },
+      {
+        "project_id": "proj-n8n-ai-speed-to-lead",
+        "title": "AI Lead Qualification Agent (n8n + OpenAI)",
+        "category": "AI Automation & Integrations",
+        "stack": ["n8n", "OpenAI API", "GoHighLevel Webhooks", "REST APIs"],
+        "description": "Autonomous AI agent that ingests inbound GHL leads via webhooks, queries OpenAI to evaluate intent and budget, and books qualified appointments on GHL calendars.",
+        "results": "Sub-60s response time, 42% increase in qualified sales appointments.",
+        "portfolio_url": "https://sohaibmahmood.vibepreview.com/"
+      },
+      {
+        "project_id": "proj-medspa-booking-funnel",
+        "title": "MedSpa Automated Booking System",
+        "category": "Funnels & Healthcare CRM",
+        "stack": ["GoHighLevel Funnels", "Custom CSS", "SMS Sequences", "Stripe Checkout"],
+        "description": "High-converting 2-step booking funnel with deposit payment integration, SMS confirmation sequences, and no-show follow-ups.",
+        "results": "Built and tested 12 customized clinic funnels with an average 18% conversion rate.",
+        "portfolio_url": "https://sohaibmahmood.vibepreview.com/"
+      }
+    ]
+  }
+}

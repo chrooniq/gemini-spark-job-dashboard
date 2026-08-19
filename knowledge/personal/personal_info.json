@@ -1,0 +1,20 @@
+{
+  "category": "personal",
+  "source": "CV",
+  "topic": "Personal & Contact Information",
+  "verified": true,
+  "data": {
+    "full_name": "Sohaib Mahmood",
+    "first_name": "Sohaib",
+    "last_name": "Mahmood",
+    "email": "sohaibmahmood5911@gmail.com",
+    "phone": "+923000000000",
+    "location": "Lahore, Pakistan",
+    "timezone": "UTC+5 (PKT)",
+    "remote_status": "100% Worldwide Remote",
+    "linkedin_url": "https://www.linkedin.com/in/sohaibmahmood/",
+    "portfolio_url": "https://sohaibmahmood.vibepreview.com/",
+    "video_intro_url": "https://drive.google.com/file/d/1TH4CMzXFOfup2liGESZmmA7QFM8GcfqP/view?usp=sharing",
+    "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
+  }
+}

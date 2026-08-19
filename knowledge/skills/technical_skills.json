@@ -1,0 +1,14 @@
+{
+  "category": "skills",
+  "source": "Master CV",
+  "topic": "Technical Skills Matrix",
+  "verified": true,
+  "data": {
+    "crm_platforms": ["GoHighLevel (Expert - 4 Yrs)", "SaaS Mode", "Sub-accounts", "Snapshots"],
+    "automations": ["GHL Workflow Builder", "n8n (Self-hosted & Cloud)", "Zapier", "Make / Integromat"],
+    "telecom_compliance": ["Twilio", "LC Phone", "A2P 10DLC Registration", "Toll-Free Verification", "SMS/MMS Delivery"],
+    "developer_tools": ["REST APIs", "Webhooks", "JSON", "JavaScript", "HTML5", "CSS3", "React.js", "Python"],
+    "ai_integrations": ["OpenAI API (GPT-4o)", "Claude API", "Conversation AI", "Custom Prompt Engineering", "AI Lead Responders"],
+    "funnel_web": ["GHL Funnel Builder", "GHL Website Builder", "Custom CSS Styling", "Form & Survey Logic", "Calendar Configurations"]
+  }
+}

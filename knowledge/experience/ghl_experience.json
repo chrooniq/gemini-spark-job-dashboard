@@ -1,0 +1,32 @@
+{
+  "category": "experience",
+  "source": "CV & Project Portfolio",
+  "topic": "GoHighLevel & CRM Automation Work History",
+  "verified": true,
+  "data": {
+    "roles": [
+      {
+        "role_title": "Lead GoHighLevel & Automation Engineer",
+        "period": "2022 – Present (4 Years)",
+        "work_type": "Remote Agency / Independent Consultant",
+        "responsibilities": [
+          "Architected 40+ GHL sub-accounts with custom snapshot provisioning, SaaS mode tiers, and automated client onboarding.",
+          "Engineered 200+ multi-step workflow automations using condition branches, webhook payloads, custom fields, and LC Phone / Twilio triggers.",
+          "Designed 50+ high-converting landing pages, booking funnels, and survey funnels with custom CSS/JS snippets.",
+          "Configured A2P 10DLC brand & campaign registrations, SMS compliance, and Twilio phone numbers across multiple client sub-accounts.",
+          "Connected GHL with n8n and OpenAI API to build autonomous AI speed-to-lead qualification bots that respond within 60 seconds."
+        ]
+      },
+      {
+        "role_title": "CRM & Marketing Automation Specialist",
+        "period": "2020 – 2022",
+        "work_type": "Remote / Contract",
+        "responsibilities": [
+          "Managed pipeline stages, opportunity revenue tracking, and automated appointment reminder sequences.",
+          "Built custom webhook integrations between GoHighLevel, Stripe, Zapier, and external databases.",
+          "Trained agency teams and mentored 21,000+ online students in marketing automation and web design fundamentals."
+        ]
+      }
+    ]
+  }
+}

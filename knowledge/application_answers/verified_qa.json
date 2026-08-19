@@ -1,0 +1,15 @@
+{
+  "category": "application_answers",
+  "source": "Verified Career History",
+  "topic": "Pre-Verified Application Q&A Bank",
+  "verified": true,
+  "data": {
+    "ghl_experience": "I have 4 years of dedicated GoHighLevel experience, having architected 40+ sub-accounts, built 200+ multi-step automated workflows, and deployed 50+ sales funnels and websites. I specialize in custom snapshot creation, SaaS mode configurations, opportunity pipeline automation, A2P 10DLC compliance, and custom webhook/API integrations.",
+    "automation_philosophy": "I build robust, error-tolerant automation systems. Every workflow includes branching logic, fallback handlers, contact tagging, and detailed webhook monitoring using tools like n8n, Zapier, and native GHL automation triggers.",
+    "ai_experience": "I build practical AI automation systems connecting GoHighLevel with OpenAI and Claude APIs via n8n and webhooks. This includes conversational speed-to-lead qualification bots that analyze inbound messages and autonomously schedule qualified appointments onto GHL calendars.",
+    "why_hire_me": "I bring 4 years of specialized GHL and workflow automation experience with a proven track record of 50+ delivered builds and 200+ automations. I work 100% remotely, communicate proactively, and can take complete technical ownership of your GHL infrastructure from day one.",
+    "remote_readiness": "I am fully set up for 100% remote work with high-speed fiber internet, power backups, and extensive experience collaborating across US, UK, and Australian timezones via Slack, Zoom, and Loom.",
+    "salary_expectation": "$1,200 – $2,200/month depending on scope, responsibilities, and contract terms.",
+    "availability": "Available to start immediately (within 1 week) for full-time or dedicated retainer engagement."
+  }
+}
