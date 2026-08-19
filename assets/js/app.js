@@ -1,12 +1,13 @@
 /**
  * Gemini Spark — AI Career Intelligence Dashboard Application
- * Production Frontend Controller with Dynamic JSON Fetching & LocalStorage Tracking
+ * 3-Hour Refresh, Application Tracking & Dynamic LocalStorage / Static JSON Controller
  */
 
 // Application Global State
 const state = {
   currentRoute: 'dashboard',
   activeDate: 'latest',
+  feedScope: 'active', // 'active' | 'processed' | 'all'
   searchQuery: '',
   roleFilter: 'all',
   prioFilter: 'all',
@@ -15,14 +16,18 @@ const state = {
   viewMode: 'table', // 'table' | 'grid'
   data: null,
   savedStatuses: {},
-  activeDrawerJobId: null
+  activeDrawerJobId: null,
+  countdownInterval: null
 };
+
+const PROCESSED_STATUSES = ["Applied", "Interview Scheduled", "Interview Completed", "Offer", "Closed"];
 
 // Application Bootstrap
 document.addEventListener('DOMContentLoaded', async () => {
   loadSavedStatuses();
   await loadDataset('latest');
   setupEventListeners();
+  startCountdownTimer();
 });
 
 // Load persistent statuses from browser localStorage
@@ -45,9 +50,13 @@ function setJobStatus(jobId, newStatus) {
     console.warn('localStorage write error:', e);
   }
 
-  if (state.data && state.data.jobs) {
-    const target = state.data.jobs.find(j => j.id === jobId);
-    if (target) target.status = newStatus;
+  if (state.data) {
+    const allJobs = state.data.jobs || [];
+    const target = allJobs.find(j => j.id === jobId || j.original_url === jobId || j.app_url === jobId);
+    if (target) {
+      target.status = newStatus;
+      target.is_active = !PROCESSED_STATUSES.includes(newStatus);
+    }
   }
 
   updateNavCounters();
@@ -80,10 +89,13 @@ async function loadDataset(dateKey = 'latest') {
     }
   }
 
-  // Attach persistent statuses
+  // Attach persistent statuses & calculate active states
   if (state.data && state.data.jobs) {
     state.data.jobs.forEach(job => {
-      job.status = state.savedStatuses[job.id] || 'New Match';
+      const key = job.original_url || job.app_url || job.id;
+      const status = state.savedStatuses[key] || state.savedStatuses[job.id] || job.status || 'New Match';
+      job.status = status;
+      job.is_active = !PROCESSED_STATUSES.includes(status);
     });
   }
 
@@ -94,35 +106,97 @@ async function loadDataset(dateKey = 'latest') {
   initAnalyticsCharts();
 }
 
+// Dynamic Countdown Timer to next 3-hour PKT slot (00, 03, 06, 09, 12, 15, 18, 21 PKT)
+function startCountdownTimer() {
+  if (state.countdownInterval) clearInterval(state.countdownInterval);
+
+  function update() {
+    const now = new Date();
+    // PKT is UTC+5
+    const utcHours = now.getUTCHours();
+    const utcMinutes = now.getUTCMinutes();
+    const utcSeconds = now.getUTCSeconds();
+
+    const pktHour = (utcHours + 5) % 24;
+    const schedulePktHours = [0, 3, 6, 9, 12, 15, 18, 21];
+
+    let nextPktHour = schedulePktHours.find(h => h > pktHour);
+    let hoursDiff = 0;
+    if (nextPktHour !== undefined) {
+      hoursDiff = nextPktHour - pktHour;
+    } else {
+      hoursDiff = (24 - pktHour) + schedulePktHours[0];
+    }
+
+    let targetDate = new Date(now.getTime());
+    targetDate.setMinutes(0, 0, 0);
+    targetDate.setHours(targetDate.getHours() + hoursDiff);
+
+    let diffMs = targetDate.getTime() - now.getTime();
+    if (diffMs < 0) diffMs = 0;
+
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const diffSecs = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+    const pad = (n) => String(n).padStart(2, '0');
+    const countdownStr = `${pad(diffHours)}h ${pad(diffMinutes)}m ${pad(diffSecs)}s`;
+
+    const countdownEl = document.getElementById('nextUpdateCountdown');
+    if (countdownEl) countdownEl.textContent = countdownStr;
+  }
+
+  update();
+  state.countdownInterval = setInterval(update, 1000);
+}
+
 // Update Header & Profile info
 function updateHeaderMetadata() {
   if (!state.data || !state.data.metadata) return;
   const meta = state.data.metadata;
-  const cand = meta.candidate;
-  const kpis = meta.kpis;
+  const allJobs = state.data.jobs || [];
+
+  const activeJobs = allJobs.filter(j => j.is_active);
+  const newJobs = activeJobs.filter(j => j.is_new);
+  const savedJobs = allJobs.filter(j => j.status === 'Saved');
+  const appliedJobs = allJobs.filter(j => j.status === 'Applied');
+  const interviewJobs = allJobs.filter(j => j.status.includes('Interview'));
+  const offerJobs = allJobs.filter(j => j.status === 'Offer');
 
   // Header badges & metadata
   const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
-  if (lastUpdatedEl) lastUpdatedEl.textContent = meta.last_updated || meta.search_date;
+  if (lastUpdatedEl) lastUpdatedEl.textContent = meta.last_updated || `${meta.search_date} ${meta.search_time || ''}`;
+
+  const nextJobSearchEl = document.getElementById('nextJobSearchTime');
+  if (nextJobSearchEl) nextJobSearchEl.textContent = meta.next_update || 'Every 3 Hours';
 
   const dateBadgeEl = document.getElementById('searchDateBadge');
   if (dateBadgeEl) dateBadgeEl.textContent = meta.search_date;
 
-  // KPIs
-  const kDiscovered = document.getElementById('kpiDiscovered');
-  if (kDiscovered) kDiscovered.textContent = kpis.relevant_qualified;
+  // Real-time KPI Cards
+  const kNewJobs = document.getElementById('kpiNewJobs');
+  if (kNewJobs) kNewJobs.textContent = newJobs.length;
+
+  const kActive = document.getElementById('kpiActiveJobs');
+  if (kActive) kActive.textContent = activeJobs.length;
+
+  const kSaved = document.getElementById('kpiSaved');
+  if (kSaved) kSaved.textContent = savedJobs.length;
+
+  const kApplied = document.getElementById('kpiApplied');
+  if (kApplied) kApplied.textContent = appliedJobs.length;
+
+  const kInterviews = document.getElementById('kpiInterviews');
+  if (kInterviews) kInterviews.textContent = interviewJobs.length;
+
+  const kOffers = document.getElementById('kpiOffers');
+  if (kOffers) kOffers.textContent = offerJobs.length;
 
   const kTopMatch = document.getElementById('kpiTopMatch');
-  if (kTopMatch) kTopMatch.textContent = `${kpis.top_match_score}%`;
-
-  const kAvgMatch = document.getElementById('kpiAvgMatch');
-  if (kAvgMatch) kAvgMatch.textContent = `${kpis.avg_match_score}%`;
-
-  const kPriority1 = document.getElementById('kpiPriority1');
-  if (kPriority1) kPriority1.textContent = kpis.priority_1_apply_count;
-
-  const kRemote = document.getElementById('kpiRemote');
-  if (kRemote) kRemote.textContent = `${kpis.remote_worldwide_percentage}%`;
+  if (kTopMatch) {
+    const topFit = activeJobs.length ? Math.max(...activeJobs.map(j => j.score)) : 0;
+    kTopMatch.textContent = `${topFit}%`;
+  }
 }
 
 // Populate Date Switcher Dropdown
@@ -155,13 +229,15 @@ function updateNavCounters() {
   if (!state.data || !state.data.jobs) return;
   const jobs = state.data.jobs;
 
+  const activeJobs = jobs.filter(j => j.is_active);
   const countAll = jobs.length;
-  const countTop5 = jobs.filter(j => j.rank <= 5).length;
+  const countTop5 = activeJobs.slice(0, 5).length;
   const countSaved = jobs.filter(j => j.status === 'Saved').length;
   const countApplied = jobs.filter(j => j.status === 'Applied').length;
   const countInterview = jobs.filter(j => j.status.includes('Interview')).length;
 
   setCount('cntAll', countAll);
+  setCount('cntActive', activeJobs.length);
   setCount('cntTop5', countTop5);
   setCount('cntSaved', countSaved);
   setCount('cntApplied', countApplied);
@@ -196,7 +272,6 @@ function navigateTo(route) {
     if (v) v.style.display = 'none';
   });
 
-  // Handle routing logic
   if (route === 'dashboard') {
     if (viewDashboard) viewDashboard.style.display = 'block';
   } else if (route === 'top-matches') {
@@ -204,12 +279,21 @@ function navigateTo(route) {
   } else if (['all-jobs', 'saved', 'applied', 'interviews'].includes(route)) {
     if (viewExplorer) viewExplorer.style.display = 'block';
     
-    // Set matching status filter
-    if (route === 'saved') state.statusFilter = 'Saved';
-    else if (route === 'applied') state.statusFilter = 'Applied';
-    else if (route === 'interviews') state.statusFilter = 'Interview Scheduled';
-    else state.statusFilter = 'all';
+    if (route === 'saved') {
+      state.feedScope = 'all';
+      state.statusFilter = 'Saved';
+    } else if (route === 'applied') {
+      state.feedScope = 'processed';
+      state.statusFilter = 'Applied';
+    } else if (route === 'interviews') {
+      state.feedScope = 'processed';
+      state.statusFilter = 'Interview Scheduled';
+    } else {
+      state.feedScope = 'active';
+      state.statusFilter = 'all';
+    }
 
+    syncFeedScopeButtons();
     syncFilterChips();
   } else if (route === 'market-intel' || route === 'skill-gaps') {
     if (viewMarketIntel) viewMarketIntel.style.display = 'block';
@@ -222,6 +306,12 @@ function navigateTo(route) {
   }
 
   renderCurrentView();
+}
+
+function syncFeedScopeButtons() {
+  document.querySelectorAll('.feed-scope-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-scope') === state.feedScope);
+  });
 }
 
 function syncFilterChips() {
@@ -239,18 +329,26 @@ function renderCurrentView() {
   renderMarketInsights();
 }
 
-// Render Top 5 Strategic Focus Cards
+// Render Top 5 Strategic Focus Cards (Excludes Applied / Processed Jobs)
 function renderTop5Cards() {
   const container = document.getElementById('top5Grid');
   const fullContainer = document.getElementById('topMatchesFullGrid');
   if (!state.data || !state.data.jobs) return;
 
-  const top5 = state.data.jobs.filter(j => j.rank <= 5);
+  // Top 5 from strictly ACTIVE (unapplied / saved) jobs
+  const activeJobs = state.data.jobs
+    .filter(j => j.is_active)
+    .sort((a, b) => b.score - a.score);
 
-  const cardsHtml = top5.map(job => {
+  const top5 = activeJobs.slice(0, 5);
+
+  const cardsHtml = top5.length === 0 
+    ? `<div style="padding: 24px; text-align: center; color: var(--text-muted); background: #ffffff; border-radius: 12px;">All current top matches have been applied to! Check back on the next 3-hour refresh.</div>`
+    : top5.map((job, idx) => {
     const badgeClass = job.score >= 90 ? 'badge-excellent' : 'badge-strong';
+    const isNewBadge = job.is_new ? `<span class="new-job-badge">NEW</span>` : '';
     return `
-      <article class="top5-card rank-${job.rank}" onclick="openJobDrawer('${job.id}')">
+      <article class="top5-card rank-${idx + 1}" onclick="openJobDrawer('${job.id}')">
         <div class="top5-card-header">
           <div class="top5-company-box">
             <div class="company-logo-avatar" style="background-color: ${job.company_color || '#2563eb'};">
@@ -261,16 +359,19 @@ function renderTop5Cards() {
               <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">${job.source}</span>
             </div>
           </div>
-          <div class="match-ring-badge ${badgeClass}">
-            ${job.score}%
-            <span>${job.category.replace(' Match', '')}</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            ${isNewBadge}
+            <div class="match-ring-badge ${badgeClass}">
+              ${job.score}%
+              <span>${job.category.replace(' Match', '')}</span>
+            </div>
           </div>
         </div>
 
         <h3>${job.title}</h3>
 
         <div class="top5-meta-pills">
-          <span class="mini-pill prio-apply">${job.priority_icon} ${job.priority.split('—')[0].trim()}</span>
+          <span class="mini-pill prio-apply">${job.priority_icon || '🔥'} ${(job.priority || 'Priority 1').split('—')[0].trim()}</span>
           <span class="mini-pill">📍 ${job.location}</span>
           <span class="mini-pill">💼 ${job.work_mode}</span>
           <span class="mini-pill">⏱ ${job.experience_req}</span>
@@ -291,7 +392,7 @@ function renderTop5Cards() {
   if (fullContainer) fullContainer.innerHTML = cardsHtml;
 }
 
-// Render All Jobs Explorer (Table & Grid)
+// Render All Jobs Explorer (Supports Active, Processed & All scopes)
 function renderExplorer() {
   const tableBody = document.getElementById('jobsTableBody');
   const gridView = document.getElementById('jobsGridView');
@@ -300,11 +401,18 @@ function renderExplorer() {
 
   let list = [...state.data.jobs];
 
+  // Feed Scope filter
+  if (state.feedScope === 'active') {
+    list = list.filter(j => j.is_active);
+  } else if (state.feedScope === 'processed') {
+    list = list.filter(j => !j.is_active);
+  }
+
   // Search Filter
   if (state.searchQuery.trim()) {
     const q = state.searchQuery.toLowerCase();
     list = list.filter(j => {
-      const text = `${j.title} ${j.company} ${j.matched_skills.join(' ')} ${j.why_matches} ${j.location}`.toLowerCase();
+      const text = `${j.title} ${j.company} ${(j.matched_skills || []).join(' ')} ${j.why_matches} ${j.location}`.toLowerCase();
       return text.includes(q);
     });
   }
@@ -328,21 +436,22 @@ function renderExplorer() {
   list.sort((a, b) => {
     if (state.sortMode === 'score-desc') return b.score - a.score;
     if (state.sortMode === 'score-asc') return a.score - b.score;
-    if (state.sortMode === 'rank-asc') return a.rank - b.rank;
+    if (state.sortMode === 'rank-asc') return (a.rank || 99) - (b.rank || 99);
     if (state.sortMode === 'title-asc') return a.title.localeCompare(b.title);
     if (state.sortMode === 'company-asc') return a.company.localeCompare(b.company);
     return 0;
   });
 
-  if (countBadge) countBadge.textContent = `${list.length} Opportunities`;
+  if (countBadge) countBadge.textContent = `${list.length} Opportunities (${state.feedScope.toUpperCase()} FEED)`;
 
   // Render Table View
   if (tableBody) {
     if (list.length === 0) {
-      tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 36px; color: var(--text-muted);">No matching opportunities found.</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 36px; color: var(--text-muted);">No matching opportunities in this feed.</td></tr>`;
     } else {
       tableBody.innerHTML = list.map(job => {
         const scoreClass = job.score >= 90 ? 'badge-excellent' : (job.score >= 80 ? 'badge-strong' : 'badge-good');
+        const isNewBadge = job.is_new && job.is_active ? `<span class="new-job-badge" style="margin-right: 4px;">NEW</span>` : '';
         return `
           <tr onclick="openJobDrawer('${job.id}')">
             <td>
@@ -358,13 +467,13 @@ function renderExplorer() {
             </td>
             <td>
               <div class="table-title-cell">
-                <h4>${job.title}</h4>
-                <span>${job.role_category.toUpperCase()} • Req: ${job.experience_req}</span>
+                <h4>${isNewBadge}${job.title}</h4>
+                <span>${(job.role_category || 'CRM').toUpperCase()} • Req: ${job.experience_req}</span>
               </div>
             </td>
             <td>
               <div style="font-weight: 600; color: var(--text-primary);">${job.location}</div>
-              <div style="font-size: 0.72rem; color: var(--text-muted);">${job.remote_eligibility}</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted);">${job.remote_eligibility || 'Remote'}</div>
             </td>
             <td>
               <span class="table-score-pill ${scoreClass}">${job.score}%</span>
@@ -373,7 +482,7 @@ function renderExplorer() {
               ${job.salary}
             </td>
             <td onclick="event.stopPropagation()">
-              <select class="status-badge-select" onchange="setJobStatus('${job.id}', this.value)">
+              <select class="status-badge-select ${PROCESSED_STATUSES.includes(job.status) ? 'status-applied' : ''}" onchange="setJobStatus('${job.id}', this.value)">
                 <option value="New Match" ${job.status === 'New Match' ? 'selected' : ''}>New Match</option>
                 <option value="Saved" ${job.status === 'Saved' ? 'selected' : ''}>Saved</option>
                 <option value="Applied" ${job.status === 'Applied' ? 'selected' : ''}>Applied</option>
@@ -413,8 +522,11 @@ function renderExplorer() {
                 <span style="font-size: 0.75rem; color: var(--text-muted);">${job.source}</span>
               </div>
             </div>
-            <div class="match-ring-badge ${job.score >= 90 ? 'badge-excellent' : 'badge-strong'}">
-              ${job.score}%
+            <div style="display: flex; align-items: center; gap: 6px;">
+              ${job.is_new ? '<span class="new-job-badge">NEW</span>' : ''}
+              <div class="match-ring-badge ${job.score >= 90 ? 'badge-excellent' : 'badge-strong'}">
+                ${job.score}%
+              </div>
             </div>
           </div>
           <h3>${job.title}</h3>
@@ -435,7 +547,8 @@ function renderExplorer() {
 
 // Open Right-Side Slide-Over Drawer
 function openJobDrawer(jobId) {
-  const job = state.data.jobs.find(j => j.id === jobId);
+  const allJobs = state.data.jobs || [];
+  const job = allJobs.find(j => j.id === jobId || j.original_url === jobId || j.app_url === jobId);
   if (!job) return;
 
   state.activeDrawerJobId = jobId;
@@ -449,10 +562,10 @@ function openJobDrawer(jobId) {
   document.getElementById('drawerScoreNum').textContent = `${job.score}%`;
   document.getElementById('drawerScoreCat').textContent = job.category;
 
-  document.getElementById('drawerLocation').textContent = `${job.location} (${job.remote_eligibility})`;
-  document.getElementById('drawerWorkMode').textContent = `${job.work_mode} (${job.employment_type})`;
+  document.getElementById('drawerLocation').textContent = `${job.location} (${job.remote_eligibility || 'Worldwide Remote'})`;
+  document.getElementById('drawerWorkMode').textContent = `${job.work_mode} (${job.employment_type || 'Full-Time'})`;
   document.getElementById('drawerSalary').textContent = job.salary;
-  document.getElementById('drawerExp').textContent = `Req: ${job.experience_req} (You: ${job.candidate_exp} — ${job.experience_gap})`;
+  document.getElementById('drawerExp').textContent = `Req: ${job.experience_req} (You: ${job.candidate_exp} — ${job.experience_gap || 'No Gap'})`;
 
   document.getElementById('drawerWhy').textContent = job.why_matches;
   document.getElementById('drawerConcerns').textContent = job.concerns || 'No major concerns identified.';
@@ -460,7 +573,7 @@ function openJobDrawer(jobId) {
   // Matched Skills Tags
   const matchedContainer = document.getElementById('drawerMatchedSkills');
   if (matchedContainer) {
-    matchedContainer.innerHTML = job.matched_skills.map(s => `<span class="drawer-tag skill-matched">✓ ${s}</span>`).join('');
+    matchedContainer.innerHTML = (job.matched_skills || []).map(s => `<span class="drawer-tag skill-matched">✓ ${s}</span>`).join('');
   }
 
   // Missing Skills Tags
@@ -512,7 +625,7 @@ function openJobDrawer(jobId) {
   if (applyBtn) applyBtn.href = job.app_url;
 
   const viewBtn = document.getElementById('drawerViewBtn');
-  if (viewBtn) viewBtn.href = job.original_url;
+  if (viewBtn) viewBtn.href = job.original_url || job.app_url;
 
   // Open drawer
   drawer.classList.add('open');
@@ -548,18 +661,18 @@ function renderMarketInsights() {
   }
 }
 
-// Initialize Lightweight Analytics Charts via Chart.js (if available)
+// Initialize Lightweight Analytics Charts
 function initAnalyticsCharts() {
   if (typeof Chart === 'undefined' || !state.data) return;
 
-  const jobs = state.data.jobs;
+  const jobs = state.data.jobs || [];
+  const activeJobs = jobs.filter(j => j.is_active);
 
-  // 1. Match Categories Donut
   const catCanvas = document.getElementById('matchDistChart');
   if (catCanvas) {
-    const excellent = jobs.filter(j => j.score >= 90).length;
-    const strong = jobs.filter(j => j.score >= 80 && j.score < 90).length;
-    const good = jobs.filter(j => j.score < 80).length;
+    const excellent = activeJobs.filter(j => j.score >= 90).length;
+    const strong = activeJobs.filter(j => j.score >= 80 && j.score < 90).length;
+    const good = activeJobs.filter(j => j.score < 80).length;
 
     new Chart(catCanvas, {
       type: 'doughnut',
@@ -592,10 +705,18 @@ function setupEventListeners() {
       const route = link.getAttribute('data-route');
       if (route) {
         navigateTo(route);
-        // On mobile, close sidebar
         const sb = document.getElementById('sidebar');
         if (sb) sb.classList.remove('mobile-open');
       }
+    });
+  });
+
+  // Feed scope switcher buttons (Active, Processed, All)
+  document.querySelectorAll('.feed-scope-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.feedScope = btn.getAttribute('data-scope');
+      syncFeedScopeButtons();
+      renderExplorer();
     });
   });
 
