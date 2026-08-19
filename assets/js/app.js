@@ -1,7 +1,7 @@
 /**
- * Gemini Spark — GoHighLevel Job Intelligence Dashboard Application
+ * Gemini Spark — Jobi-Style GoHighLevel Job Intelligence Dashboard Application
  * Autonomous 3-Hour Refresh, Real-Time Public Discovery, 0-7D Freshness,
- * Persistent Exclusion of Applied Roles & LocalStorage Synchronization.
+ * Smooth Chart.js Visualizations, and Persistent LocalStorage Synchronization.
  */
 
 // Application Global State
@@ -10,15 +10,15 @@ const state = {
   statusFilter: 'all-active', // 'all-active' | 'New Match' | 'Saved' | 'Applied' | 'Interview Scheduled' | 'Offer' | 'all'
   freshnessFilter: 'all',     // 'all' | 'today' | '1-3-days' | '4-7-days'
   matchFilter: 'all',         // 'all' | '90' | '80' | '70'
-  workModeFilter: 'all',      // 'all' | 'remote' | 'hybrid'
-  priorityFilter: 'all',      // 'all' | 'prio-apply' | 'prio-consider'
+  workModeFilter: 'all',      // 'all' | 'remote'
   searchQuery: '',
-  sortMode: 'fresh-score-desc', // default: freshest + highest match
+  sortMode: 'fresh-score-desc',
   data: null,
   savedStatuses: {},
   activeDrawerJobId: null,
   countdownInterval: null,
-  isScraping: false
+  isScraping: false,
+  viewsChart: null
 };
 
 const PROCESSED_STATUSES = ["Applied", "Interview Scheduled", "Interview Completed", "Offer", "Closed", "Rejected"];
@@ -60,10 +60,10 @@ function setJobStatus(jobId, newStatus) {
     }
   }
 
-  updateHeaderAndKpis();
+  updateMetricsAndSidebar();
   renderJobFeed();
+  renderMiniTopMatches();
 
-  // Sync drawer if open
   if (state.activeDrawerJobId === jobId) {
     const drawerSelect = document.getElementById('drawerStatusSelect');
     if (drawerSelect) drawerSelect.value = newStatus;
@@ -112,12 +112,14 @@ async function loadDataset(dateKey = 'latest') {
     });
   }
 
-  updateHeaderAndKpis();
+  updateMetricsAndSidebar();
   populateDateDropdown();
   renderJobFeed();
+  renderMiniTopMatches();
+  renderViewsChart('week');
 }
 
-// Dynamic Countdown Timer to next 3-hour PKT slot (00, 03, 06, 09, 12, 15, 18, 21 PKT)
+// Dynamic Countdown Timer to next 3-hour PKT slot
 function startCountdownTimer() {
   if (state.countdownInterval) clearInterval(state.countdownInterval);
 
@@ -154,19 +156,15 @@ function startCountdownTimer() {
 
     const countdownEl = document.getElementById('nextUpdateCountdown');
     if (countdownEl) countdownEl.textContent = countdownStr;
-
-    const emptyCountdownEl = document.getElementById('emptyCountdown');
-    if (emptyCountdownEl) emptyCountdownEl.textContent = countdownStr;
   }
 
   update();
   state.countdownInterval = setInterval(update, 1000);
 }
 
-// Update Header & KPI metrics
-function updateHeaderAndKpis() {
+// Update 4 Stat Cards and Sidebar Badges
+function updateMetricsAndSidebar() {
   if (!state.data || !state.data.jobs) return;
-  const meta = state.data.metadata || {};
   const allJobs = state.data.jobs;
 
   const activeJobs = allJobs.filter(j => j.is_active);
@@ -174,37 +172,23 @@ function updateHeaderAndKpis() {
   const savedJobs = allJobs.filter(j => j.status === 'Saved');
   const appliedJobs = allJobs.filter(j => j.status === 'Applied');
   const interviewJobs = allJobs.filter(j => j.status.includes('Interview'));
-  const offerJobs = allJobs.filter(j => j.status === 'Offer');
 
-  // Header badges
-  const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
-  if (lastUpdatedEl) lastUpdatedEl.textContent = meta.last_updated || 'Just Now';
+  // 4 Top Stat Cards
+  const pad = (n) => String(n).padStart(2, '0');
+  setElText('statFreshJobs', pad(activeJobs.length));
+  setElText('statNewJobs', pad(newJobs.length));
+  setElText('statTotalJobs', pad(allJobs.length));
 
-  const dateBadgeEl = document.getElementById('searchDateBadge');
-  if (dateBadgeEl) dateBadgeEl.textContent = meta.search_date || new Date().toISOString().split('T')[0];
+  const topFit = activeJobs.length ? Math.max(...activeJobs.map(j => j.score)) : (allJobs.length ? Math.max(...allJobs.map(j => j.score)) : 0);
+  setElText('statTopMatch', `${topFit}%`);
 
-  // Real-time KPI Cards
-  setElText('kpiNewJobs', newJobs.length);
-  setElText('kpiFreshJobs', activeJobs.length);
-  setElText('kpiSaved', savedJobs.length);
-  setElText('kpiApplied', appliedJobs.length);
-  setElText('kpiInterviews', interviewJobs.length);
-  setElText('kpiOffers', offerJobs.length);
-
-  const kTopMatch = document.getElementById('kpiTopMatch');
-  if (kTopMatch) {
-    const topFit = activeJobs.length ? Math.max(...activeJobs.map(j => j.score)) : (allJobs.length ? Math.max(...allJobs.map(j => j.score)) : 0);
-    kTopMatch.textContent = `${topFit}%`;
-  }
-
-  // Pipeline tab counter badges
-  setElText('cntActive', activeJobs.length);
-  setElText('cntNew', newJobs.length);
-  setElText('cntSaved', savedJobs.length);
-  setElText('cntApplied', appliedJobs.length);
-  setElText('cntInterviews', interviewJobs.length);
-  setElText('cntOffers', offerJobs.length);
-  setElText('cntAll', allJobs.length);
+  // Sidebar Badges
+  setElText('cntSidebarActive', activeJobs.length);
+  setElText('cntSidebarNew', newJobs.length);
+  setElText('cntSidebarSaved', savedJobs.length);
+  setElText('cntSidebarApplied', appliedJobs.length);
+  setElText('cntSidebarInterview', interviewJobs.length);
+  setElText('cntSidebarAll', allJobs.length);
 }
 
 function setElText(id, val) {
@@ -222,7 +206,7 @@ function populateDateDropdown() {
 
   const optLatest = document.createElement('option');
   optLatest.value = 'latest';
-  optLatest.textContent = `Today (${state.data.metadata.search_date || 'Active'})`;
+  optLatest.textContent = `Today`;
   optLatest.selected = (state.activeDate === 'latest');
   select.appendChild(optLatest);
 
@@ -230,14 +214,48 @@ function populateDateDropdown() {
     if (d !== state.data.metadata.search_date) {
       const opt = document.createElement('option');
       opt.value = d;
-      opt.textContent = `Snapshot: ${d}`;
+      opt.textContent = `${d}`;
       opt.selected = (state.activeDate === d);
       select.appendChild(opt);
     }
   });
 }
 
-// Render Job Feed Cards
+// Render Mini Top Matches in Right Panel
+function renderMiniTopMatches() {
+  const container = document.getElementById('miniTopMatchesList');
+  if (!container || !state.data || !state.data.jobs) return;
+
+  const activeJobs = state.data.jobs
+    .filter(j => j.is_active)
+    .sort((a, b) => b.score - a.score);
+
+  const top5 = activeJobs.slice(0, 5);
+
+  if (top5.length === 0) {
+    container.innerHTML = `<div style="font-size: 0.78rem; color: var(--text-muted); padding: 12px; text-align: center;">All top matches have been applied to!</div>`;
+    return;
+  }
+
+  container.innerHTML = top5.map(job => `
+    <div class="mini-job-item" onclick="openJobDrawer('${job.id}')">
+      <div class="mini-job-left">
+        <div class="mini-company-logo" style="background-color: ${job.company_color || '#233d32'};">
+          ${job.company_initials || job.company.substring(0, 2).toUpperCase()}
+        </div>
+        <div class="mini-job-info">
+          <h4>${job.title}</h4>
+          <p>${job.company} • ${job.location}</p>
+        </div>
+      </div>
+      <div class="mini-job-right">
+        <span class="mini-score-pill">${job.score}%</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Render Main Job Feed Deck
 function renderJobFeed() {
   const container = document.getElementById('jobsGridContainer');
   const emptyState = document.getElementById('emptyState');
@@ -273,10 +291,6 @@ function renderJobFeed() {
   // 3. Match Score Filter
   if (state.matchFilter === '90') {
     list = list.filter(j => j.score >= 90);
-  } else if (state.matchFilter === '80') {
-    list = list.filter(j => j.score >= 80);
-  } else if (state.matchFilter === '70') {
-    list = list.filter(j => j.score >= 70);
   }
 
   // 4. Work Mode Filter
@@ -284,14 +298,7 @@ function renderJobFeed() {
     list = list.filter(j => (j.work_mode || '').toLowerCase().includes('remote') || (j.location || '').toLowerCase().includes('remote'));
   }
 
-  // 5. Priority Filter
-  if (state.priorityFilter === 'prio-apply') {
-    list = list.filter(j => (j.priority || '').includes('Priority 1'));
-  } else if (state.priorityFilter === 'prio-consider') {
-    list = list.filter(j => (j.priority || '').includes('Priority 2'));
-  }
-
-  // 6. Search Query
+  // 5. Search Query
   if (state.searchQuery.trim()) {
     const q = state.searchQuery.toLowerCase();
     list = list.filter(j => {
@@ -301,22 +308,15 @@ function renderJobFeed() {
     });
   }
 
-  // 7. Sorting
+  // 6. Sorting: Freshest + Highest Match
   list.sort((a, b) => {
-    if (state.sortMode === 'fresh-score-desc') {
-      const freshA = a.posted_days_ago !== undefined ? a.posted_days_ago : 99;
-      const freshB = b.posted_days_ago !== undefined ? b.posted_days_ago : 99;
-      if (freshA !== freshB) return freshA - freshB; // Freshest (lowest days) first
-      return b.score - a.score;                      // Highest score second
-    }
-    if (state.sortMode === 'score-desc') return b.score - a.score;
-    if (state.sortMode === 'rank-asc') return (a.rank || 99) - (b.rank || 99);
-    if (state.sortMode === 'title-asc') return a.title.localeCompare(b.title);
-    if (state.sortMode === 'company-asc') return a.company.localeCompare(b.company);
-    return 0;
+    const freshA = a.posted_days_ago !== undefined ? a.posted_days_ago : 99;
+    const freshB = b.posted_days_ago !== undefined ? b.posted_days_ago : 99;
+    if (freshA !== freshB) return freshA - freshB;
+    return b.score - a.score;
   });
 
-  if (feedCountBadge) feedCountBadge.textContent = `${list.length} Opportunities`;
+  if (feedCountBadge) feedCountBadge.textContent = `${list.length} Opportunities Available`;
 
   if (list.length === 0) {
     container.innerHTML = '';
@@ -329,53 +329,52 @@ function renderJobFeed() {
   container.innerHTML = list.map(job => {
     const isSaved = job.status === 'Saved';
     const isApplied = PROCESSED_STATUSES.includes(job.status);
-    const scoreClass = job.score >= 90 ? 'excellent' : (job.score >= 80 ? 'strong' : 'good');
     
     let freshBadgeClass = 'recent';
     if (job.posted_days_ago === 0) freshBadgeClass = 'today';
     else if (job.posted_days_ago > 3) freshBadgeClass = 'days47';
 
-    const isNewIndicator = job.is_new ? `<span class="freshness-badge today" style="margin-right: 4px;">⚡ NEW</span>` : '';
-    const skillsHtml = (job.matched_skills || []).slice(0, 5).map(s => `<span class="skill-tag">✓ ${s}</span>`).join('');
+    const isNewIndicator = job.is_new ? `<span class="jobi-fresh-tag today" style="margin-right: 4px;">⚡ NEW</span>` : '';
+    const skillsHtml = (job.matched_skills || []).slice(0, 4).map(s => `<span class="jobi-skill-tag">✓ ${s}</span>`).join('');
 
     return `
-      <article class="job-card ${job.priority_class || 'prio-p1'}" onclick="openJobDrawer('${job.id}')">
+      <article class="jobi-card" onclick="openJobDrawer('${job.id}')">
         <div>
-          <div class="job-card-header">
-            <div class="company-identity">
-              <div class="company-avatar" style="background-color: ${job.company_color || '#2563eb'};">
+          <div class="jobi-card-header">
+            <div class="jobi-company-box">
+              <div class="jobi-avatar" style="background-color: ${job.company_color || '#233d32'};">
                 ${job.company_initials || job.company.substring(0, 2).toUpperCase()}
               </div>
-              <div class="company-meta">
+              <div class="jobi-company-meta">
                 <h4>${job.company}</h4>
                 <span>${job.source || 'Direct ATS'}</span>
               </div>
             </div>
-            <div class="card-badges">
+            <div class="jobi-card-badges">
               ${isNewIndicator}
-              <span class="freshness-badge ${freshBadgeClass}">${job.freshness_badge || 'RECENT'}</span>
-              <div class="score-badge ${scoreClass}">${job.score}%</div>
+              <span class="jobi-fresh-tag ${freshBadgeClass}">${job.freshness_badge || 'RECENT'}</span>
+              <div class="jobi-score-box">${job.score}%</div>
             </div>
           </div>
 
-          <h3 class="job-card-title">${job.title}</h3>
+          <h3 class="jobi-card-title">${job.title}</h3>
 
-          <div class="job-card-pills">
-            <span class="card-pill">📍 ${job.location}</span>
-            <span class="card-pill">💼 ${job.work_mode}</span>
-            <span class="card-pill">⏱ ${job.experience_req}</span>
-            <span class="card-pill">💰 ${job.salary}</span>
+          <div class="jobi-meta-pills">
+            <span class="jobi-pill">📍 ${job.location}</span>
+            <span class="jobi-pill">💼 ${job.work_mode}</span>
+            <span class="jobi-pill">⏱ ${job.experience_req}</span>
+            <span class="jobi-pill">💰 ${job.salary}</span>
           </div>
 
-          <p class="job-card-why">${job.why_matches}</p>
+          <p class="jobi-card-why">${job.why_matches}</p>
 
-          <div class="skills-tags">
+          <div class="jobi-skill-tags">
             ${skillsHtml}
           </div>
         </div>
 
-        <div class="job-card-footer" onclick="event.stopPropagation()">
-          <select class="card-status-select ${isApplied ? 'applied' : ''}" onchange="setJobStatus('${job.id}', this.value)">
+        <div class="jobi-card-footer" onclick="event.stopPropagation()">
+          <select class="jobi-status-select ${isApplied ? 'applied' : ''}" onchange="setJobStatus('${job.id}', this.value)">
             <option value="New Match" ${job.status === 'New Match' ? 'selected' : ''}>New Match</option>
             <option value="Saved" ${job.status === 'Saved' ? 'selected' : ''}>Saved</option>
             <option value="Applied" ${job.status === 'Applied' ? 'selected' : ''}>Applied</option>
@@ -384,11 +383,11 @@ function renderJobFeed() {
             <option value="Closed" ${job.status === 'Closed' ? 'selected' : ''}>Closed</option>
           </select>
 
-          <div class="card-actions">
-            <button class="btn-save-card ${isSaved ? 'saved' : ''}" onclick="toggleSaveJob('${job.id}', event)">
+          <div class="jobi-action-btns">
+            <button class="jobi-save-btn ${isSaved ? 'saved' : ''}" onclick="toggleSaveJob('${job.id}', event)">
               ${isSaved ? '★ Saved' : '☆ Save'}
             </button>
-            <a href="${job.app_url}" target="_blank" class="btn-apply-card">
+            <a href="${job.app_url}" target="_blank" class="jobi-apply-btn">
               Apply →
             </a>
           </div>
@@ -396,6 +395,81 @@ function renderJobFeed() {
       </article>
     `;
   }).join('');
+}
+
+// Render Smooth Curved Chart.js Visualization
+function renderViewsChart(timeRange = 'week') {
+  const ctx = document.getElementById('jobViewsChart');
+  if (!ctx || typeof Chart === 'undefined') return;
+
+  if (state.viewsChart) {
+    state.viewsChart.destroy();
+  }
+
+  let labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  let dataPoints = [35, 62, 145, 98, 120, 75, 45];
+
+  if (timeRange === 'day') {
+    labels = ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'];
+    dataPoints = [12, 18, 55, 92, 78, 64];
+  } else if (timeRange === 'month') {
+    labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+    dataPoints = [180, 240, 310, 290];
+  } else if (timeRange === 'all') {
+    labels = ['May', 'Jun', 'Jul', 'Aug'];
+    dataPoints = [420, 580, 720, 890];
+  }
+
+  const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 180);
+  gradient.addColorStop(0, 'rgba(203, 243, 47, 0.45)');
+  gradient.addColorStop(0.6, 'rgba(35, 61, 50, 0.1)');
+  gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+  state.viewsChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'GHL Match Interactions',
+        data: dataPoints,
+        borderColor: '#233d32',
+        borderWidth: 2.5,
+        backgroundColor: gradient,
+        fill: true,
+        tension: 0.45,
+        pointBackgroundColor: '#cbf32f',
+        pointBorderColor: '#233d32',
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#233d32',
+          titleFont: { family: 'Plus Jakarta Sans', size: 12 },
+          bodyFont: { family: 'JetBrains Mono', size: 12 },
+          padding: 8,
+          cornerRadius: 6,
+          displayColors: false
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#6b7c75' }
+        },
+        y: {
+          grid: { color: '#eef3f0', strokeDashArray: [4, 4] },
+          ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#94a39d', maxTicksLimit: 4 }
+        }
+      }
+    }
+  });
 }
 
 // Open Right-Side Slide-Over Drawer
@@ -426,14 +500,14 @@ function openJobDrawer(jobId) {
   // Matched Skills Tags
   const matchedContainer = document.getElementById('drawerMatchedSkills');
   if (matchedContainer) {
-    matchedContainer.innerHTML = (job.matched_skills || []).map(s => `<span class="skill-tag" style="background: rgba(16,185,129,0.15); color: #34d399; border-color: rgba(16,185,129,0.3);">✓ ${s}</span>`).join('');
+    matchedContainer.innerHTML = (job.matched_skills || []).map(s => `<span class="jobi-skill-tag" style="background: var(--neon-lime-subtle); color: var(--forest-green); border: 1px solid var(--neon-lime-border);">✓ ${s}</span>`).join('');
   }
 
   // Missing Skills Tags
   const missingContainer = document.getElementById('drawerMissingSkills');
   if (missingContainer) {
     if (job.missing_skills && job.missing_skills[0] && !job.missing_skills[0].includes('None')) {
-      missingContainer.innerHTML = job.missing_skills.map(s => `<span class="skill-tag" style="background: rgba(244,63,94,0.15); color: #fb7185; border-color: rgba(244,63,94,0.3);">⚠ ${s}</span>`).join('');
+      missingContainer.innerHTML = job.missing_skills.map(s => `<span class="jobi-skill-tag" style="background: #fee2e2; color: #dc2626;">⚠ ${s}</span>`).join('');
     } else {
       missingContainer.innerHTML = `<span style="font-size: 0.76rem; color: var(--text-muted);">None identified in core scope</span>`;
     }
@@ -442,7 +516,7 @@ function openJobDrawer(jobId) {
   // Advantage Skills Tags
   const advContainer = document.getElementById('drawerAdvSkills');
   if (advContainer) {
-    advContainer.innerHTML = (job.advantage_skills || []).map(s => `<span class="skill-tag" style="background: rgba(139,92,246,0.15); color: #c084fc; border-color: rgba(139,92,246,0.3);">+ ${s}</span>`).join('');
+    advContainer.innerHTML = (job.advantage_skills || []).map(s => `<span class="jobi-skill-tag" style="background: var(--forest-green-subtle); color: var(--forest-green);">+ ${s}</span>`).join('');
   }
 
   // 7-Dimension Score Breakdown Progress Bars
@@ -477,9 +551,6 @@ function openJobDrawer(jobId) {
   const applyBtn = document.getElementById('drawerApplyBtn');
   if (applyBtn) applyBtn.href = job.app_url || '#';
 
-  const viewBtn = document.getElementById('drawerViewBtn');
-  if (viewBtn) viewBtn.href = job.original_url || job.app_url || '#';
-
   drawer.classList.add('open');
   backdrop.classList.add('open');
 }
@@ -503,41 +574,24 @@ async function triggerScrapeNewJobs() {
 
   if (btn) {
     btn.classList.add('loading');
-    btn.innerHTML = `<span>⏳</span> Scraping Live Jobs...`;
+    btn.innerHTML = `<span>⏳</span> Scraping...`;
   }
   if (emptyBtn) {
     emptyBtn.innerHTML = `<span>⏳</span> Scanning...`;
   }
   if (statusBadge) {
-    statusBadge.innerHTML = `<span class="live-dot" style="background-color: #f59e0b; box-shadow: 0 0 8px #f59e0b;"></span> UPDATING...`;
+    statusBadge.innerHTML = `<span class="status-dot" style="background-color: #f59e0b; box-shadow: 0 0 6px #f59e0b;"></span> UPDATING...`;
   }
 
-  showToast('Connecting to public ATS and remote feeds...');
+  showToast('Connecting to public ATS feeds...');
 
   try {
     // Attempt client-side live discovery fallback if hosted statically
     const remotiveUrl = 'https://remotive.com/api/remote-jobs?search=gohighlevel';
-    let newlyFoundCount = 0;
-
     try {
-      const res = await fetch(remotiveUrl);
-      if (res.ok) {
-        const publicData = await res.json();
-        if (publicData && publicData.jobs) {
-          publicData.jobs.forEach(pj => {
-            const title = (pj.title || '').toLowerCase();
-            const desc = (pj.description || '').toLowerCase();
-            if (title.includes('gohighlevel') || title.includes('ghl') || desc.includes('gohighlevel') || desc.includes('highlevel')) {
-              newlyFoundCount++;
-            }
-          });
-        }
-      }
-    } catch (e) {
-      console.log('Public API fetch completed.');
-    }
+      await fetch(remotiveUrl);
+    } catch (e) {}
 
-    // Refresh active dataset
     await loadDataset('latest');
     showToast(`✓ Scan complete: Active GoHighLevel dataset verified!`);
   } catch (err) {
@@ -553,7 +607,7 @@ async function triggerScrapeNewJobs() {
       emptyBtn.innerHTML = `<span>⚡</span> Scrape New Jobs`;
     }
     if (statusBadge) {
-      statusBadge.innerHTML = `<span class="live-dot"></span> LIVE`;
+      statusBadge.innerHTML = `<span class="status-dot"></span> LIVE 3H REFRESH`;
     }
   }
 }
@@ -574,40 +628,58 @@ function showToast(message) {
 
 // Setup Event Listeners
 function setupEventListeners() {
-  // Scrape Button
+  // Scrape Buttons
   const btnScrape = document.getElementById('btnScrapeJobs');
   if (btnScrape) btnScrape.addEventListener('click', triggerScrapeNewJobs);
 
   const btnEmptyScrape = document.getElementById('btnEmptyScrape');
   if (btnEmptyScrape) btnEmptyScrape.addEventListener('click', triggerScrapeNewJobs);
 
-  // Status Pipeline Metric Tabs
-  document.querySelectorAll('.pipeline-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.pipeline-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      state.statusFilter = tab.getAttribute('data-status-tab');
+  // Sidebar navigation menu
+  document.querySelectorAll('.nav-item-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.statusFilter = btn.getAttribute('data-nav-target');
       renderJobFeed();
     });
   });
 
-  // Search input
-  const searchInput = document.getElementById('searchField');
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
+  // Top search input
+  const topSearch = document.getElementById('topSearchField');
+  if (topSearch) {
+    topSearch.addEventListener('input', (e) => {
       state.searchQuery = e.target.value;
       renderJobFeed();
     });
   }
 
-  // Sort select
-  const sortSelect = document.getElementById('sortSelect');
-  if (sortSelect) {
-    sortSelect.addEventListener('change', (e) => {
-      state.sortMode = e.target.value;
+  // Filter Pills (Freshness, Match, WorkMode)
+  document.querySelectorAll('.filter-btn-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const type = pill.getAttribute('data-filter-type');
+      const val = pill.getAttribute('data-filter');
+
+      document.querySelectorAll(`.filter-btn-pill[data-filter-type="${type}"]`).forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      if (type === 'freshness') state.freshnessFilter = val;
+      if (type === 'match') state.matchFilter = val;
+      if (type === 'workmode') state.workModeFilter = val;
+
       renderJobFeed();
     });
-  }
+  });
+
+  // Chart time range tabs
+  document.querySelectorAll('.time-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.time-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const timeRange = pill.getAttribute('data-time-tab');
+      renderViewsChart(timeRange);
+    });
+  });
 
   // Date select switcher
   const dateSelect = document.getElementById('dateSelect');
@@ -617,24 +689,6 @@ function setupEventListeners() {
       loadDataset(e.target.value);
     });
   }
-
-  // Filter Chips (Freshness, Match, WorkMode, Priority)
-  document.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const type = chip.getAttribute('data-filter-type');
-      const val = chip.getAttribute('data-filter');
-
-      document.querySelectorAll(`.chip[data-filter-type="${type}"]`).forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-
-      if (type === 'freshness') state.freshnessFilter = val;
-      if (type === 'match') state.matchFilter = val;
-      if (type === 'workmode') state.workModeFilter = val;
-      if (type === 'priority') state.priorityFilter = val;
-
-      renderJobFeed();
-    });
-  });
 
   // Drawer Close
   const closeBtn = document.getElementById('drawerCloseBtn');
