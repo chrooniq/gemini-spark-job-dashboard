@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-Gemini Spark — 3-Hour Autonomous GoHighLevel (GHL) Job Refresh & Automation Engine
+Gemini Spark — Production 3-Hour Autonomous GoHighLevel (GHL) Job Refresh & Automation Engine
 Executes every 3 hours (00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 PKT).
-Discovers fresh public GHL jobs (0–7 days max age), enforces strict GHL relevance,
-syncs persistent application statuses, permanently excludes applied/interviewed jobs from the active feed,
-updates latest.json, archives immutable historical snapshots, and recompiles index.html & email_template.html.
+Discovers real GHL opportunities across JSearch, Public ATS & Remote Portals,
+enforces permanent Applied-job exclusion, strict 0–7 day freshness,
+updates latest.json, archives immutable historical snapshots, recompiles index.html,
+and dispatches transactional email reports via Resend API to sohaibmahmood5911@gmail.com.
 """
 
 import os
@@ -81,8 +82,8 @@ def run_job_refresh():
             print(f"Warning: Could not read application_status.json: {e}")
             app_statuses = {}
 
-    # 2. Load previous latest.json to track previously known jobs & available dates
-    prev_known_keys = set()
+    # 2. Load previous latest.json to track first_seen timestamps & history
+    prev_known_jobs = {}
     available_dates = []
     if os.path.exists(latest_file):
         try:
@@ -90,9 +91,9 @@ def run_job_refresh():
                 prev_payload = json.load(f)
                 available_dates = prev_payload.get("metadata", {}).get("available_dates", [])
                 for pj in prev_payload.get("jobs", []):
-                    key = pj.get("original_url") or pj.get("app_url") or pj.get("id")
+                    key = pj.get("fingerprint") or pj.get("original_url") or pj.get("app_url") or pj.get("id")
                     if key:
-                        prev_known_keys.add(key)
+                        prev_known_jobs[key] = pj
         except Exception as e:
             print(f"Info: Could not load previous latest.json: {e}")
 
@@ -101,37 +102,46 @@ def run_job_refresh():
     date_str = sched_info["search_date"]
     time_slug = sched_info["search_time_slug"]
 
-    # 3. Discover fresh GHL opportunities (<= 7 days)
-    print(f"[*] Starting GHL Job Discovery cycle for {sched_info['last_updated']}...")
+    # 3. Discover fresh GHL opportunities from live multi-source engine
+    print(f"\n[*] Starting Production GHL Job Discovery cycle for {sched_info['last_updated']}...")
     discovered_jobs = discover_ghl_opportunities()
 
     processed_jobs = []
     new_jobs_count = 0
 
     for job in discovered_jobs:
-        job_url_key = job.get("original_url") or job.get("app_url") or job.get("id")
-        
-        # Check persistent status registry
-        stored_entry = app_statuses.get(job_url_key, {})
+        fp_key = job.get("fingerprint")
+        url_key = job.get("original_url") or job.get("app_url") or job.get("id")
+
+        # Check persistent status registry by URL or fingerprint
+        stored_entry = app_statuses.get(url_key) or app_statuses.get(fp_key) or {}
         current_status = stored_entry.get("status") or job.get("status") or "New Match"
         status_updated_at = stored_entry.get("updated_at") or job.get("status_updated_at") or sched_info["last_updated"]
 
-        # Check if job was previously known or is newly discovered
-        is_truly_new = (job_url_key not in prev_known_keys)
-        job["is_new"] = is_truly_new
-        if is_truly_new:
+        # Track first_seen and is_new
+        is_truly_new = False
+        if fp_key not in prev_known_jobs and url_key not in prev_known_jobs:
+            is_truly_new = True
+            job["first_seen_at"] = pkt_now.isoformat()
             new_jobs_count += 1
+        else:
+            prev_job = prev_known_jobs.get(fp_key) or prev_known_jobs.get(url_key) or {}
+            job["first_seen_at"] = prev_job.get("first_seen_at", pkt_now.isoformat())
 
+        job["is_new"] = is_truly_new
+        job["last_seen_at"] = pkt_now.isoformat()
         job["status"] = current_status
         job["status_updated_at"] = status_updated_at
 
-        # Critical exclusion rule: Applied/Interviewed/Processed jobs are NEVER active
-        is_active = (current_status not in PROCESSED_STATUSES)
-        job["is_active"] = is_active
+        # Critical exclusion rule: Applied/Interviewed/Processed jobs are NEVER active in discovery
+        is_processed = current_status in PROCESSED_STATUSES
+        is_too_old = job.get("posted_days_ago", 0) > 7
+        job["is_active"] = (not is_processed and not is_too_old)
 
         # Update registry with latest metadata
-        app_statuses[job_url_key] = {
+        app_statuses[url_key] = {
             "job_id": job.get("id"),
+            "fingerprint": fp_key,
             "company": job.get("company"),
             "title": job.get("title"),
             "status": current_status,
@@ -221,14 +231,14 @@ def run_job_refresh():
         json.dump(updated_payload, f, indent=2)
     print(f"✓ Saved active dataset to {latest_file}")
 
-    # 6. Save timestamp sub-interval snapshot (data/history/YYYY-MM-DD/HH-MM.json)
+    # 6. Save timestamp sub-interval snapshot
     date_history_dir = os.path.join(history_dir, date_str)
     os.makedirs(date_history_dir, exist_ok=True)
     time_snapshot_file = os.path.join(date_history_dir, f"{time_slug}.json")
     with open(time_snapshot_file, "w", encoding="utf-8") as f:
         json.dump(updated_payload, f, indent=2)
 
-    # 7. Save immutable daily snapshot (data/history/YYYY-MM-DD.json)
+    # 7. Save immutable daily snapshot
     daily_snapshot_file = os.path.join(history_dir, f"{date_str}.json")
     with open(daily_snapshot_file, "w", encoding="utf-8") as f:
         json.dump(updated_payload, f, indent=2)
@@ -245,6 +255,14 @@ def run_job_refresh():
     if os.path.exists(email_script):
         subprocess.run([sys.executable, email_script], check=True)
         print("✓ Recompiled email_template.html")
+
+    # 10. Dispatch Transactional Email Report via Resend
+    send_email_script = os.path.join(base_dir, "scripts", "send_email.py")
+    if os.path.exists(send_email_script):
+        try:
+            subprocess.run([sys.executable, send_email_script], check=False)
+        except Exception as e:
+            print(f"[-] Email dispatch step skipped: {e}")
 
     print(f"\n✨ GHL 3-Hour Job Refresh complete: {len(active_jobs)} active fresh GHL jobs (0–7 days old).")
     return True

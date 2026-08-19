@@ -35,7 +35,11 @@ jobs:
           pip install --upgrade pip
           pip install requests openpyxl
 
-      - name: Execute 3-Hour GHL Job Discovery & Refresh Engine
+      - name: Execute 3-Hour Multi-Source GHL Job Discovery & Email Dispatcher
+        env:
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
         run: |
           python scripts/generate_job_refresh.py
 

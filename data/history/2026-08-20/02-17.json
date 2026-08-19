@@ -1,0 +1,158 @@
+{
+  "metadata": {
+    "search_date": "2026-08-20",
+    "search_time": "02:17 PKT",
+    "search_time_slug": "02-17",
+    "last_updated": "20 Aug 2026, 02:17 AM PKT",
+    "next_update": "20 Aug 2026, 03:00 AM PKT",
+    "next_update_iso": "2026-08-20T03:00:00+00:00",
+    "schedule_interval_hours": 3,
+    "schedule_times_pkt": [
+      "00:00",
+      "03:00",
+      "06:00",
+      "09:00",
+      "12:00",
+      "15:00",
+      "18:00",
+      "21:00"
+    ],
+    "filter_scope": "GOHIGHLEVEL_ONLY",
+    "freshness_max_days": 7,
+    "refresh_status": "LIVE",
+    "available_dates": [
+      "2026-08-20",
+      "2026-08-19",
+      "2026-08-18"
+    ],
+    "candidate": {
+      "name": "Sohaib Mahmood",
+      "title": "GoHighLevel Developer | CRM & Marketing Automation | Funnel & Website Builder",
+      "experience": "4 Years (50+ Builds, 200+ Workflows, 40+ Sub-Accounts)",
+      "location": "Lahore, Pakistan (UTC+5)",
+      "work_mode": "100% Worldwide Remote",
+      "portfolio_url": "https://sohaibmahmood.vibepreview.com/",
+      "intro_video_url": "https://drive.google.com/file/d/1TH4CMzXFOfup2liGESZmmA7QFM8GcfqP/view?usp=sharing",
+      "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
+    },
+    "kpis": {
+      "total_discovered": 1,
+      "new_jobs_count": 0,
+      "active_jobs_count": 1,
+      "fresh_jobs_count": 1,
+      "today_count": 0,
+      "three_days_count": 0,
+      "seven_days_count": 1,
+      "applied_count": 0,
+      "interviews_count": 0,
+      "offers_count": 0,
+      "saved_count": 0,
+      "top_match_score": 78.5,
+      "avg_match_score": 78.5,
+      "top_5_count": 1,
+      "priority_1_apply_count": 0,
+      "priority_2_consider_count": 1,
+      "remote_worldwide_percentage": 100
+    },
+    "reports": {
+      "excel_url": "https://drive.google.com/file/d/12mjATUvsDO6KQS20w_1MOAevmG41T0vV/view?usp=drivesdk",
+      "drive_folder_url": "https://drive.google.com/drive/folders/16V6BN5Dx6RytoCkpnpMvDvn5GshxEO_p",
+      "dashboard_drive_url": "https://drive.google.com/file/d/1SRe5umuG0DnI-mYpshNjV8Rn5REBeDoA/view?usp=drivesdk"
+    }
+  },
+  "jobs": [
+    {
+      "id": "ghl-f000a586",
+      "fingerprint": "f000a5867d3e07d39a1ff88d1f19b121",
+      "rank": 1,
+      "title": "GoHighLevel Marketing Operations Specialist",
+      "company": "Pavago",
+      "company_initials": "PA",
+      "company_color": "#2563EB",
+      "company_logo": null,
+      "company_domain": null,
+      "location": "Costa Rica (100% Remote)",
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,200 \u2013 $2,200/mo",
+      "employment_type": "Full-Time Contractor",
+      "experience_req": "3+ years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-13",
+      "posted_days_ago": 7,
+      "posted_relative": "Posted 7 days ago",
+      "freshness_badge": "7D AGO",
+      "freshness_priority": 2,
+      "freshness_tier": "4\u20137 Days",
+      "score": 78.5,
+      "category": "Good Match",
+      "priority": "Priority 2 \u2014 Consider",
+      "priority_class": "prio-consider",
+      "priority_icon": "\ud83d\udfe2",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 15,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.5,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 10.0,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "matched_skills": [
+        "GoHighLevel CRM",
+        "Workflow Automation",
+        "Snapshots",
+        "REST APIs"
+      ],
+      "missing_skills": [
+        "None identified in core scope"
+      ],
+      "advantage_skills": [
+        "50+ completed GHL funnels",
+        "n8n automation pipelines",
+        "React frontend connectors"
+      ],
+      "why_matches": "Direct match for Pavago GoHighLevel architecture, pipeline automation, and multi-account CRM management.",
+      "concerns": "Verify client timezone overlap during initial interview.",
+      "source": "Pavago Direct ATS (Workable)",
+      "source_type": "workable_ats",
+      "app_url": "https://apply.workable.com/pavago/j/05E08A61F4",
+      "original_url": "https://apply.workable.com/pavago/j/05E08A61F4",
+      "discovered_at": "2026-08-20T02:17:07.477264+00:00",
+      "first_seen_at": "2026-08-20T02:17:07.476800+00:00",
+      "is_new": false,
+      "last_seen_at": "2026-08-20T02:17:07.476800+00:00",
+      "status": "New Match",
+      "status_updated_at": "2026-08-19 21:00 PKT",
+      "is_active": true
+    }
+  ]
+}

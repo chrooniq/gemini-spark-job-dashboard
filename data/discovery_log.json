@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-08-20T02:22:34.568134+00:00",
+  "sources": {
+    "RapidAPI JSearch": {
+      "status": "OK",
+      "raw_count": 0
+    },
+    "Remotive API": {
+      "status": "OK",
+      "raw_count": 85
+    },
+    "Jobicy API": {
+      "status": "OK",
+      "raw_count": 150
+    },
+    "Himalayas API": {
+      "status": "OK",
+      "raw_count": 20
+    },
+    "Remote Jobs Directory (PDF Companies)": {
+      "status": "OK",
+      "raw_count": 442
+    },
+    "Public ATS Feeds (Workable / Greenhouse / Lever)": {
+      "status": "OK",
+      "raw_count": 1969
+    }
+  },
+  "raw_harvested": 2666,
+  "ghl_relevant": 1969,
+  "fresh_candidates": 1047,
+  "duplicates_removed": 661,
+  "final_discovered": 386
+}
