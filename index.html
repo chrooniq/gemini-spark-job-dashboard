@@ -31,7 +31,7 @@
       </div>
 
       <div class="sidebar-nav">
-        <div class="nav-group-title">Discovery</div>
+        <div class="nav-group-title">Live Feeds</div>
         <a href="#dashboard" class="sidebar-link active" data-route="dashboard">
           <i data-lucide="layout-dashboard"></i>
           <span>Dashboard</span>
@@ -43,8 +43,8 @@
         </a>
         <a href="#all-jobs" class="sidebar-link" data-route="all-jobs">
           <i data-lucide="briefcase"></i>
-          <span>All Jobs</span>
-          <span class="nav-counter" id="cntAll">14</span>
+          <span>Active Explorer</span>
+          <span class="nav-counter" id="cntActive">14</span>
         </a>
 
         <div class="nav-group-title">Application Pipeline</div>
@@ -75,7 +75,7 @@
         </a>
         <a href="#history" class="sidebar-link" data-route="history">
           <i data-lucide="history"></i>
-          <span>Search History</span>
+          <span>3-Hour Snapshots</span>
         </a>
         <a href="#settings" class="sidebar-link" data-route="settings">
           <i data-lucide="settings"></i>
@@ -106,12 +106,18 @@
           </button>
           <div class="header-title-box">
             <h2>AI Career Intelligence</h2>
-            <p>Your daily job market matching & career intelligence system</p>
+            <p>3-Hour Autonomous Job Refresh & Application Tracking System</p>
           </div>
         </div>
 
         <div class="header-right">
-          <!-- Live Date Selector -->
+          <!-- 3-Hour Countdown Box -->
+          <div class="countdown-box" title="Next scheduled 3-hour job refresh">
+            <i data-lucide="timer" style="width: 14px; height: 14px;"></i>
+            <span>Next: <b id="nextUpdateCountdown">--:--:--</b></span>
+          </div>
+
+          <!-- Date Selector -->
           <div class="date-select-box">
             <i data-lucide="calendar" style="width: 14px; height: 14px; color: var(--text-secondary);"></i>
             <select id="dateSelect" aria-label="Report Date Selection">
@@ -119,10 +125,10 @@
             </select>
           </div>
 
-          <!-- Metadata Badge -->
-          <div class="header-meta-badge">
+          <!-- Last Updated Badge -->
+          <div class="header-meta-badge" title="Last search execution time">
             <i data-lucide="clock" style="width: 13px; height: 13px;"></i>
-            <span id="lastUpdatedBadge">2026-08-19 14:17 UTC</span>
+            <span id="lastUpdatedBadge">19 Aug 2026, 09:00 PM PKT</span>
           </div>
 
           <!-- Quick Action Buttons -->
@@ -155,72 +161,81 @@
           <div class="hero-banner">
             <div class="hero-text">
               <h3>Good morning, Sohaib 👋</h3>
-              <p>Your AI-powered career intelligence is ready with 14 verified remote opportunities.</p>
+              <p>Your 3-hour autonomous career search is active. Next scheduled refresh: <b id="nextJobSearchTime">12:00 AM PKT</b>.</p>
             </div>
             <div class="hero-pills-wrap">
               <span class="hero-pill status-live"><span class="pulse-dot"></span> 100% Worldwide Remote</span>
               <span class="hero-pill">📍 Lahore, Pakistan (UTC+5)</span>
-              <span class="hero-pill">⏱ 4+ Years Experience</span>
+              <span class="hero-pill">⏱ 3-Hour Refresh Cycle</span>
               <span class="hero-pill" id="searchDateBadge">2026-08-19</span>
             </div>
           </div>
 
-          <!-- KPI Metric Cards -->
+          <!-- Real-Time Application Tracking KPI Metric Cards -->
           <div class="kpi-container">
             <div class="kpi-tile">
               <div class="kpi-top-row">
-                <span class="kpi-tag-label">Qualified Jobs</span>
-                <div class="kpi-icon-pill icon-blue"><i data-lucide="briefcase"></i></div>
+                <span class="kpi-tag-label">New Jobs</span>
+                <div class="kpi-icon-pill icon-blue"><i data-lucide="sparkles"></i></div>
               </div>
-              <div class="kpi-main-number" id="kpiDiscovered">14</div>
-              <div class="kpi-footer-note"><i data-lucide="check-circle-2" style="width: 13px; height: 13px;"></i> Verified Active</div>
+              <div class="kpi-main-number" id="kpiNewJobs" style="color: var(--primary-accent);">14</div>
+              <div class="kpi-footer-note"><i data-lucide="check-circle-2" style="width: 13px; height: 13px;"></i> Discovered This Cycle</div>
             </div>
 
             <div class="kpi-tile">
               <div class="kpi-top-row">
-                <span class="kpi-tag-label">Top Match</span>
-                <div class="kpi-icon-pill icon-green"><i data-lucide="flame"></i></div>
+                <span class="kpi-tag-label">Active Queue</span>
+                <div class="kpi-icon-pill icon-green"><i data-lucide="briefcase"></i></div>
+              </div>
+              <div class="kpi-main-number" id="kpiActiveJobs" style="color: var(--success);">14</div>
+              <div class="kpi-footer-note"><i data-lucide="flame" style="width: 13px; height: 13px;"></i> Ready to Apply</div>
+            </div>
+
+            <div class="kpi-tile">
+              <div class="kpi-top-row">
+                <span class="kpi-tag-label">Saved</span>
+                <div class="kpi-icon-pill icon-amber"><i data-lucide="bookmark"></i></div>
+              </div>
+              <div class="kpi-main-number" id="kpiSaved" style="color: var(--warning);">0</div>
+              <div class="kpi-footer-note">Bookmarked Opportunities</div>
+            </div>
+
+            <div class="kpi-tile">
+              <div class="kpi-top-row">
+                <span class="kpi-tag-label">Applied</span>
+                <div class="kpi-icon-pill icon-purple"><i data-lucide="send"></i></div>
+              </div>
+              <div class="kpi-main-number" id="kpiApplied" style="color: var(--purple);">0</div>
+              <div class="kpi-footer-note">Excluded from Active</div>
+            </div>
+
+            <div class="kpi-tile">
+              <div class="kpi-top-row">
+                <span class="kpi-tag-label">Interviews</span>
+                <div class="kpi-icon-pill icon-rose"><i data-lucide="calendar-check"></i></div>
+              </div>
+              <div class="kpi-main-number" id="kpiInterviews">0</div>
+              <div class="kpi-footer-note">Scheduled / In-Progress</div>
+            </div>
+
+            <div class="kpi-tile">
+              <div class="kpi-top-row">
+                <span class="kpi-tag-label">Top Fit Score</span>
+                <div class="kpi-icon-pill icon-green"><i data-lucide="trophy"></i></div>
               </div>
               <div class="kpi-main-number" id="kpiTopMatch" style="color: var(--success);">98%</div>
-              <div class="kpi-footer-note" style="color: var(--success);"><i data-lucide="sparkles" style="width: 13px; height: 13px;"></i> Excellent Alignment</div>
-            </div>
-
-            <div class="kpi-tile">
-              <div class="kpi-top-row">
-                <span class="kpi-tag-label">Average Match</span>
-                <div class="kpi-icon-pill icon-blue"><i data-lucide="trending-up"></i></div>
-              </div>
-              <div class="kpi-main-number" id="kpiAvgMatch">89.1%</div>
-              <div class="kpi-footer-note">Weighted Benchmark</div>
-            </div>
-
-            <div class="kpi-tile">
-              <div class="kpi-top-row">
-                <span class="kpi-tag-label">Priority 1 (Apply)</span>
-                <div class="kpi-icon-pill icon-rose"><i data-lucide="zap"></i></div>
-              </div>
-              <div class="kpi-main-number" id="kpiPriority1" style="color: var(--danger);">13</div>
-              <div class="kpi-footer-note" style="color: var(--danger);"><i data-lucide="alert-circle" style="width: 13px; height: 13px;"></i> Immediate Action</div>
-            </div>
-
-            <div class="kpi-tile">
-              <div class="kpi-top-row">
-                <span class="kpi-tag-label">Remote Ratio</span>
-                <div class="kpi-icon-pill icon-purple"><i data-lucide="globe"></i></div>
-              </div>
-              <div class="kpi-main-number" id="kpiRemote">100%</div>
-              <div class="kpi-footer-note">Pakistan Compatible</div>
+              <div class="kpi-footer-note">Highest Active Match</div>
             </div>
           </div>
 
-          <!-- Top 5 Strategic Highlights -->
+          <!-- Top 5 Strategic Highlights (Filtered from Active Only) -->
           <div class="section-headline">
             <div class="section-headline-left">
               <i data-lucide="star" style="color: #f59e0b;"></i>
-              <span>Top 5 Strategic Focus</span>
+              <span>Top 5 Active Focus (Excludes Applied)</span>
             </div>
             <button onclick="navigateTo('all-jobs')" style="font-size: 0.8rem; font-weight: 700; color: var(--primary-accent);">
-              View All 14 Roles →
+              View Active Queue →
             </button>
           </div>
 
@@ -231,7 +246,7 @@
             <div class="intel-panel">
               <div class="intel-panel-title">
                 <i data-lucide="bar-chart-2" style="color: var(--primary-accent);"></i>
-                <span>In-Demand Skills Frequency</span>
+                <span>In-Demand Skills Frequency (Active Market)</span>
               </div>
               <div id="inDemandSkillsBars"></div>
             </div>
@@ -239,7 +254,7 @@
             <div class="intel-panel">
               <div class="intel-panel-title">
                 <i data-lucide="pie-chart" style="color: var(--success);"></i>
-                <span>Match Score Distribution</span>
+                <span>Active Match Score Distribution</span>
               </div>
               <div style="max-height: 220px; display: flex; justify-content: center;">
                 <canvas id="matchDistChart"></canvas>
@@ -254,9 +269,9 @@
           <div class="section-headline">
             <div class="section-headline-left">
               <i data-lucide="sparkles" style="color: var(--primary-accent);"></i>
-              <span>Top 5 Strategic Shortlist</span>
+              <span>Top 5 Active Strategic Opportunities</span>
             </div>
-            <span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Ranked by 0–100% Weighted Score</span>
+            <span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Auto-refreshed every 3 hours</span>
           </div>
           <div class="top5-grid" id="topMatchesFullGrid"></div>
         </section>
@@ -265,11 +280,18 @@
         <section id="viewExplorer" style="display: none;">
           <div class="explorer-card">
             
+            <!-- Feed Scope Selector Tabs -->
+            <div class="feed-scope-tabs">
+              <button class="feed-scope-btn active" data-scope="active">Active Jobs (Not Applied)</button>
+              <button class="feed-scope-btn" data-scope="processed">Processed Jobs (Applied / Interviews)</button>
+              <button class="feed-scope-btn" data-scope="all">All Discovered Jobs</button>
+            </div>
+
             <!-- Search & Controls Header -->
             <div class="explorer-header">
               <div class="search-field-box">
                 <i data-lucide="search" class="search-icon-svg"></i>
-                <input type="text" id="searchField" class="search-field" placeholder="Search by job title, company, skills, or platform...">
+                <input type="text" id="searchField" class="search-field" placeholder="Search active jobs by title, company, skills, or platform...">
               </div>
 
               <div class="filter-dropdown-wrap">
@@ -296,15 +318,15 @@
             <div class="quick-chips-bar">
               <span class="chip-label">Filters:</span>
               <button class="filter-chip active" data-filter-type="role" data-filter="all">All Roles</button>
-              <button class="filter-chip" data-filter-type="role" data-filter="ghl">GoHighLevel (8)</button>
-              <button class="filter-chip" data-filter-type="role" data-filter="automation">n8n Automation (4)</button>
-              <button class="filter-chip" data-filter-type="role" data-filter="ai">AI Systems (2)</button>
+              <button class="filter-chip" data-filter-type="role" data-filter="ghl">GoHighLevel</button>
+              <button class="filter-chip" data-filter-type="role" data-filter="automation">n8n Automation</button>
+              <button class="filter-chip" data-filter-type="role" data-filter="ai">AI Systems</button>
               <button class="filter-chip" data-filter-type="role" data-filter="funnels">Funnels & Web</button>
               
               <span class="chip-label" style="margin-left: 10px;">Priority:</span>
               <button class="filter-chip active" data-filter-type="prio" data-filter="all">All</button>
-              <button class="filter-chip" data-filter-type="prio" data-filter="prio-apply">🔥 Apply (13)</button>
-              <button class="filter-chip" data-filter-type="prio" data-filter="prio-consider">🟢 Consider (1)</button>
+              <button class="filter-chip" data-filter-type="prio" data-filter="prio-apply">🔥 Apply</button>
+              <button class="filter-chip" data-filter-type="prio" data-filter="prio-consider">🟢 Consider</button>
 
               <span class="chip-label" style="margin-left: 10px;">Status:</span>
               <button class="filter-chip active" data-filter-type="status" data-filter="all">All</button>
@@ -337,7 +359,7 @@
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; font-size: 0.8rem; color: var(--text-secondary);">
               <span id="explorerCount">14 Opportunities</span>
-              <span>Click any row for 7-dimension score breakdown</span>
+              <span>Setting status to "Applied" immediately excludes the job from future active searches</span>
             </div>
           </div>
         </section>
@@ -445,19 +467,19 @@
           <div class="section-headline">
             <div class="section-headline-left">
               <i data-lucide="history" style="color: var(--primary-accent);"></i>
-              <span>Daily Search Snapshots</span>
+              <span>3-Hour Snapshot History</span>
             </div>
           </div>
           <div class="intel-panel">
             <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
-              Select any previous execution date to inspect the archived job matching dataset and historical metrics:
+              Select any previous 3-hour search snapshot to inspect historical market data and rankings:
             </p>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
               <button class="filter-chip active" onclick="document.getElementById('dateSelect').value='latest'; loadDataset('latest');">
-                Today (2026-08-19) — 14 Roles
+                Active Latest (2026-08-19) — 14 Roles
               </button>
               <button class="filter-chip" onclick="document.getElementById('dateSelect').value='2026-08-18'; loadDataset('2026-08-18');">
-                2026-08-18 — 14 Roles
+                2026-08-18 Snapshot — 14 Roles
               </button>
             </div>
           </div>
@@ -468,16 +490,19 @@
           <div class="section-headline">
             <div class="section-headline-left">
               <i data-lucide="sliders" style="color: var(--primary-accent);"></i>
-              <span>System & Search Configuration</span>
+              <span>3-Hour Refresh & System Configuration</span>
             </div>
           </div>
           <div class="intel-panel">
-            <h4 style="font-size: 0.95rem; margin-bottom: 8px;">Target Career Stack</h4>
+            <h4 style="font-size: 0.95rem; margin-bottom: 8px;">Target Career Stack & Frequency</h4>
             <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
               GoHighLevel • CRM Architecture • Marketing Automation • Funnels • Websites • n8n • REST APIs • Webhooks • OpenAI • Anthropic
             </p>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">
-              Automated Daily Schedule: <b>02:30 AM PKT (21:30 UTC)</b> via GitHub Actions & Gemini Spark Engine.
+            <div style="font-size: 0.85rem; color: var(--text-primary); margin-bottom: 6px;">
+              <b>Automated 3-Hour Schedule:</b> 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 PKT (Pakistan Standard Time / UTC+5)
+            </div>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">
+              Persistent application tracking enabled at <code>data/application_status.json</code>. Applied jobs are permanently excluded from active searches.
             </div>
           </div>
         </section>
@@ -556,7 +581,7 @@
 
       <!-- Status Updater -->
       <div class="drawer-section" style="border-top: 1px solid var(--border-light); padding-top: 16px;">
-        <div class="drawer-section-title">Update Application Status</div>
+        <div class="drawer-section-title">Update Application Status (Auto-Persisted)</div>
         <select class="custom-select" id="drawerStatusSelect">
           <option value="New Match">New Match</option>
           <option value="Saved">Saved</option>
@@ -567,6 +592,9 @@
           <option value="Rejected">Rejected</option>
           <option value="Closed">Closed</option>
         </select>
+        <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">
+          * Setting to "Applied", "Interview", "Offer" or "Closed" permanently removes the job from future active searches.
+        </p>
       </div>
     </div>
 
