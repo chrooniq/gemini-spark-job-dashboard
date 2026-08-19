@@ -1,6 +1,11 @@
+import os
 import json
 
-with open("/working_dir/c_f852dfa8ed7d66d6/gemini-spark-job-dashboard/data/latest.json", "r", encoding="utf-8") as f:
+base_dir = os.path.dirname(os.path.abspath(__file__))
+latest_json_path = os.path.join(base_dir, "data", "latest.json")
+index_html_path = os.path.join(base_dir, "index.html")
+
+with open(latest_json_path, "r", encoding="utf-8") as f:
     latest_json_str = f.read()
 
 index_html = f"""<!DOCTYPE html>
@@ -36,7 +41,7 @@ index_html = f"""<!DOCTYPE html>
         <div class="date-selector-wrap">
           <span class="date-selector-label">Date:</span>
           <select id="dateSelect" class="date-select" title="Switch Report Date">
-            <option value="latest">Today (2026-08-19)</option>
+            <option value="latest">Today</option>
           </select>
         </div>
 
@@ -265,7 +270,7 @@ index_html = f"""<!DOCTYPE html>
 </html>
 """
 
-with open("/working_dir/c_f852dfa8ed7d66d6/gemini-spark-job-dashboard/index.html", "w", encoding="utf-8") as f:
+with open(index_html_path, "w", encoding="utf-8") as f:
     f.write(index_html)
 
-print("index.html successfully built.")
+print("✓ index.html successfully built dynamically.")

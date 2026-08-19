@@ -1,0 +1,51 @@
+name: Daily Autonomous Job Intelligence Update
+
+on:
+  schedule:
+    # Runs every day at 21:30 UTC (02:30 AM PKT / Pakistan Standard Time)
+    - cron: '30 21 * * *'
+  workflow_dispatch: # Allows manual trigger anytime from GitHub Actions tab
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "daily-update"
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install openpyxl
+
+      - name: Execute Daily Job Update Engine
+        run: |
+          python scripts/generate_daily_update.py
+
+      - name: Commit and Push Updated Dataset
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ index.html email_template.html
+          if git diff --staged --quiet; then
+            echo "No data changes detected today."
+          else
+            git commit -m "Auto: Update daily job intelligence dataset [$(date +'%Y-%m-%d')]"
+            git push origin main
+          fi
