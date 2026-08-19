@@ -1,0 +1,527 @@
+[
+  {
+    "job_id": "ghl-3724bdc6",
+    "company": "HumanIntelligence",
+    "job_title": "GoHighLevel Automation Specialist | CRM, Funnels & AI Systems",
+    "match_score": 87.5,
+    "application_url": "https://apply.workable.com/humanintelligence/j/E08961ABAC",
+    "selected_resume": "Sohaib_Mahmood_GHL_Funnel_Builder_Resume.pdf",
+    "selected_resume_focus": "High-Converting GHL Funnels & UI/UX Conversion",
+    "selected_portfolio": "https://sohaibmahmood.vibepreview.com/",
+    "answers": [
+      {
+        "question": "Full Name",
+        "answer": "Sohaib Mahmood",
+        "category": "FULL_NAME",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Email",
+        "answer": "sohaibmahmood5911@gmail.com",
+        "category": "EMAIL",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Phone",
+        "answer": "+923000000000",
+        "category": "PHONE",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Location",
+        "answer": "Lahore, Pakistan (100% Remote / UTC+5)",
+        "category": "LOCATION",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "How many years of GoHighLevel experience do you have?",
+        "answer": "I have 4 years of dedicated GoHighLevel experience, having architected 40+ sub-accounts, built 200+ multi-step automated workflows, and deployed 50+ sales funnels. I specialize in custom snapshot creation, SaaS mode configurations, opportunity pipeline automation, A2P 10DLC compliance, and custom webhook/API integrations.",
+        "category": "GHL_EXPERIENCE",
+        "confidence": 96,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "Professional Summary & Core Highlights \u2014 headline"
+        ]
+      },
+      {
+        "question": "Describe your workflow automation and AI bot experience",
+        "answer": "I design error-tolerant multi-platform automations connecting GoHighLevel with n8n, Zapier, OpenAI, and REST APIs. I have built 200+ live workflows handling lead qualification, calendar routing, and automated webhook data syncing.",
+        "category": "AUTOMATION_EXPERIENCE",
+        "confidence": 95,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "GoHighLevel & CRM Automation Work History \u2014 roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies"
+        ]
+      },
+      {
+        "question": "Why are you interested in this role?",
+        "answer": "I bring 4 years of specialized GoHighLevel development experience with 50+ delivered builds and 200+ automations. I work 100% remotely, communicate proactively across US/UK/AEST timezones, and can take complete technical ownership of your GHL infrastructure from day one.",
+        "category": "WHY_HIRE_ME",
+        "confidence": 94,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "question": "What is your salary expectation?",
+        "answer": "$1,200 \u2013 $2,000 / month (Full-time Remote)",
+        "category": "SALARY_EXPECTATION",
+        "confidence": 95,
+        "sources": [
+          "preferences.json"
+        ]
+      },
+      {
+        "question": "When can you start?",
+        "answer": "Available to start immediately (within 1 week).",
+        "category": "AVAILABILITY",
+        "confidence": 100,
+        "sources": [
+          "preferences.json"
+        ]
+      }
+    ],
+    "confidence": 100,
+    "requires_review": false,
+    "status": "APPROVED_TO_APPLY",
+    "created_at": "2026-08-19T21:57:16.896456+00:00",
+    "approved_at": "2026-08-19T21:57:23.640135+00:00",
+    "approval_notes": "Verified for controlled test"
+  },
+  {
+    "job_id": "ghl-1e585608",
+    "company": "HumanIntelligence",
+    "job_title": "Automation Workflow Specialist (GHL, Zapier, n8n, AI)",
+    "match_score": 97.5,
+    "application_url": "https://apply.workable.com/humanintelligence/j/D264BCF75C",
+    "selected_resume": "Sohaib_Mahmood_GHL_Developer_Resume.pdf",
+    "selected_resume_focus": "Full-Stack GoHighLevel Development, Webhooks & APIs",
+    "selected_portfolio": "https://sohaibmahmood.vibepreview.com/",
+    "answers": [
+      {
+        "question": "Full Name",
+        "answer": "Sohaib Mahmood",
+        "category": "FULL_NAME",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Email",
+        "answer": "sohaibmahmood5911@gmail.com",
+        "category": "EMAIL",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Phone",
+        "answer": "+923000000000",
+        "category": "PHONE",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Location",
+        "answer": "Lahore, Pakistan (100% Remote / UTC+5)",
+        "category": "LOCATION",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "How many years of GoHighLevel experience do you have?",
+        "answer": "I have 4 years of dedicated GoHighLevel experience, having architected 40+ sub-accounts, built 200+ multi-step automated workflows, and deployed 50+ sales funnels. I specialize in custom snapshot creation, SaaS mode configurations, opportunity pipeline automation, A2P 10DLC compliance, and custom webhook/API integrations.",
+        "category": "GHL_EXPERIENCE",
+        "confidence": 96,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Pre-Verified Application Q&A Bank \u2014 automation_philosophy",
+          "Technical Skills Matrix \u2014 automations"
+        ]
+      },
+      {
+        "question": "Describe your workflow automation and AI bot experience",
+        "answer": "I design error-tolerant multi-platform automations connecting GoHighLevel with n8n, Zapier, OpenAI, and REST APIs. I have built 200+ live workflows handling lead qualification, calendar routing, and automated webhook data syncing.",
+        "category": "AUTOMATION_EXPERIENCE",
+        "confidence": 95,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Pre-Verified Application Q&A Bank \u2014 automation_philosophy",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "question": "Why are you interested in this role?",
+        "answer": "I bring 4 years of specialized GoHighLevel development experience with 50+ delivered builds and 200+ automations. I work 100% remotely, communicate proactively across US/UK/AEST timezones, and can take complete technical ownership of your GHL infrastructure from day one.",
+        "category": "WHY_HIRE_ME",
+        "confidence": 94,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Pre-Verified Application Q&A Bank \u2014 automation_philosophy",
+          "Technical Skills Matrix \u2014 automations"
+        ]
+      },
+      {
+        "question": "What is your salary expectation?",
+        "answer": "$1,200 \u2013 $2,000 / month (Full-time Remote)",
+        "category": "SALARY_EXPECTATION",
+        "confidence": 95,
+        "sources": [
+          "preferences.json"
+        ]
+      },
+      {
+        "question": "When can you start?",
+        "answer": "Available to start immediately (within 1 week).",
+        "category": "AVAILABILITY",
+        "confidence": 100,
+        "sources": [
+          "preferences.json"
+        ]
+      }
+    ],
+    "confidence": 100,
+    "requires_review": false,
+    "status": "READY_FOR_REVIEW",
+    "created_at": "2026-08-19T21:57:16.925792+00:00",
+    "approved_at": null,
+    "approval_notes": ""
+  },
+  {
+    "job_id": "ghl-4bd100d4",
+    "company": "Huzzle.com",
+    "job_title": "AI & Automation Specialist (GHL)",
+    "match_score": 97.5,
+    "application_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
+    "selected_resume": "Sohaib_Mahmood_GHL_Developer_Resume.pdf",
+    "selected_resume_focus": "Full-Stack GoHighLevel Development, Webhooks & APIs",
+    "selected_portfolio": "https://sohaibmahmood.vibepreview.com/",
+    "answers": [
+      {
+        "question": "Full Name",
+        "answer": "Sohaib Mahmood",
+        "category": "FULL_NAME",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Email",
+        "answer": "sohaibmahmood5911@gmail.com",
+        "category": "EMAIL",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Phone",
+        "answer": "+923000000000",
+        "category": "PHONE",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Location",
+        "answer": "Lahore, Pakistan (100% Remote / UTC+5)",
+        "category": "LOCATION",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "How many years of GoHighLevel experience do you have?",
+        "answer": "I have 4 years of dedicated GoHighLevel experience, having architected 40+ sub-accounts, built 200+ multi-step automated workflows, and deployed 50+ sales funnels. I specialize in custom snapshot creation, SaaS mode configurations, opportunity pipeline automation, A2P 10DLC compliance, and custom webhook/API integrations.",
+        "category": "GHL_EXPERIENCE",
+        "confidence": 96,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 headline",
+          "Verified GoHighLevel & AI Automation Projects \u2014 featured_projects"
+        ]
+      },
+      {
+        "question": "Describe your workflow automation and AI bot experience",
+        "answer": "I design error-tolerant multi-platform automations connecting GoHighLevel with n8n, Zapier, OpenAI, and REST APIs. I have built 200+ live workflows handling lead qualification, calendar routing, and automated webhook data syncing.",
+        "category": "AUTOMATION_EXPERIENCE",
+        "confidence": 95,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Pre-Verified Application Q&A Bank \u2014 ai_experience",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "question": "Why are you interested in this role?",
+        "answer": "I bring 4 years of specialized GoHighLevel development experience with 50+ delivered builds and 200+ automations. I work 100% remotely, communicate proactively across US/UK/AEST timezones, and can take complete technical ownership of your GHL infrastructure from day one.",
+        "category": "WHY_HIRE_ME",
+        "confidence": 94,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Pre-Verified Application Q&A Bank \u2014 ai_experience",
+          "Verified GoHighLevel & AI Automation Projects \u2014 featured_projects"
+        ]
+      },
+      {
+        "question": "What is your salary expectation?",
+        "answer": "$1,200 \u2013 $2,000 / month (Full-time Remote)",
+        "category": "SALARY_EXPECTATION",
+        "confidence": 95,
+        "sources": [
+          "preferences.json"
+        ]
+      },
+      {
+        "question": "When can you start?",
+        "answer": "Available to start immediately (within 1 week).",
+        "category": "AVAILABILITY",
+        "confidence": 100,
+        "sources": [
+          "preferences.json"
+        ]
+      }
+    ],
+    "confidence": 100,
+    "requires_review": false,
+    "status": "READY_FOR_REVIEW",
+    "created_at": "2026-08-19T21:57:16.959944+00:00",
+    "approved_at": null,
+    "approval_notes": ""
+  },
+  {
+    "job_id": "ghl-f96dfb11",
+    "company": "HumanIntelligence",
+    "job_title": "Go High Level (CRM Platform) Officer",
+    "match_score": 92.5,
+    "application_url": "https://apply.workable.com/humanintelligence/j/C762E31B96",
+    "selected_resume": "Sohaib_Mahmood_GHL_Developer_Resume.pdf",
+    "selected_resume_focus": "Full-Stack GoHighLevel Development, Webhooks & APIs",
+    "selected_portfolio": "https://sohaibmahmood.vibepreview.com/",
+    "answers": [
+      {
+        "question": "Full Name",
+        "answer": "Sohaib Mahmood",
+        "category": "FULL_NAME",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Email",
+        "answer": "sohaibmahmood5911@gmail.com",
+        "category": "EMAIL",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Phone",
+        "answer": "+923000000000",
+        "category": "PHONE",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Location",
+        "answer": "Lahore, Pakistan (100% Remote / UTC+5)",
+        "category": "LOCATION",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "How many years of GoHighLevel experience do you have?",
+        "answer": "I have 4 years of dedicated GoHighLevel experience, having architected 40+ sub-accounts, built 200+ multi-step automated workflows, and deployed 50+ sales funnels. I specialize in custom snapshot creation, SaaS mode configurations, opportunity pipeline automation, A2P 10DLC compliance, and custom webhook/API integrations.",
+        "category": "GHL_EXPERIENCE",
+        "confidence": 96,
+        "sources": [
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "Verified GoHighLevel & AI Automation Projects \u2014 featured_projects",
+          "Pre-Verified Application Q&A Bank \u2014 ghl_experience"
+        ]
+      },
+      {
+        "question": "Describe your workflow automation and AI bot experience",
+        "answer": "I design error-tolerant multi-platform automations connecting GoHighLevel with n8n, Zapier, OpenAI, and REST APIs. I have built 200+ live workflows handling lead qualification, calendar routing, and automated webhook data syncing.",
+        "category": "AUTOMATION_EXPERIENCE",
+        "confidence": 95,
+        "sources": [
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "GoHighLevel & CRM Automation Work History \u2014 roles",
+          "Verified GoHighLevel & AI Automation Projects \u2014 featured_projects"
+        ]
+      },
+      {
+        "question": "Why are you interested in this role?",
+        "answer": "I bring 4 years of specialized GoHighLevel development experience with 50+ delivered builds and 200+ automations. I work 100% remotely, communicate proactively across US/UK/AEST timezones, and can take complete technical ownership of your GHL infrastructure from day one.",
+        "category": "WHY_HIRE_ME",
+        "confidence": 94,
+        "sources": [
+          "Professional Summary & Core Highlights \u2014 core_competencies",
+          "Verified GoHighLevel & AI Automation Projects \u2014 featured_projects",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "question": "What is your salary expectation?",
+        "answer": "$1,200 \u2013 $2,000 / month (Full-time Remote)",
+        "category": "SALARY_EXPECTATION",
+        "confidence": 95,
+        "sources": [
+          "preferences.json"
+        ]
+      },
+      {
+        "question": "When can you start?",
+        "answer": "Available to start immediately (within 1 week).",
+        "category": "AVAILABILITY",
+        "confidence": 100,
+        "sources": [
+          "preferences.json"
+        ]
+      }
+    ],
+    "confidence": 100,
+    "requires_review": false,
+    "status": "READY_FOR_REVIEW",
+    "created_at": "2026-08-19T21:57:17.010110+00:00",
+    "approved_at": null,
+    "approval_notes": ""
+  },
+  {
+    "job_id": "ghl-56cbe9ff",
+    "company": "Huzzle",
+    "job_title": "Marketing Automation Specialist - GHL",
+    "match_score": 89.0,
+    "application_url": "https://jobs.workable.com/view/h7PDQ3QSkauCNvZwoss4P1/remote-marketing-automation-specialist---ghl-in-colombia-at-huzzle",
+    "selected_resume": "Sohaib_Mahmood_GHL_Developer_Resume.pdf",
+    "selected_resume_focus": "Full-Stack GoHighLevel Development, Webhooks & APIs",
+    "selected_portfolio": "https://sohaibmahmood.vibepreview.com/",
+    "answers": [
+      {
+        "question": "Full Name",
+        "answer": "Sohaib Mahmood",
+        "category": "FULL_NAME",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Email",
+        "answer": "sohaibmahmood5911@gmail.com",
+        "category": "EMAIL",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Phone",
+        "answer": "+923000000000",
+        "category": "PHONE",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "Location",
+        "answer": "Lahore, Pakistan (100% Remote / UTC+5)",
+        "category": "LOCATION",
+        "confidence": 100,
+        "sources": [
+          "personal_info.json"
+        ]
+      },
+      {
+        "question": "How many years of GoHighLevel experience do you have?",
+        "answer": "I have 4 years of dedicated GoHighLevel experience, having architected 40+ sub-accounts, built 200+ multi-step automated workflows, and deployed 50+ sales funnels. I specialize in custom snapshot creation, SaaS mode configurations, opportunity pipeline automation, A2P 10DLC compliance, and custom webhook/API integrations.",
+        "category": "GHL_EXPERIENCE",
+        "confidence": 96,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "Professional Summary & Core Highlights \u2014 headline",
+          "GoHighLevel & CRM Automation Work History \u2014 roles"
+        ]
+      },
+      {
+        "question": "Describe your workflow automation and AI bot experience",
+        "answer": "I design error-tolerant multi-platform automations connecting GoHighLevel with n8n, Zapier, OpenAI, and REST APIs. I have built 200+ live workflows handling lead qualification, calendar routing, and automated webhook data syncing.",
+        "category": "AUTOMATION_EXPERIENCE",
+        "confidence": 95,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "GoHighLevel & CRM Automation Work History \u2014 roles",
+          "Pre-Verified Application Q&A Bank \u2014 automation_philosophy"
+        ]
+      },
+      {
+        "question": "Why are you interested in this role?",
+        "answer": "I bring 4 years of specialized GoHighLevel development experience with 50+ delivered builds and 200+ automations. I work 100% remotely, communicate proactively across US/UK/AEST timezones, and can take complete technical ownership of your GHL infrastructure from day one.",
+        "category": "WHY_HIRE_ME",
+        "confidence": 94,
+        "sources": [
+          "Work Preferences & Availability \u2014 preferred_roles",
+          "GoHighLevel & CRM Automation Work History \u2014 roles",
+          "Professional Summary & Core Highlights \u2014 headline"
+        ]
+      },
+      {
+        "question": "What is your salary expectation?",
+        "answer": "$1,200 \u2013 $2,000 / month (Full-time Remote)",
+        "category": "SALARY_EXPECTATION",
+        "confidence": 95,
+        "sources": [
+          "preferences.json"
+        ]
+      },
+      {
+        "question": "When can you start?",
+        "answer": "Available to start immediately (within 1 week).",
+        "category": "AVAILABILITY",
+        "confidence": 100,
+        "sources": [
+          "preferences.json"
+        ]
+      }
+    ],
+    "confidence": 100,
+    "requires_review": false,
+    "status": "READY_FOR_REVIEW",
+    "created_at": "2026-08-19T21:57:17.046376+00:00",
+    "approved_at": null,
+    "approval_notes": ""
+  }
+]
