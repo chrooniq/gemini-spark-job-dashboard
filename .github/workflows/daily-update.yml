@@ -1,10 +1,11 @@
-name: Daily Autonomous Job Intelligence Update
+name: 3-Hour Autonomous Job Intelligence Refresh
 
 on:
   schedule:
-    # Runs every day at 21:30 UTC (02:30 AM PKT / Pakistan Standard Time)
-    - cron: '30 21 * * *'
-  workflow_dispatch: # Allows manual trigger anytime from GitHub Actions tab
+    # Runs every 3 hours at 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 PKT (UTC+5)
+    # Corresponding UTC: 19:00, 22:00, 01:00, 04:00, 07:00, 10:00, 13:00, 16:00 UTC
+    - cron: '0 1,4,7,10,13,16,19,22 * * *'
+  workflow_dispatch: # Allows instant manual refresh anytime from GitHub Actions tab
 
 permissions:
   contents: write
@@ -12,11 +13,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "daily-update"
+  group: "job-refresh"
   cancel-in-progress: false
 
 jobs:
-  update-and-deploy:
+  refresh-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -34,9 +35,9 @@ jobs:
           pip install --upgrade pip
           pip install openpyxl
 
-      - name: Execute Daily Job Update Engine
+      - name: Execute 3-Hour Job Refresh & Application Tracking Engine
         run: |
-          python scripts/generate_daily_update.py
+          python scripts/generate_job_refresh.py
 
       - name: Commit and Push Updated Dataset
         run: |
@@ -44,8 +45,8 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data/ index.html email_template.html
           if git diff --staged --quiet; then
-            echo "No data changes detected today."
+            echo "No new job or status changes detected in this cycle."
           else
-            git commit -m "Auto: Update daily job intelligence dataset [$(date +'%Y-%m-%d')]"
+            git commit -m "chore: refresh job dataset $(date -u '+%Y-%m-%d %H:%M UTC')"
             git push origin main
           fi
