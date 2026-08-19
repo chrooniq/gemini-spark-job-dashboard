@@ -1,7 +1,7 @@
 /* ==========================================================================
-   GEMINI SPARK — FULL-PAGE PRODUCTION GOHIGHLEVEL SAAS DASHBOARD
+   GEMINI SPARK — MULTI-PAGE GOHIGHLEVEL CAREER INTELLIGENCE PORTAL
    Design System: "Jobi" Style Clean SaaS Dashboard
-   100% Vector SVG Icons • Full-Viewport Layout • Multi-View Routing
+   Full Viewport Layout • 100% Vector SVG Icons • Dedicated Multi-Page Views
    ========================================================================== */
 
 :root {
@@ -36,6 +36,8 @@
   --rose-subtle: #ffe4e6;
   --blue: #2563eb;
   --blue-subtle: #eff6ff;
+  --purple: #8b5cf6;
+  --purple-subtle: #f3e8ff;
 
   --border-subtle: #e8f0ec;
   --border-card: #e5ede8;
@@ -51,6 +53,7 @@
   --shadow-md: 0 8px 24px rgba(25, 42, 36, 0.06);
   --shadow-lg: 0 16px 40px rgba(25, 42, 36, 0.08);
   --shadow-drawer: -10px 0 40px rgba(0, 0, 0, 0.12);
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.18);
 }
 
 /* Reset & Fullpage Shell */
@@ -66,7 +69,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-app);
+  background-color: var(--bg-app) !important;
   color: var(--text-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -110,7 +113,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px 18px;
+  padding: 24px 16px;
   flex-shrink: 0;
   z-index: 30;
   overflow-y: auto;
@@ -121,7 +124,7 @@ button {
   align-items: center;
   gap: 10px;
   padding: 0 8px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .brand-dot-logo {
@@ -166,15 +169,15 @@ button {
 }
 
 .sidebar-avatar {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: linear-gradient(135deg, #233d32, #3b6051);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 800;
   box-shadow: 0 4px 12px rgba(35, 61, 50, 0.15);
   margin-bottom: 8px;
@@ -201,7 +204,7 @@ button {
 .sidebar-nav-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .nav-link-btn {
@@ -330,20 +333,21 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 36px 14px 36px;
+  padding: 18px 36px 14px 36px;
   gap: 16px;
-  background: transparent;
+  background: rgba(244, 247, 245, 0.85);
   position: sticky;
   top: 0;
   z-index: 20;
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 .top-nav-links {
   display: flex;
   align-items: center;
-  gap: 20px;
-  font-size: 0.86rem;
+  gap: 18px;
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -361,7 +365,7 @@ button {
 
 .search-pill-wrap {
   position: relative;
-  width: 220px;
+  width: 240px;
 }
 
 .search-svg-icon {
@@ -442,20 +446,28 @@ button {
   padding: 6px 36px 40px 36px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 22px;
 }
 
 .view-heading-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .view-main-title {
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-main);
+}
+
+.view-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 2px;
 }
 
 .live-badge-box {
@@ -488,7 +500,7 @@ button {
 }
 
 /* ==========================================================================
-   4 STAT CARDS (Exact Jobi Spec with Neon Lime SVG Badges)
+   4 STAT CARDS (Dashboard Specs)
    ========================================================================== */
 .stat-cards-container {
   display: grid;
@@ -550,11 +562,11 @@ button {
 }
 
 /* ==========================================================================
-   MIDDLE SECTION: CHART & RECENT MATCHES
+   MIDDLE DASHBOARD SECTION: CHART & TOP MATCHES
    ========================================================================== */
 .analytics-two-col {
   display: grid;
-  grid-template-columns: 1.55fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 20px;
 }
 
@@ -673,72 +685,121 @@ button {
 }
 
 /* ==========================================================================
-   FEED CONTROLS & JOB CARDS
+   PAGE: ALL JOBS — FILTERS, SORT & COMPARE TOOLBAR
    ========================================================================== */
-.feed-header-bar {
+.all-jobs-toolbar {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toolbar-upper-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 
-.feed-header-title {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--text-main);
-}
-
-.filter-chips-row {
+.toolbar-controls-group {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-.filter-chip-btn {
-  padding: 6px 14px;
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: 9999px;
-  font-size: 0.75rem;
+.filter-select {
+  height: 36px;
+  padding: 0 10px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  color: var(--text-main);
+  font-size: 0.78rem;
   font-weight: 600;
-  color: var(--text-muted);
   cursor: pointer;
-  transition: all 0.15s ease;
+  outline: none;
 }
 
-.filter-chip-btn:hover {
+.filter-select:focus {
   border-color: var(--forest-green);
+}
+
+.view-toggle-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--bg-input);
+  padding: 3px;
+  border-radius: var(--radius-xs);
+  gap: 2px;
+}
+
+.view-toggle-btn {
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.view-toggle-btn.active {
+  background: #ffffff;
+  color: var(--forest-green);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.compare-bar-cta {
+  background: var(--forest-green-subtle);
+  border: 1px solid rgba(35, 61, 50, 0.15);
+  border-radius: var(--radius-xs);
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
   color: var(--forest-green);
 }
 
-.filter-chip-btn.active {
+.btn-launch-compare {
   background: var(--forest-green);
   color: #ffffff;
-  border-color: var(--forest-green);
+  font-size: 0.74rem;
   font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-xs);
 }
 
-/* Job Cards Grid */
+/* Job Cards Grid & List Modes */
 .job-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
   gap: 18px;
+}
+
+.job-cards-grid.list-mode {
+  grid-template-columns: 1fr;
 }
 
 .jobi-card-item {
   background: #ffffff;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: var(--shadow-xs);
   transition: all 0.2s ease;
   cursor: pointer;
+  position: relative;
 }
 
 .jobi-card-item:hover {
@@ -762,32 +823,32 @@ button {
 }
 
 .card-company-avatar {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: #ffffff;
 }
 
 .card-company-details h4 {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--text-main);
 }
 
 .card-company-details span {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
 }
 
 .card-top-badges {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .tag-freshness {
@@ -819,13 +880,13 @@ button {
   border-radius: var(--radius-xs);
   font-family: 'JetBrains Mono', monospace;
   font-weight: 800;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   background: var(--forest-green);
   color: #ffffff;
 }
 
 .card-job-title {
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-main);
   line-height: 1.35;
@@ -841,19 +902,19 @@ button {
 }
 
 .card-meta-pill {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--text-muted);
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
-  padding: 2px 7px;
+  padding: 3px 8px;
   border-radius: var(--radius-xs);
 }
 
 .card-why-desc {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   color: #4a5c54;
-  line-height: 1.4;
+  line-height: 1.42;
   margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -869,9 +930,9 @@ button {
 }
 
 .skill-tag-pill {
-  font-size: 0.66rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 9999px;
   background: var(--forest-green-subtle);
   color: var(--forest-green);
@@ -881,19 +942,19 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 12px;
+  padding-top: 14px;
   border-top: 1px solid var(--border-subtle);
   gap: 8px;
 }
 
 .card-status-dropdown {
-  height: 30px;
-  padding: 0 6px;
+  height: 32px;
+  padding: 0 8px;
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
   color: var(--text-muted);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -911,12 +972,12 @@ button {
 }
 
 .btn-card-save {
-  padding: 5px 10px;
+  padding: 6px 12px;
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
   color: var(--text-muted);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 600;
   transition: all 0.15s ease;
 }
@@ -933,10 +994,10 @@ button {
 }
 
 .btn-card-apply {
-  padding: 5px 14px;
+  padding: 6px 16px;
   background: var(--forest-green);
   color: #ffffff;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   border-radius: var(--radius-xs);
   transition: all 0.15s ease;
@@ -946,10 +1007,324 @@ button {
   background: var(--forest-green-hover);
 }
 
+.compare-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
 /* ==========================================================================
-   SLIDE-OVER JOB DRAWER
+   PAGE: NEW MATCHES TIMELINE FEED
    ========================================================================== */
-.drawer-backdrop {
+.timeline-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.timeline-header-label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--forest-green);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline-header-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* ==========================================================================
+   PAGE: APPLIED JOBS (APPLICATION TRACKER — KANBAN & TABLE)
+   ========================================================================== */
+.tracker-view-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.kanban-board-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  min-height: 520px;
+}
+
+.kanban-column {
+  background: #edf3ef;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kanban-column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(35, 61, 50, 0.1);
+}
+
+.kanban-column-title {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--forest-green);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kanban-counter-badge {
+  background: #ffffff;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--forest-green);
+}
+
+.kanban-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.kanban-item-card {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  box-shadow: var(--shadow-xs);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.kanban-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: #dce7e1;
+}
+
+.kanban-item-title {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.kanban-item-company {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.kanban-item-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Tracker Table View */
+.tracker-table-container {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+
+.tracker-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tracker-table th {
+  background: var(--bg-subtle);
+  padding: 12px 16px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tracker-table td {
+  padding: 14px 16px;
+  font-size: 0.82rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-main);
+}
+
+.tracker-table tr:hover td {
+  background: var(--bg-subtle);
+}
+
+/* ==========================================================================
+   PAGE: MY RESUME INTELLIGENCE CENTER
+   ========================================================================== */
+.resume-grid-two-col {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.resume-health-card {
+  background: linear-gradient(135deg, #233d32, #2d4f41);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-md);
+}
+
+.resume-metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.resume-score-huge {
+  font-size: 3rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--neon-lime);
+  line-height: 1;
+}
+
+.skills-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.skill-matrix-item {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+
+.skill-matrix-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.skill-matrix-level {
+  font-size: 0.68rem;
+  color: var(--forest-green);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   PAGE: PORTFOLIO SHOWCASE
+   ========================================================================== */
+.portfolio-grid-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 22px;
+}
+
+.portfolio-card-item {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  transition: all 0.22s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: #cde0d7;
+}
+
+.portfolio-banner-preview {
+  height: 170px;
+  background: linear-gradient(135deg, #1b3027, #2c4d3f);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  position: relative;
+}
+
+.portfolio-badge-pill {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--neon-lime);
+  color: var(--forest-green);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+}
+
+.portfolio-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.portfolio-project-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.portfolio-project-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+
+.portfolio-tools-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
+/* ==========================================================================
+   JOB DETAIL DRAWER & COMPARISON MODAL
+   ========================================================================== */
+.drawer-backdrop, .modal-backdrop {
   position: fixed;
   inset: 0;
   background: rgba(25, 42, 36, 0.45);
@@ -960,7 +1335,7 @@ button {
   transition: opacity 0.25s ease;
 }
 
-.drawer-backdrop.open {
+.drawer-backdrop.open, .modal-backdrop.open {
   opacity: 1;
   pointer-events: auto;
 }
@@ -968,9 +1343,9 @@ button {
 .job-drawer {
   position: fixed;
   top: 0;
-  right: -580px;
-  width: 540px;
-  max-width: 90vw;
+  right: -620px;
+  width: 580px;
+  max-width: 92vw;
   height: 100%;
   background: #ffffff;
   border-left: 1px solid var(--border-card);
@@ -986,7 +1361,7 @@ button {
 }
 
 .drawer-header {
-  padding: 18px 22px;
+  padding: 18px 24px;
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
@@ -994,15 +1369,15 @@ button {
 }
 
 .drawer-close-btn {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--bg-subtle);
   color: var(--text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: all 0.15s ease;
 }
 
@@ -1014,7 +1389,7 @@ button {
 .drawer-body {
   flex: 1;
   overflow-y: auto;
-  padding: 22px;
+  padding: 24px;
 }
 
 .drawer-title-box {
@@ -1022,7 +1397,7 @@ button {
 }
 
 .drawer-title-box h3 {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-main);
   line-height: 1.3;
@@ -1107,13 +1482,53 @@ button {
 }
 
 .drawer-footer {
-  padding: 16px 22px;
+  padding: 16px 24px;
   border-top: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   background: #ffffff;
+}
+
+/* Compare Modal */
+.compare-modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 900px;
+  max-width: 94vw;
+  max-height: 88vh;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.compare-modal-box.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.compare-modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.compare-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
 }
 
 /* ==========================================================================
@@ -1191,8 +1606,11 @@ button {
   .stat-cards-container {
     grid-template-columns: repeat(2, 1fr);
   }
-  .analytics-two-col {
+  .analytics-two-col, .resume-grid-two-col {
     grid-template-columns: 1fr;
+  }
+  .kanban-board-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1216,7 +1634,7 @@ button {
   .view-content {
     padding: 14px 18px;
   }
-  .stat-cards-container {
+  .stat-cards-container, .kanban-board-grid {
     grid-template-columns: 1fr;
   }
   .job-cards-grid {

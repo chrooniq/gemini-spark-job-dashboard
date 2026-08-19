@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>jobi | Gemini Spark GoHighLevel Job Intelligence</title>
+  <title>jobi | Gemini Spark GoHighLevel Job Intelligence Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
 /* ==========================================================================
-   GEMINI SPARK — FULL-PAGE PRODUCTION GOHIGHLEVEL SAAS DASHBOARD
+   GEMINI SPARK — MULTI-PAGE GOHIGHLEVEL CAREER INTELLIGENCE PORTAL
    Design System: "Jobi" Style Clean SaaS Dashboard
-   100% Vector SVG Icons • Full-Viewport Layout • Multi-View Routing
+   Full Viewport Layout • 100% Vector SVG Icons • Dedicated Multi-Page Views
    ========================================================================== */
 
 :root {
@@ -47,6 +47,8 @@
   --rose-subtle: #ffe4e6;
   --blue: #2563eb;
   --blue-subtle: #eff6ff;
+  --purple: #8b5cf6;
+  --purple-subtle: #f3e8ff;
 
   --border-subtle: #e8f0ec;
   --border-card: #e5ede8;
@@ -62,6 +64,7 @@
   --shadow-md: 0 8px 24px rgba(25, 42, 36, 0.06);
   --shadow-lg: 0 16px 40px rgba(25, 42, 36, 0.08);
   --shadow-drawer: -10px 0 40px rgba(0, 0, 0, 0.12);
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.18);
 }
 
 /* Reset & Fullpage Shell */
@@ -77,7 +80,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-app);
+  background-color: var(--bg-app) !important;
   color: var(--text-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -121,7 +124,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px 18px;
+  padding: 24px 16px;
   flex-shrink: 0;
   z-index: 30;
   overflow-y: auto;
@@ -132,7 +135,7 @@ button {
   align-items: center;
   gap: 10px;
   padding: 0 8px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .brand-dot-logo {
@@ -177,15 +180,15 @@ button {
 }
 
 .sidebar-avatar {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: linear-gradient(135deg, #233d32, #3b6051);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 800;
   box-shadow: 0 4px 12px rgba(35, 61, 50, 0.15);
   margin-bottom: 8px;
@@ -212,7 +215,7 @@ button {
 .sidebar-nav-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .nav-link-btn {
@@ -341,20 +344,21 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 36px 14px 36px;
+  padding: 18px 36px 14px 36px;
   gap: 16px;
-  background: transparent;
+  background: rgba(244, 247, 245, 0.85);
   position: sticky;
   top: 0;
   z-index: 20;
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 .top-nav-links {
   display: flex;
   align-items: center;
-  gap: 20px;
-  font-size: 0.86rem;
+  gap: 18px;
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -372,7 +376,7 @@ button {
 
 .search-pill-wrap {
   position: relative;
-  width: 220px;
+  width: 240px;
 }
 
 .search-svg-icon {
@@ -453,20 +457,28 @@ button {
   padding: 6px 36px 40px 36px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 22px;
 }
 
 .view-heading-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .view-main-title {
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-main);
+}
+
+.view-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 2px;
 }
 
 .live-badge-box {
@@ -499,7 +511,7 @@ button {
 }
 
 /* ==========================================================================
-   4 STAT CARDS (Exact Jobi Spec with Neon Lime SVG Badges)
+   4 STAT CARDS (Dashboard Specs)
    ========================================================================== */
 .stat-cards-container {
   display: grid;
@@ -561,11 +573,11 @@ button {
 }
 
 /* ==========================================================================
-   MIDDLE SECTION: CHART & RECENT MATCHES
+   MIDDLE DASHBOARD SECTION: CHART & TOP MATCHES
    ========================================================================== */
 .analytics-two-col {
   display: grid;
-  grid-template-columns: 1.55fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 20px;
 }
 
@@ -684,72 +696,121 @@ button {
 }
 
 /* ==========================================================================
-   FEED CONTROLS & JOB CARDS
+   PAGE: ALL JOBS — FILTERS, SORT & COMPARE TOOLBAR
    ========================================================================== */
-.feed-header-bar {
+.all-jobs-toolbar {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toolbar-upper-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 
-.feed-header-title {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--text-main);
-}
-
-.filter-chips-row {
+.toolbar-controls-group {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-.filter-chip-btn {
-  padding: 6px 14px;
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: 9999px;
-  font-size: 0.75rem;
+.filter-select {
+  height: 36px;
+  padding: 0 10px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  color: var(--text-main);
+  font-size: 0.78rem;
   font-weight: 600;
-  color: var(--text-muted);
   cursor: pointer;
-  transition: all 0.15s ease;
+  outline: none;
 }
 
-.filter-chip-btn:hover {
+.filter-select:focus {
   border-color: var(--forest-green);
+}
+
+.view-toggle-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--bg-input);
+  padding: 3px;
+  border-radius: var(--radius-xs);
+  gap: 2px;
+}
+
+.view-toggle-btn {
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.view-toggle-btn.active {
+  background: #ffffff;
+  color: var(--forest-green);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.compare-bar-cta {
+  background: var(--forest-green-subtle);
+  border: 1px solid rgba(35, 61, 50, 0.15);
+  border-radius: var(--radius-xs);
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
   color: var(--forest-green);
 }
 
-.filter-chip-btn.active {
+.btn-launch-compare {
   background: var(--forest-green);
   color: #ffffff;
-  border-color: var(--forest-green);
+  font-size: 0.74rem;
   font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-xs);
 }
 
-/* Job Cards Grid */
+/* Job Cards Grid & List Modes */
 .job-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
   gap: 18px;
+}
+
+.job-cards-grid.list-mode {
+  grid-template-columns: 1fr;
 }
 
 .jobi-card-item {
   background: #ffffff;
   border: 1px solid var(--border-card);
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: var(--shadow-xs);
   transition: all 0.2s ease;
   cursor: pointer;
+  position: relative;
 }
 
 .jobi-card-item:hover {
@@ -773,32 +834,32 @@ button {
 }
 
 .card-company-avatar {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: #ffffff;
 }
 
 .card-company-details h4 {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--text-main);
 }
 
 .card-company-details span {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
 }
 
 .card-top-badges {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .tag-freshness {
@@ -830,13 +891,13 @@ button {
   border-radius: var(--radius-xs);
   font-family: 'JetBrains Mono', monospace;
   font-weight: 800;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   background: var(--forest-green);
   color: #ffffff;
 }
 
 .card-job-title {
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-main);
   line-height: 1.35;
@@ -852,19 +913,19 @@ button {
 }
 
 .card-meta-pill {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--text-muted);
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
-  padding: 2px 7px;
+  padding: 3px 8px;
   border-radius: var(--radius-xs);
 }
 
 .card-why-desc {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   color: #4a5c54;
-  line-height: 1.4;
+  line-height: 1.42;
   margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -880,9 +941,9 @@ button {
 }
 
 .skill-tag-pill {
-  font-size: 0.66rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  padding: 2px 7px;
+  padding: 2px 8px;
   border-radius: 9999px;
   background: var(--forest-green-subtle);
   color: var(--forest-green);
@@ -892,19 +953,19 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 12px;
+  padding-top: 14px;
   border-top: 1px solid var(--border-subtle);
   gap: 8px;
 }
 
 .card-status-dropdown {
-  height: 30px;
-  padding: 0 6px;
+  height: 32px;
+  padding: 0 8px;
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
   color: var(--text-muted);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -922,12 +983,12 @@ button {
 }
 
 .btn-card-save {
-  padding: 5px 10px;
+  padding: 6px 12px;
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
   color: var(--text-muted);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 600;
   transition: all 0.15s ease;
 }
@@ -944,10 +1005,10 @@ button {
 }
 
 .btn-card-apply {
-  padding: 5px 14px;
+  padding: 6px 16px;
   background: var(--forest-green);
   color: #ffffff;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   border-radius: var(--radius-xs);
   transition: all 0.15s ease;
@@ -957,10 +1018,324 @@ button {
   background: var(--forest-green-hover);
 }
 
+.compare-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
 /* ==========================================================================
-   SLIDE-OVER JOB DRAWER
+   PAGE: NEW MATCHES TIMELINE FEED
    ========================================================================== */
-.drawer-backdrop {
+.timeline-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.timeline-header-label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--forest-green);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline-header-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* ==========================================================================
+   PAGE: APPLIED JOBS (APPLICATION TRACKER — KANBAN & TABLE)
+   ========================================================================== */
+.tracker-view-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.kanban-board-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  min-height: 520px;
+}
+
+.kanban-column {
+  background: #edf3ef;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kanban-column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(35, 61, 50, 0.1);
+}
+
+.kanban-column-title {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--forest-green);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kanban-counter-badge {
+  background: #ffffff;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--forest-green);
+}
+
+.kanban-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.kanban-item-card {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  box-shadow: var(--shadow-xs);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.kanban-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: #dce7e1;
+}
+
+.kanban-item-title {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.kanban-item-company {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.kanban-item-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Tracker Table View */
+.tracker-table-container {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+
+.tracker-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tracker-table th {
+  background: var(--bg-subtle);
+  padding: 12px 16px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tracker-table td {
+  padding: 14px 16px;
+  font-size: 0.82rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-main);
+}
+
+.tracker-table tr:hover td {
+  background: var(--bg-subtle);
+}
+
+/* ==========================================================================
+   PAGE: MY RESUME INTELLIGENCE CENTER
+   ========================================================================== */
+.resume-grid-two-col {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.resume-health-card {
+  background: linear-gradient(135deg, #233d32, #2d4f41);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-md);
+}
+
+.resume-metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.resume-score-huge {
+  font-size: 3rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--neon-lime);
+  line-height: 1;
+}
+
+.skills-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.skill-matrix-item {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+
+.skill-matrix-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.skill-matrix-level {
+  font-size: 0.68rem;
+  color: var(--forest-green);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   PAGE: PORTFOLIO SHOWCASE
+   ========================================================================== */
+.portfolio-grid-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 22px;
+}
+
+.portfolio-card-item {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  transition: all 0.22s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: #cde0d7;
+}
+
+.portfolio-banner-preview {
+  height: 170px;
+  background: linear-gradient(135deg, #1b3027, #2c4d3f);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  position: relative;
+}
+
+.portfolio-badge-pill {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--neon-lime);
+  color: var(--forest-green);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+}
+
+.portfolio-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.portfolio-project-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.portfolio-project-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+
+.portfolio-tools-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
+/* ==========================================================================
+   JOB DETAIL DRAWER & COMPARISON MODAL
+   ========================================================================== */
+.drawer-backdrop, .modal-backdrop {
   position: fixed;
   inset: 0;
   background: rgba(25, 42, 36, 0.45);
@@ -971,7 +1346,7 @@ button {
   transition: opacity 0.25s ease;
 }
 
-.drawer-backdrop.open {
+.drawer-backdrop.open, .modal-backdrop.open {
   opacity: 1;
   pointer-events: auto;
 }
@@ -979,9 +1354,9 @@ button {
 .job-drawer {
   position: fixed;
   top: 0;
-  right: -580px;
-  width: 540px;
-  max-width: 90vw;
+  right: -620px;
+  width: 580px;
+  max-width: 92vw;
   height: 100%;
   background: #ffffff;
   border-left: 1px solid var(--border-card);
@@ -997,7 +1372,7 @@ button {
 }
 
 .drawer-header {
-  padding: 18px 22px;
+  padding: 18px 24px;
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
@@ -1005,15 +1380,15 @@ button {
 }
 
 .drawer-close-btn {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--bg-subtle);
   color: var(--text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: all 0.15s ease;
 }
 
@@ -1025,7 +1400,7 @@ button {
 .drawer-body {
   flex: 1;
   overflow-y: auto;
-  padding: 22px;
+  padding: 24px;
 }
 
 .drawer-title-box {
@@ -1033,7 +1408,7 @@ button {
 }
 
 .drawer-title-box h3 {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-main);
   line-height: 1.3;
@@ -1118,13 +1493,53 @@ button {
 }
 
 .drawer-footer {
-  padding: 16px 22px;
+  padding: 16px 24px;
   border-top: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   background: #ffffff;
+}
+
+/* Compare Modal */
+.compare-modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 900px;
+  max-width: 94vw;
+  max-height: 88vh;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.compare-modal-box.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.compare-modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.compare-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
 }
 
 /* ==========================================================================
@@ -1202,8 +1617,11 @@ button {
   .stat-cards-container {
     grid-template-columns: repeat(2, 1fr);
   }
-  .analytics-two-col {
+  .analytics-two-col, .resume-grid-two-col {
     grid-template-columns: 1fr;
+  }
+  .kanban-board-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1227,7 +1645,7 @@ button {
   .view-content {
     padding: 14px 18px;
   }
-  .stat-cards-container {
+  .stat-cards-container, .kanban-board-grid {
     grid-template-columns: 1fr;
   }
   .job-cards-grid {
@@ -1241,9 +1659,9 @@ button {
     window.FALLBACK_DATA = {
   "metadata": {
     "search_date": "2026-08-20",
-    "search_time": "01:27 PKT",
-    "search_time_slug": "01-27",
-    "last_updated": "20 Aug 2026, 01:27 AM PKT",
+    "search_time": "01:46 PKT",
+    "search_time_slug": "01-46",
+    "last_updated": "20 Aug 2026, 01:46 AM PKT",
     "next_update": "20 Aug 2026, 03:00 AM PKT",
     "next_update_iso": "2026-08-20T03:00:00+00:00",
     "schedule_interval_hours": 3,
@@ -1348,7 +1766,7 @@ button {
       "source": "Workable Direct ATS",
       "app_url": "https://apply.workable.com/humanintelligence/j/E08961ABAC",
       "original_url": "https://apply.workable.com/humanintelligence/j/E08961ABAC",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 88.5,
       "score_breakdown": {
@@ -1440,7 +1858,7 @@ button {
       "source": "Workable Direct ATS",
       "app_url": "https://apply.workable.com/humanintelligence/j/D264BCF75C",
       "original_url": "https://apply.workable.com/humanintelligence/j/D264BCF75C",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 98.0,
       "score_breakdown": {
@@ -1534,7 +1952,7 @@ button {
       "source": "Workable Direct ATS",
       "app_url": "https://apply.workable.com/humanintelligence/j/C762E31B96",
       "original_url": "https://apply.workable.com/humanintelligence/j/C762E31B96",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 95.5,
       "score_breakdown": {
@@ -1624,7 +2042,7 @@ button {
       "source": "Jobgether",
       "app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "original_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 93.5,
       "score_breakdown": {
@@ -1713,7 +2131,7 @@ button {
       "source": "Workable Direct ATS",
       "app_url": "https://jobs.workable.com/view/h7PDQ3QSkauCNvZwoss4P1/remote-marketing-automation-specialist---ghl-in-colombia-at-huzzle",
       "original_url": "https://jobs.workable.com/view/h7PDQ3QSkauCNvZwoss4P1/remote-marketing-automation-specialist---ghl-in-colombia-at-huzzle",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 88.0,
       "score_breakdown": {
@@ -1804,7 +2222,7 @@ button {
       "source": "Employment Hero",
       "app_url": "https://employmenthero.com/jobs/position/fasttrack-business-holdings-pte-ltd-gohighlevel-expert-funnel-builder-remote-adj7x/",
       "original_url": "https://employmenthero.com/jobs/position/fasttrack-business-holdings-pte-ltd-gohighlevel-expert-funnel-builder-remote-adj7x/",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 87.0,
       "score_breakdown": {
@@ -1894,7 +2312,7 @@ button {
       "source": "JobLeads",
       "app_url": "https://www.jobleads.com/us/job/remote-gohighlevel-n8n-automation-engineer--northern--e4629b3d752e57a75aed4bdc8821f0205",
       "original_url": "https://www.jobleads.com/us/job/remote-gohighlevel-n8n-automation-engineer--northern--e4629b3d752e57a75aed4bdc8821f0205",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 93.5,
       "score_breakdown": {
@@ -1984,7 +2402,7 @@ button {
       "source": "Remote.com",
       "app_url": "https://remote.com/jobs/mymarketingpass-c1ymnbf2/sr-gohighlevel-automator-n8n-api-etc-j1fr1v9w",
       "original_url": "https://remote.com/jobs/mymarketingpass-c1ymnbf2/sr-gohighlevel-automator-n8n-api-etc-j1fr1v9w",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 93.5,
       "score_breakdown": {
@@ -2072,7 +2490,7 @@ button {
       "source": "Remotive",
       "app_url": "https://remotive.com/remote/jobs/marketing/go-high-level-marketing-automation-specialist-5093156",
       "original_url": "https://remotive.com/remote/jobs/marketing/go-high-level-marketing-automation-specialist-5093156",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 87.0,
       "score_breakdown": {
@@ -2160,7 +2578,7 @@ button {
       "source": "Workable Direct ATS",
       "app_url": "https://apply.workable.com/pavago/j/05E08A61F4",
       "original_url": "https://apply.workable.com/pavago/j/05E08A61F4",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 86.5,
       "score_breakdown": {
@@ -2250,7 +2668,7 @@ button {
       "source": "BeBee / HireGummy",
       "app_url": "https://bebee.com/pk/jobs/web-developer-and-ghl-build-specialist-hiregummy-islamabad--theirstack-740076269",
       "original_url": "https://bebee.com/pk/jobs/web-developer-and-ghl-build-specialist-hiregummy-islamabad--theirstack-740076269",
-      "discovered_at": "2026-08-20 01:27 PKT",
+      "discovered_at": "2026-08-20 01:46 PKT",
       "status_updated_at": "2026-08-19 21:00 PKT",
       "score": 83.5,
       "score_breakdown": {
@@ -2302,84 +2720,83 @@ button {
 </head>
 <body>
 
-  <!-- Full-Page Layout Container -->
+  <!-- Fullscreen App Shell -->
   <div class="app-shell">
 
-    <!-- Left Sidebar (Full Viewport Height) -->
-    <aside class="sidebar" aria-label="Main Navigation">
+    <!-- Global Left Sidebar -->
+    <aside class="sidebar" aria-label="Portal Navigation">
       <div>
-        <!-- Brand / Logo -->
+        <!-- Brand Logo -->
         <div class="sidebar-brand-row">
           <div class="brand-dot-logo"></div>
           <div class="brand-title-text">jobi</div>
         </div>
 
-        <!-- User Profile Box -->
+        <!-- Candidate Profile Header -->
         <div class="sidebar-user-box">
           <div class="sidebar-avatar">SM</div>
           <div class="sidebar-user-name">
             <span>Sohaib Mahmood</span>
             <svg class="svg-icon" style="width: 12px; height: 12px;" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
           </div>
-          <div class="sidebar-user-role">GHL & CRM Developer</div>
+          <div class="sidebar-user-role">GoHighLevel Developer</div>
         </div>
 
-        <!-- Navigation Links -->
+        <!-- Primary Navigation Menu (Phase 3 Spec) -->
         <nav class="sidebar-nav-group">
-          <button class="nav-link-btn active" data-view="dashboard" data-filter="all-active">
+          <!-- 1. Dashboard -->
+          <button class="nav-link-btn active" data-route="dashboard">
             <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
             <span>Dashboard</span>
-            <span class="nav-counter-pill" id="cntSidebarActive">11</span>
           </button>
 
-          <button class="nav-link-btn" data-view="profile">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span>My Profile</span>
-          </button>
-
-          <button class="nav-link-btn" data-view="feed" data-filter="all-active">
+          <!-- 2. All Jobs -->
+          <button class="nav-link-btn" data-route="jobs">
             <svg class="svg-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            <span>My Jobs (GHL)</span>
-            <span class="nav-counter-pill" id="cntSidebarJobs">11</span>
+            <span>All Jobs</span>
+            <span class="nav-counter-pill" id="cntSidebarAllJobs">11</span>
           </button>
 
-          <button class="nav-link-btn" data-view="feed" data-filter="New Match">
+          <!-- 3. New Matches -->
+          <button class="nav-link-btn" data-route="matches">
             <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             <span>New Matches</span>
-            <span class="nav-counter-pill" id="cntSidebarNew">11</span>
+            <span class="nav-counter-pill" id="cntSidebarNewMatches">11</span>
           </button>
 
-          <button class="nav-link-btn" data-view="feed" data-filter="Saved">
+          <!-- 4. Saved Jobs -->
+          <button class="nav-link-btn" data-route="saved">
             <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
             <span>Saved Jobs</span>
             <span class="nav-counter-pill" id="cntSidebarSaved">0</span>
           </button>
 
-          <button class="nav-link-btn" data-view="feed" data-filter="Applied">
+          <!-- 5. Applied Jobs (Application Tracker) -->
+          <button class="nav-link-btn" data-route="applied">
             <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             <span>Applied Jobs</span>
             <span class="nav-counter-pill" id="cntSidebarApplied">0</span>
           </button>
 
-          <button class="nav-link-btn" data-view="feed" data-filter="Interview Scheduled">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            <span>Interviews</span>
-            <span class="nav-counter-pill" id="cntSidebarInterview">0</span>
+          <!-- 6. My Resume -->
+          <button class="nav-link-btn" data-route="resume">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span>My Resume</span>
           </button>
 
-          <button class="nav-link-btn" data-view="feed" data-filter="all">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-            <span>All Records</span>
-            <span class="nav-counter-pill" id="cntSidebarAll">11</span>
+          <!-- 7. Portfolio -->
+          <button class="nav-link-btn" data-route="portfolio">
+            <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            <span>Portfolio</span>
           </button>
         </nav>
       </div>
 
-      <!-- Sidebar Footer -->
+      <!-- Sidebar Bottom -->
       <div class="sidebar-footer">
         <div class="fit-progress-box">
           <div class="fit-progress-header">
-            <span>Profile Match Strength</span>
+            <span>Profile Match Fit</span>
             <span style="color: var(--forest-green); font-weight: 800;">87%</span>
           </div>
           <div class="fit-progress-track">
@@ -2394,24 +2811,25 @@ button {
       </div>
     </aside>
 
-    <!-- Main Viewport (Scrollable Content Area) -->
+    <!-- Main Viewport (Multi-Page Content Area) -->
     <main class="main-viewport">
 
-      <!-- Top Navbar -->
+      <!-- Global Top Navbar -->
       <header class="top-navbar">
         <div class="top-nav-links">
-          <a href="#" class="top-nav-link active" data-view="dashboard">Home</a>
-          <a href="#" class="top-nav-link" data-view="feed" data-filter="all-active">GHL Jobs</a>
-          <a href="#" class="top-nav-link" data-view="profile">Profile</a>
-          <a href="https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk" target="_blank" class="top-nav-link">Resume</a>
-          <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="top-nav-link">Portfolio</a>
+          <a href="#dashboard" class="top-nav-link active" data-route="dashboard">Dashboard</a>
+          <a href="#jobs" class="top-nav-link" data-route="jobs">All Jobs</a>
+          <a href="#matches" class="top-nav-link" data-route="matches">New Matches</a>
+          <a href="#applied" class="top-nav-link" data-route="applied">Tracker</a>
+          <a href="#resume" class="top-nav-link" data-route="resume">Resume</a>
+          <a href="#portfolio" class="top-nav-link" data-route="portfolio">Portfolio</a>
         </div>
 
         <div class="top-right-group">
-          <!-- Search input with vector SVG icon -->
+          <!-- Global Search Pill -->
           <div class="search-pill-wrap">
             <svg class="search-svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="topSearchInput" class="search-pill-input" placeholder="Search GHL jobs...">
+            <input type="text" id="globalSearchInput" class="search-pill-input" placeholder="Search GHL jobs, skills...">
           </div>
 
           <!-- History snapshot selector -->
@@ -2419,7 +2837,7 @@ button {
             <option value="latest">Today</option>
           </select>
 
-          <!-- Main CTA button -->
+          <!-- ⚡ Scrape New Jobs Button -->
           <button id="btnScrapeJobs" class="btn-scrape-cta" title="Scrape & refresh GoHighLevel jobs in real-time">
             <svg class="svg-icon" style="width: 14px; height: 14px; stroke: #ffffff; fill: none;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             <span>Scrape New Jobs</span>
@@ -2427,34 +2845,37 @@ button {
         </div>
       </header>
 
-      <!-- View: Dashboard (Default Main Page) -->
-      <div class="view-content" id="viewDashboard">
-
-        <!-- Title & Status Row -->
+      <!-- ====================================================================
+           PAGE 1: DASHBOARD (Intelligence Overview)
+           ==================================================================== -->
+      <section class="view-content" id="page-dashboard">
+        <!-- Dashboard Header -->
         <div class="view-heading-row">
           <div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--forest-green); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px;">
+              GEMINI SPARK • AI JOB INTELLIGENCE
+            </div>
             <h1 class="view-main-title">Dashboard</h1>
-            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">
-              GoHighLevel & CRM Automation Intelligence • Candidate: <strong>Sohaib Mahmood</strong>
+            <p class="view-subtitle">
+              Candidate: <strong>Sohaib Mahmood</strong> • Focus: <strong>GoHighLevel & CRM Automation</strong>
             </p>
           </div>
 
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div class="live-badge-box" id="headerStatusBadge">
+            <div class="live-badge-box" id="dashLiveBadge">
               <span class="live-dot-pulse"></span> LIVE 3H REFRESH
             </div>
             <div style="font-size: 0.78rem; color: var(--text-muted);">
-              Next: <span id="nextUpdateCountdown" style="font-weight: 800; font-family: monospace; color: var(--forest-green);">--:--:--</span>
+              Next: <span id="dashCountdown" style="font-weight: 800; font-family: monospace; color: var(--forest-green);">--:--:--</span>
             </div>
           </div>
         </div>
 
-        <!-- 4 Stat Metric Cards (Exact Jobi Specs with Neon Lime SVG Badges) -->
-        <section class="stat-cards-container" aria-label="Key Performance Indicators">
-          <!-- Stat 1: Fresh Jobs -->
+        <!-- 4 Metric Cards -->
+        <div class="stat-cards-container" aria-label="Key Search Metrics">
           <div class="jobi-stat-card">
             <div class="stat-left-text">
-              <div class="stat-large-num" id="statFreshJobs">07</div>
+              <div class="stat-large-num" id="dashFreshJobs">07</div>
               <div class="stat-sub-label">Fresh GHL Jobs (0–7D)</div>
             </div>
             <div class="stat-lime-circle">
@@ -2462,49 +2883,46 @@ button {
             </div>
           </div>
 
-          <!-- Stat 2: New Discovered -->
           <div class="jobi-stat-card">
             <div class="stat-left-text">
-              <div class="stat-large-num" id="statNewJobs">03</div>
+              <div class="stat-large-num" id="dashNewJobs">03</div>
               <div class="stat-sub-label">New Discovered</div>
             </div>
             <div class="stat-lime-circle">
-              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </div>
           </div>
 
-          <!-- Stat 3: Total Discoveries -->
           <div class="jobi-stat-card">
             <div class="stat-left-text">
-              <div class="stat-large-num" id="statTotalJobs">11</div>
-              <div class="stat-sub-label">GHL Opportunities</div>
+              <div class="stat-large-num" id="dashTotalJobs">11</div>
+              <div class="stat-sub-label">Active Opportunities</div>
             </div>
             <div class="stat-lime-circle">
               <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             </div>
           </div>
 
-          <!-- Stat 4: Top Match Score -->
           <div class="jobi-stat-card">
             <div class="stat-left-text">
-              <div class="stat-large-num" id="statTopMatch">98%</div>
+              <div class="stat-large-num" id="dashTopMatch">98%</div>
               <div class="stat-sub-label">Top Fit Score</div>
             </div>
             <div class="stat-lime-circle">
-              <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
           </div>
-        </section>
+        </div>
 
-        <!-- Middle Section: Chart & Recent Matches List -->
-        <section class="analytics-two-col">
-          <!-- Left: Job Views & Match Velocity Chart -->
+        <!-- Middle Section: Chart & Top Matches -->
+        <div class="analytics-two-col">
+          <!-- Left: Match Velocity Chart -->
           <div class="white-panel-box">
             <div class="panel-title-bar">
               <div>
-                <div class="panel-heading">Job Match Intelligence</div>
+                <div class="panel-heading">Job Match Velocity</div>
                 <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
-                  GoHighLevel CRM & Automation Match Trajectory
+                  GHL opportunity frequency & match concentration
                 </div>
               </div>
               <div class="time-tabs-bar">
@@ -2516,130 +2934,494 @@ button {
             </div>
 
             <div class="chart-wrapper-inner">
-              <canvas id="jobViewsChart"></canvas>
+              <canvas id="dashViewsChart"></canvas>
             </div>
           </div>
 
-          <!-- Right: Posted / Top Strategic Matches -->
+          <!-- Right: Top Strategic GHL Focus -->
           <div class="white-panel-box">
             <div class="panel-title-bar">
               <div class="panel-heading">Top GHL Focus</div>
               <span style="font-size: 0.72rem; font-weight: 700; color: var(--forest-green);">PRIORITY 1</span>
             </div>
 
-            <div class="mini-top-list" id="miniTopMatchesList">
-              <!-- Populated dynamically by app.js -->
+            <div class="mini-top-list" id="dashTopMatchesList">
+              <!-- Populated dynamically -->
             </div>
-          </div>
-        </section>
-
-        <!-- Bottom Feed Section: All Ranked GHL Opportunities -->
-        <section>
-          <div class="feed-header-bar">
-            <div>
-              <h2 class="feed-header-title">Live GoHighLevel Opportunities</h2>
-              <span style="font-size: 0.76rem; color: var(--text-muted);" id="feedCountBadge">11 Opportunities Available</span>
-            </div>
-
-            <!-- Filter Chips -->
-            <div class="filter-chips-row">
-              <button class="filter-chip-btn active" data-filter-type="freshness" data-filter="all">All (0–7D)</button>
-              <button class="filter-chip-btn" data-filter-type="freshness" data-filter="today">Today</button>
-              <button class="filter-chip-btn" data-filter-type="freshness" data-filter="1-3-days">1–3 Days</button>
-              <button class="filter-chip-btn" data-filter-type="freshness" data-filter="4-7-days">4–7 Days</button>
-              <button class="filter-chip-btn" data-filter-type="match" data-filter="90">90%+</button>
-              <button class="filter-chip-btn" data-filter-type="workmode" data-filter="remote">100% Remote</button>
-            </div>
-          </div>
-
-          <!-- Job Cards Grid Deck -->
-          <div class="job-cards-grid" id="jobsGridContainer">
-            <!-- Populated dynamically by app.js -->
-          </div>
-
-          <!-- Empty State -->
-          <div class="empty-state" id="emptyState" style="display: none;">
-            <div class="empty-icon-wrap">
-              <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            </div>
-            <h3>No GoHighLevel opportunities found</h3>
-            <p>
-              No active roles match your current filter criteria or all listed opportunities have been processed.
-            </p>
-            <button id="btnEmptyScrape" class="btn-scrape-cta" style="margin: 0 auto; display: inline-flex;">
-              <svg class="svg-icon" style="width: 14px; height: 14px; stroke: #ffffff; fill: none;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              <span>Scrape New Jobs</span>
-            </button>
-          </div>
-        </section>
-
-      </div>
-
-      <!-- View: Candidate Profile -->
-      <div class="view-content" id="viewProfile" style="display: none;">
-        <div class="view-heading-row">
-          <div>
-            <h1 class="view-main-title">Candidate Profile</h1>
-            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">
-              Sohaib Mahmood • GoHighLevel & CRM Automation Specialist
-            </p>
           </div>
         </div>
 
-        <div class="white-panel-box" style="margin-top: 10px;">
-          <div style="display: flex; gap: 24px; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 20px; margin-bottom: 20px;">
-            <div class="sidebar-avatar" style="width: 72px; height: 72px; font-size: 1.5rem;">SM</div>
+        <!-- Freshest Opportunities Preview with CTA to All Jobs -->
+        <div class="white-panel-box">
+          <div class="panel-title-bar">
             <div>
-              <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--text-main);">Sohaib Mahmood</h2>
-              <p style="font-size: 0.84rem; color: var(--forest-green); font-weight: 700; margin-top: 2px;">
-                GoHighLevel Developer | CRM & Marketing Automation | Funnel & Website Builder
+              <div class="panel-heading">Freshest GHL Discoveries</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
+                Top 4 highest priority fresh listings (0–3 days old)
+              </div>
+            </div>
+            <button class="btn-scrape-cta" onclick="navigateTo('jobs')">
+              <span>View All Jobs →</span>
+            </button>
+          </div>
+
+          <div class="job-cards-grid" id="dashFreshGrid">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PAGE 2: ALL JOBS (Main Database with Comprehensive Filter Toolbar)
+           ==================================================================== -->
+      <section class="view-content" id="page-jobs" style="display: none;">
+        <!-- Header -->
+        <div class="view-heading-row">
+          <div>
+            <h1 class="view-main-title">All GoHighLevel Jobs</h1>
+            <p class="view-subtitle">
+              Fresh opportunities discovered across public job sources • Strict 0–7 Day Window
+            </p>
+          </div>
+
+          <div id="compareBarActive" class="compare-bar-cta" style="display: none;">
+            <span>Comparing <b id="compareSelectedCount">0</b> jobs</span>
+            <button class="btn-launch-compare" id="btnOpenCompareModal">Compare Now →</button>
+          </div>
+        </div>
+
+        <!-- Full Filter & Sort Toolbar -->
+        <div class="all-jobs-toolbar">
+          <div class="toolbar-upper-row">
+            <div class="toolbar-controls-group">
+              <!-- Freshness Filter -->
+              <select id="filterFreshness" class="filter-select">
+                <option value="all">Freshness: All (0–7D)</option>
+                <option value="today">Today (0D)</option>
+                <option value="1-3-days">1–3 Days Ago</option>
+                <option value="4-7-days">4–7 Days Ago</option>
+              </select>
+
+              <!-- Match Score Filter -->
+              <select id="filterMatch" class="filter-select">
+                <option value="all">Match: All Scores</option>
+                <option value="90">90%+ Match</option>
+                <option value="80">80%+ Match</option>
+                <option value="70">70%+ Match</option>
+              </select>
+
+              <!-- Work Mode Filter -->
+              <select id="filterWorkMode" class="filter-select">
+                <option value="all">Work Mode: All</option>
+                <option value="remote">100% Remote</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="onsite">Onsite</option>
+              </select>
+
+              <!-- Sorting -->
+              <select id="sortJobsSelect" class="filter-select">
+                <option value="newest">Sort: Newest First</option>
+                <option value="match-desc">Sort: Highest Match</option>
+                <option value="salary-desc">Sort: Highest Salary</option>
+                <option value="company-az">Sort: Company A-Z</option>
+              </select>
+            </div>
+
+            <!-- View Layout Toggle (Grid vs List) -->
+            <div class="view-toggle-wrap">
+              <button class="view-toggle-btn active" id="btnViewGrid" title="Grid View">
+                <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              </button>
+              <button class="view-toggle-btn" id="btnViewList" title="List View">
+                <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- All Jobs Grid / List -->
+        <div class="job-cards-grid" id="allJobsGrid">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="allJobsEmpty" style="display: none;">
+          <div class="empty-icon-wrap">
+            <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>No matching GoHighLevel jobs found</h3>
+          <p>Try adjusting your search criteria or trigger a live scrape across public feeds.</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PAGE 3: NEW MATCHES (Timeline Feed)
+           ==================================================================== -->
+      <section class="view-content" id="page-matches" style="display: none;">
+        <div class="view-heading-row">
+          <div>
+            <h1 class="view-main-title">New Matches</h1>
+            <p class="view-subtitle">Newly discovered GoHighLevel opportunities from recent automated scans</p>
+          </div>
+        </div>
+
+        <!-- Timeline Feeds -->
+        <div id="matchesTimelineContainer">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PAGE 4: SAVED JOBS (Saved Opportunity Management)
+           ==================================================================== -->
+      <section class="view-content" id="page-saved" style="display: none;">
+        <div class="view-heading-row">
+          <div>
+            <h1 class="view-main-title">Saved Jobs</h1>
+            <p class="view-subtitle">Personal shortlist of bookmarked GoHighLevel roles</p>
+          </div>
+        </div>
+
+        <div class="job-cards-grid" id="savedJobsGrid">
+          <!-- Populated dynamically -->
+        </div>
+
+        <div class="empty-state" id="savedJobsEmpty" style="display: none;">
+          <div class="empty-icon-wrap">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>No saved opportunities yet</h3>
+          <p>Click the bookmark icon or "☆ Save" button on any job card in All Jobs to pin it here.</p>
+          <button class="btn-scrape-cta" style="margin: 0 auto; display: inline-flex;" onclick="navigateTo('jobs')">
+            <span>Explore All Jobs →</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PAGE 5: APPLIED JOBS (Application Tracker — Kanban & Table)
+           ==================================================================== -->
+      <section class="view-content" id="page-applied" style="display: none;">
+        <div class="view-heading-row">
+          <div>
+            <h1 class="view-main-title">Application Tracker</h1>
+            <p class="view-subtitle">Track submission stages, interviews, and offers in one unified pipeline</p>
+          </div>
+
+          <div class="view-toggle-wrap">
+            <button class="view-toggle-btn active" id="btnTrackerKanban">Kanban</button>
+            <button class="view-toggle-btn" id="btnTrackerTable">Table</button>
+          </div>
+        </div>
+
+        <!-- Kanban Board View -->
+        <div class="kanban-board-grid" id="trackerKanbanView">
+          <!-- Column 1: Applied -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <div class="kanban-column-title">
+                <span>Applied</span>
+              </div>
+              <span class="kanban-counter-badge" id="kanbanCntApplied">0</span>
+            </div>
+            <div class="kanban-cards-stack" id="kanbanColApplied"></div>
+          </div>
+
+          <!-- Column 2: Interview Scheduled / Active -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <div class="kanban-column-title">
+                <span>Interview</span>
+              </div>
+              <span class="kanban-counter-badge" id="kanbanCntInterview">0</span>
+            </div>
+            <div class="kanban-cards-stack" id="kanbanColInterview"></div>
+          </div>
+
+          <!-- Column 3: Offer -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <div class="kanban-column-title">
+                <span>Offer</span>
+              </div>
+              <span class="kanban-counter-badge" id="kanbanCntOffer">0</span>
+            </div>
+            <div class="kanban-cards-stack" id="kanbanColOffer"></div>
+          </div>
+
+          <!-- Column 4: Rejected / Closed -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <div class="kanban-column-title">
+                <span>Rejected / Closed</span>
+              </div>
+              <span class="kanban-counter-badge" id="kanbanCntRejected">0</span>
+            </div>
+            <div class="kanban-cards-stack" id="kanbanColRejected"></div>
+          </div>
+        </div>
+
+        <!-- Table View -->
+        <div class="tracker-table-container" id="trackerTableView" style="display: none;">
+          <table class="tracker-table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Role</th>
+                <th>Match Score</th>
+                <th>Applied Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="trackerTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PAGE 6: MY RESUME (Resume Intelligence Center)
+           ==================================================================== -->
+      <section class="view-content" id="page-resume" style="display: none;">
+        <div class="view-heading-row">
+          <div>
+            <h1 class="view-main-title">My Resume Intelligence</h1>
+            <p class="view-subtitle">ATS readiness score, GHL keyword density, and market alignment</p>
+          </div>
+
+          <div style="display: flex; gap: 10px;">
+            <button class="btn-scrape-cta" id="btnAnalyzeResumeAgainstFeed">
+              <svg class="svg-icon" style="width: 14px; height: 14px; stroke: #ffffff; fill: none;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>Analyze Against Current Jobs</span>
+            </button>
+            <a href="https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk" target="_blank" class="btn-card-save" style="padding: 9px 16px;">
+              Download PDF Resume
+            </a>
+          </div>
+        </div>
+
+        <div class="resume-grid-two-col">
+          <!-- Left: Profile & Expertise -->
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <!-- Candidate Summary Box -->
+            <div class="white-panel-box">
+              <div class="panel-heading" style="margin-bottom: 10px;">Executive Positioning</div>
+              <p style="font-size: 0.84rem; color: var(--text-main); line-height: 1.55;">
+                Senior GoHighLevel Developer and Marketing Automation Specialist with 4+ years of hands-on experience engineering high-converting sales funnels, bespoke CRM snapshot architectures, SaaS mode client sub-accounts, and complex multi-step n8n / REST API integrations.
               </p>
-              <div style="display: flex; gap: 12px; margin-top: 8px; font-size: 0.78rem; color: var(--text-muted);">
-                <span>📍 Lahore, Pakistan (UTC+5)</span>
-                <span>⏱ 4 Years Experience (50+ Builds)</span>
-                <span>🌍 100% Worldwide Remote</span>
+            </div>
+
+            <!-- Technical Skills Matrix -->
+            <div class="white-panel-box">
+              <div class="panel-heading">GoHighLevel & CRM Skills Matrix</div>
+              <div class="skills-matrix-grid">
+                <div class="skill-matrix-item">
+                  <div class="skill-matrix-title">GHL SaaS Mode & Snapshots</div>
+                  <div class="skill-matrix-level">Expert • 4 Years (50+ Builds)</div>
+                </div>
+                <div class="skill-matrix-item">
+                  <div class="skill-matrix-title">n8n & Zapier Automation</div>
+                  <div class="skill-matrix-level">Expert • Complex Webhooks</div>
+                </div>
+                <div class="skill-matrix-item">
+                  <div class="skill-matrix-title">Speed-to-Lead Workflows</div>
+                  <div class="skill-matrix-level">Advanced • LC Phone & Twilio</div>
+                </div>
+                <div class="skill-matrix-item">
+                  <div class="skill-matrix-title">Sales Funnel Architecture</div>
+                  <div class="skill-matrix-level">Expert • High-Converting</div>
+                </div>
+                <div class="skill-matrix-item">
+                  <div class="skill-matrix-title">OpenAI & AI Automation</div>
+                  <div class="skill-matrix-level">Advanced • Prompt Agents</div>
+                </div>
+                <div class="skill-matrix-item">
+                  <div class="skill-matrix-title">REST APIs & Custom Code</div>
+                  <div class="skill-matrix-level">Advanced • React / Node</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Experience Highlights -->
+            <div class="white-panel-box">
+              <div class="panel-heading" style="margin-bottom: 12px;">Verified Experience Timeline</div>
+              <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div style="border-left: 2px solid var(--forest-green); padding-left: 14px;">
+                  <div style="font-size: 0.86rem; font-weight: 800; color: var(--text-main);">Lead GoHighLevel & CRM Engineer • Remote</div>
+                  <div style="font-size: 0.74rem; color: var(--forest-green); font-weight: 700;">2022 — Present</div>
+                  <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Architected 50+ production client sub-accounts, custom snapshots, speed-to-lead SMS/voice cadences, and n8n webhook pipelines.</p>
+                </div>
+                <div style="border-left: 2px solid #cbd5e1; padding-left: 14px;">
+                  <div style="font-size: 0.86rem; font-weight: 800; color: var(--text-main);">Marketing Automation & Funnel Builder • Remote</div>
+                  <div style="font-size: 0.74rem; color: var(--text-muted); font-weight: 700;">2020 — 2022</div>
+                  <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Designed end-to-end client onboarding funnels, automated billing triggers, and integrated Twilio/Stripe webhooks.</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px;">Core Expertise & Verified Skills</h3>
-          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
-            <span class="skill-tag-pill" style="font-size: 0.76rem; padding: 4px 10px;">GoHighLevel SaaS Mode</span>
-            <span class="skill-tag-pill" style="font-size: 0.76rem; padding: 4px 10px;">Sub-Accounts & Snapshots</span>
-            <span class="skill-tag-pill" style="font-size: 0.76rem; padding: 4px 10px;">n8n Workflow Automation</span>
-            <span class="skill-tag-pill" style="font-size: 0.76rem; padding: 4px 10px;">Speed-to-Lead Workflows</span>
-            <span class="skill-tag-pill" style="font-size: 0.76rem; padding: 4px 10px;">Sales Funnel Architecture</span>
-            <span class="skill-tag-pill" style="font-size: 0.76rem; padding: 4px 10px;">REST APIs & Webhooks</span>
-            <span class="skill-tag-pill" style="font-size: 0.76rem; padding: 4px 10px;">Twilio & LC Phone</span>
-            <span class="skill-tag-pill" style="font-size: 0.76rem; padding: 4px 10px;">OpenAI / Anthropic APIs</span>
-            <span class="skill-tag-pill" style="font-size: 0.76rem; padding: 4px 10px;">React.js & Tailwind CSS</span>
-          </div>
+          <!-- Right: ATS Health & Alignment Card -->
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <div class="resume-health-card">
+              <div>
+                <div style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.9;">
+                  ATS Resume Readiness
+                </div>
+                <div class="resume-metric-row">
+                  <div class="resume-score-huge">94%</div>
+                  <div style="font-size: 0.78rem; line-height: 1.4; opacity: 0.9;">
+                    High ATS Parse Rate<br><b>Tier 1 GoHighLevel Alignment</b>
+                  </div>
+                </div>
+              </div>
 
-          <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px;">Portfolio & Artifacts</h3>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="btn-card-apply" style="padding: 9px 18px;">
-              🌐 View Live Portfolio
-            </a>
-            <a href="https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk" target="_blank" class="btn-card-save" style="padding: 9px 18px;">
-              📄 Download Resume
-            </a>
-            <a href="https://drive.google.com/file/d/1TH4CMzXFOfup2liGESZmmA7QFM8GcfqP/view?usp=sharing" target="_blank" class="btn-card-save" style="padding: 9px 18px;">
-              🎥 Intro Video
-            </a>
+              <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 14px;">
+                <div style="font-size: 0.75rem; font-weight: 700; margin-bottom: 6px;">Keyword Density in Discovered Jobs:</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                  <span style="background: rgba(203, 243, 47, 0.2); color: var(--neon-lime); font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px;">GoHighLevel (100%)</span>
+                  <span style="background: rgba(203, 243, 47, 0.2); color: var(--neon-lime); font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px;">Automation (95%)</span>
+                  <span style="background: rgba(203, 243, 47, 0.2); color: var(--neon-lime); font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px;">Snapshots (90%)</span>
+                  <span style="background: rgba(203, 243, 47, 0.2); color: var(--neon-lime); font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px;">n8n (88%)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Links Card -->
+            <div class="white-panel-box">
+              <div class="panel-heading" style="margin-bottom: 10px;">Portfolio Artifacts</div>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="sidebar-sub-btn" style="color: var(--forest-green); font-weight: 700;">
+                  🌐 Live Portfolio Website →
+                </a>
+                <a href="https://drive.google.com/file/d/1TH4CMzXFOfup2liGESZmmA7QFM8GcfqP/view?usp=sharing" target="_blank" class="sidebar-sub-btn" style="color: var(--forest-green); font-weight: 700;">
+                  🎥 Video Introduction (Google Drive) →
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- ====================================================================
+           PAGE 7: PORTFOLIO (Visual Project Showcase)
+           ==================================================================== -->
+      <section class="view-content" id="page-portfolio" style="display: none;">
+        <div class="view-heading-row">
+          <div>
+            <h1 class="view-main-title">Project Portfolio</h1>
+            <p class="view-subtitle">Live GoHighLevel snapshot builds, automated CRM systems, and AI workflows</p>
+          </div>
+
+          <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="btn-scrape-cta">
+            <span>Visit Full Portfolio →</span>
+          </a>
+        </div>
+
+        <div class="portfolio-grid-deck">
+          <!-- Project 1 -->
+          <article class="portfolio-card-item">
+            <div class="portfolio-banner-preview">
+              <span class="portfolio-badge-pill">GHL SaaS Mode</span>
+              <div style="font-size: 1.1rem; font-weight: 800;">Real Estate Agency Snapshot</div>
+              <div style="font-size: 0.74rem; opacity: 0.9;">End-to-end multi-agent sub-account architecture</div>
+            </div>
+            <div class="portfolio-card-body">
+              <p class="portfolio-project-desc">
+                Engineered a comprehensive real estate snapshot featuring automated buyer/seller intake funnels, 5-minute speed-to-lead SMS followup cadences, and automated calendar booking.
+              </p>
+              <div class="portfolio-tools-row">
+                <span class="skill-tag-pill">GoHighLevel</span>
+                <span class="skill-tag-pill">LC Phone</span>
+                <span class="skill-tag-pill">Funnels</span>
+                <span class="skill-tag-pill">Calendars</span>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="btn-card-apply" style="flex: 1; text-align: center;">Live Demo</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="portfolio-card-item">
+            <div class="portfolio-banner-preview" style="background: linear-gradient(135deg, #1e3a8a, #1e40af);">
+              <span class="portfolio-badge-pill">n8n + OpenAI</span>
+              <div style="font-size: 1.1rem; font-weight: 800;">AI Lead Qualification Agent</div>
+              <div style="font-size: 0.74rem; opacity: 0.9;">Autonomous WhatsApp & SMS conversion bot</div>
+            </div>
+            <div class="portfolio-card-body">
+              <p class="portfolio-project-desc">
+                Developed an autonomous AI agent integrated into GHL sub-accounts that qualifies incoming leads via conversational SMS, updates custom fields, and triggers calendar links.
+              </p>
+              <div class="portfolio-tools-row">
+                <span class="skill-tag-pill">n8n</span>
+                <span class="skill-tag-pill">OpenAI API</span>
+                <span class="skill-tag-pill">GHL Webhooks</span>
+                <span class="skill-tag-pill">Twilio</span>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="btn-card-apply" style="flex: 1; text-align: center;">Live Demo</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="portfolio-card-item">
+            <div class="portfolio-banner-preview" style="background: linear-gradient(135deg, #701a75, #86198f);">
+              <span class="portfolio-badge-pill">Clinic & Healthcare</span>
+              <div style="font-size: 1.1rem; font-weight: 800;">MedSpa Automated Booking System</div>
+              <div style="font-size: 0.74rem; opacity: 0.9;">Patient scheduling, reminders & payment triggers</div>
+            </div>
+            <div class="portfolio-card-body">
+              <p class="portfolio-project-desc">
+                Built an HIPAA-compliant patient acquisition engine with deposit payment collection via Stripe, two-way SMS confirmation reminders, and automated review generation.
+              </p>
+              <div class="portfolio-tools-row">
+                <span class="skill-tag-pill">GHL Funnels</span>
+                <span class="skill-tag-pill">Stripe</span>
+                <span class="skill-tag-pill">Workflows</span>
+                <span class="skill-tag-pill">Review Engine</span>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="btn-card-apply" style="flex: 1; text-align: center;">Live Demo</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
 
     </main>
 
   </div>
 
-  <!-- Slide-Over Job Drawer -->
+  <!-- ====================================================================
+       AI JOB COMPARISON MODAL
+       ==================================================================== -->
+  <div class="modal-backdrop" id="compareModalBackdrop"></div>
+  <div class="compare-modal-box" id="compareModalBox" role="dialog" aria-label="Compare Jobs">
+    <div class="compare-modal-header">
+      <div>
+        <div style="font-size: 0.74rem; font-weight: 800; color: var(--forest-green); text-transform: uppercase;">
+          AI JOB COMPARISON
+        </div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">Side-by-Side Evaluation</h3>
+      </div>
+      <button class="drawer-close-btn" id="compareCloseBtn">✕</button>
+    </div>
+    <div class="compare-modal-body" id="compareModalBody">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       SLIDE-OVER JOB DETAIL DRAWER (With AI Match Analysis)
+       ==================================================================== -->
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="job-drawer" id="jobDrawer" aria-label="Job Detail Drawer">
     <div class="drawer-header">
       <div style="font-size: 0.78rem; font-weight: 800; color: var(--forest-green); text-transform: uppercase; letter-spacing: 0.06em;">
-        GHL OPPORTUNITY BREAKDOWN
+        AI MATCH ANALYSIS
       </div>
       <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Drawer">✕</button>
     </div>
@@ -2692,7 +3474,7 @@ button {
       <div class="drawer-section-title">ADVANTAGE HIGHLIGHTS</div>
       <div class="card-skills-row" id="drawerAdvSkills" style="margin-bottom: 16px;"></div>
 
-      <div class="drawer-section-title">POTENTIAL CONSIDERATIONS</div>
+      <div class="drawer-section-title">APPLICATION STRATEGY & CONSIDERATIONS</div>
       <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 20px;" id="drawerConcerns"></p>
     </div>
 
