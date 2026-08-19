@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "search_date": "2026-08-19",
+    "last_updated": "19 Aug 2026, 09:00 PM PKT",
+    "search_time": "21:00 PKT",
+    "search_time_slug": "21-00",
+    "next_update": "20 Aug 2026, 12:00 AM PKT",
+    "next_update_iso": "2026-08-19T21:00:00+00:00",
+    "schedule_interval_hours": 3,
+    "candidate": {
+      "name": "Sohaib Mahmood",
+      "title": "GoHighLevel Developer | CRM & Marketing Automation | Funnel & Website Builder",
+      "experience": "4 Years (50+ Builds, 200+ Workflows, 40+ Sub-Accounts)",
+      "location": "Lahore, Pakistan (UTC+5)",
+      "work_mode": "100% Worldwide Remote"
+    },
+    "kpis": {
+      "total_discovered": 14,
+      "relevant_qualified": 14,
+      "new_jobs_count": 14,
+      "active_jobs_count": 14,
+      "applied_count": 0,
+      "interviews_count": 0,
+      "offers_count": 0,
+      "saved_count": 0,
+      "top_match_score": 98,
+      "avg_match_score": 89.1,
+      "top_5_count": 5,
+      "priority_1_apply_count": 13,
+      "remote_worldwide_percentage": 100
+    }
+  },
+  "jobs_snapshot_count": 14
+}
