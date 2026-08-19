@@ -1,18 +1,18 @@
 /**
- * Gemini Spark — Jobi-Style GoHighLevel Job Intelligence Dashboard Application
- * Autonomous 3-Hour Refresh, Real-Time Public Discovery, 0-7D Freshness,
- * Smooth Chart.js Visualizations, and Persistent LocalStorage Synchronization.
+ * Gemini Spark — Jobi Full-Page SaaS Dashboard Application Controller
+ * Multi-View Navigation Router, Real-Time GHL Discovery, Vector Icon Binding,
+ * 7-Day Freshness Filter, and LocalStorage State Persistence.
  */
 
 // Application Global State
 const state = {
+  currentView: 'dashboard',   // 'dashboard' | 'profile' | 'feed'
   activeDate: 'latest',
   statusFilter: 'all-active', // 'all-active' | 'New Match' | 'Saved' | 'Applied' | 'Interview Scheduled' | 'Offer' | 'all'
   freshnessFilter: 'all',     // 'all' | 'today' | '1-3-days' | '4-7-days'
   matchFilter: 'all',         // 'all' | '90' | '80' | '70'
   workModeFilter: 'all',      // 'all' | 'remote'
   searchQuery: '',
-  sortMode: 'fresh-score-desc',
   data: null,
   savedStatuses: {},
   activeDrawerJobId: null,
@@ -184,6 +184,7 @@ function updateMetricsAndSidebar() {
 
   // Sidebar Badges
   setElText('cntSidebarActive', activeJobs.length);
+  setElText('cntSidebarJobs', activeJobs.length);
   setElText('cntSidebarNew', newJobs.length);
   setElText('cntSidebarSaved', savedJobs.length);
   setElText('cntSidebarApplied', appliedJobs.length);
@@ -221,6 +222,31 @@ function populateDateDropdown() {
   });
 }
 
+// Switch Active View
+function switchView(viewName, filterTarget = null) {
+  state.currentView = viewName;
+
+  const viewDashboard = document.getElementById('viewDashboard');
+  const viewProfile = document.getElementById('viewProfile');
+
+  if (viewDashboard) viewDashboard.style.display = 'none';
+  if (viewProfile) viewProfile.style.display = 'none';
+
+  if (viewName === 'profile') {
+    if (viewProfile) viewProfile.style.display = 'block';
+  } else {
+    if (viewDashboard) viewDashboard.style.display = 'flex';
+    if (filterTarget) {
+      state.statusFilter = filterTarget;
+      renderJobFeed();
+    }
+  }
+
+  // Scroll main viewport to top
+  const mainVp = document.querySelector('.main-viewport');
+  if (mainVp) mainVp.scrollTop = 0;
+}
+
 // Render Mini Top Matches in Right Panel
 function renderMiniTopMatches() {
   const container = document.getElementById('miniTopMatchesList');
@@ -238,18 +264,18 @@ function renderMiniTopMatches() {
   }
 
   container.innerHTML = top5.map(job => `
-    <div class="mini-job-item" onclick="openJobDrawer('${job.id}')">
-      <div class="mini-job-left">
-        <div class="mini-company-logo" style="background-color: ${job.company_color || '#233d32'};">
+    <div class="mini-row-item" onclick="openJobDrawer('${job.id}')">
+      <div class="mini-row-left">
+        <div class="mini-logo-box" style="background-color: ${job.company_color || '#233d32'};">
           ${job.company_initials || job.company.substring(0, 2).toUpperCase()}
         </div>
-        <div class="mini-job-info">
+        <div class="mini-row-info">
           <h4>${job.title}</h4>
           <p>${job.company} • ${job.location}</p>
         </div>
       </div>
-      <div class="mini-job-right">
-        <span class="mini-score-pill">${job.score}%</span>
+      <div class="mini-row-right">
+        <span class="mini-match-pill">${job.score}%</span>
       </div>
     </div>
   `).join('');
@@ -334,47 +360,47 @@ function renderJobFeed() {
     if (job.posted_days_ago === 0) freshBadgeClass = 'today';
     else if (job.posted_days_ago > 3) freshBadgeClass = 'days47';
 
-    const isNewIndicator = job.is_new ? `<span class="jobi-fresh-tag today" style="margin-right: 4px;">⚡ NEW</span>` : '';
-    const skillsHtml = (job.matched_skills || []).slice(0, 4).map(s => `<span class="jobi-skill-tag">✓ ${s}</span>`).join('');
+    const isNewIndicator = job.is_new ? `<span class="tag-freshness today" style="margin-right: 4px;">⚡ NEW</span>` : '';
+    const skillsHtml = (job.matched_skills || []).slice(0, 4).map(s => `<span class="skill-tag-pill">✓ ${s}</span>`).join('');
 
     return `
-      <article class="jobi-card" onclick="openJobDrawer('${job.id}')">
+      <article class="jobi-card-item" onclick="openJobDrawer('${job.id}')">
         <div>
-          <div class="jobi-card-header">
-            <div class="jobi-company-box">
-              <div class="jobi-avatar" style="background-color: ${job.company_color || '#233d32'};">
+          <div class="jobi-card-top">
+            <div class="card-company-wrap">
+              <div class="card-company-avatar" style="background-color: ${job.company_color || '#233d32'};">
                 ${job.company_initials || job.company.substring(0, 2).toUpperCase()}
               </div>
-              <div class="jobi-company-meta">
+              <div class="card-company-details">
                 <h4>${job.company}</h4>
                 <span>${job.source || 'Direct ATS'}</span>
               </div>
             </div>
-            <div class="jobi-card-badges">
+            <div class="card-top-badges">
               ${isNewIndicator}
-              <span class="jobi-fresh-tag ${freshBadgeClass}">${job.freshness_badge || 'RECENT'}</span>
-              <div class="jobi-score-box">${job.score}%</div>
+              <span class="tag-freshness ${freshBadgeClass}">${job.freshness_badge || 'RECENT'}</span>
+              <div class="badge-match-score">${job.score}%</div>
             </div>
           </div>
 
-          <h3 class="jobi-card-title">${job.title}</h3>
+          <h3 class="card-job-title">${job.title}</h3>
 
-          <div class="jobi-meta-pills">
-            <span class="jobi-pill">📍 ${job.location}</span>
-            <span class="jobi-pill">💼 ${job.work_mode}</span>
-            <span class="jobi-pill">⏱ ${job.experience_req}</span>
-            <span class="jobi-pill">💰 ${job.salary}</span>
+          <div class="card-meta-row">
+            <span class="card-meta-pill">📍 ${job.location}</span>
+            <span class="card-meta-pill">💼 ${job.work_mode}</span>
+            <span class="card-meta-pill">⏱ ${job.experience_req}</span>
+            <span class="card-meta-pill">💰 ${job.salary}</span>
           </div>
 
-          <p class="jobi-card-why">${job.why_matches}</p>
+          <p class="card-why-desc">${job.why_matches}</p>
 
-          <div class="jobi-skill-tags">
+          <div class="card-skills-row">
             ${skillsHtml}
           </div>
         </div>
 
-        <div class="jobi-card-footer" onclick="event.stopPropagation()">
-          <select class="jobi-status-select ${isApplied ? 'applied' : ''}" onchange="setJobStatus('${job.id}', this.value)">
+        <div class="card-bottom-row" onclick="event.stopPropagation()">
+          <select class="card-status-dropdown ${isApplied ? 'applied' : ''}" onchange="setJobStatus('${job.id}', this.value)">
             <option value="New Match" ${job.status === 'New Match' ? 'selected' : ''}>New Match</option>
             <option value="Saved" ${job.status === 'Saved' ? 'selected' : ''}>Saved</option>
             <option value="Applied" ${job.status === 'Applied' ? 'selected' : ''}>Applied</option>
@@ -383,11 +409,11 @@ function renderJobFeed() {
             <option value="Closed" ${job.status === 'Closed' ? 'selected' : ''}>Closed</option>
           </select>
 
-          <div class="jobi-action-btns">
-            <button class="jobi-save-btn ${isSaved ? 'saved' : ''}" onclick="toggleSaveJob('${job.id}', event)">
+          <div class="card-btn-actions">
+            <button class="btn-card-save ${isSaved ? 'saved' : ''}" onclick="toggleSaveJob('${job.id}', event)">
               ${isSaved ? '★ Saved' : '☆ Save'}
             </button>
-            <a href="${job.app_url}" target="_blank" class="jobi-apply-btn">
+            <a href="${job.app_url}" target="_blank" class="btn-card-apply">
               Apply →
             </a>
           </div>
@@ -500,14 +526,14 @@ function openJobDrawer(jobId) {
   // Matched Skills Tags
   const matchedContainer = document.getElementById('drawerMatchedSkills');
   if (matchedContainer) {
-    matchedContainer.innerHTML = (job.matched_skills || []).map(s => `<span class="jobi-skill-tag" style="background: var(--neon-lime-subtle); color: var(--forest-green); border: 1px solid var(--neon-lime-border);">✓ ${s}</span>`).join('');
+    matchedContainer.innerHTML = (job.matched_skills || []).map(s => `<span class="skill-tag-pill" style="background: var(--neon-lime-subtle); color: var(--forest-green); border: 1px solid var(--neon-lime-border);">✓ ${s}</span>`).join('');
   }
 
   // Missing Skills Tags
   const missingContainer = document.getElementById('drawerMissingSkills');
   if (missingContainer) {
     if (job.missing_skills && job.missing_skills[0] && !job.missing_skills[0].includes('None')) {
-      missingContainer.innerHTML = job.missing_skills.map(s => `<span class="jobi-skill-tag" style="background: #fee2e2; color: #dc2626;">⚠ ${s}</span>`).join('');
+      missingContainer.innerHTML = job.missing_skills.map(s => `<span class="skill-tag-pill" style="background: #fee2e2; color: #dc2626;">⚠ ${s}</span>`).join('');
     } else {
       missingContainer.innerHTML = `<span style="font-size: 0.76rem; color: var(--text-muted);">None identified in core scope</span>`;
     }
@@ -516,7 +542,7 @@ function openJobDrawer(jobId) {
   // Advantage Skills Tags
   const advContainer = document.getElementById('drawerAdvSkills');
   if (advContainer) {
-    advContainer.innerHTML = (job.advantage_skills || []).map(s => `<span class="jobi-skill-tag" style="background: var(--forest-green-subtle); color: var(--forest-green);">+ ${s}</span>`).join('');
+    advContainer.innerHTML = (job.advantage_skills || []).map(s => `<span class="skill-tag-pill" style="background: var(--forest-green-subtle); color: var(--forest-green);">+ ${s}</span>`).join('');
   }
 
   // 7-Dimension Score Breakdown Progress Bars
@@ -574,19 +600,18 @@ async function triggerScrapeNewJobs() {
 
   if (btn) {
     btn.classList.add('loading');
-    btn.innerHTML = `<span>⏳</span> Scraping...`;
+    btn.innerHTML = `<span>⏳</span> Scanning...`;
   }
   if (emptyBtn) {
     emptyBtn.innerHTML = `<span>⏳</span> Scanning...`;
   }
   if (statusBadge) {
-    statusBadge.innerHTML = `<span class="status-dot" style="background-color: #f59e0b; box-shadow: 0 0 6px #f59e0b;"></span> UPDATING...`;
+    statusBadge.innerHTML = `<span class="live-dot-pulse" style="background-color: #f59e0b; box-shadow: 0 0 6px #f59e0b;"></span> UPDATING...`;
   }
 
   showToast('Connecting to public ATS feeds...');
 
   try {
-    // Attempt client-side live discovery fallback if hosted statically
     const remotiveUrl = 'https://remotive.com/api/remote-jobs?search=gohighlevel';
     try {
       await fetch(remotiveUrl);
@@ -601,13 +626,13 @@ async function triggerScrapeNewJobs() {
     state.isScraping = false;
     if (btn) {
       btn.classList.remove('loading');
-      btn.innerHTML = `<span>⚡</span> Scrape New Jobs`;
+      btn.innerHTML = `<svg class="svg-icon" style="width: 14px; height: 14px; stroke: #ffffff; fill: none;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> <span>Scrape New Jobs</span>`;
     }
     if (emptyBtn) {
-      emptyBtn.innerHTML = `<span>⚡</span> Scrape New Jobs`;
+      emptyBtn.innerHTML = `<svg class="svg-icon" style="width: 14px; height: 14px; stroke: #ffffff; fill: none;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> <span>Scrape New Jobs</span>`;
     }
     if (statusBadge) {
-      statusBadge.innerHTML = `<span class="status-dot"></span> LIVE 3H REFRESH`;
+      statusBadge.innerHTML = `<span class="live-dot-pulse"></span> LIVE 3H REFRESH`;
     }
   }
 }
@@ -635,32 +660,50 @@ function setupEventListeners() {
   const btnEmptyScrape = document.getElementById('btnEmptyScrape');
   if (btnEmptyScrape) btnEmptyScrape.addEventListener('click', triggerScrapeNewJobs);
 
-  // Sidebar navigation menu
-  document.querySelectorAll('.nav-item-btn').forEach(btn => {
+  // Sidebar navigation menu tabs
+  document.querySelectorAll('.nav-link-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.nav-link-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      state.statusFilter = btn.getAttribute('data-nav-target');
-      renderJobFeed();
+
+      const view = btn.getAttribute('data-view');
+      const filter = btn.getAttribute('data-filter');
+      switchView(view, filter);
+    });
+  });
+
+  // Top nav bar links
+  document.querySelectorAll('.top-nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.top-nav-link').forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+
+      const view = link.getAttribute('data-view');
+      const filter = link.getAttribute('data-filter');
+      switchView(view, filter);
     });
   });
 
   // Top search input
-  const topSearch = document.getElementById('topSearchField');
+  const topSearch = document.getElementById('topSearchInput');
   if (topSearch) {
     topSearch.addEventListener('input', (e) => {
       state.searchQuery = e.target.value;
+      if (state.currentView === 'profile') {
+        switchView('dashboard');
+      }
       renderJobFeed();
     });
   }
 
-  // Filter Pills (Freshness, Match, WorkMode)
-  document.querySelectorAll('.filter-btn-pill').forEach(pill => {
+  // Filter Chips (Freshness, Match, WorkMode)
+  document.querySelectorAll('.filter-chip-btn').forEach(pill => {
     pill.addEventListener('click', () => {
       const type = pill.getAttribute('data-filter-type');
       const val = pill.getAttribute('data-filter');
 
-      document.querySelectorAll(`.filter-btn-pill[data-filter-type="${type}"]`).forEach(p => p.classList.remove('active'));
+      document.querySelectorAll(`.filter-chip-btn[data-filter-type="${type}"]`).forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
 
       if (type === 'freshness') state.freshnessFilter = val;
@@ -672,9 +715,9 @@ function setupEventListeners() {
   });
 
   // Chart time range tabs
-  document.querySelectorAll('.time-pill').forEach(pill => {
+  document.querySelectorAll('.time-tab-btn').forEach(pill => {
     pill.addEventListener('click', () => {
-      document.querySelectorAll('.time-pill').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.time-tab-btn').forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
       const timeRange = pill.getAttribute('data-time-tab');
       renderViewsChart(timeRange);
