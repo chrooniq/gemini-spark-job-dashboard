@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-Gemini Spark — 3-Hour Autonomous GoHighLevel (GHL) Job Refresh Engine
+Gemini Spark — 3-Hour Autonomous GoHighLevel (GHL) Job Refresh & Automation Engine
 Executes every 3 hours (00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 PKT).
-Enforces STRICT GoHighLevel-only filter and 0–14 days freshness rule (excluding >14D).
-Syncs persistent application statuses, excludes applied/processed jobs, and archives snapshots.
+Discovers fresh public GHL jobs (0–7 days max age), enforces strict GHL relevance,
+syncs persistent application statuses, permanently excludes applied/interviewed jobs from the active feed,
+updates latest.json, archives immutable historical snapshots, and recompiles index.html & email_template.html.
 """
 
 import os
@@ -12,13 +13,20 @@ import json
 import datetime
 import subprocess
 
-PROCESSED_STATUSES = ["Applied", "Interview Scheduled", "Interview Completed", "Offer", "Closed"]
-GHL_KEYWORDS = ["gohighlevel", "highlevel", "ghl", "go high level"]
+# Ensure UTF-8 output on Windows
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
-def get_pkt_now():
-    utc_now = datetime.datetime.now(datetime.timezone.utc)
-    pkt_now = utc_now + datetime.timedelta(hours=5)
-    return pkt_now
+# Add scripts directory to path to import job_discovery
+script_dir = os.path.dirname(os.path.abspath(__file__))
+if script_dir not in sys.path:
+    sys.path.insert(0, script_dir)
+
+from job_discovery import discover_ghl_opportunities, PROCESSED_STATUSES, get_pkt_now
 
 def compute_schedule_info(pkt_now):
     schedule_hours = [0, 3, 6, 9, 12, 15, 18, 21]
@@ -50,25 +58,9 @@ def compute_schedule_info(pkt_now):
         "schedule_interval_hours": 3,
         "schedule_times_pkt": ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"],
         "filter_scope": "GOHIGHLEVEL_ONLY",
-        "freshness_max_days": 14
+        "freshness_max_days": 7,
+        "refresh_status": "LIVE"
     }
-
-def is_ghl_opportunity(job):
-    # Strict GHL verification check
-    title = job.get("title", "").lower()
-    desc = job.get("why_matches", "").lower()
-    skills = " ".join(job.get("matched_skills", [])).lower()
-    full_text = f"{title} {desc} {skills}"
-    return any(k in full_text for k in GHL_KEYWORDS)
-
-def calculate_days_old(posted_date_str, current_date):
-    if not posted_date_str:
-        return 2
-    try:
-        posted_dt = datetime.datetime.strptime(posted_date_str, "%Y-%m-%d").date()
-        return (current_date - posted_dt).days
-    except Exception:
-        return 2
 
 def run_job_refresh():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -89,147 +81,172 @@ def run_job_refresh():
             print(f"Warning: Could not read application_status.json: {e}")
             app_statuses = {}
 
-    # 2. Load latest master data
-    if not os.path.exists(latest_file):
-        print(f"Error: {latest_file} does not exist.")
-        return False
-
-    with open(latest_file, "r", encoding="utf-8") as f:
-        master_data = json.load(f)
+    # 2. Load previous latest.json to track previously known jobs & available dates
+    prev_known_keys = set()
+    available_dates = []
+    if os.path.exists(latest_file):
+        try:
+            with open(latest_file, "r", encoding="utf-8") as f:
+                prev_payload = json.load(f)
+                available_dates = prev_payload.get("metadata", {}).get("available_dates", [])
+                for pj in prev_payload.get("jobs", []):
+                    key = pj.get("original_url") or pj.get("app_url") or pj.get("id")
+                    if key:
+                        prev_known_keys.add(key)
+        except Exception as e:
+            print(f"Info: Could not load previous latest.json: {e}")
 
     pkt_now = get_pkt_now()
     sched_info = compute_schedule_info(pkt_now)
-    current_date = pkt_now.date()
-
     date_str = sched_info["search_date"]
     time_slug = sched_info["search_time_slug"]
 
-    all_raw_jobs = master_data.get("jobs", [])
-    filtered_ghl_jobs = []
+    # 3. Discover fresh GHL opportunities (<= 7 days)
+    print(f"[*] Starting GHL Job Discovery cycle for {sched_info['last_updated']}...")
+    discovered_jobs = discover_ghl_opportunities()
 
-    for job in all_raw_jobs:
-        # Strict GHL check
-        if not is_ghl_opportunity(job):
-            continue
+    processed_jobs = []
+    new_jobs_count = 0
 
-        job_url = job.get("original_url") or job.get("app_url") or job.get("id")
-        stored = app_statuses.get(job_url, {})
-        current_status = stored.get("status") or job.get("status") or "New Match"
-        job["status"] = current_status
-        job["status_updated_at"] = stored.get("updated_at") or sched_info["last_updated"]
-
-        # Calculate Freshness (0–14 days)
-        days_old = calculate_days_old(job.get("posted_date"), current_date)
-        job["posted_days_ago"] = days_old
+    for job in discovered_jobs:
+        job_url_key = job.get("original_url") or job.get("app_url") or job.get("id")
         
-        if days_old == 0:
-            job["posted_relative"] = "Posted today"
-            job["freshness_tier"] = "today"
-            job["freshness_badge"] = "TODAY"
-        elif days_old <= 3:
-            job["posted_relative"] = f"Posted {days_old} days ago"
-            job["freshness_tier"] = "1-3-days"
-            job["freshness_badge"] = f"{days_old}D AGO"
-        elif days_old <= 7:
-            job["posted_relative"] = f"Posted {days_old} days ago"
-            job["freshness_tier"] = "4-7-days"
-            job["freshness_badge"] = f"{days_old}D AGO"
-        elif days_old <= 14:
-            job["posted_relative"] = f"Posted {days_old} days ago"
-            job["freshness_tier"] = "8-14-days"
-            job["freshness_badge"] = f"{days_old}D AGO"
-        else:
-            # Exclude 15+ days old from active feed
-            job["is_active"] = False
-            continue
+        # Check persistent status registry
+        stored_entry = app_statuses.get(job_url_key, {})
+        current_status = stored_entry.get("status") or job.get("status") or "New Match"
+        status_updated_at = stored_entry.get("updated_at") or job.get("status_updated_at") or sched_info["last_updated"]
 
-        # Exclude applied / processed from active feed
-        is_act = (current_status not in PROCESSED_STATUSES)
-        job["is_active"] = is_act
+        # Check if job was previously known or is newly discovered
+        is_truly_new = (job_url_key not in prev_known_keys)
+        job["is_new"] = is_truly_new
+        if is_truly_new:
+            new_jobs_count += 1
 
-        app_statuses[job_url] = {
+        job["status"] = current_status
+        job["status_updated_at"] = status_updated_at
+
+        # Critical exclusion rule: Applied/Interviewed/Processed jobs are NEVER active
+        is_active = (current_status not in PROCESSED_STATUSES)
+        job["is_active"] = is_active
+
+        # Update registry with latest metadata
+        app_statuses[job_url_key] = {
             "job_id": job.get("id"),
             "company": job.get("company"),
             "title": job.get("title"),
             "status": current_status,
-            "updated_at": job["status_updated_at"],
-            "notes": stored.get("notes", "")
+            "updated_at": status_updated_at,
+            "notes": stored_entry.get("notes", "")
         }
 
-        filtered_ghl_jobs.append(job)
+        processed_jobs.append(job)
 
-    # Sort strictly by Freshness Tier, then Match Score
-    filtered_ghl_jobs.sort(key=lambda j: (
-        0 if j["posted_days_ago"] <= 3 else (1 if j["posted_days_ago"] <= 7 else 2),
+    # Sort active jobs strictly by Freshness Tier (Today -> 1-3D -> 4-7D), then Match Score descending
+    processed_jobs.sort(key=lambda j: (
+        0 if j["is_active"] else 1,
+        j.get("freshness_priority", 2),
         -j.get("score", 0)
     ))
 
-    for i, j in enumerate(filtered_ghl_jobs, 1):
+    # Re-assign rank among all jobs
+    for i, j in enumerate(processed_jobs, 1):
         j["rank"] = i
 
-    active_jobs = [j for j in filtered_ghl_jobs if j["is_active"]]
-    today_jobs = [j for j in active_jobs if j["posted_days_ago"] == 0]
-    three_day_jobs = [j for j in active_jobs if 1 <= j["posted_days_ago"] <= 3]
-    seven_day_jobs = [j for j in active_jobs if 4 <= j["posted_days_ago"] <= 7]
+    active_jobs = [j for j in processed_jobs if j["is_active"]]
+    today_jobs = [j for j in active_jobs if j.get("posted_days_ago") == 0]
+    three_day_jobs = [j for j in active_jobs if 1 <= j.get("posted_days_ago", 99) <= 3]
+    seven_day_jobs = [j for j in active_jobs if 4 <= j.get("posted_days_ago", 99) <= 7]
 
-    applied_count = len([j for j in filtered_ghl_jobs if j.get("status") == "Applied"])
-    interviews_count = len([j for j in filtered_ghl_jobs if "Interview" in j.get("status", "")])
-    saved_count = len([j for j in filtered_ghl_jobs if j.get("status") == "Saved"])
+    applied_count = len([j for j in processed_jobs if j.get("status") == "Applied"])
+    interviews_count = len([j for j in processed_jobs if "Interview" in j.get("status", "")])
+    saved_count = len([j for j in processed_jobs if j.get("status") == "Saved"])
+    offers_count = len([j for j in processed_jobs if j.get("status") == "Offer"])
+
     top_score = active_jobs[0]["score"] if active_jobs else 0
     avg_score = round(sum(j["score"] for j in active_jobs) / len(active_jobs), 1) if active_jobs else 0
 
+    # Build available dates list
+    history_dates = [f.replace(".json", "") for f in os.listdir(history_dir) if f.endswith(".json")]
+    all_dates = sorted(list(set(history_dates + available_dates + [date_str])), reverse=True)
+
     updated_payload = {
         "metadata": {
-            **master_data.get("metadata", {}),
             **sched_info,
+            "available_dates": all_dates,
+            "candidate": {
+                "name": "Sohaib Mahmood",
+                "title": "GoHighLevel Developer | CRM & Marketing Automation | Funnel & Website Builder",
+                "experience": "4 Years (50+ Builds, 200+ Workflows, 40+ Sub-Accounts)",
+                "location": "Lahore, Pakistan (UTC+5)",
+                "work_mode": "100% Worldwide Remote",
+                "portfolio_url": "https://sohaibmahmood.vibepreview.com/",
+                "intro_video_url": "https://drive.google.com/file/d/1TH4CMzXFOfup2liGESZmmA7QFM8GcfqP/view?usp=sharing",
+                "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
+            },
             "kpis": {
-                "total_discovered": len(filtered_ghl_jobs),
-                "relevant_qualified": len(active_jobs),
-                "new_jobs_count": len(active_jobs),
+                "total_discovered": len(processed_jobs),
+                "new_jobs_count": new_jobs_count,
                 "active_jobs_count": len(active_jobs),
+                "fresh_jobs_count": len(active_jobs),
                 "today_count": len(today_jobs),
                 "three_days_count": len(three_day_jobs),
                 "seven_days_count": len(seven_day_jobs),
                 "applied_count": applied_count,
                 "interviews_count": interviews_count,
-                "offers_count": 0,
+                "offers_count": offers_count,
                 "saved_count": saved_count,
                 "top_match_score": top_score,
                 "avg_match_score": avg_score,
                 "top_5_count": min(5, len(active_jobs)),
-                "priority_1_apply_count": len(active_jobs),
+                "priority_1_apply_count": len([j for j in active_jobs if "Priority 1" in j.get("priority", "")]),
+                "priority_2_consider_count": len([j for j in active_jobs if "Priority 2" in j.get("priority", "")]),
                 "remote_worldwide_percentage": 100
+            },
+            "reports": {
+                "excel_url": "https://drive.google.com/file/d/12mjATUvsDO6KQS20w_1MOAevmG41T0vV/view?usp=drivesdk",
+                "drive_folder_url": "https://drive.google.com/drive/folders/16V6BN5Dx6RytoCkpnpMvDvn5GshxEO_p",
+                "dashboard_drive_url": "https://drive.google.com/file/d/1SRe5umuG0DnI-mYpshNjV8Rn5REBeDoA/view?usp=drivesdk"
             }
         },
-        "jobs": filtered_ghl_jobs
+        "jobs": processed_jobs
     }
 
-    # Save application_status.json
+    # 4. Save application_status.json
     with open(app_status_file, "w", encoding="utf-8") as f:
         json.dump(app_statuses, f, indent=2)
+    print(f"✓ Synchronized status registry ({len(app_statuses)} total tracked records)")
 
-    # Save latest.json
+    # 5. Save latest.json
     with open(latest_file, "w", encoding="utf-8") as f:
         json.dump(updated_payload, f, indent=2)
+    print(f"✓ Saved active dataset to {latest_file}")
 
-    # Save timestamp snapshot in data/history/YYYY-MM-DD/HH-MM.json
+    # 6. Save timestamp sub-interval snapshot (data/history/YYYY-MM-DD/HH-MM.json)
     date_history_dir = os.path.join(history_dir, date_str)
     os.makedirs(date_history_dir, exist_ok=True)
     time_snapshot_file = os.path.join(date_history_dir, f"{time_slug}.json")
     with open(time_snapshot_file, "w", encoding="utf-8") as f:
         json.dump(updated_payload, f, indent=2)
 
-    # Save daily snapshot
+    # 7. Save immutable daily snapshot (data/history/YYYY-MM-DD.json)
     daily_snapshot_file = os.path.join(history_dir, f"{date_str}.json")
     with open(daily_snapshot_file, "w", encoding="utf-8") as f:
         json.dump(updated_payload, f, indent=2)
+    print(f"✓ Archived snapshot to {daily_snapshot_file}")
 
-    # Rebuild index.html
+    # 8. Recompile index.html with embedded fallback store
     build_script = os.path.join(base_dir, "build_index.py")
     if os.path.exists(build_script):
         subprocess.run([sys.executable, build_script], check=True)
+        print("✓ Recompiled index.html with latest dataset")
 
-    print(f"✓ GHL 3-Hour Refresh complete: {len(active_jobs)} active fresh GHL jobs (0-14D).")
+    # 9. Recompile email_template.html
+    email_script = os.path.join(base_dir, "scripts", "generate_email_template.py")
+    if os.path.exists(email_script):
+        subprocess.run([sys.executable, email_script], check=True)
+        print("✓ Recompiled email_template.html")
+
+    print(f"\n✨ GHL 3-Hour Job Refresh complete: {len(active_jobs)} active fresh GHL jobs (0–7 days old).")
     return True
 
 if __name__ == "__main__":

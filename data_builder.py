@@ -1,503 +1,105 @@
+#!/usr/bin/env python3
+"""
+Gemini Spark — Data Builder Utility
+Generates and normalizes GoHighLevel candidate dataset fixtures for local testing and CI.
+Uses portable relative paths.
+"""
+
 import os
+import sys
 import json
-from datetime import datetime
+import datetime
 
-DATE_STR = "2026-08-19"
+# Ensure UTF-8 output on Windows
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
-latest_data = {
-    "metadata": {
-        "search_date": DATE_STR,
-        "candidate": {
-            "name": "Sohaib Mahmood",
-            "title": "GoHighLevel Developer | CRM & Marketing Automation | Funnel & Website Builder",
-            "experience": "4 Years (50+ Builds, 200+ Workflows, 40+ Sub-Accounts)",
-            "location": "Lahore, Pakistan (UTC+5)",
-            "work_mode": "100% Worldwide Remote",
-            "portfolio_url": "https://sohaibmahmood.vibepreview.com/",
-            "intro_video_url": "https://drive.google.com/file/d/1TH4CMzXFOfup2liGESZmmA7QFM8GcfqP/view?usp=sharing",
-            "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+base_dir = os.path.dirname(script_dir) if "scripts" in script_dir else script_dir
+
+if os.path.join(base_dir, "scripts") not in sys.path:
+    sys.path.insert(0, os.path.join(base_dir, "scripts"))
+
+from job_discovery import discover_ghl_opportunities, get_pkt_now
+
+def build_data():
+    pkt_now = get_pkt_now()
+    date_str = pkt_now.strftime("%Y-%m-%d")
+    
+    data_dir = os.path.join(base_dir, "data")
+    history_dir = os.path.join(data_dir, "history")
+    os.makedirs(history_dir, exist_ok=True)
+
+    jobs = discover_ghl_opportunities()
+    active_jobs = [j for j in jobs if j.get("is_active", True)]
+    today_jobs = [j for j in active_jobs if j.get("posted_days_ago") == 0]
+    three_day_jobs = [j for j in active_jobs if 1 <= j.get("posted_days_ago", 99) <= 3]
+    seven_day_jobs = [j for j in active_jobs if 4 <= j.get("posted_days_ago", 99) <= 7]
+
+    payload = {
+        "metadata": {
+            "search_date": date_str,
+            "search_time": pkt_now.strftime("%H:%M PKT"),
+            "search_time_slug": pkt_now.strftime("%H-%M"),
+            "last_updated": pkt_now.strftime("%d %b %Y, %I:%M %p PKT"),
+            "next_update": (pkt_now + datetime.timedelta(hours=3)).strftime("%d %b %Y, %I:%M %p PKT"),
+            "next_update_iso": (pkt_now + datetime.timedelta(hours=3)).isoformat(),
+            "schedule_interval_hours": 3,
+            "schedule_times_pkt": ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"],
+            "filter_scope": "GOHIGHLEVEL_ONLY",
+            "freshness_max_days": 7,
+            "refresh_status": "LIVE",
+            "candidate": {
+                "name": "Sohaib Mahmood",
+                "title": "GoHighLevel Developer | CRM & Marketing Automation | Funnel & Website Builder",
+                "experience": "4 Years (50+ Builds, 200+ Workflows, 40+ Sub-Accounts)",
+                "location": "Lahore, Pakistan (UTC+5)",
+                "work_mode": "100% Worldwide Remote",
+                "portfolio_url": "https://sohaibmahmood.vibepreview.com/",
+                "intro_video_url": "https://drive.google.com/file/d/1TH4CMzXFOfup2liGESZmmA7QFM8GcfqP/view?usp=sharing",
+                "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
+            },
+            "kpis": {
+                "total_discovered": len(jobs),
+                "new_jobs_count": len(active_jobs),
+                "active_jobs_count": len(active_jobs),
+                "fresh_jobs_count": len(active_jobs),
+                "today_count": len(today_jobs),
+                "three_days_count": len(three_day_jobs),
+                "seven_days_count": len(seven_day_jobs),
+                "applied_count": 0,
+                "interviews_count": 0,
+                "offers_count": 0,
+                "saved_count": 0,
+                "top_match_score": active_jobs[0]["score"] if active_jobs else 0,
+                "avg_match_score": round(sum(j["score"] for j in active_jobs) / len(active_jobs), 1) if active_jobs else 0,
+                "top_5_count": min(5, len(active_jobs)),
+                "priority_1_apply_count": len([j for j in active_jobs if "Priority 1" in j.get("priority", "")]),
+                "remote_worldwide_percentage": 100
+            },
+            "reports": {
+                "excel_url": "https://drive.google.com/file/d/12mjATUvsDO6KQS20w_1MOAevmG41T0vV/view?usp=drivesdk",
+                "drive_folder_url": "https://drive.google.com/drive/folders/16V6BN5Dx6RytoCkpnpMvDvn5GshxEO_p",
+                "dashboard_drive_url": "https://drive.google.com/file/d/1SRe5umuG0DnI-mYpshNjV8Rn5REBeDoA/view?usp=drivesdk"
+            },
+            "available_dates": [date_str]
         },
-        "kpis": {
-            "total_discovered": 14,
-            "relevant_qualified": 14,
-            "top_match_score": 98,
-            "avg_match_score": 89.1,
-            "top_5_count": 5,
-            "priority_1_apply_count": 13,
-            "priority_2_consider_count": 1,
-            "remote_worldwide_percentage": 100
-        },
-        "reports": {
-            "excel_url": "https://drive.google.com/file/d/12mjATUvsDO6KQS20w_1MOAevmG41T0vV/view?usp=drivesdk",
-            "drive_folder_url": "https://drive.google.com/drive/folders/16V6BN5Dx6RytoCkpnpMvDvn5GshxEO_p",
-            "dashboard_drive_url": "https://drive.google.com/file/d/1SRe5umuG0DnI-mYpshNjV8Rn5REBeDoA/view?usp=drivesdk"
-        },
-        "available_dates": ["2026-08-19"]
-    },
-    "jobs": [
-        {
-            "id": "job-1",
-            "rank": 1,
-            "score": 98,
-            "category": "Excellent Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "Automation Workflow Specialist (GHL, Zapier, n8n, AI)",
-            "company": "HumanIntelligence",
-            "role_category": "automation",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Open Globally (Pakistan Eligible)",
-            "work_mode": "100% Remote",
-            "experience_req": "3–5 years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "Not disclosed",
-            "employment_type": "Full-Time / Retainer",
-            "posted_date": "August 2026",
-            "matched_skills": ["GoHighLevel", "n8n", "OpenAI API", "Webhook Handlers", "REST APIs", "Zapier", "Opportunity Pipelines"],
-            "missing_skills": ["None identified in core scope"],
-            "advantage_skills": ["React/Node.js custom webhook endpoints", "Self-hosted n8n management"],
-            "why_matches": "Direct alignment across GoHighLevel CRM architecture, n8n backend workflow design, webhook data syncing, and OpenAI API integration.",
-            "concerns": "Fast-paced outcomes-driven culture with high volume of multi-brand integrations.",
-            "source": "Workable Direct ATS",
-            "app_url": "https://apply.workable.com/humanintelligence/j/D264BCF75C",
-            "original_url": "https://apply.workable.com/humanintelligence/j/D264BCF75C"
-        },
-        {
-            "id": "job-2",
-            "rank": 2,
-            "score": 96,
-            "category": "Excellent Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "Go High Level (CRM Platform) Officer",
-            "company": "HumanIntelligence",
-            "role_category": "ghl",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Open Globally (Pakistan Eligible)",
-            "work_mode": "100% Remote",
-            "experience_req": "3–5+ years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "Not disclosed",
-            "employment_type": "Full-Time Contractor",
-            "posted_date": "August 2026",
-            "matched_skills": ["GHL Sub-accounts", "Snapshots", "SaaS Mode", "Custom Values", "Pipelines", "A2P 10DLC", "Twilio", "Webhooks", "REST APIs"],
-            "missing_skills": ["WhatsApp native API integration"],
-            "advantage_skills": ["Team mentoring (21,000+ students)", "Technical SOP & handover documentation"],
-            "why_matches": "Requires taking complete ownership of enterprise GHL architecture: sub-accounts, snapshots, SaaS mode, AI conversation flows, and API/webhook connectivity.",
-            "concerns": "Governance and multi-tier affiliate tracking across multiple brand verticals.",
-            "source": "Workable Direct ATS",
-            "app_url": "https://apply.workable.com/humanintelligence/j/C762E31B96",
-            "original_url": "https://apply.workable.com/humanintelligence/j/C762E31B96"
-        },
-        {
-            "id": "job-3",
-            "rank": 3,
-            "score": 96,
-            "category": "Excellent Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "GoHighLevel Automation Specialist | CRM, Funnels & AI Systems",
-            "company": "HumanIntelligence",
-            "role_category": "ghl",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Open Globally (Pakistan Eligible)",
-            "work_mode": "100% Remote",
-            "experience_req": "3+ years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "$1,000 – $1,500/mo base + performance incentives",
-            "employment_type": "Full-Time Contractor",
-            "posted_date": "August 09, 2026",
-            "matched_skills": ["GHL Funnel Builder", "Landing Pages", "Lifecycle Sequences", "Speed-to-Lead", "Opportunity Pipelines", "AI Prompting"],
-            "missing_skills": ["None for listed technical scope"],
-            "advantage_skills": ["React.js frontend development", "Live portfolio (sohaibmahmood.vibepreview.com)"],
-            "why_matches": "Combines GHL CRM configuration, high-converting funnel design, lifecycle email/SMS automations, and AI workflow testing.",
-            "concerns": "Performance-linked incentives require consistent speed and conversion tracking.",
-            "source": "Workable Direct ATS",
-            "app_url": "https://apply.workable.com/humanintelligence/j/E08961ABAC",
-            "original_url": "https://apply.workable.com/humanintelligence/j/E08961ABAC"
-        },
-        {
-            "id": "job-4",
-            "rank": 4,
-            "score": 92,
-            "category": "Excellent Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "Remote GoHighLevel & n8n Automation Engineer",
-            "company": "The Uncommon Business",
-            "role_category": "automation",
-            "location": "Northern / Remote",
-            "remote_eligibility": "Open Globally (Pakistan Eligible)",
-            "work_mode": "100% Remote",
-            "experience_req": "3+ years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "Not disclosed",
-            "employment_type": "Full-Time Remote",
-            "posted_date": "August 01, 2026",
-            "matched_skills": ["GoHighLevel", "n8n", "Custom Webhooks", "REST APIs", "Error Handling", "CRM Data Hygiene"],
-            "missing_skills": ["Not specified in primary listing"],
-            "advantage_skills": ["JavaScript/Node.js custom scripts inside n8n nodes"],
-            "why_matches": "High technical synergy bridging GoHighLevel CRM frontends with complex backend n8n data pipelines and custom API connectors.",
-            "concerns": "Compensation details are not disclosed in the listing.",
-            "source": "JobLeads",
-            "app_url": "https://www.jobleads.com/us/job/remote-gohighlevel-n8n-automation-engineer--northern--e4629b3d752e57a75aed4bdc8821f0205",
-            "original_url": "https://www.jobleads.com/us/job/remote-gohighlevel-n8n-automation-engineer--northern--e4629b3d752e57a75aed4bdc8821f0205"
-        },
-        {
-            "id": "job-5",
-            "rank": 5,
-            "score": 91,
-            "category": "Excellent Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "Sr. GoHighLevel Automator (N8N, API, etc.)",
-            "company": "MyMarketingPass",
-            "role_category": "ghl",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Open Globally (Anywhere)",
-            "work_mode": "100% Remote",
-            "experience_req": "Senior (3–5 yrs)",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "$7 – $15 USD / hour ($1,200 – $2,600 / month)",
-            "employment_type": "Full-Time Remote",
-            "posted_date": "November 2025 / Active",
-            "matched_skills": ["GoHighLevel", "n8n Workflow Automation", "API Integrations", "Webhooks", "CRM Sync"],
-            "missing_skills": ["None identified"],
-            "advantage_skills": ["React dashboard development", "Agency multi-account management"],
-            "why_matches": "Senior GHL specialist capable of building multi-account workflows, connecting external tools via n8n, and handling custom API integrations.",
-            "concerns": "Broad hourly compensation range based on task complexity.",
-            "source": "Remote.com",
-            "app_url": "https://remote.com/jobs/mymarketingpass-c1ymnbf2/sr-gohighlevel-automator-n8n-api-etc-j1fr1v9w",
-            "original_url": "https://remote.com/jobs/mymarketingpass-c1ymnbf2/sr-gohighlevel-automator-n8n-api-etc-j1fr1v9w"
-        },
-        {
-            "id": "job-6",
-            "rank": 6,
-            "score": 90,
-            "category": "Excellent Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "GoHighLevel Expert / Funnel Builder",
-            "company": "Fasttrack Business Holdings",
-            "role_category": "funnels",
-            "location": "Queensland / Remote",
-            "remote_eligibility": "Open Globally",
-            "work_mode": "100% Remote",
-            "experience_req": "2+ years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "$1,300 – $1,550 AUD / month",
-            "employment_type": "Full-Time / Project",
-            "posted_date": "August 2026",
-            "matched_skills": ["GoHighLevel", "Funnel Building", "Landing Pages", "Lead Capture", "SMS/Email Automation", "WordPress Integration"],
-            "missing_skills": ["Airtable (Bonus)", "Meta Ads Management (Bonus)"],
-            "advantage_skills": ["50+ completed GHL funnels and web portfolio"],
-            "why_matches": "Focuses on designing high-converting GoHighLevel funnels, landing pages, and lead nurture sequences for agency clients.",
-            "concerns": "Airtable automation listed as bonus qualification.",
-            "source": "Employment Hero",
-            "app_url": "https://employmenthero.com/jobs/position/fasttrack-business-holdings-pte-ltd-gohighlevel-expert-funnel-builder-remote-adj7x/",
-            "original_url": "https://employmenthero.com/jobs/position/fasttrack-business-holdings-pte-ltd-gohighlevel-expert-funnel-builder-remote-adj7x/"
-        },
-        {
-            "id": "job-7",
-            "rank": 7,
-            "score": 89,
-            "category": "Strong Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "Go-High-Level Marketing Automation Specialist",
-            "company": "Remotive Partner",
-            "role_category": "ghl",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Open Globally",
-            "work_mode": "100% Remote",
-            "experience_req": "3+ years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "Not disclosed",
-            "employment_type": "Full-Time Remote",
-            "posted_date": "August 2026",
-            "matched_skills": ["GoHighLevel Platform Management", "Multi-account Funnels", "SMS/Email Automation", "Lifecycle Optimization"],
-            "missing_skills": ["Advanced BI dashboard tools"],
-            "advantage_skills": ["Custom CSS and responsive mobile design"],
-            "why_matches": "Agency-focused GHL lead role mapping directly to multi-account client delivery background.",
-            "concerns": "Undisclosed salary range.",
-            "source": "Remotive",
-            "app_url": "https://remotive.com/remote/jobs/marketing/go-high-level-marketing-automation-specialist-5093156",
-            "original_url": "https://remotive.com/remote/jobs/marketing/go-high-level-marketing-automation-specialist-5093156"
-        },
-        {
-            "id": "job-8",
-            "rank": 8,
-            "score": 88,
-            "category": "Strong Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "AI & Automation Specialist (GHL)",
-            "company": "Huzzle.com",
-            "role_category": "ai",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Open Globally",
-            "work_mode": "100% Remote",
-            "experience_req": "3+ years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "Not disclosed",
-            "employment_type": "Full-Time Remote",
-            "posted_date": "August 2026",
-            "matched_skills": ["GoHighLevel", "LLM Integrations (OpenAI/Anthropic)", "AI Lead Nurture", "API Endpoints", "Conversation AI"],
-            "missing_skills": ["LangChain (Bonus)"],
-            "advantage_skills": ["n8n pipeline orchestration", "Custom webhook development"],
-            "why_matches": "Direct match for building and automating AI-powered client workflows inside GHL.",
-            "concerns": "High focus on continuous AI prompt iteration.",
-            "source": "Jobgether",
-            "app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
-            "original_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl"
-        },
-        {
-            "id": "job-9",
-            "rank": 9,
-            "score": 88,
-            "category": "Strong Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "Marketing Automation Specialist - GHL",
-            "company": "Huzzle",
-            "role_category": "ghl",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Open Globally",
-            "work_mode": "100% Remote",
-            "experience_req": "Senior (3–5 yrs)",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "Not disclosed",
-            "employment_type": "Full-Time Remote",
-            "posted_date": "August 17, 2026",
-            "matched_skills": ["Senior GoHighLevel Automation", "AI Integrations", "Nurture Sequences", "CRM Data Hygiene", "Pipelines"],
-            "missing_skills": ["None for core scope"],
-            "advantage_skills": ["MERN full stack capabilities for external data tools"],
-            "why_matches": "Senior GHL and AI workflow development matching multi-account and SaaS configuration experience.",
-            "concerns": "Fast response expectations across distributed client accounts.",
-            "source": "Workable Direct ATS",
-            "app_url": "https://jobs.workable.com/view/h7PDQ3QSkauCNvZwoss4P1/remote-marketing-automation-specialist---ghl-in-colombia-at-huzzle",
-            "original_url": "https://jobs.workable.com/view/h7PDQ3QSkauCNvZwoss4P1/remote-marketing-automation-specialist---ghl-in-colombia-at-huzzle"
-        },
-        {
-            "id": "job-10",
-            "rank": 10,
-            "score": 87,
-            "category": "Strong Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "Web Developer & GHL Build Specialist",
-            "company": "Level Up (HireGummy)",
-            "role_category": "web",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Pakistan / AEST Compatible",
-            "work_mode": "100% Remote",
-            "experience_req": "2–4 years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "Not disclosed",
-            "employment_type": "Contract to Full-Time",
-            "posted_date": "August 2026",
-            "matched_skills": ["GoHighLevel", "Web Development", "Funnel Optimization", "Tracking Scripts", "CRM Workflows", "HTML/CSS"],
-            "missing_skills": ["Paid Ads Tracking (Bonus)"],
-            "advantage_skills": ["React.js & Tailwind CSS for custom frontend extensions"],
-            "why_matches": "Direct overlap of GHL, custom coding, and funnel implementation with explicit Pakistan timezone feasibility.",
-            "concerns": "Initial contract starts at 20 hrs/week before transitioning to full-time.",
-            "source": "BeBee / HireGummy",
-            "app_url": "https://bebee.com/pk/jobs/web-developer-and-ghl-build-specialist-hiregummy-islamabad--theirstack-740076269",
-            "original_url": "https://bebee.com/pk/jobs/web-developer-and-ghl-build-specialist-hiregummy-islamabad--theirstack-740076269"
-        },
-        {
-            "id": "job-11",
-            "rank": 11,
-            "score": 86,
-            "category": "Strong Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "N8N AI Automation Developer (Remote)",
-            "company": "n8n Community Enterprise",
-            "role_category": "automation",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Open Globally",
-            "work_mode": "100% Remote",
-            "experience_req": "2–4 years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "Market Rate",
-            "employment_type": "Contract to Long-Term",
-            "posted_date": "August 17, 2026",
-            "matched_skills": ["n8n Workflow Design", "LLM APIs (OpenAI/Claude)", "CRM Webhook Integration", "Data Transformation"],
-            "missing_skills": ["Python / FastAPI backend"],
-            "advantage_skills": ["GoHighLevel CRM expertise for multi-node sync"],
-            "why_matches": "Core n8n + AI automation engineering role automating lead pipelines and external CRM systems.",
-            "concerns": "Requires deep familiarity with custom JSON transformations in n8n.",
-            "source": "n8n Community",
-            "app_url": "https://community.n8n.io/t/hiring-n8n-ai-automation-developer-remote/298577",
-            "original_url": "https://community.n8n.io/t/hiring-n8n-ai-automation-developer-remote/298577"
-        },
-        {
-            "id": "job-12",
-            "rank": 12,
-            "score": 84,
-            "category": "Strong Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "n8n Workflow Developer, Self‑Hosted Automation",
-            "company": "OpenTrain AI",
-            "role_category": "automation",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Open Globally",
-            "work_mode": "100% Remote",
-            "experience_req": "3+ years",
-            "candidate_exp": "4 years",
-            "experience_gap": "Minor Gap (Docker)",
-            "salary": "Not disclosed",
-            "employment_type": "Contract / Full-Time",
-            "posted_date": "July 28, 2026",
-            "matched_skills": ["Self-hosted n8n", "REST APIs", "Webhook Handlers", "Custom Logic & Automation"],
-            "missing_skills": ["Docker containerization advanced scaling"],
-            "advantage_skills": ["Node.js and Express backend capabilities"],
-            "why_matches": "Aligns directly with self-hosted n8n workflows and API data pipelines.",
-            "concerns": "Heavy focus on self-hosted infrastructure troubleshooting.",
-            "source": "OpenTrain AI",
-            "app_url": "https://www.opentrain.ai/jobs/n8n-workflow-developer-self-hosted-ai-automation--cmnbnmiqh001q04jxun7qi050/",
-            "original_url": "https://www.opentrain.ai/jobs/n8n-workflow-developer-self-hosted-ai-automation--cmnbnmiqh001q04jxun7qi050/"
-        },
-        {
-            "id": "job-13",
-            "rank": 13,
-            "score": 83,
-            "category": "Strong Match",
-            "priority": "Priority 1 — Apply",
-            "priority_class": "prio-apply",
-            "priority_icon": "🔥",
-            "title": "Automation & AI Developer",
-            "company": "Seamless Assist",
-            "role_category": "ai",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "Open Globally",
-            "work_mode": "100% Remote",
-            "experience_req": "2–4 years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "Not disclosed",
-            "employment_type": "Full-Time Remote",
-            "posted_date": "August 18, 2026",
-            "matched_skills": ["Workflow Automation", "GoHighLevel", "Zapier/Make", "AI Agent Connectors", "Webhooks"],
-            "missing_skills": ["Custom Python agents"],
-            "advantage_skills": ["Sub-account snapshot architecture and funnel creation"],
-            "why_matches": "Multi-platform automation and AI tooling role with GHL and Zapier/Make crossover.",
-            "concerns": "Broad stack covering multiple low-code platforms.",
-            "source": "Himalayas",
-            "app_url": "https://himalayas.app/companies/seamless-assist/jobs/automation-ai-developer-7023027584",
-            "original_url": "https://himalayas.app/companies/seamless-assist/jobs/automation-ai-developer-7023027584"
-        },
-        {
-            "id": "job-14",
-            "rank": 14,
-            "score": 79,
-            "category": "Good Match",
-            "priority": "Priority 2 — Consider",
-            "priority_class": "prio-consider",
-            "priority_icon": "🟢",
-            "title": "GoHighLevel Marketing Operations Specialist",
-            "company": "Pavago",
-            "role_category": "ghl",
-            "location": "Worldwide Remote",
-            "remote_eligibility": "PST Overlap Required",
-            "work_mode": "100% Remote",
-            "experience_req": "2+ years",
-            "candidate_exp": "4 years",
-            "experience_gap": "No Gap",
-            "salary": "Not disclosed",
-            "employment_type": "Full-Time Remote",
-            "posted_date": "August 17, 2026",
-            "matched_skills": ["GoHighLevel CRM", "Pipeline Hygiene", "Email Automation", "Content & Membership Operations"],
-            "missing_skills": ["Social media content production / Canva"],
-            "advantage_skills": ["Speed-to-lead workflow engineering"],
-            "why_matches": "Solid GHL operations role; slightly more administrative/operations-focused than technical engineering.",
-            "concerns": "Requires PST working hours alignment and content creation support.",
-            "source": "Workable Direct ATS",
-            "app_url": "https://apply.workable.com/pavago/j/05E08A61F4",
-            "original_url": "https://apply.workable.com/pavago/j/05E08A61F4"
-        }
-    ],
-    "market_insights": {
-        "most_in_demand_skills": [
-            {"skill": "GoHighLevel CRM Architecture", "count": 10, "frequency_pct": "71%"},
-            {"skill": "n8n Workflow Automation", "count": 7, "frequency_pct": "50%"},
-            {"skill": "REST APIs & Webhooks", "count": 9, "frequency_pct": "64%"},
-            {"skill": "OpenAI / Anthropic APIs", "count": 6, "frequency_pct": "43%"},
-            {"skill": "Sales Funnels & Landing Pages", "count": 6, "frequency_pct": "43%"},
-            {"skill": "Speed-to-Lead & Deliverability", "count": 8, "frequency_pct": "57%"}
-        ],
-        "skill_gap_summary": {
-            "skill": "WhatsApp Business Cloud API",
-            "market_demand": "High demand for European, Asian, and Latin American multi-channel marketing campaigns paired with GHL.",
-            "resume_evidence": "Not explicitly listed (resume covers Twilio, LC Phone, and SMS/Email deliverability)."
-        },
-        "resume_recommendations": [
-            {
-                "section": "Core Skills / Projects",
-                "action": "Highlight omni-channel messaging & webhook retry mechanisms",
-                "reason": "Increases ATS match for complex enterprise automation and international GHL client builds."
-            }
-        ],
-        "career_quadrants": {
-            "keep_doing": [
-                "GoHighLevel SaaS Mode, Snapshots & Sub-accounts",
-                "n8n backend workflow engineering",
-                "Speed-to-lead automation (<1 minute response time)",
-                "50+ websites & sales funnels delivery"
-            ],
-            "improve": [
-                "Explicitly detail webhook error handling & automated retries",
-                "Frame custom React dashboard as executive reporting solution",
-                "Highlight GHL multi-tier affiliate & commission tracking"
-            ],
-            "learn": [
-                "WhatsApp Business Cloud API integration",
-                "Docker containerization for self-hosted n8n scaling",
-                "Basic Python middleware for custom API nodes"
-            ],
-            "watch": [
-                "LangGraph / AI Agent tool orchestration",
-                "Model Context Protocol (MCP) server connectors",
-                "OpenAI Assistants API native CRM actions"
-            ]
-        }
+        "jobs": jobs
     }
-}
 
-os.makedirs("/working_dir/c_f852dfa8ed7d66d6/gemini-spark-job-dashboard/data/history", exist_ok=True)
-os.makedirs("/working_dir/c_f852dfa8ed7d66d6/gemini-spark-job-dashboard/assets/css", exist_ok=True)
-os.makedirs("/working_dir/c_f852dfa8ed7d66d6/gemini-spark-job-dashboard/assets/js", exist_ok=True)
-os.makedirs("/working_dir/c_f852dfa8ed7d66d6/gemini-spark-job-dashboard/scripts", exist_ok=True)
+    latest_file = os.path.join(data_dir, "latest.json")
+    with open(latest_file, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
 
-with open("/working_dir/c_f852dfa8ed7d66d6/gemini-spark-job-dashboard/data/latest.json", "w", encoding="utf-8") as f:
-    json.dump(latest_data, f, indent=2)
+    history_file = os.path.join(history_dir, f"{date_str}.json")
+    with open(history_file, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
 
-with open(f"/working_dir/c_f852dfa8ed7d66d6/gemini-spark-job-dashboard/data/history/{DATE_STR}.json", "w", encoding="utf-8") as f:
-    json.dump(latest_data, f, indent=2)
+    print(f"✓ latest.json and history/{date_str}.json written successfully.")
 
-print("latest.json and history JSON successfully written.")
+if __name__ == "__main__":
+    build_data()

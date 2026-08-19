@@ -1,4 +1,4 @@
-name: 3-Hour Autonomous Job Intelligence Refresh
+name: 3-Hour Autonomous GoHighLevel Job Refresh
 
 on:
   schedule:
@@ -33,9 +33,9 @@ jobs:
       - name: Install Python Dependencies
         run: |
           pip install --upgrade pip
-          pip install openpyxl
+          pip install requests openpyxl
 
-      - name: Execute 3-Hour Job Refresh & Application Tracking Engine
+      - name: Execute 3-Hour GHL Job Discovery & Refresh Engine
         run: |
           python scripts/generate_job_refresh.py
 
@@ -47,6 +47,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No new job or status changes detected in this cycle."
           else
-            git commit -m "chore: refresh job dataset $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git commit -m "chore: refresh GHL job dataset $(date -u '+%Y-%m-%d %H:%M UTC')"
             git push origin main
           fi
