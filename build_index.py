@@ -1,17 +1,8 @@
 #!/usr/bin/env python3
 """
-Gemini Spark — Multi-Page SaaS Career Intelligence Portal Builder
-Compiles the complete Phase 3 web application with 7 dedicated pages:
-1. Dashboard (/ or #dashboard)
-2. All Jobs (/jobs or #jobs)
-3. New Matches (/matches or #matches)
-4. Saved Jobs (/saved or #saved)
-5. Applied Jobs / Application Tracker (/applied or #applied)
-6. My Resume (/resume or #resume)
-7. Portfolio (/portfolio or #portfolio)
-
-Includes vector SVG icons, embedded CSS for instant 100% styling on GitHub Pages,
-Chart.js visualization, Compare Jobs modal, and slide-over AI detail drawer.
+Gemini Spark — Cleaned Streamlined Multi-Page SaaS Career Intelligence Portal Builder
+5 Core Dedicated Pages (Dashboard, All Jobs, New Matches, Saved Jobs, Applied Jobs),
+Animated Sidebar, Pixel-Style Tech Badges, Clean Topbar, and Embedded Stylesheet.
 """
 
 import os
@@ -66,7 +57,7 @@ index_html = f"""<!DOCTYPE html>
   <!-- Fullscreen App Shell -->
   <div class="app-shell">
 
-    <!-- Global Left Sidebar -->
+    <!-- Global Left Sidebar (With Smooth Animations) -->
     <aside class="sidebar" aria-label="Portal Navigation">
       <div>
         <!-- Brand Logo -->
@@ -85,7 +76,7 @@ index_html = f"""<!DOCTYPE html>
           <div class="sidebar-user-role">GoHighLevel Developer</div>
         </div>
 
-        <!-- Primary Navigation Menu (Phase 3 Spec) -->
+        <!-- Primary Navigation Menu (5 Focused Tabs) -->
         <nav class="sidebar-nav-group">
           <!-- 1. Dashboard -->
           <button class="nav-link-btn active" data-route="dashboard">
@@ -120,18 +111,6 @@ index_html = f"""<!DOCTYPE html>
             <span>Applied Jobs</span>
             <span class="nav-counter-pill" id="cntSidebarApplied">0</span>
           </button>
-
-          <!-- 6. My Resume -->
-          <button class="nav-link-btn" data-route="resume">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-            <span>My Resume</span>
-          </button>
-
-          <!-- 7. Portfolio -->
-          <button class="nav-link-btn" data-route="portfolio">
-            <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-            <span>Portfolio</span>
-          </button>
         </nav>
       </div>
 
@@ -157,24 +136,16 @@ index_html = f"""<!DOCTYPE html>
     <!-- Main Viewport (Multi-Page Content Area) -->
     <main class="main-viewport">
 
-      <!-- Global Top Navbar -->
-      <header class="top-navbar">
-        <div class="top-nav-links">
-          <a href="#dashboard" class="top-nav-link active" data-route="dashboard">Dashboard</a>
-          <a href="#jobs" class="top-nav-link" data-route="jobs">All Jobs</a>
-          <a href="#matches" class="top-nav-link" data-route="matches">New Matches</a>
-          <a href="#applied" class="top-nav-link" data-route="applied">Tracker</a>
-          <a href="#resume" class="top-nav-link" data-route="resume">Resume</a>
-          <a href="#portfolio" class="top-nav-link" data-route="portfolio">Portfolio</a>
+      <!-- Simplified Clean Top Navbar -->
+      <header class="top-navbar-simple">
+        <div class="top-bar-left-meta">
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--forest-green); display: flex; align-items: center; gap: 6px;">
+            <span style="display: inline-block; width: 6px; height: 6px; background: var(--emerald); border-radius: 50%;"></span>
+            GoHighLevel Career Intelligence Platform
+          </div>
         </div>
 
-        <div class="top-right-group">
-          <!-- Global Search Pill -->
-          <div class="search-pill-wrap">
-            <svg class="search-svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="globalSearchInput" class="search-pill-input" placeholder="Search GHL jobs, skills...">
-          </div>
-
+        <div class="top-bar-right-actions">
           <!-- History snapshot selector -->
           <select id="dateSelect" class="date-select-pill" title="History Snapshots">
             <option value="latest">Today</option>
@@ -333,9 +304,15 @@ index_html = f"""<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- Full Filter & Sort Toolbar -->
+        <!-- Full Filter & Sort Toolbar (With Dedicated Search) -->
         <div class="all-jobs-toolbar">
           <div class="toolbar-upper-row">
+            <!-- Dedicated Job Search Input -->
+            <div class="toolbar-search-wrap">
+              <svg class="search-svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="jobsSearchInput" class="toolbar-search-input" placeholder="Search by title, skill, company...">
+            </div>
+
             <div class="toolbar-controls-group">
               <!-- Freshness Filter -->
               <select id="filterFreshness" class="filter-select">
@@ -524,216 +501,6 @@ index_html = f"""<!DOCTYPE html>
         </div>
       </section>
 
-      <!-- ====================================================================
-           PAGE 6: MY RESUME (Resume Intelligence Center)
-           ==================================================================== -->
-      <section class="view-content" id="page-resume" style="display: none;">
-        <div class="view-heading-row">
-          <div>
-            <h1 class="view-main-title">My Resume Intelligence</h1>
-            <p class="view-subtitle">ATS readiness score, GHL keyword density, and market alignment</p>
-          </div>
-
-          <div style="display: flex; gap: 10px;">
-            <button class="btn-scrape-cta" id="btnAnalyzeResumeAgainstFeed">
-              <svg class="svg-icon" style="width: 14px; height: 14px; stroke: #ffffff; fill: none;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              <span>Analyze Against Current Jobs</span>
-            </button>
-            <a href="https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk" target="_blank" class="btn-card-save" style="padding: 9px 16px;">
-              Download PDF Resume
-            </a>
-          </div>
-        </div>
-
-        <div class="resume-grid-two-col">
-          <!-- Left: Profile & Expertise -->
-          <div style="display: flex; flex-direction: column; gap: 18px;">
-            <!-- Candidate Summary Box -->
-            <div class="white-panel-box">
-              <div class="panel-heading" style="margin-bottom: 10px;">Executive Positioning</div>
-              <p style="font-size: 0.84rem; color: var(--text-main); line-height: 1.55;">
-                Senior GoHighLevel Developer and Marketing Automation Specialist with 4+ years of hands-on experience engineering high-converting sales funnels, bespoke CRM snapshot architectures, SaaS mode client sub-accounts, and complex multi-step n8n / REST API integrations.
-              </p>
-            </div>
-
-            <!-- Technical Skills Matrix -->
-            <div class="white-panel-box">
-              <div class="panel-heading">GoHighLevel & CRM Skills Matrix</div>
-              <div class="skills-matrix-grid">
-                <div class="skill-matrix-item">
-                  <div class="skill-matrix-title">GHL SaaS Mode & Snapshots</div>
-                  <div class="skill-matrix-level">Expert • 4 Years (50+ Builds)</div>
-                </div>
-                <div class="skill-matrix-item">
-                  <div class="skill-matrix-title">n8n & Zapier Automation</div>
-                  <div class="skill-matrix-level">Expert • Complex Webhooks</div>
-                </div>
-                <div class="skill-matrix-item">
-                  <div class="skill-matrix-title">Speed-to-Lead Workflows</div>
-                  <div class="skill-matrix-level">Advanced • LC Phone & Twilio</div>
-                </div>
-                <div class="skill-matrix-item">
-                  <div class="skill-matrix-title">Sales Funnel Architecture</div>
-                  <div class="skill-matrix-level">Expert • High-Converting</div>
-                </div>
-                <div class="skill-matrix-item">
-                  <div class="skill-matrix-title">OpenAI & AI Automation</div>
-                  <div class="skill-matrix-level">Advanced • Prompt Agents</div>
-                </div>
-                <div class="skill-matrix-item">
-                  <div class="skill-matrix-title">REST APIs & Custom Code</div>
-                  <div class="skill-matrix-level">Advanced • React / Node</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Experience Highlights -->
-            <div class="white-panel-box">
-              <div class="panel-heading" style="margin-bottom: 12px;">Verified Experience Timeline</div>
-              <div style="display: flex; flex-direction: column; gap: 14px;">
-                <div style="border-left: 2px solid var(--forest-green); padding-left: 14px;">
-                  <div style="font-size: 0.86rem; font-weight: 800; color: var(--text-main);">Lead GoHighLevel & CRM Engineer • Remote</div>
-                  <div style="font-size: 0.74rem; color: var(--forest-green); font-weight: 700;">2022 — Present</div>
-                  <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Architected 50+ production client sub-accounts, custom snapshots, speed-to-lead SMS/voice cadences, and n8n webhook pipelines.</p>
-                </div>
-                <div style="border-left: 2px solid #cbd5e1; padding-left: 14px;">
-                  <div style="font-size: 0.86rem; font-weight: 800; color: var(--text-main);">Marketing Automation & Funnel Builder • Remote</div>
-                  <div style="font-size: 0.74rem; color: var(--text-muted); font-weight: 700;">2020 — 2022</div>
-                  <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Designed end-to-end client onboarding funnels, automated billing triggers, and integrated Twilio/Stripe webhooks.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: ATS Health & Alignment Card -->
-          <div style="display: flex; flex-direction: column; gap: 18px;">
-            <div class="resume-health-card">
-              <div>
-                <div style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.9;">
-                  ATS Resume Readiness
-                </div>
-                <div class="resume-metric-row">
-                  <div class="resume-score-huge">94%</div>
-                  <div style="font-size: 0.78rem; line-height: 1.4; opacity: 0.9;">
-                    High ATS Parse Rate<br><b>Tier 1 GoHighLevel Alignment</b>
-                  </div>
-                </div>
-              </div>
-
-              <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 14px;">
-                <div style="font-size: 0.75rem; font-weight: 700; margin-bottom: 6px;">Keyword Density in Discovered Jobs:</div>
-                <div style="display: flex; flex-wrap: wrap; gap: 5px;">
-                  <span style="background: rgba(203, 243, 47, 0.2); color: var(--neon-lime); font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px;">GoHighLevel (100%)</span>
-                  <span style="background: rgba(203, 243, 47, 0.2); color: var(--neon-lime); font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px;">Automation (95%)</span>
-                  <span style="background: rgba(203, 243, 47, 0.2); color: var(--neon-lime); font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px;">Snapshots (90%)</span>
-                  <span style="background: rgba(203, 243, 47, 0.2); color: var(--neon-lime); font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px;">n8n (88%)</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Links Card -->
-            <div class="white-panel-box">
-              <div class="panel-heading" style="margin-bottom: 10px;">Portfolio Artifacts</div>
-              <div style="display: flex; flex-direction: column; gap: 8px;">
-                <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="sidebar-sub-btn" style="color: var(--forest-green); font-weight: 700;">
-                  🌐 Live Portfolio Website →
-                </a>
-                <a href="https://drive.google.com/file/d/1TH4CMzXFOfup2liGESZmmA7QFM8GcfqP/view?usp=sharing" target="_blank" class="sidebar-sub-btn" style="color: var(--forest-green); font-weight: 700;">
-                  🎥 Video Introduction (Google Drive) →
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====================================================================
-           PAGE 7: PORTFOLIO (Visual Project Showcase)
-           ==================================================================== -->
-      <section class="view-content" id="page-portfolio" style="display: none;">
-        <div class="view-heading-row">
-          <div>
-            <h1 class="view-main-title">Project Portfolio</h1>
-            <p class="view-subtitle">Live GoHighLevel snapshot builds, automated CRM systems, and AI workflows</p>
-          </div>
-
-          <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="btn-scrape-cta">
-            <span>Visit Full Portfolio →</span>
-          </a>
-        </div>
-
-        <div class="portfolio-grid-deck">
-          <!-- Project 1 -->
-          <article class="portfolio-card-item">
-            <div class="portfolio-banner-preview">
-              <span class="portfolio-badge-pill">GHL SaaS Mode</span>
-              <div style="font-size: 1.1rem; font-weight: 800;">Real Estate Agency Snapshot</div>
-              <div style="font-size: 0.74rem; opacity: 0.9;">End-to-end multi-agent sub-account architecture</div>
-            </div>
-            <div class="portfolio-card-body">
-              <p class="portfolio-project-desc">
-                Engineered a comprehensive real estate snapshot featuring automated buyer/seller intake funnels, 5-minute speed-to-lead SMS followup cadences, and automated calendar booking.
-              </p>
-              <div class="portfolio-tools-row">
-                <span class="skill-tag-pill">GoHighLevel</span>
-                <span class="skill-tag-pill">LC Phone</span>
-                <span class="skill-tag-pill">Funnels</span>
-                <span class="skill-tag-pill">Calendars</span>
-              </div>
-              <div style="display: flex; gap: 8px;">
-                <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="btn-card-apply" style="flex: 1; text-align: center;">Live Demo</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 2 -->
-          <article class="portfolio-card-item">
-            <div class="portfolio-banner-preview" style="background: linear-gradient(135deg, #1e3a8a, #1e40af);">
-              <span class="portfolio-badge-pill">n8n + OpenAI</span>
-              <div style="font-size: 1.1rem; font-weight: 800;">AI Lead Qualification Agent</div>
-              <div style="font-size: 0.74rem; opacity: 0.9;">Autonomous WhatsApp & SMS conversion bot</div>
-            </div>
-            <div class="portfolio-card-body">
-              <p class="portfolio-project-desc">
-                Developed an autonomous AI agent integrated into GHL sub-accounts that qualifies incoming leads via conversational SMS, updates custom fields, and triggers calendar links.
-              </p>
-              <div class="portfolio-tools-row">
-                <span class="skill-tag-pill">n8n</span>
-                <span class="skill-tag-pill">OpenAI API</span>
-                <span class="skill-tag-pill">GHL Webhooks</span>
-                <span class="skill-tag-pill">Twilio</span>
-              </div>
-              <div style="display: flex; gap: 8px;">
-                <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="btn-card-apply" style="flex: 1; text-align: center;">Live Demo</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 3 -->
-          <article class="portfolio-card-item">
-            <div class="portfolio-banner-preview" style="background: linear-gradient(135deg, #701a75, #86198f);">
-              <span class="portfolio-badge-pill">Clinic & Healthcare</span>
-              <div style="font-size: 1.1rem; font-weight: 800;">MedSpa Automated Booking System</div>
-              <div style="font-size: 0.74rem; opacity: 0.9;">Patient scheduling, reminders & payment triggers</div>
-            </div>
-            <div class="portfolio-card-body">
-              <p class="portfolio-project-desc">
-                Built an HIPAA-compliant patient acquisition engine with deposit payment collection via Stripe, two-way SMS confirmation reminders, and automated review generation.
-              </p>
-              <div class="portfolio-tools-row">
-                <span class="skill-tag-pill">GHL Funnels</span>
-                <span class="skill-tag-pill">Stripe</span>
-                <span class="skill-tag-pill">Workflows</span>
-                <span class="skill-tag-pill">Review Engine</span>
-              </div>
-              <div style="display: flex; gap: 8px;">
-                <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="btn-card-apply" style="flex: 1; text-align: center;">Live Demo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
     </main>
 
   </div>
@@ -852,4 +619,4 @@ index_html = f"""<!DOCTYPE html>
 with open(index_html_path, "w", encoding="utf-8") as f:
     f.write(index_html)
 
-print("✓ index.html successfully compiled with Phase 3 Multi-Page Architecture.")
+print("✓ index.html successfully compiled with 5 streamlined tabs, pixel-style card badges, and simplified topbar.")

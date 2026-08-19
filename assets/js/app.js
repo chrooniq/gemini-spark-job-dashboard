@@ -1,12 +1,12 @@
 /**
- * Gemini Spark — Phase 3 Multi-Page SaaS Career Intelligence Portal Controller
- * Modular Client-Side Router, 7 Dedicated Pages, Vector Icon Bindings,
- * Real-Time Discovery, Kanban Application Tracker, and Compare Jobs Engine.
+ * Gemini Spark — Streamlined Multi-Page SaaS Career Intelligence Portal Controller
+ * 5 Core Tabs Router, Pixel/Tech Brand Badges, Dedicated Job Search,
+ * Kanban Application Tracker, and AI Comparison Modal.
  */
 
 // Global Application State
 const state = {
-  currentRoute: 'dashboard', // 'dashboard' | 'jobs' | 'matches' | 'saved' | 'applied' | 'resume' | 'portfolio'
+  currentRoute: 'dashboard', // 'dashboard' | 'jobs' | 'matches' | 'saved' | 'applied'
   activeDate: 'latest',
   
   // All Jobs Filters
@@ -139,7 +139,7 @@ function setupRouting() {
 }
 
 function navigateTo(routeName, updateHash = true) {
-  const validRoutes = ['dashboard', 'jobs', 'matches', 'saved', 'applied', 'resume', 'portfolio'];
+  const validRoutes = ['dashboard', 'jobs', 'matches', 'saved', 'applied'];
   if (!validRoutes.includes(routeName)) routeName = 'dashboard';
 
   state.currentRoute = routeName;
@@ -150,11 +150,6 @@ function navigateTo(routeName, updateHash = true) {
   // Update Sidebar active state
   document.querySelectorAll('.nav-link-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-route') === routeName);
-  });
-
-  // Update Top Navbar active state
-  document.querySelectorAll('.top-nav-link').forEach(link => {
-    link.classList.toggle('active', link.getAttribute('data-route') === routeName);
   });
 
   // Toggle Page Visibility
@@ -190,12 +185,43 @@ function renderCurrentRoute() {
     case 'applied':
       renderAppliedTrackerPage();
       break;
-    case 'resume':
-      // Resume content is static & interactive
-      break;
-    case 'portfolio':
-      // Portfolio content is static & interactive
-      break;
+  }
+}
+
+// Generate Pixel/Tech Brand Logo Icon SVG for company
+function getCompanyTechBadge(companyName, companyColor) {
+  const c = (companyName || '').toLowerCase();
+  
+  if (c.includes('human') || c.includes('intelligence')) {
+    return {
+      gradient: 'linear-gradient(135deg, #1e3a8a, #3b82f6)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4c0 1.1-.4 2.1-1.1 2.8L17 11h-3v3h-4v-3H7l2.1-2.2A4 4 0 0 1 8 6a4 4 0 0 1 4-4z"/><circle cx="12" cy="18" r="3"/></svg>`
+    };
+  } else if (c.includes('huzzle')) {
+    return {
+      gradient: 'linear-gradient(135deg, #701a75, #ec4899)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
+    };
+  } else if (c.includes('fasttrack') || c.includes('business')) {
+    return {
+      gradient: 'linear-gradient(135deg, #14532d, #22c55e)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>`
+    };
+  } else if (c.includes('remotive') || c.includes('remote')) {
+    return {
+      gradient: 'linear-gradient(135deg, #0f766e, #14b8a6)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`
+    };
+  } else if (c.includes('jobicy') || c.includes('himalayas')) {
+    return {
+      gradient: 'linear-gradient(135deg, #c2410c, #f97316)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`
+    };
+  } else {
+    return {
+      gradient: 'linear-gradient(135deg, #1b3027, #2d4f41)',
+      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`
+    };
   }
 }
 
@@ -213,22 +239,25 @@ function renderDashboardPage() {
     if (top4.length === 0) {
       topListContainer.innerHTML = `<div style="font-size: 0.78rem; color: var(--text-muted); padding: 12px; text-align: center;">All top matches have been applied to!</div>`;
     } else {
-      topListContainer.innerHTML = top4.map(job => `
-        <div class="mini-row-item" onclick="openJobDrawer('${job.id}')">
-          <div class="mini-row-left">
-            <div class="mini-logo-box" style="background-color: ${job.company_color || '#233d32'};">
-              ${job.company_initials || job.company.substring(0, 2).toUpperCase()}
+      topListContainer.innerHTML = top4.map(job => {
+        const badge = getCompanyTechBadge(job.company, job.company_color);
+        return `
+          <div class="mini-row-item" onclick="openJobDrawer('${job.id}')">
+            <div class="mini-row-left">
+              <div class="mini-logo-box" style="background: ${badge.gradient};">
+                ${badge.svg}
+              </div>
+              <div class="mini-row-info">
+                <h4>${job.title}</h4>
+                <p>${job.company} • ${job.location}</p>
+              </div>
             </div>
-            <div class="mini-row-info">
-              <h4>${job.title}</h4>
-              <p>${job.company} • ${job.location}</p>
+            <div class="mini-row-right">
+              <span class="mini-match-pill">${job.score}%</span>
             </div>
           </div>
-          <div class="mini-row-right">
-            <span class="mini-match-pill">${job.score}%</span>
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
   }
 
@@ -541,7 +570,7 @@ function renderKanbanCardHtml(job) {
 }
 
 // ==========================================================================
-// REUSABLE JOB CARD COMPONENT
+// REUSABLE PIXEL/TECH JOB CARD COMPONENT
 // ==========================================================================
 function renderJobCardHtml(job, showCompareCheckbox = false) {
   const isSaved = job.status === 'Saved';
@@ -562,13 +591,15 @@ function renderJobCardHtml(job, showCompareCheckbox = false) {
     </label>
   ` : '';
 
+  const badge = getCompanyTechBadge(job.company, job.company_color);
+
   return `
     <article class="jobi-card-item" onclick="openJobDrawer('${job.id}')">
       <div>
         <div class="jobi-card-top">
           <div class="card-company-wrap">
-            <div class="card-company-avatar" style="background-color: ${job.company_color || '#233d32'};">
-              ${job.company_initials || job.company.substring(0, 2).toUpperCase()}
+            <div class="card-company-badge-box" style="background: ${badge.gradient};">
+              ${badge.svg}
             </div>
             <div class="card-company-details">
               <h4>${job.company}</h4>
@@ -977,25 +1008,12 @@ function setupEventListeners() {
     });
   });
 
-  // Top Nav Links
-  document.querySelectorAll('.top-nav-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const route = link.getAttribute('data-route');
-      navigateTo(route);
-    });
-  });
-
-  // Global Search Input
-  const searchInput = document.getElementById('globalSearchInput');
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
+  // Dedicated Job Search Input on All Jobs Page
+  const jobsSearchInput = document.getElementById('jobsSearchInput');
+  if (jobsSearchInput) {
+    jobsSearchInput.addEventListener('input', (e) => {
       state.searchQuery = e.target.value;
-      if (state.currentRoute !== 'jobs') {
-        navigateTo('jobs');
-      } else {
-        renderAllJobsPage();
-      }
+      renderAllJobsPage();
     });
   }
 
@@ -1088,14 +1106,6 @@ function setupEventListeners() {
         setJobStatus(state.activeDrawerJobId, 'Applied');
         closeJobDrawer();
       }
-    });
-  }
-
-  // Analyze Resume Scanner CTA
-  const btnAnalyzeResume = document.getElementById('btnAnalyzeResumeAgainstFeed');
-  if (btnAnalyzeResume) {
-    btnAnalyzeResume.addEventListener('click', () => {
-      showToast('Scanning resume keywords against 11 active GHL opportunities: 94% Alignment verified!');
     });
   }
 

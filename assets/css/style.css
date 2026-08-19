@@ -1,7 +1,7 @@
 /* ==========================================================================
-   GEMINI SPARK — MULTI-PAGE GOHIGHLEVEL CAREER INTELLIGENCE PORTAL
+   GEMINI SPARK — STREAMLINED SAAS CAREER INTELLIGENCE PORTAL
    Design System: "Jobi" Style Clean SaaS Dashboard
-   Full Viewport Layout • 100% Vector SVG Icons • Dedicated Multi-Page Views
+   Micro-Animations • Pixel/Vector Company Badges • Clean Non-Overwhelmed UI
    ========================================================================== */
 
 :root {
@@ -36,8 +36,6 @@
   --rose-subtle: #ffe4e6;
   --blue: #2563eb;
   --blue-subtle: #eff6ff;
-  --purple: #8b5cf6;
-  --purple-subtle: #f3e8ff;
 
   --border-subtle: #e8f0ec;
   --border-card: #e5ede8;
@@ -103,7 +101,7 @@ button {
 }
 
 /* ==========================================================================
-   LEFT SIDEBAR (Full Height)
+   LEFT SIDEBAR (With Smooth Animations)
    ========================================================================== */
 .sidebar {
   width: 250px;
@@ -117,6 +115,7 @@ button {
   flex-shrink: 0;
   z-index: 30;
   overflow-y: auto;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebar-brand-row {
@@ -124,7 +123,7 @@ button {
   align-items: center;
   gap: 10px;
   padding: 0 8px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .brand-dot-logo {
@@ -137,6 +136,17 @@ button {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(203, 243, 47, 0.4);
+  transition: transform 0.3s ease;
+  animation: logo-glow 3s infinite ease-in-out;
+}
+
+.sidebar-brand-row:hover .brand-dot-logo {
+  transform: rotate(180deg) scale(1.08);
+}
+
+@keyframes logo-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(203, 243, 47, 0.4); }
+  50% { box-shadow: 0 0 18px rgba(203, 243, 47, 0.7); }
 }
 
 .brand-dot-logo::after {
@@ -157,13 +167,13 @@ button {
   color: var(--forest-green);
 }
 
-/* Profile Badge in Sidebar */
+/* User Profile Widget */
 .sidebar-user-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 8px 0 16px 0;
+  padding: 6px 0 14px 0;
   border-bottom: 1px solid var(--border-subtle);
   margin-bottom: 16px;
 }
@@ -182,6 +192,12 @@ button {
   box-shadow: 0 4px 12px rgba(35, 61, 50, 0.15);
   margin-bottom: 8px;
   border: 2px solid #ffffff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sidebar-user-box:hover .sidebar-avatar {
+  transform: scale(1.06);
+  box-shadow: 0 6px 16px rgba(35, 61, 50, 0.25);
 }
 
 .sidebar-user-name {
@@ -200,37 +216,59 @@ button {
   margin-top: 1px;
 }
 
-/* Sidebar Navigation Items */
+/* Animated Navigation Items */
 .sidebar-nav-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .nav-link-btn {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 14px;
+  padding: 11px 14px;
   border-radius: var(--radius-sm);
   font-size: 0.84rem;
   font-weight: 600;
   color: var(--text-muted);
-  transition: all 0.15s ease;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
   text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: var(--neon-lime);
+  opacity: 0;
+  transform: scaleY(0);
+  transition: all 0.2s ease;
 }
 
 .nav-link-btn:hover {
   background-color: var(--bg-subtle);
   color: var(--text-main);
+  transform: translateX(3px);
 }
 
 .nav-link-btn.active {
   background-color: var(--forest-green);
   color: #ffffff !important;
   font-weight: 700;
-  box-shadow: 0 3px 8px rgba(35, 61, 50, 0.2);
+  box-shadow: 0 4px 12px rgba(35, 61, 50, 0.22);
+  transform: translateX(0);
+}
+
+.nav-link-btn.active::before {
+  opacity: 1;
+  transform: scaleY(1);
 }
 
 .nav-link-btn .svg-icon {
@@ -240,6 +278,11 @@ button {
   stroke: currentColor;
   fill: none;
   flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.nav-link-btn:hover .svg-icon {
+  transform: scale(1.1);
 }
 
 .nav-link-btn.active .svg-icon {
@@ -249,11 +292,12 @@ button {
 .nav-counter-pill {
   margin-left: auto;
   background: rgba(0, 0, 0, 0.05);
-  padding: 1px 7px;
+  padding: 2px 8px;
   border-radius: 9999px;
   font-size: 0.7rem;
   font-weight: 700;
   font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s ease;
 }
 
 .nav-link-btn.active .nav-counter-pill {
@@ -261,7 +305,7 @@ button {
   color: var(--forest-green);
 }
 
-/* Sidebar Footer Box */
+/* Sidebar Footer */
 .sidebar-footer {
   padding-top: 16px;
   border-top: 1px solid var(--border-subtle);
@@ -297,6 +341,7 @@ button {
   height: 100%;
   background: var(--neon-lime);
   border-radius: 9999px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebar-sub-btn {
@@ -312,12 +357,12 @@ button {
 }
 
 .sidebar-sub-btn:hover {
-  background: #fee2e2;
-  color: #dc2626;
+  background: #e9f0ed;
+  color: var(--forest-green);
 }
 
 /* ==========================================================================
-   MAIN CONTENT AREA (Scrollable Viewport)
+   MAIN CONTENT VIEWPORT & SIMPLIFIED TOPBAR
    ========================================================================== */
 .main-viewport {
   flex: 1;
@@ -328,81 +373,34 @@ button {
   background-color: var(--bg-app);
 }
 
-/* Top App Bar */
-.top-navbar {
+/* Simplified Clean Top Bar (No duplicate links) */
+.top-navbar-simple {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 36px 14px 36px;
-  gap: 16px;
+  padding: 16px 36px;
   background: rgba(244, 247, 245, 0.85);
   position: sticky;
   top: 0;
   z-index: 20;
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 }
 
-.top-nav-links {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  font-size: 0.84rem;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.top-nav-link:hover, .top-nav-link.active {
-  color: var(--forest-green);
-  font-weight: 700;
-}
-
-.top-right-group {
+.top-bar-left-meta {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.search-pill-wrap {
-  position: relative;
-  width: 240px;
-}
-
-.search-svg-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 15px;
-  height: 15px;
-  stroke: var(--text-light);
-  fill: none;
-  stroke-width: 2;
-  pointer-events: none;
-}
-
-.search-pill-input {
-  width: 100%;
-  height: 38px;
-  padding: 0 12px 0 34px;
-  background: #ffffff;
-  border: 1px solid var(--border-subtle);
-  border-radius: 9999px;
-  font-size: 0.8rem;
-  color: var(--text-main);
-  font-family: inherit;
-  box-shadow: var(--shadow-xs);
-  transition: all 0.2s ease;
-}
-
-.search-pill-input:focus {
-  border-color: var(--forest-green);
-  box-shadow: 0 0 0 2px var(--forest-green-subtle);
-  outline: none;
+.top-bar-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .date-select-pill {
-  height: 38px;
+  height: 36px;
   padding: 0 12px;
   background: #ffffff;
   border: 1px solid var(--border-subtle);
@@ -413,6 +411,11 @@ button {
   cursor: pointer;
   box-shadow: var(--shadow-xs);
   outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.date-select-pill:focus {
+  border-color: var(--forest-green);
 }
 
 .btn-scrape-cta {
@@ -426,12 +429,17 @@ button {
   padding: 9px 20px;
   border-radius: 9999px;
   box-shadow: 0 3px 10px rgba(35, 61, 50, 0.2);
-  transition: all 0.2s ease;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-scrape-cta:hover {
   background: var(--forest-green-hover);
   transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(35, 61, 50, 0.3);
+}
+
+.btn-scrape-cta:active {
+  transform: translateY(0);
 }
 
 .btn-scrape-cta.loading {
@@ -443,10 +451,16 @@ button {
    VIEW CONTAINER & HEADINGS
    ========================================================================== */
 .view-content {
-  padding: 6px 36px 40px 36px;
+  padding: 8px 36px 40px 36px;
   display: flex;
   flex-direction: column;
   gap: 22px;
+  animation: fadeInView 0.25s ease-out;
+}
+
+@keyframes fadeInView {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .view-heading-row {
@@ -500,7 +514,7 @@ button {
 }
 
 /* ==========================================================================
-   4 STAT CARDS (Dashboard Specs)
+   4 STAT CARDS
    ========================================================================== */
 .stat-cards-container {
   display: grid;
@@ -517,7 +531,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all 0.2s ease;
+  transition: all 0.22s ease;
 }
 
 .jobi-stat-card:hover {
@@ -551,6 +565,11 @@ button {
   justify-content: center;
   box-shadow: 0 2px 8px rgba(203, 243, 47, 0.4);
   flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.jobi-stat-card:hover .stat-lime-circle {
+  transform: scale(1.1);
 }
 
 .stat-lime-circle .svg-icon {
@@ -634,7 +653,7 @@ button {
   border-radius: var(--radius-sm);
   background: var(--bg-subtle);
   border: 1px solid transparent;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 
@@ -642,6 +661,7 @@ button {
   background: #ffffff;
   border-color: var(--border-subtle);
   box-shadow: var(--shadow-xs);
+  transform: translateX(3px);
 }
 
 .mini-row-left {
@@ -651,15 +671,16 @@ button {
 }
 
 .mini-logo-box {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: var(--radius-xs);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
 .mini-row-info h4 {
@@ -685,7 +706,7 @@ button {
 }
 
 /* ==========================================================================
-   PAGE: ALL JOBS — FILTERS, SORT & COMPARE TOOLBAR
+   PAGE: ALL JOBS — DEDICATED TOOLBAR & SEARCH
    ========================================================================== */
 .all-jobs-toolbar {
   background: #ffffff;
@@ -706,6 +727,33 @@ button {
   gap: 12px;
 }
 
+.toolbar-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+  max-width: 380px;
+}
+
+.toolbar-search-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px 0 34px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  color: var(--text-main);
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.toolbar-search-input:focus {
+  background: #ffffff;
+  border-color: var(--forest-green);
+  box-shadow: 0 0 0 2px var(--forest-green-subtle);
+  outline: none;
+}
+
 .toolbar-controls-group {
   display: flex;
   align-items: center;
@@ -714,7 +762,7 @@ button {
 }
 
 .filter-select {
-  height: 36px;
+  height: 38px;
   padding: 0 10px;
   background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
@@ -724,10 +772,12 @@ button {
   font-weight: 600;
   cursor: pointer;
   outline: none;
+  transition: all 0.15s ease;
 }
 
 .filter-select:focus {
   border-color: var(--forest-green);
+  background: #ffffff;
 }
 
 .view-toggle-wrap {
@@ -747,6 +797,7 @@ button {
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
+  transition: all 0.15s ease;
 }
 
 .view-toggle-btn.active {
@@ -766,6 +817,12 @@ button {
   font-size: 0.76rem;
   font-weight: 700;
   color: var(--forest-green);
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .btn-launch-compare {
@@ -775,9 +832,16 @@ button {
   font-weight: 700;
   padding: 4px 12px;
   border-radius: var(--radius-xs);
+  transition: background 0.15s ease;
 }
 
-/* Job Cards Grid & List Modes */
+.btn-launch-compare:hover {
+  background: var(--forest-green-hover);
+}
+
+/* ==========================================================================
+   PIXEL/TECH STYLE ANIMATED JOB CARDS
+   ========================================================================== */
 .job-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
@@ -797,15 +861,31 @@ button {
   flex-direction: column;
   justify-content: space-between;
   box-shadow: var(--shadow-xs);
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   position: relative;
+  overflow: hidden;
+}
+
+.jobi-card-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: var(--neon-lime);
+  transition: height 0.25s ease;
 }
 
 .jobi-card-item:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: #cde0d7;
+}
+
+.jobi-card-item:hover::before {
+  height: 100%;
 }
 
 .jobi-card-top {
@@ -819,19 +899,33 @@ button {
 .card-company-wrap {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
-.card-company-avatar {
-  width: 40px;
-  height: 40px;
+/* Pixel / Tech Brand Logo Badge */
+.card-company-badge-box {
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 0.88rem;
-  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease;
+}
+
+.jobi-card-item:hover .card-company-badge-box {
+  transform: scale(1.08) rotate(2deg);
+}
+
+.card-company-badge-box .brand-svg-logo {
+  width: 22px;
+  height: 22px;
+  stroke: #ffffff;
+  fill: none;
+  stroke-width: 2;
 }
 
 .card-company-details h4 {
@@ -883,6 +977,7 @@ button {
   font-size: 0.92rem;
   background: var(--forest-green);
   color: #ffffff;
+  box-shadow: 0 2px 6px rgba(35, 61, 50, 0.2);
 }
 
 .card-job-title {
@@ -936,6 +1031,11 @@ button {
   border-radius: 9999px;
   background: var(--forest-green-subtle);
   color: var(--forest-green);
+  transition: background 0.15s ease;
+}
+
+.skill-tag-pill:hover {
+  background: #d8e5df;
 }
 
 .card-bottom-row {
@@ -957,6 +1057,7 @@ button {
   font-size: 0.72rem;
   font-weight: 600;
   cursor: pointer;
+  transition: border-color 0.15s ease;
 }
 
 .card-status-dropdown.applied {
@@ -1000,11 +1101,12 @@ button {
   font-size: 0.74rem;
   font-weight: 700;
   border-radius: var(--radius-xs);
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .btn-card-apply:hover {
   background: var(--forest-green-hover);
+  transform: translateY(-1px);
 }
 
 .compare-checkbox-label {
@@ -1046,15 +1148,8 @@ button {
 }
 
 /* ==========================================================================
-   PAGE: APPLIED JOBS (APPLICATION TRACKER — KANBAN & TABLE)
+   PAGE: APPLIED JOBS (APPLICATION TRACKER)
    ========================================================================== */
-.tracker-view-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
 .kanban-board-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1113,7 +1208,7 @@ button {
   padding: 14px;
   box-shadow: var(--shadow-xs);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .kanban-item-card:hover {
@@ -1179,146 +1274,6 @@ button {
 
 .tracker-table tr:hover td {
   background: var(--bg-subtle);
-}
-
-/* ==========================================================================
-   PAGE: MY RESUME INTELLIGENCE CENTER
-   ========================================================================== */
-.resume-grid-two-col {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
-}
-
-.resume-health-card {
-  background: linear-gradient(135deg, #233d32, #2d4f41);
-  color: #ffffff;
-  border-radius: var(--radius-md);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: var(--shadow-md);
-}
-
-.resume-metric-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 14px;
-}
-
-.resume-score-huge {
-  font-size: 3rem;
-  font-weight: 800;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--neon-lime);
-  line-height: 1;
-}
-
-.skills-matrix-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.skill-matrix-item {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
-}
-
-.skill-matrix-title {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 2px;
-}
-
-.skill-matrix-level {
-  font-size: 0.68rem;
-  color: var(--forest-green);
-  font-weight: 700;
-}
-
-/* ==========================================================================
-   PAGE: PORTFOLIO SHOWCASE
-   ========================================================================== */
-.portfolio-grid-deck {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  gap: 22px;
-}
-
-.portfolio-card-item {
-  background: #ffffff;
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-xs);
-  transition: all 0.22s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.portfolio-card-item:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: #cde0d7;
-}
-
-.portfolio-banner-preview {
-  height: 170px;
-  background: linear-gradient(135deg, #1b3027, #2c4d3f);
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 18px;
-  position: relative;
-}
-
-.portfolio-badge-pill {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: var(--neon-lime);
-  color: var(--forest-green);
-  font-size: 0.68rem;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: var(--radius-xs);
-}
-
-.portfolio-card-body {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
-}
-
-.portfolio-project-title {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: var(--text-main);
-  margin-bottom: 6px;
-}
-
-.portfolio-project-desc {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  line-height: 1.45;
-  margin-bottom: 14px;
-}
-
-.portfolio-tools-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 18px;
 }
 
 /* ==========================================================================
@@ -1606,7 +1561,7 @@ button {
   .stat-cards-container {
     grid-template-columns: repeat(2, 1fr);
   }
-  .analytics-two-col, .resume-grid-two-col {
+  .analytics-two-col {
     grid-template-columns: 1fr;
   }
   .kanban-board-grid {
@@ -1626,7 +1581,7 @@ button {
     border-right: none;
     border-bottom: 1px solid var(--border-subtle);
   }
-  .top-navbar {
+  .top-navbar-simple {
     padding: 14px 18px;
     flex-direction: column;
     align-items: stretch;
