@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-20T02:22:34.568134+00:00",
+  "timestamp": "2026-08-20T02:31:49.049474+00:00",
   "sources": {
     "RapidAPI JSearch": {
       "status": "OK",
@@ -7,28 +7,30 @@
     },
     "Remotive API": {
       "status": "OK",
-      "raw_count": 85
+      "raw_count": 0
     },
     "Jobicy API": {
       "status": "OK",
-      "raw_count": 150
+      "raw_count": 0
     },
     "Himalayas API": {
       "status": "OK",
-      "raw_count": 20
+      "raw_count": 0
     },
     "Remote Jobs Directory (PDF Companies)": {
       "status": "OK",
-      "raw_count": 442
+      "raw_count": 0
     },
     "Public ATS Feeds (Workable / Greenhouse / Lever)": {
       "status": "OK",
-      "raw_count": 1969
+      "raw_count": 16
     }
   },
-  "raw_harvested": 2666,
-  "ghl_relevant": 1969,
-  "fresh_candidates": 1047,
-  "duplicates_removed": 661,
-  "final_discovered": 386
+  "raw_harvested": 16,
+  "verified_ghl": 16,
+  "rejected_non_ghl": 0,
+  "rejected_forbidden_titles": 0,
+  "rejected_expired": 3,
+  "duplicates_collapsed": 4,
+  "final_verified_ghl_jobs": 9
 }

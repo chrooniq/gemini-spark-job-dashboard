@@ -1,15 +1,19 @@
 """
 Gemini Spark — Remote Jobs PDF Directory & Public Company ATS Adapter
-Queries public career endpoints for companies listed in the Remote Jobs Directory.
+Queries public career endpoints for companies listed in the Remote Jobs Directory,
+strictly filtering for explicit GoHighLevel / HighLevel / GHL requirements.
 """
 
 import requests
 import json
+import re
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 GeminiSpark/2.0",
     "Accept": "application/json"
 }
+
+GHL_CHECK_REGEX = re.compile(r"\b(gohighlevel|go\s+high\s+level|highlevel|ghl)\b", re.IGNORECASE)
 
 # Key remote companies with direct public Greenhouse / Lever / Workable endpoints
 REMOTE_DIRECTORY_COMPANIES = [
@@ -26,10 +30,7 @@ REMOTE_DIRECTORY_COMPANIES = [
     {"name": "Formstack", "gh_board": "formstack", "region": "Worldwide"},
     {"name": "WebFX", "gh_board": "webfx", "region": "Worldwide"},
     {"name": "Auth0", "gh_board": "auth0", "region": "Worldwide"},
-    {"name": "Elastic", "gh_board": "elastic", "region": "Worldwide"},
-    {"name": "HumanIntelligence", "workable_board": "humanintelligence", "region": "Worldwide Remote"},
-    {"name": "Pavago", "workable_board": "pavago", "region": "Worldwide Remote"},
-    {"name": "Fasttrack Business Holdings", "region": "Worldwide Remote"}
+    {"name": "Elastic", "gh_board": "elastic", "region": "Worldwide"}
 ]
 
 def query_remote_companies_directory():
@@ -50,24 +51,26 @@ def query_remote_companies_directory():
                     for item in data.get("jobs", []):
                         title = item.get("title", "")
                         content = item.get("content", "")
-                        jobs.append({
-                            "raw_id": f"gh-{board}-{item.get('id')}",
-                            "title": title,
-                            "company": c_name,
-                            "location": item.get("location", {}).get("name") or region,
-                            "remote_eligibility": "Open Globally",
-                            "work_mode": "100% Remote",
-                            "salary": "Competitive Market Rate",
-                            "employment_type": "Full-Time Remote",
-                            "experience_req": "3+ years",
-                            "description": content,
-                            "posted_date_raw": item.get("updated_at"),
-                            "source": f"{c_name} Careers (Greenhouse)",
-                            "app_url": item.get("absolute_url"),
-                            "original_url": item.get("absolute_url"),
-                            "source_type": "greenhouse_public_api"
-                        })
-            except Exception as e:
+                        # ONLY accept if GHL is explicitly in title or content
+                        if GHL_CHECK_REGEX.search(title) or GHL_CHECK_REGEX.search(content):
+                            jobs.append({
+                                "raw_id": f"gh-{board}-{item.get('id')}",
+                                "title": title,
+                                "company": c_name,
+                                "location": item.get("location", {}).get("name") or region,
+                                "remote_eligibility": "Open Globally",
+                                "work_mode": "100% Remote",
+                                "salary": "Competitive Market Rate",
+                                "employment_type": "Full-Time Remote",
+                                "experience_req": "3+ years",
+                                "description": content,
+                                "posted_date_raw": item.get("updated_at"),
+                                "source": f"{c_name} Careers (Greenhouse)",
+                                "app_url": item.get("absolute_url"),
+                                "original_url": item.get("absolute_url"),
+                                "source_type": "greenhouse_public_api"
+                            })
+            except Exception:
                 pass
 
         # 2. Check Lever Public API
@@ -81,25 +84,27 @@ def query_remote_companies_directory():
                     for item in data:
                         title = item.get("text", "")
                         desc = item.get("descriptionPlain", "") or item.get("description", "")
-                        categories = item.get("categories", {})
-                        jobs.append({
-                            "raw_id": f"lever-{board}-{item.get('id')}",
-                            "title": title,
-                            "company": c_name,
-                            "location": categories.get("location") or region,
-                            "remote_eligibility": "Open Globally",
-                            "work_mode": "100% Remote",
-                            "salary": "Competitive Market Rate",
-                            "employment_type": categories.get("commitment") or "Full-Time",
-                            "experience_req": "3+ years",
-                            "description": desc,
-                            "posted_date_raw": item.get("createdAt"),
-                            "source": f"{c_name} Careers (Lever)",
-                            "app_url": item.get("hostedUrl") or item.get("applyUrl"),
-                            "original_url": item.get("hostedUrl"),
-                            "source_type": "lever_public_api"
-                        })
-            except Exception as e:
+                        # ONLY accept if GHL is explicitly in title or description
+                        if GHL_CHECK_REGEX.search(title) or GHL_CHECK_REGEX.search(desc):
+                            categories = item.get("categories", {})
+                            jobs.append({
+                                "raw_id": f"lever-{board}-{item.get('id')}",
+                                "title": title,
+                                "company": c_name,
+                                "location": categories.get("location") or region,
+                                "remote_eligibility": "Open Globally",
+                                "work_mode": "100% Remote",
+                                "salary": "Competitive Market Rate",
+                                "employment_type": categories.get("commitment") or "Full-Time",
+                                "experience_req": "3+ years",
+                                "description": desc,
+                                "posted_date_raw": item.get("createdAt"),
+                                "source": f"{c_name} Careers (Lever)",
+                                "app_url": item.get("hostedUrl") or item.get("applyUrl"),
+                                "original_url": item.get("hostedUrl"),
+                                "source_type": "lever_public_api"
+                            })
+            except Exception:
                 pass
 
     return jobs
