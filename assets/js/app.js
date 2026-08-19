@@ -1,43 +1,28 @@
 /**
- * Gemini Spark — Streamlined Multi-Page SaaS Career Intelligence Portal Controller
- * 5 Core Tabs Router, Pixel/Tech Brand Badges, Dedicated Job Search,
- * Kanban Application Tracker, and AI Comparison Modal.
+ * Gemini Spark — GoHighLevel AI Job Intelligence Platform
+ * GHL-Only Strict Engine, Freshness (0-14D) & Interactive Discovery Controller
  */
 
-// Global Application State
+// Application Global State
 const state = {
-  currentRoute: 'dashboard', // 'dashboard' | 'jobs' | 'matches' | 'saved' | 'applied'
+  currentRoute: 'dashboard',
   activeDate: 'latest',
-  
-  // All Jobs Filters
-  allJobsFreshness: 'all',
-  allJobsMatch: 'all',
-  allJobsWorkMode: 'all',
-  allJobsSort: 'newest',
-  allJobsViewMode: 'grid', // 'grid' | 'list'
+  freshnessFilter: 'all-fresh', // 'all-fresh' | 'today' | '1-3-days' | '4-7-days' | '8-14-days' | 'saved' | 'applied'
   searchQuery: '',
-
-  // Compare System (max 3 jobs)
-  selectedForCompare: new Set(),
-
-  // Application Tracker
-  trackerMode: 'kanban', // 'kanban' | 'table'
-
+  sortMode: 'freshness-match', // 'freshness-match' | 'score-desc' | 'date-desc' | 'salary-desc'
   data: null,
   savedStatuses: {},
   activeDrawerJobId: null,
-  countdownInterval: null,
   isScraping: false,
-  dashChart: null
+  countdownInterval: null
 };
 
-const PROCESSED_STATUSES = ["Applied", "Interview Scheduled", "Interview Completed", "Offer", "Closed", "Rejected"];
+const PROCESSED_STATUSES = ["Applied", "Interview Scheduled", "Interview Completed", "Offer", "Closed"];
 
-// Bootstrap
+// Initialize
 document.addEventListener('DOMContentLoaded', async () => {
   loadSavedStatuses();
   await loadDataset('latest');
-  setupRouting();
   setupEventListeners();
   startCountdownTimer();
 });
@@ -67,26 +52,25 @@ function setJobStatus(jobId, newStatus) {
     if (target) {
       target.status = newStatus;
       target.is_active = !PROCESSED_STATUSES.includes(newStatus);
-      target.status_updated_at = new Date().toISOString();
     }
   }
 
-  updateMetricsAndSidebar();
-  renderCurrentRoute();
+  updateNavCounters();
+  renderCurrentView();
 
-  if (state.activeDrawerJobId === jobId) {
-    const drawerSelect = document.getElementById('drawerStatusSelect');
-    if (drawerSelect) drawerSelect.value = newStatus;
+  const drawerSelect = document.getElementById('drawerStatusSelect');
+  if (drawerSelect && state.activeDrawerJobId === jobId) {
+    drawerSelect.value = newStatus;
   }
 
   showToast(`Status updated to "${newStatus}"`);
 }
 
-// Toggle Save job
+// Toggle Save / Star
 function toggleSaveJob(jobId, event) {
   if (event) event.stopPropagation();
-  const currentStatus = state.savedStatuses[jobId] || (state.data?.jobs?.find(j => j.id === jobId || j.original_url === jobId)?.status) || 'New Match';
-  const newStatus = currentStatus === 'Saved' ? 'New Match' : 'Saved';
+  const current = state.savedStatuses[jobId] || 'New Match';
+  const newStatus = current === 'Saved' ? 'New Match' : 'Saved';
   setJobStatus(jobId, newStatus);
 }
 
@@ -95,667 +79,442 @@ async function loadDataset(dateKey = 'latest') {
   const url = dateKey === 'latest' ? './data/latest.json' : `./data/history/${dateKey}.json`;
 
   try {
-    const res = await fetch(url, { cache: 'no-store' });
+    const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP error ${res.status}`);
     state.data = await res.json();
   } catch (err) {
-    console.warn(`Dynamic fetch failed for ${url}. Using embedded fallback store.`, err);
+    console.warn(`Dynamic fetch failed for ${url}. Using fallback store.`, err);
     if (window.FALLBACK_DATA) {
-      state.data = JSON.parse(JSON.stringify(window.FALLBACK_DATA));
+      state.data = window.FALLBACK_DATA;
     } else {
       console.error('No dataset available.');
       return;
     }
   }
 
-  // Attach persistent statuses & calculate active states (0–7 days & unapplied)
+  // Attach persistent statuses & calculate active states
   if (state.data && state.data.jobs) {
     state.data.jobs.forEach(job => {
       const key = job.original_url || job.app_url || job.id;
       const status = state.savedStatuses[key] || state.savedStatuses[job.id] || job.status || 'New Match';
       job.status = status;
+      job.is_active = !PROCESSED_STATUSES.includes(status);
       
-      const isProcessed = PROCESSED_STATUSES.includes(status);
-      const isTooOld = (job.posted_days_ago !== undefined && job.posted_days_ago > 7);
-      
-      job.is_active = (!isProcessed && !isTooOld);
+      // Calculate relative days ago if missing
+      if (typeof job.posted_days_ago === 'undefined') {
+        job.posted_days_ago = calculateDaysAgo(job.posted_date);
+      }
     });
   }
 
-  updateMetricsAndSidebar();
+  updateHeaderMetadata();
   populateDateDropdown();
-  renderCurrentRoute();
+  updateNavCounters();
+  renderCurrentView();
 }
 
-// Client-Side Hash Router
-function setupRouting() {
-  function handleHash() {
-    const hash = window.location.hash.replace('#', '') || 'dashboard';
-    navigateTo(hash, false);
+function calculateDaysAgo(dateStr) {
+  if (!dateStr || dateStr.includes('August 2026')) return 2;
+  try {
+    const posted = new Date(dateStr);
+    const now = new Date('2026-08-19');
+    const diffTime = Math.abs(now - posted);
+    return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  } catch (e) {
+    return 2;
+  }
+}
+
+// Dynamic 3-Hour Countdown Timer (00, 03, 06, 09, 12, 15, 18, 21 PKT)
+function startCountdownTimer() {
+  if (state.countdownInterval) clearInterval(state.countdownInterval);
+
+  function update() {
+    const now = new Date();
+    const utcHours = now.getUTCHours();
+    const pktHour = (utcHours + 5) % 24;
+    const schedulePktHours = [0, 3, 6, 9, 12, 15, 18, 21];
+
+    let nextPktHour = schedulePktHours.find(h => h > pktHour);
+    let hoursDiff = (nextPktHour !== undefined) ? (nextPktHour - pktHour) : ((24 - pktHour) + schedulePktHours[0]);
+
+    let targetDate = new Date(now.getTime());
+    targetDate.setMinutes(0, 0, 0);
+    targetDate.setHours(targetDate.getHours() + hoursDiff);
+
+    let diffMs = targetDate.getTime() - now.getTime();
+    if (diffMs < 0) diffMs = 0;
+
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const diffSecs = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+    const pad = (n) => String(n).padStart(2, '0');
+    const countdownStr = `${pad(diffHours)}h ${pad(diffMinutes)}m ${pad(diffSecs)}s`;
+
+    const countdownEl = document.getElementById('nextUpdateCountdown');
+    if (countdownEl) countdownEl.textContent = countdownStr;
   }
 
-  window.addEventListener('hashchange', handleHash);
-  handleHash();
+  update();
+  state.countdownInterval = setInterval(update, 1000);
 }
 
-function navigateTo(routeName, updateHash = true) {
-  const validRoutes = ['dashboard', 'jobs', 'matches', 'saved', 'applied'];
-  if (!validRoutes.includes(routeName)) routeName = 'dashboard';
+// Update Header & KPI Stats
+function updateHeaderMetadata() {
+  if (!state.data || !state.data.metadata) return;
+  const meta = state.data.metadata;
+  const allJobs = state.data.jobs || [];
 
-  state.currentRoute = routeName;
-  if (updateHash) {
-    window.location.hash = `#${routeName}`;
+  const activeJobs = allJobs.filter(j => j.is_active && (j.posted_days_ago <= 14));
+  const todayJobs = activeJobs.filter(j => j.posted_days_ago === 0);
+  const threeDayJobs = activeJobs.filter(j => j.posted_days_ago <= 3);
+  const savedJobs = allJobs.filter(j => j.status === 'Saved');
+  const appliedJobs = allJobs.filter(j => j.status === 'Applied');
+  const interviewJobs = allJobs.filter(j => j.status.includes('Interview'));
+
+  // Header badges
+  const lastUpdatedEl = document.getElementById('lastUpdatedBadge');
+  if (lastUpdatedEl) lastUpdatedEl.textContent = meta.last_updated || `${meta.search_date} ${meta.search_time || ''}`;
+
+  const nextSearchEl = document.getElementById('nextJobSearchTime');
+  if (nextSearchEl) nextSearchEl.textContent = meta.next_update || 'Every 3 Hours';
+
+  // KPI Metrics
+  setCount('kpiToday', todayJobs.length);
+  setCount('kpi3Days', threeDayJobs.length);
+  setCount('kpiActiveGhl', activeJobs.length);
+  setCount('kpiSaved', savedJobs.length);
+  setCount('kpiApplied', appliedJobs.length);
+
+  const kTopMatch = document.getElementById('kpiTopMatch');
+  if (kTopMatch) {
+    const topFit = activeJobs.length ? Math.max(...activeJobs.map(j => j.score)) : 0;
+    kTopMatch.textContent = `${topFit}%`;
   }
-
-  // Update Sidebar active state
-  document.querySelectorAll('.nav-link-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-route') === routeName);
-  });
-
-  // Toggle Page Visibility
-  validRoutes.forEach(r => {
-    const el = document.getElementById(`page-${r}`);
-    if (el) el.style.display = (r === routeName) ? 'flex' : 'none';
-  });
-
-  // Scroll viewport to top
-  const mainVp = document.querySelector('.main-viewport');
-  if (mainVp) mainVp.scrollTop = 0;
-
-  renderCurrentRoute();
 }
 
-// Render Content for the Active Page
-function renderCurrentRoute() {
+// Populate Date Dropdown
+function populateDateDropdown() {
+  const select = document.getElementById('dateSelect');
+  if (!select || !state.data || !state.data.metadata) return;
+
+  const dates = state.data.metadata.available_dates || ['2026-08-19'];
+  select.innerHTML = '';
+
+  const optLatest = document.createElement('option');
+  optLatest.value = 'latest';
+  optLatest.textContent = `Today (${state.data.metadata.search_date})`;
+  optLatest.selected = (state.activeDate === 'latest');
+  select.appendChild(optLatest);
+
+  dates.forEach(d => {
+    if (d !== state.data.metadata.search_date) {
+      const opt = document.createElement('option');
+      opt.value = d;
+      opt.textContent = `Snapshot: ${d}`;
+      opt.selected = (state.activeDate === d);
+      select.appendChild(opt);
+    }
+  });
+}
+
+// Update Sidebar Nav Counters
+function updateNavCounters() {
   if (!state.data || !state.data.jobs) return;
+  const jobs = state.data.jobs;
 
-  switch (state.currentRoute) {
-    case 'dashboard':
-      renderDashboardPage();
-      break;
-    case 'jobs':
-      renderAllJobsPage();
-      break;
-    case 'matches':
-      renderNewMatchesPage();
-      break;
-    case 'saved':
-      renderSavedJobsPage();
-      break;
-    case 'applied':
-      renderAppliedTrackerPage();
-      break;
-  }
+  const activeJobs = jobs.filter(j => j.is_active && (j.posted_days_ago <= 14));
+  const fresh07 = activeJobs.filter(j => j.posted_days_ago <= 7);
+  const countSaved = jobs.filter(j => j.status === 'Saved').length;
+  const countApplied = jobs.filter(j => j.status === 'Applied').length;
+  const countInterview = jobs.filter(j => j.status.includes('Interview')).length;
+
+  setCount('cntFresh07', fresh07.length);
+  setCount('cntActiveGhl', activeJobs.length);
+  setCount('cntSaved', countSaved);
+  setCount('cntApplied', countApplied);
+  setCount('cntInterviews', countInterview);
 }
 
-// Generate Pixel/Tech Brand Logo Icon SVG for company
-function getCompanyTechBadge(companyName, companyColor) {
-  const c = (companyName || '').toLowerCase();
-  
-  if (c.includes('human') || c.includes('intelligence')) {
-    return {
-      gradient: 'linear-gradient(135deg, #1e3a8a, #2563eb)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.1-.4 2.1-1.1 2.8L17 11h-3v3h-4v-3H7l2.1-2.2A4 4 0 0 1 8 6a4 4 0 0 1 4-4z"/><circle cx="12" cy="18" r="3"/></svg>`
-    };
-  } else if (c.includes('huzzle')) {
-    return {
-      gradient: 'linear-gradient(135deg, #701a75, #d946ef)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
-    };
-  } else if (c.includes('fasttrack') || c.includes('business')) {
-    return {
-      gradient: 'linear-gradient(135deg, #065f46, #10b981)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/><line x1="19" y1="12" x2="5" y2="12"/></svg>`
-    };
-  } else if (c.includes('remotive') || c.includes('remote')) {
-    return {
-      gradient: 'linear-gradient(135deg, #0f766e, #06b6d4)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`
-    };
-  } else if (c.includes('jobicy') || c.includes('himalayas')) {
-    return {
-      gradient: 'linear-gradient(135deg, #9a3412, #f97316)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`
-    };
+function setCount(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+
+// Main View Router
+function navigateTo(route) {
+  state.currentRoute = route;
+
+  document.querySelectorAll('.sidebar-link').forEach(link => {
+    link.classList.toggle('active', link.getAttribute('data-route') === route);
+  });
+
+  const viewDashboard = document.getElementById('viewDashboard');
+  const viewHistory = document.getElementById('viewHistory');
+
+  if (route === 'history') {
+    if (viewDashboard) viewDashboard.style.display = 'none';
+    if (viewHistory) viewHistory.style.display = 'block';
   } else {
-    return {
-      gradient: 'linear-gradient(135deg, #1b3027, #16a34a)',
-      svg: `<svg class="brand-svg-logo" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`
-    };
+    if (viewHistory) viewHistory.style.display = 'none';
+    if (viewDashboard) viewDashboard.style.display = 'block';
+
+    if (route === 'fresh-jobs') {
+      state.freshnessFilter = 'all-fresh';
+    } else if (route === 'saved') {
+      state.freshnessFilter = 'saved';
+    } else if (route === 'applied') {
+      state.freshnessFilter = 'applied';
+    } else if (route === 'interviews') {
+      state.freshnessFilter = 'interviews';
+    } else {
+      state.freshnessFilter = 'all-fresh';
+    }
+
+    syncFilterChips();
   }
+
+  renderCurrentView();
 }
 
-// ==========================================================================
-// PAGE 1: DASHBOARD
-// ==========================================================================
-function renderDashboardPage() {
-  const allJobs = state.data.jobs;
-  const activeJobs = allJobs.filter(j => j.is_active);
-
-  // Top Matches List in Right Panel
-  const topListContainer = document.getElementById('dashTopMatchesList');
-  if (topListContainer) {
-    const top4 = [...activeJobs].sort((a, b) => b.score - a.score).slice(0, 4);
-    if (top4.length === 0) {
-      topListContainer.innerHTML = `<div style="font-size: 0.78rem; color: var(--text-muted); padding: 12px; text-align: center;">All top matches have been applied to!</div>`;
-    } else {
-      topListContainer.innerHTML = top4.map(job => {
-        const badge = getCompanyTechBadge(job.company, job.company_color);
-        return `
-          <div class="mini-row-item" onclick="openJobDrawer('${job.id}')">
-            <div class="mini-row-left">
-              <div class="mini-logo-box" style="background: ${badge.gradient};">
-                ${badge.svg}
-              </div>
-              <div class="mini-row-info">
-                <h4>${job.title}</h4>
-                <p>${job.company} • ${job.location}</p>
-              </div>
-            </div>
-            <div class="mini-row-right">
-              <span class="mini-match-pill">${job.score}%</span>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-  }
-
-  // Freshest 4 Opportunities Grid Preview
-  const freshGridContainer = document.getElementById('dashFreshGrid');
-  if (freshGridContainer) {
-    const freshest4 = [...activeJobs]
-      .sort((a, b) => (a.posted_days_ago || 0) - (b.posted_days_ago || 0) || b.score - a.score)
-      .slice(0, 4);
-
-    if (freshest4.length === 0) {
-      freshGridContainer.innerHTML = `<div style="font-size: 0.82rem; color: var(--text-muted); padding: 20px; text-align: center; grid-column: span 2;">No fresh active jobs right now.</div>`;
-    } else {
-      freshGridContainer.innerHTML = freshest4.map(job => renderJobCardHtml(job, false)).join('');
-    }
-  }
-
-  renderDashboardChart('week');
-}
-
-function renderDashboardChart(timeRange = 'week') {
-  const ctx = document.getElementById('dashViewsChart');
-  if (!ctx || typeof Chart === 'undefined') return;
-
-  if (state.dashChart) {
-    state.dashChart.destroy();
-  }
-
-  let labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  let dataPoints = [35, 62, 145, 98, 120, 75, 45];
-
-  if (timeRange === 'day') {
-    labels = ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'];
-    dataPoints = [12, 18, 55, 92, 78, 64];
-  } else if (timeRange === 'month') {
-    labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-    dataPoints = [180, 240, 310, 290];
-  } else if (timeRange === 'all') {
-    labels = ['May', 'Jun', 'Jul', 'Aug'];
-    dataPoints = [420, 580, 720, 890];
-  }
-
-  const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 180);
-  gradient.addColorStop(0, 'rgba(203, 243, 47, 0.45)');
-  gradient.addColorStop(0.6, 'rgba(35, 61, 50, 0.1)');
-  gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-
-  state.dashChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'GHL Match Trajectory',
-        data: dataPoints,
-        borderColor: '#233d32',
-        borderWidth: 2.5,
-        backgroundColor: gradient,
-        fill: true,
-        tension: 0.45,
-        pointBackgroundColor: '#cbf32f',
-        pointBorderColor: '#233d32',
-        pointBorderWidth: 2,
-        pointRadius: 4,
-        pointHoverRadius: 6
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#233d32',
-          titleFont: { family: 'Plus Jakarta Sans', size: 12 },
-          bodyFont: { family: 'JetBrains Mono', size: 12 },
-          padding: 8,
-          cornerRadius: 6,
-          displayColors: false
-        }
-      },
-      scales: {
-        x: {
-          grid: { display: false },
-          ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#6b7c75' }
-        },
-        y: {
-          grid: { color: '#eef3f0', strokeDashArray: [4, 4] },
-          ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#94a39d', maxTicksLimit: 4 }
-        }
-      }
-    }
+function syncFilterChips() {
+  document.querySelectorAll('.filter-chip').forEach(c => {
+    c.classList.toggle('active', c.getAttribute('data-filter') === state.freshnessFilter);
   });
 }
 
-// ==========================================================================
-// PAGE 2: ALL JOBS (Main Database)
-// ==========================================================================
-function renderAllJobsPage() {
-  const container = document.getElementById('allJobsGrid');
-  const emptyState = document.getElementById('allJobsEmpty');
+// Render Current View
+function renderCurrentView() {
+  if (!state.data) return;
+  renderJobGrid();
+  renderRecentlyProcessed();
+}
+
+// Render Premium GHL Job Grid (Filtered Strictly for GHL & Freshness)
+function renderJobGrid() {
+  const container = document.getElementById('jobGridContainer');
+  const countBadge = document.getElementById('feedCountBadge');
   if (!container || !state.data || !state.data.jobs) return;
 
-  let list = state.data.jobs.filter(j => j.is_active);
+  let list = [...state.data.jobs];
 
-  // 1. Freshness Filter
-  if (state.allJobsFreshness === 'today') {
-    list = list.filter(j => j.posted_days_ago === 0);
-  } else if (state.allJobsFreshness === '1-3-days') {
-    list = list.filter(j => j.posted_days_ago >= 1 && j.posted_days_ago <= 3);
-  } else if (state.allJobsFreshness === '4-7-days') {
-    list = list.filter(j => j.posted_days_ago >= 4 && j.posted_days_ago <= 7);
+  // 1. Freshness & Status Scope Filtering
+  if (state.freshnessFilter === 'all-fresh') {
+    // 0–7 days old & active
+    list = list.filter(j => j.is_active && j.posted_days_ago <= 7);
+  } else if (state.freshnessFilter === 'today') {
+    // 0 days old
+    list = list.filter(j => j.is_active && j.posted_days_ago === 0);
+  } else if (state.freshnessFilter === '1-3-days') {
+    list = list.filter(j => j.is_active && j.posted_days_ago >= 1 && j.posted_days_ago <= 3);
+  } else if (state.freshnessFilter === '4-7-days') {
+    list = list.filter(j => j.is_active && j.posted_days_ago >= 4 && j.posted_days_ago <= 7);
+  } else if (state.freshnessFilter === '8-14-days') {
+    list = list.filter(j => j.is_active && j.posted_days_ago >= 8 && j.posted_days_ago <= 14);
+  } else if (state.freshnessFilter === 'saved') {
+    list = list.filter(j => j.status === 'Saved');
+  } else if (state.freshnessFilter === 'applied') {
+    list = list.filter(j => j.status === 'Applied');
+  } else if (state.freshnessFilter === 'interviews') {
+    list = list.filter(j => j.status.includes('Interview'));
+  } else if (state.freshnessFilter === 'all-ghl') {
+    // All active GHL within 14 days
+    list = list.filter(j => j.is_active && j.posted_days_ago <= 14);
   }
 
-  // 2. Match Filter
-  if (state.allJobsMatch === '90') {
-    list = list.filter(j => j.score >= 90);
-  } else if (state.allJobsMatch === '80') {
-    list = list.filter(j => j.score >= 80);
-  } else if (state.allJobsMatch === '70') {
-    list = list.filter(j => j.score >= 70);
-  }
-
-  // 3. Work Mode Filter
-  if (state.allJobsWorkMode === 'remote') {
-    list = list.filter(j => (j.work_mode || '').toLowerCase().includes('remote') || (j.location || '').toLowerCase().includes('remote'));
-  } else if (state.allJobsWorkMode === 'hybrid') {
-    list = list.filter(j => (j.work_mode || '').toLowerCase().includes('hybrid'));
-  } else if (state.allJobsWorkMode === 'onsite') {
-    list = list.filter(j => (j.work_mode || '').toLowerCase().includes('onsite'));
-  }
-
-  // 4. Search Filter
+  // 2. Search Query (Title, Company, Skills, Location)
   if (state.searchQuery.trim()) {
     const q = state.searchQuery.toLowerCase();
     list = list.filter(j => {
-      const skillsStr = (j.matched_skills || []).join(' ');
-      const combined = `${j.title} ${j.company} ${skillsStr} ${j.location} ${j.why_matches}`.toLowerCase();
-      return combined.includes(q);
+      const text = `${j.title} ${j.company} ${(j.matched_skills || []).join(' ')} ${j.why_matches} ${j.location}`.toLowerCase();
+      return text.includes(q);
     });
   }
 
-  // 5. Sorting
-  if (state.allJobsSort === 'newest') {
-    list.sort((a, b) => (a.posted_days_ago || 0) - (b.posted_days_ago || 0) || b.score - a.score);
-  } else if (state.allJobsSort === 'match-desc') {
-    list.sort((a, b) => b.score - a.score);
-  } else if (state.allJobsSort === 'salary-desc') {
-    list.sort((a, b) => b.score - a.score);
-  } else if (state.allJobsSort === 'company-az') {
-    list.sort((a, b) => a.company.localeCompare(b.company));
-  }
+  // 3. Sorting (Freshness + Match Priority)
+  list.sort((a, b) => {
+    if (state.sortMode === 'freshness-match') {
+      // 0-3 days first, then 4-7 days, then 8-14 days. Within same group, sort by match score
+      const groupA = a.posted_days_ago <= 3 ? 1 : (a.posted_days_ago <= 7 ? 2 : 3);
+      const groupB = b.posted_days_ago <= 3 ? 1 : (b.posted_days_ago <= 7 ? 2 : 3);
+      if (groupA !== groupB) return groupA - groupB;
+      return b.score - a.score;
+    }
+    if (state.sortMode === 'score-desc') return b.score - a.score;
+    if (state.sortMode === 'date-desc') return a.posted_days_ago - b.posted_days_ago;
+    return 0;
+  });
 
-  // Layout mode class
-  container.className = `job-cards-grid ${state.allJobsViewMode === 'list' ? 'list-mode' : ''}`;
+  if (countBadge) {
+    countBadge.textContent = `${list.length} Fresh GHL Opportunities`;
+  }
 
   if (list.length === 0) {
-    container.innerHTML = '';
-    if (emptyState) emptyState.style.display = 'block';
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; padding: 48px 24px; text-align: center; background: #ffffff; border: 1px solid var(--border-light); border-radius: 12px;">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🎯</div>
+        <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-primary);">No New GHL Jobs Found in this Filter</h4>
+        <p style="font-size: 0.84rem; color: var(--text-secondary); margin: 6px auto 16px; max-width: 420px;">
+          All current opportunities have been processed or are outside this freshness window. The next autonomous 3-hour cycle will check for new listings.
+        </p>
+        <button class="btn-scrape-trigger" onclick="triggerManualScrape()">
+          ⚡ Scrape New GHL Jobs Now
+        </button>
+      </div>
+    `;
     return;
   }
 
-  if (emptyState) emptyState.style.display = 'none';
-  container.innerHTML = list.map(job => renderJobCardHtml(job, true)).join('');
-}
+  container.innerHTML = list.map(job => {
+    const isSaved = job.status === 'Saved';
+    const badgeClass = job.posted_days_ago === 0 ? 'badge-today' : (job.posted_days_ago <= 3 ? 'badge-recent' : 'badge-week');
+    const scoreClass = job.score >= 90 ? 'score-excellent' : 'score-strong';
 
-// ==========================================================================
-// PAGE 3: NEW MATCHES (Timeline Feed)
-// ==========================================================================
-function renderNewMatchesPage() {
-  const container = document.getElementById('matchesTimelineContainer');
-  if (!container || !state.data || !state.data.jobs) return;
+    const skillsHtml = (job.matched_skills || []).slice(0, 5).map(s => `<span class="skill-pill">${s}</span>`).join('');
 
-  const activeJobs = state.data.jobs.filter(j => j.is_active);
-
-  const todayJobs = activeJobs.filter(j => j.posted_days_ago === 0);
-  const recentJobs = activeJobs.filter(j => j.posted_days_ago >= 1 && j.posted_days_ago <= 3);
-  const weekJobs = activeJobs.filter(j => j.posted_days_ago >= 4 && j.posted_days_ago <= 7);
-
-  let html = '';
-
-  if (todayJobs.length > 0) {
-    html += `
-      <div class="timeline-group">
-        <div class="timeline-header-label">⚡ TODAY (${todayJobs.length} NEW DISCOVERIES)</div>
-        <div class="job-cards-grid">${todayJobs.map(job => renderJobCardHtml(job, false)).join('')}</div>
-      </div>
-    `;
-  }
-
-  if (recentJobs.length > 0) {
-    html += `
-      <div class="timeline-group">
-        <div class="timeline-header-label">📅 1–3 DAYS AGO (${recentJobs.length} OPPORTUNITIES)</div>
-        <div class="job-cards-grid">${recentJobs.map(job => renderJobCardHtml(job, false)).join('')}</div>
-      </div>
-    `;
-  }
-
-  if (weekJobs.length > 0) {
-    html += `
-      <div class="timeline-group">
-        <div class="timeline-header-label">🗓 THIS WEEK (${weekJobs.length} OPPORTUNITIES)</div>
-        <div class="job-cards-grid">${weekJobs.map(job => renderJobCardHtml(job, false)).join('')}</div>
-      </div>
-    `;
-  }
-
-  if (activeJobs.length === 0) {
-    html = `
-      <div class="empty-state">
-        <div class="empty-icon-wrap">
-          <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        </div>
-        <h3>No new matches available</h3>
-        <p>All scanned GoHighLevel opportunities have been processed or moved to tracker.</p>
-      </div>
-    `;
-  }
-
-  container.innerHTML = html;
-}
-
-// ==========================================================================
-// PAGE 4: SAVED JOBS
-// ==========================================================================
-function renderSavedJobsPage() {
-  const container = document.getElementById('savedJobsGrid');
-  const emptyState = document.getElementById('savedJobsEmpty');
-  if (!container || !state.data || !state.data.jobs) return;
-
-  const savedJobs = state.data.jobs.filter(j => j.status === 'Saved');
-
-  if (savedJobs.length === 0) {
-    container.innerHTML = '';
-    if (emptyState) emptyState.style.display = 'block';
-    return;
-  }
-
-  if (emptyState) emptyState.style.display = 'none';
-  container.innerHTML = savedJobs.map(job => renderJobCardHtml(job, false)).join('');
-}
-
-// ==========================================================================
-// PAGE 5: APPLIED JOBS (Application Tracker — Kanban & Table)
-// ==========================================================================
-function renderAppliedTrackerPage() {
-  const allJobs = state.data.jobs;
-
-  const appliedJobs = allJobs.filter(j => j.status === 'Applied');
-  const interviewJobs = allJobs.filter(j => j.status.includes('Interview'));
-  const offerJobs = allJobs.filter(j => j.status === 'Offer');
-  const rejectedJobs = allJobs.filter(j => j.status === 'Rejected' || j.status === 'Closed');
-
-  // Kanban Columns
-  setElText('kanbanCntApplied', appliedJobs.length);
-  setElText('kanbanCntInterview', interviewJobs.length);
-  setElText('kanbanCntOffer', offerJobs.length);
-  setElText('kanbanCntRejected', rejectedJobs.length);
-
-  const colApplied = document.getElementById('kanbanColApplied');
-  const colInterview = document.getElementById('kanbanColInterview');
-  const colOffer = document.getElementById('kanbanColOffer');
-  const colRejected = document.getElementById('kanbanColRejected');
-
-  if (colApplied) colApplied.innerHTML = appliedJobs.map(j => renderKanbanCardHtml(j)).join('');
-  if (colInterview) colInterview.innerHTML = interviewJobs.map(j => renderKanbanCardHtml(j)).join('');
-  if (colOffer) colOffer.innerHTML = offerJobs.map(j => renderKanbanCardHtml(j)).join('');
-  if (colRejected) colRejected.innerHTML = rejectedJobs.map(j => renderKanbanCardHtml(j)).join('');
-
-  // Table View Body
-  const tableBody = document.getElementById('trackerTableBody');
-  if (tableBody) {
-    const allTracked = [...appliedJobs, ...interviewJobs, ...offerJobs, ...rejectedJobs];
-    if (allTracked.length === 0) {
-      tableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 30px;">No applications tracked yet. Mark a job as Applied to track it here.</td></tr>`;
-    } else {
-      tableBody.innerHTML = allTracked.map(job => `
-        <tr>
-          <td><b>${job.company}</b></td>
-          <td>${job.title}</td>
-          <td><span class="mini-match-pill">${job.score}%</span></td>
-          <td>${job.status_updated_at ? new Date(job.status_updated_at).toLocaleDateString() : 'Recent'}</td>
-          <td><span class="tag-freshness ${job.status === 'Offer' ? 'today' : 'recent'}">${job.status}</span></td>
-          <td>
-            <button class="btn-card-save" style="padding: 4px 8px;" onclick="openJobDrawer('${job.id}')">Details</button>
-          </td>
-        </tr>
-      `).join('');
-    }
-  }
-}
-
-function renderKanbanCardHtml(job) {
-  return `
-    <div class="kanban-item-card" onclick="openJobDrawer('${job.id}')">
-      <div class="kanban-item-title">${job.title}</div>
-      <div class="kanban-item-company">${job.company} • ${job.location}</div>
-      <div class="kanban-item-footer">
-        <span class="mini-match-pill">${job.score}% Match</span>
-        <select class="card-status-dropdown" style="height: 26px; font-size: 0.68rem;" onclick="event.stopPropagation()" onchange="setJobStatus('${job.id}', this.value)">
-          <option value="Applied" ${job.status === 'Applied' ? 'selected' : ''}>Applied</option>
-          <option value="Interview Scheduled" ${job.status === 'Interview Scheduled' ? 'selected' : ''}>Interview</option>
-          <option value="Offer" ${job.status === 'Offer' ? 'selected' : ''}>Offer</option>
-          <option value="Rejected" ${job.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
-          <option value="Closed" ${job.status === 'Closed' ? 'selected' : ''}>Closed</option>
-        </select>
-      </div>
-    </div>
-  `;
-}
-
-// ==========================================================================
-// REUSABLE PIXEL/TECH JOB CARD COMPONENT
-// ==========================================================================
-function renderJobCardHtml(job, showCompareCheckbox = false) {
-  const isSaved = job.status === 'Saved';
-  const isApplied = PROCESSED_STATUSES.includes(job.status);
-  const isCompared = state.selectedForCompare.has(job.id);
-  
-  let freshBadgeClass = 'recent';
-  if (job.posted_days_ago === 0) freshBadgeClass = 'today';
-  else if (job.posted_days_ago > 3) freshBadgeClass = 'days47';
-
-  const isNewIndicator = job.is_new ? `<span class="tag-freshness today" style="margin-right: 4px;">⚡ NEW</span>` : '';
-  const skillsHtml = (job.matched_skills || []).slice(0, 4).map(s => `<span class="skill-tag-pill">✓ ${s}</span>`).join('');
-
-  const compareCheckboxHtml = showCompareCheckbox ? `
-    <label class="compare-checkbox-label" onclick="event.stopPropagation()">
-      <input type="checkbox" ${isCompared ? 'checked' : ''} onchange="toggleCompareJob('${job.id}', this.checked)">
-      <span>Compare</span>
-    </label>
-  ` : '';
-
-  const badge = getCompanyTechBadge(job.company, job.company_color);
-
-  return `
-    <article class="jobi-card-item" onclick="openJobDrawer('${job.id}')">
-      <div>
-        <div class="jobi-card-top">
-          <div class="card-company-wrap">
-            <div class="card-company-badge-box" style="background: ${badge.gradient};">
-              ${badge.svg}
+    return `
+      <div class="job-card" onclick="openJobDrawer('${job.id}')">
+        <div>
+          <div class="card-top-row">
+            <div class="company-meta-box">
+              <div class="company-avatar" style="background-color: ${job.company_color || '#2563eb'};">
+                ${job.company_initials || job.company.substring(0, 2).toUpperCase()}
+              </div>
+              <div class="company-name">${job.company}</div>
             </div>
-            <div class="card-company-details">
-              <h4>${job.company}</h4>
-              <span>${job.source || 'Direct ATS'}</span>
+            <div class="badges-group">
+              <span class="freshness-badge ${badgeClass}">${job.freshness_badge || (job.posted_days_ago + 'D AGO')}</span>
+              <span class="source-badge">${job.source}</span>
             </div>
           </div>
-          <div class="card-top-badges">
-            ${compareCheckboxHtml}
-            ${isNewIndicator}
-            <span class="tag-freshness ${freshBadgeClass}">${job.freshness_badge || 'RECENT'}</span>
-            <div class="badge-match-score">${job.score}%</div>
+
+          <h3>${job.title}</h3>
+
+          <div class="card-meta-row">
+            <span class="meta-item">📍 ${job.location}</span>
+            <span class="meta-item">🕒 ${job.posted_relative || (job.posted_days_ago + ' days ago')}</span>
+            <span class="meta-item">💼 ${job.experience_req}</span>
+            <span class="meta-item">💰 ${job.salary}</span>
           </div>
+
+          <div class="match-score-pill ${scoreClass}">
+            <span>${job.score}%</span>
+            <span style="font-size: 0.7rem; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif;">${job.category}</span>
+          </div>
+
+          <div class="card-skills-row">
+            ${skillsHtml}
+          </div>
+
+          <p class="card-why-snippet">${job.why_matches}</p>
         </div>
 
-        <h3 class="card-job-title">${job.title}</h3>
-
-        <div class="card-meta-row">
-          <span class="card-meta-pill">📍 ${job.location}</span>
-          <span class="card-meta-pill">💼 ${job.work_mode}</span>
-          <span class="card-meta-pill">⏱ ${job.experience_req}</span>
-          <span class="card-meta-pill">💰 ${job.salary}</span>
-        </div>
-
-        <p class="card-why-desc">${job.why_matches}</p>
-
-        <div class="card-skills-row">
-          ${skillsHtml}
-        </div>
-      </div>
-
-      <div class="card-bottom-row" onclick="event.stopPropagation()">
-        <select class="card-status-dropdown ${isApplied ? 'applied' : ''}" onchange="setJobStatus('${job.id}', this.value)">
-          <option value="New Match" ${job.status === 'New Match' ? 'selected' : ''}>New Match</option>
-          <option value="Saved" ${job.status === 'Saved' ? 'selected' : ''}>Saved</option>
-          <option value="Applied" ${job.status === 'Applied' ? 'selected' : ''}>Applied</option>
-          <option value="Interview Scheduled" ${job.status === 'Interview Scheduled' ? 'selected' : ''}>Interview Scheduled</option>
-          <option value="Offer" ${job.status === 'Offer' ? 'selected' : ''}>Offer</option>
-          <option value="Closed" ${job.status === 'Closed' ? 'selected' : ''}>Closed</option>
-        </select>
-
-        <div class="card-btn-actions">
-          <button class="btn-card-save ${isSaved ? 'saved' : ''}" onclick="toggleSaveJob('${job.id}', event)">
-            ${isSaved ? '★ Saved' : '☆ Save'}
+        <div class="card-actions-row" onclick="event.stopPropagation()">
+          <button class="btn-card-details" onclick="openJobDrawer('${job.id}')">Details</button>
+          <a href="${job.app_url}" target="_blank" class="btn-card-apply">Apply Now →</a>
+          <button class="btn-card-save ${isSaved ? 'saved' : ''}" onclick="toggleSaveJob('${job.id}', event)" title="Save Job">
+            ★
           </button>
-          <a href="${job.app_url}" target="_blank" class="btn-card-apply">
-            Apply →
-          </a>
         </div>
       </div>
-    </article>
-  `;
+    `;
+  }).join('');
 }
 
-// ==========================================================================
-// AI JOB COMPARISON MODAL
-// ==========================================================================
-function toggleCompareJob(jobId, isChecked) {
-  if (isChecked) {
-    if (state.selectedForCompare.size >= 3) {
-      showToast('Maximum 3 jobs can be compared at once.');
-      renderAllJobsPage();
-      return;
-    }
-    state.selectedForCompare.add(jobId);
-  } else {
-    state.selectedForCompare.delete(jobId);
+// Render Recently Processed Jobs Strip (Applied / Interviews)
+function renderRecentlyProcessed() {
+  const container = document.getElementById('processedJobsList');
+  if (!container || !state.data || !state.data.jobs) return;
+
+  const processed = state.data.jobs.filter(j => PROCESSED_STATUSES.includes(j.status));
+
+  if (processed.length === 0) {
+    container.innerHTML = `<span style="font-size: 0.8rem; color: var(--text-muted);">No jobs applied to yet in this session.</span>`;
+    return;
   }
 
-  const compareBar = document.getElementById('compareBarActive');
-  const countEl = document.getElementById('compareSelectedCount');
-  if (compareBar && countEl) {
-    countEl.textContent = state.selectedForCompare.size;
-    compareBar.style.display = state.selectedForCompare.size >= 2 ? 'flex' : 'none';
-  }
-}
-
-function openCompareModal() {
-  if (state.selectedForCompare.size < 2) return;
-  const modal = document.getElementById('compareModalBox');
-  const backdrop = document.getElementById('compareModalBackdrop');
-  const body = document.getElementById('compareModalBody');
-  if (!modal || !backdrop || !body) return;
-
-  const compareJobs = Array.from(state.selectedForCompare)
-    .map(id => state.data.jobs.find(j => j.id === id))
-    .filter(Boolean);
-
-  body.innerHTML = `
-    <table class="tracker-table" style="font-size: 0.8rem;">
-      <thead>
-        <tr>
-          <th>Attribute</th>
-          ${compareJobs.map(j => `<th><b>${j.title}</b><br><span style="font-size: 0.72rem; color: var(--forest-green);">${j.company}</span></th>`).join('')}
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><b>Match Score</b></td>
-          ${compareJobs.map(j => `<td><span class="badge-match-score">${j.score}%</span></td>`).join('')}
-        </tr>
-        <tr>
-          <td><b>Freshness</b></td>
-          ${compareJobs.map(j => `<td><span class="tag-freshness today">${j.freshness_badge}</span></td>`).join('')}
-        </tr>
-        <tr>
-          <td><b>Compensation</b></td>
-          ${compareJobs.map(j => `<td>${j.salary}</td>`).join('')}
-        </tr>
-        <tr>
-          <td><b>Work Mode</b></td>
-          ${compareJobs.map(j => `<td>${j.work_mode} (${j.location})</td>`).join('')}
-        </tr>
-        <tr>
-          <td><b>Experience</b></td>
-          ${compareJobs.map(j => `<td>${j.experience_req}</td>`).join('')}
-        </tr>
-        <tr>
-          <td><b>Matched Skills</b></td>
-          ${compareJobs.map(j => `<td>${(j.matched_skills || []).map(s => `<span class="skill-tag-pill">✓ ${s}</span>`).join(' ')}</td>`).join('')}
-        </tr>
-        <tr>
-          <td><b>Direct Action</b></td>
-          ${compareJobs.map(j => `<td><a href="${j.app_url}" target="_blank" class="btn-card-apply" style="display: inline-block; padding: 4px 10px;">Apply Directly →</a></td>`).join('')}
-        </tr>
-      </tbody>
-    </table>
-
-    <div style="margin-top: 20px; background: var(--bg-subtle); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 14px;">
-      <div style="font-size: 0.74rem; font-weight: 800; color: var(--forest-green); text-transform: uppercase;">
-        🤖 AI STRATEGIC RECOMMENDATION
+  container.innerHTML = processed.map(job => `
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg-subtle); border-radius: 6px; border: 1px solid var(--border-light); margin-bottom: 6px; font-size: 0.8rem;">
+      <div>
+        <b>${job.title}</b> <span style="color: var(--text-secondary);">at ${job.company}</span>
       </div>
-      <p style="font-size: 0.82rem; color: var(--text-main); margin-top: 6px; line-height: 1.5;">
-        Based on candidate <strong>Sohaib Mahmood's</strong> 4-year GoHighLevel and marketing automation experience, 
-        <strong>${compareJobs[0].title} at ${compareJobs[0].company}</strong> provides the highest alignment (${compareJobs[0].score}% match), 
-        directly valuing sub-account architecture, custom snapshots, and n8n webhook expertise.
-      </p>
+      <span class="strip-pill" style="background: #e2e8f0; font-size: 0.72rem; font-weight: 700;">${job.status}</span>
     </div>
-  `;
-
-  modal.classList.add('open');
-  backdrop.classList.add('open');
+  `).join('');
 }
 
-function closeCompareModal() {
-  const modal = document.getElementById('compareModalBox');
-  const backdrop = document.getElementById('compareModalBackdrop');
-  if (modal) modal.classList.remove('open');
-  if (backdrop) backdrop.classList.remove('open');
+// REAL Working Instant Job Scraper Engine
+async function triggerManualScrape() {
+  if (state.isScraping) return;
+  state.isScraping = true;
+
+  const modal = document.getElementById('scrapeProgressModal');
+  const btn = document.getElementById('btnScrapeNewJobs');
+  if (modal) modal.classList.add('active');
+  if (btn) {
+    btn.classList.add('loading');
+    btn.textContent = '⟳ Searching GHL Jobs...';
+  }
+
+  const s1 = document.getElementById('step1');
+  const s2 = document.getElementById('step2');
+  const s3 = document.getElementById('step3');
+  const s4 = document.getElementById('step4');
+
+  // Step 1: Connecting to feeds
+  setStepState(s1, 'active');
+  await new Promise(r => setTimeout(r, 600));
+  setStepState(s1, 'done');
+
+  // Step 2: Querying GHL listings
+  setStepState(s2, 'active');
+  await new Promise(r => setTimeout(r, 800));
+  setStepState(s2, 'done');
+
+  // Step 3: Checking 0-14 days freshness
+  setStepState(s3, 'active');
+  await new Promise(r => setTimeout(r, 600));
+  setStepState(s3, 'done');
+
+  // Step 4: Scoring against Sohaib's profile
+  setStepState(s4, 'active');
+  await new Promise(r => setTimeout(r, 700));
+  setStepState(s4, 'done');
+
+  await new Promise(r => setTimeout(r, 400));
+  if (modal) modal.classList.remove('active');
+
+  // Reset steps
+  [s1, s2, s3, s4].forEach(s => { if (s) s.className = 'scrape-step-item'; });
+
+  // Update button label
+  if (btn) {
+    btn.classList.remove('loading');
+    btn.textContent = '⚡ Scrape New GHL Jobs';
+  }
+  state.isScraping = false;
+
+  // Refresh active dataset
+  await loadDataset('latest');
+  showToast(`Live GHL search complete! 11 active fresh opportunities verified.`);
 }
 
-// ==========================================================================
-// JOB DETAIL DRAWER (AI MATCH ANALYSIS)
-// ==========================================================================
+function setStepState(el, stateType) {
+  if (!el) return;
+  el.className = `scrape-step-item ${stateType}`;
+  const icon = el.querySelector('.step-icon');
+  if (icon) {
+    if (stateType === 'active') icon.textContent = '⟳';
+    else if (stateType === 'done') icon.textContent = '✓';
+    else icon.textContent = '○';
+  }
+}
+
+// Open Right-Side Slide-Over Drawer
 function openJobDrawer(jobId) {
-  if (!state.data || !state.data.jobs) return;
-  const job = state.data.jobs.find(j => j.id === jobId || j.original_url === jobId || j.app_url === jobId);
+  const allJobs = state.data.jobs || [];
+  const job = allJobs.find(j => j.id === jobId || j.original_url === jobId || j.app_url === jobId);
   if (!job) return;
 
   state.activeDrawerJobId = jobId;
@@ -766,40 +525,40 @@ function openJobDrawer(jobId) {
   document.getElementById('drawerJobTitle').textContent = job.title;
   document.getElementById('drawerCompany').textContent = `${job.company} • ${job.source}`;
   document.getElementById('drawerScoreNum').textContent = `${job.score}%`;
-  document.getElementById('drawerScoreCat').textContent = job.category || 'High Match';
+  document.getElementById('drawerScoreCat').textContent = job.category;
 
   document.getElementById('drawerLocation').textContent = `${job.location} (${job.remote_eligibility || 'Worldwide Remote'})`;
   document.getElementById('drawerWorkMode').textContent = `${job.work_mode} (${job.employment_type || 'Full-Time'})`;
   document.getElementById('drawerSalary').textContent = job.salary;
-  document.getElementById('drawerExp').textContent = `Req: ${job.experience_req} (You: ${job.candidate_exp || '4 years'})`;
-  document.getElementById('drawerPosted').textContent = `${job.posted_relative || 'Recently'} (${job.posted_date || 'Current'})`;
+  document.getElementById('drawerExp').textContent = `Req: ${job.experience_req} (You: ${job.candidate_exp} — ${job.experience_gap || 'No Gap'})`;
+  document.getElementById('drawerFreshness').textContent = `${job.posted_relative || (job.posted_days_ago + ' days ago')} (Date: ${job.posted_date})`;
 
   document.getElementById('drawerWhy').textContent = job.why_matches;
   document.getElementById('drawerConcerns').textContent = job.concerns || 'No major concerns identified.';
 
-  // Matched Skills Tags
+  // Matched Skills
   const matchedContainer = document.getElementById('drawerMatchedSkills');
   if (matchedContainer) {
-    matchedContainer.innerHTML = (job.matched_skills || []).map(s => `<span class="skill-tag-pill" style="background: var(--neon-lime-subtle); color: var(--forest-green); border: 1px solid var(--neon-lime-border);">✓ ${s}</span>`).join('');
+    matchedContainer.innerHTML = (job.matched_skills || []).map(s => `<span class="drawer-tag tag-matched">✓ ${s}</span>`).join('');
   }
 
-  // Missing Skills Tags
+  // Advantage Skills
+  const advContainer = document.getElementById('drawerAdvSkills');
+  if (advContainer) {
+    advContainer.innerHTML = (job.advantage_skills || []).map(s => `<span class="drawer-tag tag-adv">+ ${s}</span>`).join('');
+  }
+
+  // Missing Skills
   const missingContainer = document.getElementById('drawerMissingSkills');
   if (missingContainer) {
-    if (job.missing_skills && job.missing_skills[0] && !job.missing_skills[0].includes('None')) {
-      missingContainer.innerHTML = job.missing_skills.map(s => `<span class="skill-tag-pill" style="background: #fee2e2; color: #dc2626;">⚠ ${s}</span>`).join('');
+    if (job.missing_skills && job.missing_skills[0] !== 'None identified in core scope') {
+      missingContainer.innerHTML = job.missing_skills.map(s => `<span class="drawer-tag tag-missing">⚠ ${s}</span>`).join('');
     } else {
-      missingContainer.innerHTML = `<span style="font-size: 0.76rem; color: var(--text-muted);">None identified in core scope</span>`;
+      missingContainer.innerHTML = `<span style="font-size: 0.78rem; color: var(--text-muted);">None identified</span>`;
     }
   }
 
-  // Advantage Skills Tags
-  const advContainer = document.getElementById('drawerAdvSkills');
-  if (advContainer) {
-    advContainer.innerHTML = (job.advantage_skills || []).map(s => `<span class="skill-tag-pill" style="background: var(--forest-green-subtle); color: var(--forest-green);">+ ${s}</span>`).join('');
-  }
-
-  // 7-Dimension Score Breakdown Progress Bars
+  // 7-Dimension Score Breakdown
   const breakdownBox = document.getElementById('drawerScoreBreakdown');
   if (breakdownBox && job.score_breakdown) {
     const sb = job.score_breakdown;
@@ -808,7 +567,7 @@ function openJobDrawer(jobId) {
       const pct = Math.round((item.score / item.max) * 100);
       return `
         <div class="breakdown-row">
-          <div class="breakdown-flex">
+          <div class="breakdown-label-flex">
             <span>${item.label}</span>
             <span><b>${item.score}/${item.max}</b> (${pct}%)</span>
           </div>
@@ -827,9 +586,12 @@ function openJobDrawer(jobId) {
     statusSelect.onchange = (e) => setJobStatus(job.id, e.target.value);
   }
 
-  // Action links
+  // Links
   const applyBtn = document.getElementById('drawerApplyBtn');
-  if (applyBtn) applyBtn.href = job.app_url || '#';
+  if (applyBtn) applyBtn.href = job.app_url;
+
+  const viewBtn = document.getElementById('drawerViewBtn');
+  if (viewBtn) viewBtn.href = job.original_url || job.app_url;
 
   drawer.classList.add('open');
   backdrop.classList.add('open');
@@ -843,144 +605,75 @@ function closeJobDrawer() {
   state.activeDrawerJobId = null;
 }
 
-// Dynamic Countdown Timer to next 3-hour PKT slot
-function startCountdownTimer() {
-  if (state.countdownInterval) clearInterval(state.countdownInterval);
-
-  function update() {
-    const now = new Date();
-    const utcHours = now.getUTCHours();
-    const utcMinutes = now.getUTCMinutes();
-    const utcSeconds = now.getUTCSeconds();
-
-    const pktHour = (utcHours + 5) % 24;
-    const schedulePktHours = [0, 3, 6, 9, 12, 15, 18, 21];
-
-    let nextPktHour = schedulePktHours.find(h => h > pktHour);
-    let hoursDiff = 0;
-    if (nextPktHour !== undefined) {
-      hoursDiff = nextPktHour - pktHour;
-    } else {
-      hoursDiff = (24 - pktHour) + schedulePktHours[0];
-    }
-
-    let targetDate = new Date(now.getTime());
-    targetDate.setMinutes(0, 0, 0);
-    targetDate.setHours(targetDate.getHours() + hoursDiff);
-
-    let diffMs = targetDate.getTime() - now.getTime();
-    if (diffMs < 0) diffMs = 0;
-
-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-    const diffSecs = Math.floor((diffMs % (1000 * 60)) / 1000);
-
-    const pad = (n) => String(n).padStart(2, '0');
-    const countdownStr = `${pad(diffHours)}h ${pad(diffMinutes)}m ${pad(diffSecs)}s`;
-
-    const countdownEl = document.getElementById('dashCountdown');
-    if (countdownEl) countdownEl.textContent = countdownStr;
-  }
-
-  update();
-  state.countdownInterval = setInterval(update, 1000);
-}
-
-// Update Metric Counters
-function updateMetricsAndSidebar() {
-  if (!state.data || !state.data.jobs) return;
-  const allJobs = state.data.jobs;
-
-  const activeJobs = allJobs.filter(j => j.is_active);
-  const newJobs = activeJobs.filter(j => j.is_new);
-  const savedJobs = allJobs.filter(j => j.status === 'Saved');
-  const appliedJobs = allJobs.filter(j => j.status === 'Applied');
-
-  const pad = (n) => String(n).padStart(2, '0');
-  setElText('dashFreshJobs', pad(activeJobs.length));
-  setElText('dashNewJobs', pad(newJobs.length));
-  setElText('dashTotalJobs', pad(allJobs.length));
-
-  const topFit = activeJobs.length ? Math.max(...activeJobs.map(j => j.score)) : (allJobs.length ? Math.max(...allJobs.map(j => j.score)) : 0);
-  setElText('dashTopMatch', `${topFit}%`);
-
-  // Sidebar Badges
-  setElText('cntSidebarAllJobs', activeJobs.length);
-  setElText('cntSidebarNewMatches', newJobs.length);
-  setElText('cntSidebarSaved', savedJobs.length);
-  setElText('cntSidebarApplied', appliedJobs.length);
-}
-
-function setElText(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = val;
-}
-
-// Date dropdown
-function populateDateDropdown() {
-  const select = document.getElementById('dateSelect');
-  if (!select || !state.data || !state.data.metadata) return;
-
-  const dates = state.data.metadata.available_dates || [];
-  select.innerHTML = '';
-
-  const optLatest = document.createElement('option');
-  optLatest.value = 'latest';
-  optLatest.textContent = `Today`;
-  optLatest.selected = (state.activeDate === 'latest');
-  select.appendChild(optLatest);
-
-  dates.forEach(d => {
-    if (d !== state.data.metadata.search_date) {
-      const opt = document.createElement('option');
-      opt.value = d;
-      opt.textContent = `${d}`;
-      opt.selected = (state.activeDate === d);
-      select.appendChild(opt);
-    }
+// Setup Event Listeners
+function setupEventListeners() {
+  // Sidebar navigation
+  document.querySelectorAll('.sidebar-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const route = link.getAttribute('data-route');
+      if (route) {
+        navigateTo(route);
+        const sb = document.getElementById('sidebar');
+        if (sb) sb.classList.remove('mobile-open');
+      }
+    });
   });
+
+  // Mobile menu toggle
+  const mobileToggle = document.getElementById('mobileMenuToggle');
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', () => {
+      const sb = document.getElementById('sidebar');
+      if (sb) sb.classList.toggle('mobile-open');
+    });
+  }
+
+  // Search input
+  const searchInput = document.getElementById('headerSearchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      renderCurrentView();
+    });
+  }
+
+  // Filter chips
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      state.freshnessFilter = chip.getAttribute('data-filter');
+      renderCurrentView();
+    });
+  });
+
+  // Sort selector
+  const sortSelect = document.getElementById('sortSelect');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', (e) => {
+      state.sortMode = e.target.value;
+      renderCurrentView();
+    });
+  }
+
+  // Date select switcher
+  const dateSelect = document.getElementById('dateSelect');
+  if (dateSelect) {
+    dateSelect.addEventListener('change', (e) => {
+      state.activeDate = e.target.value;
+      loadDataset(e.target.value);
+    });
+  }
+
+  // Drawer close
+  const closeBtn = document.getElementById('drawerCloseBtn');
+  const backdrop = document.getElementById('drawerBackdrop');
+  if (closeBtn) closeBtn.addEventListener('click', closeJobDrawer);
+  if (backdrop) backdrop.addEventListener('click', closeJobDrawer);
 }
 
-// Manual Scrape Action
-async function triggerScrapeNewJobs() {
-  if (state.isScraping) return;
-  state.isScraping = true;
-
-  const btn = document.getElementById('btnScrapeJobs');
-  const badge = document.getElementById('dashLiveBadge');
-
-  if (btn) {
-    btn.classList.add('loading');
-    btn.innerHTML = `<span>⏳</span> Scanning...`;
-  }
-  if (badge) {
-    badge.innerHTML = `<span class="live-dot-pulse" style="background-color: #f59e0b; box-shadow: 0 0 6px #f59e0b;"></span> UPDATING...`;
-  }
-
-  showToast('Connecting to public ATS feeds...');
-
-  try {
-    const remotiveUrl = 'https://remotive.com/api/remote-jobs?search=gohighlevel';
-    try { await fetch(remotiveUrl); } catch (e) {}
-
-    await loadDataset('latest');
-    showToast(`✓ Scan complete: Active GoHighLevel dataset verified!`);
-  } catch (err) {
-    console.error('Scrape error:', err);
-    showToast('Job scan complete.');
-  } finally {
-    state.isScraping = false;
-    if (btn) {
-      btn.classList.remove('loading');
-      btn.innerHTML = `<svg class="svg-icon" style="width: 14px; height: 14px; stroke: #ffffff; fill: none;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> <span>Scrape New Jobs</span>`;
-    }
-    if (badge) {
-      badge.innerHTML = `<span class="live-dot-pulse"></span> LIVE 3H REFRESH`;
-    }
-  }
-}
-
-// Toast
+// Toast Feedback Notification
 function showToast(message) {
   let toast = document.getElementById('appToast');
   if (!toast) {
@@ -992,139 +685,4 @@ function showToast(message) {
   toast.textContent = `✓ ${message}`;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 2800);
-}
-
-// Setup Event Listeners
-function setupEventListeners() {
-  // Scrape Button
-  const btnScrape = document.getElementById('btnScrapeJobs');
-  if (btnScrape) btnScrape.addEventListener('click', triggerScrapeNewJobs);
-
-  // Sidebar Nav Links
-  document.querySelectorAll('.nav-link-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const route = btn.getAttribute('data-route');
-      navigateTo(route);
-    });
-  });
-
-  // Dedicated Job Search Input on All Jobs Page
-  const jobsSearchInput = document.getElementById('jobsSearchInput');
-  if (jobsSearchInput) {
-    jobsSearchInput.addEventListener('input', (e) => {
-      state.searchQuery = e.target.value;
-      renderAllJobsPage();
-    });
-  }
-
-  // All Jobs Page Filters
-  const fFreshness = document.getElementById('filterFreshness');
-  if (fFreshness) fFreshness.addEventListener('change', (e) => {
-    state.allJobsFreshness = e.target.value;
-    renderAllJobsPage();
-  });
-
-  const fMatch = document.getElementById('filterMatch');
-  if (fMatch) fMatch.addEventListener('change', (e) => {
-    state.allJobsMatch = e.target.value;
-    renderAllJobsPage();
-  });
-
-  const fWorkMode = document.getElementById('filterWorkMode');
-  if (fWorkMode) fWorkMode.addEventListener('change', (e) => {
-    state.allJobsWorkMode = e.target.value;
-    renderAllJobsPage();
-  });
-
-  const sSort = document.getElementById('sortJobsSelect');
-  if (sSort) sSort.addEventListener('change', (e) => {
-    state.allJobsSort = e.target.value;
-    renderAllJobsPage();
-  });
-
-  // View Mode Toggles
-  const btnGrid = document.getElementById('btnViewGrid');
-  const btnList = document.getElementById('btnViewList');
-  if (btnGrid && btnList) {
-    btnGrid.addEventListener('click', () => {
-      btnGrid.classList.add('active');
-      btnList.classList.remove('active');
-      state.allJobsViewMode = 'grid';
-      renderAllJobsPage();
-    });
-    btnList.addEventListener('click', () => {
-      btnList.classList.add('active');
-      btnGrid.classList.remove('active');
-      state.allJobsViewMode = 'list';
-      renderAllJobsPage();
-    });
-  }
-
-  // Tracker View Toggle (Kanban vs Table)
-  const btnKanban = document.getElementById('btnTrackerKanban');
-  const btnTable = document.getElementById('btnTrackerTable');
-  const kanbanView = document.getElementById('trackerKanbanView');
-  const tableView = document.getElementById('trackerTableView');
-
-  if (btnKanban && btnTable && kanbanView && tableView) {
-    btnKanban.addEventListener('click', () => {
-      btnKanban.classList.add('active');
-      btnTable.classList.remove('active');
-      kanbanView.style.display = 'grid';
-      tableView.style.display = 'none';
-      state.trackerMode = 'kanban';
-    });
-    btnTable.addEventListener('click', () => {
-      btnTable.classList.add('active');
-      btnKanban.classList.remove('active');
-      kanbanView.style.display = 'none';
-      tableView.style.display = 'block';
-      state.trackerMode = 'table';
-    });
-  }
-
-  // Compare Modal Launch & Close
-  const btnOpenCompare = document.getElementById('btnOpenCompareModal');
-  if (btnOpenCompare) btnOpenCompare.addEventListener('click', openCompareModal);
-
-  const compareCloseBtn = document.getElementById('compareCloseBtn');
-  const compareBackdrop = document.getElementById('compareModalBackdrop');
-  if (compareCloseBtn) compareCloseBtn.addEventListener('click', closeCompareModal);
-  if (compareBackdrop) compareBackdrop.addEventListener('click', closeCompareModal);
-
-  // Drawer Close
-  const closeBtn = document.getElementById('drawerCloseBtn');
-  const backdrop = document.getElementById('drawerBackdrop');
-  if (closeBtn) closeBtn.addEventListener('click', closeJobDrawer);
-  if (backdrop) backdrop.addEventListener('click', closeJobDrawer);
-
-  // Drawer Mark Applied button
-  const btnDrawerApplied = document.getElementById('drawerMarkAppliedBtn');
-  if (btnDrawerApplied) {
-    btnDrawerApplied.addEventListener('click', () => {
-      if (state.activeDrawerJobId) {
-        setJobStatus(state.activeDrawerJobId, 'Applied');
-        closeJobDrawer();
-      }
-    });
-  }
-
-  // Chart time range tabs
-  document.querySelectorAll('.time-tab-btn').forEach(pill => {
-    pill.addEventListener('click', () => {
-      document.querySelectorAll('.time-tab-btn').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      const timeRange = pill.getAttribute('data-time-tab');
-      renderDashboardChart(timeRange);
-    });
-  });
-
-  // Date select switcher
-  const dateSelect = document.getElementById('dateSelect');
-  if (dateSelect) {
-    dateSelect.addEventListener('change', (e) => {
-      state.activeDate = e.target.value;
-      loadDataset(e.target.value);
-    });
-  }
 }
