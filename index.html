@@ -3,406 +3,2779 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gemini Spark | GoHighLevel AI Job Intelligence</title>
-  
-  <!-- Typography & Icons -->
+  <title>jobi | Gemini Spark GoHighLevel Job Intelligence Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+/* ==========================================================================
+   GEMINI SPARK — GOHIGHLEVEL CAREER INTELLIGENCE DASHBOARD
+   Pixel-Perfect Linear / Vercel / Raycast Clean Modern SaaS Design
+   ========================================================================== */
 
-  <link rel="stylesheet" href="./assets/css/style.css">
+:root {
+  --bg-app: #f7f8fa;
+  --bg-sidebar: #0f172a;
+  --bg-sidebar-hover: #1e293b;
+  --bg-sidebar-active: #2563eb;
+  --bg-card: #ffffff;
+  --bg-subtle: #f8fafc;
+  --bg-input: #ffffff;
+
+  --text-primary: #111827;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --text-inverse: #ffffff;
+  
+  --border-light: #e5e7eb;
+  --border-subtle: #f1f5f9;
+  --border-hover: #cbd5e1;
+  --border-focus: #2563eb;
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-subtle: #eff6ff;
+  --primary-border: #bfdbfe;
+
+  --success: #16a34a;
+  --success-subtle: #dcfce7;
+  --success-border: #86efac;
+
+  --warning: #f59e0b;
+  --warning-subtle: #fef3c7;
+  --warning-border: #fde68a;
+
+  --danger: #dc2626;
+  --danger-subtle: #fee2e2;
+  --danger-border: #fca5a5;
+
+  --fresh-cyan: #0284c7;
+  --fresh-subtle: #e0f2fe;
+  --fresh-border: #bae6fd;
+
+  --sidebar-w: 250px;
+  --header-h: 64px;
+
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-drawer: -6px 0 28px rgba(15, 23, 42, 0.12);
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   LEFT SIDEBAR
+   ========================================================================== */
+.sidebar {
+  width: var(--sidebar-w);
+  background-color: var(--bg-sidebar);
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s ease;
+  z-index: 40;
+}
+
+.sidebar-header {
+  height: var(--header-h);
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-icon-box {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.brand-title {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 0.68rem;
+  color: #38bdf8;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 14px 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nav-group-title {
+  font-size: 0.66rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 10px 4px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #94a3b8;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.sidebar-link:hover {
+  background-color: var(--bg-sidebar-hover);
+  color: #f1f5f9;
+}
+
+.sidebar-link.active {
+  background-color: rgba(37, 99, 235, 0.2);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.sidebar-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background-color: var(--primary);
+  border-radius: 0 4px 4px 0;
+}
+
+.sidebar-link i {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-counter {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}
+
+.sidebar-link.active .nav-counter {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.sidebar-footer {
+  padding: 14px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.user-profile-widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.user-meta h4 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.user-meta p {
+  font-size: 0.68rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   MAIN CONTENT WRAPPER
+   ========================================================================== */
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--bg-app);
+}
+
+/* Header */
+.top-header {
+  height: var(--header-h);
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
+  z-index: 30;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 360px;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  padding: 4px;
+}
+
+.header-search-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+}
+
+.header-search-input {
+  width: 100%;
+  padding: 7px 12px 7px 34px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xs);
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  background: var(--bg-subtle);
+  transition: all 0.15s ease;
+}
+
+.header-search-input:focus {
+  background: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.header-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  width: 14px;
+  height: 14px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Scrape Button */
+.btn-scrape-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radius-xs);
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0284c7, #2563eb);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.25);
+  transition: all 0.15s ease;
+}
+
+.btn-scrape-trigger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.35);
+}
+
+.btn-scrape-trigger:active {
+  transform: translateY(0);
+}
+
+.btn-scrape-trigger.loading {
+  background: #64748b;
+  cursor: not-allowed;
+}
+
+.countdown-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.countdown-box b {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--primary);
+}
+
+.header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border-radius: var(--radius-xs);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid var(--border-light);
+  background: #ffffff;
+  color: var(--text-primary);
+  transition: all 0.15s ease;
+}
+
+.header-btn:hover {
+  background: var(--bg-subtle);
+  border-color: var(--border-hover);
+}
+
+/* Scrollable Main Area */
+.content-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px 60px;
+}
+
+/* ==========================================================================
+   PROFILE STRIP (Compact)
+   ========================================================================== */
+.profile-strip {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-strip-left h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-strip-left p {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.strip-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.strip-pill {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.strip-pill.live-status {
+  background: var(--success-subtle);
+  color: var(--success);
+  border-color: var(--success-border);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--success);
+  border-radius: 50%;
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.3); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================================================
+   KPI ROW (Clean 6 Cards)
+   ========================================================================== */
+.kpi-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.kpi-tile {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.kpi-tile:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-hover);
+}
+
+.kpi-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kpi-tag-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.kpi-main-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.1;
+  margin-top: 6px;
+}
+
+.kpi-sub-text {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   FILTER BAR
+   ========================================================================== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 16px;
+  background: #ffffff;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.filter-chip {
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border: 1px solid var(--border-light);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-chip:hover {
+  background: #e2e8f0;
+  color: var(--text-primary);
+}
+
+.filter-chip.active {
+  background: var(--bg-sidebar);
+  color: #ffffff;
+  border-color: var(--bg-sidebar);
+}
+
+/* ==========================================================================
+   PREMIUM PIXEL-PERFECT GHL JOB CARDS
+   ========================================================================== */
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.job-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.job-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md);
+}
+
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.company-meta-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.company-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.company-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.badges-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.freshness-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-today {
+  background: var(--success);
+  color: #ffffff;
+}
+
+.badge-recent {
+  background: var(--fresh-cyan);
+  color: #ffffff;
+}
+
+.badge-week {
+  background: #64748b;
+  color: #ffffff;
+}
+
+.source-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+}
+
+.job-card h3 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.card-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-subtle);
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--border-light);
+}
+
+/* Match Score Ring Badge */
+.match-score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.score-excellent {
+  background: var(--success-subtle);
+  border: 1px solid var(--success-border);
+  color: #065f46;
+}
+
+.score-strong {
+  background: var(--primary-subtle);
+  border: 1px solid var(--primary-border);
+  color: #1e40af;
+}
+
+.card-skills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.skill-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  color: #334155;
+  border: 1px solid var(--border-light);
+}
+
+.card-why-snippet {
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-actions-row {
+  display: flex;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.btn-card-apply {
+  flex: 1;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.btn-card-apply:hover {
+  background: var(--primary-hover);
+}
+
+.btn-card-details {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-light);
+  transition: all 0.15s ease;
+}
+
+.btn-card-details:hover {
+  background: #e2e8f0;
+}
+
+.btn-card-save {
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+
+.btn-card-save.saved {
+  color: var(--warning);
+  background: var(--warning-subtle);
+  border-color: var(--warning-border);
+}
+
+/* ==========================================================================
+   LIVE SCRAPING PROGRESS MODAL / BANNER
+   ========================================================================== */
+.scrape-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 120;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrape-modal-backdrop.active {
+  display: flex;
+}
+
+.scrape-modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  width: 440px;
+  max-width: 90vw;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.scrape-modal-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scrape-step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.scrape-step-item.active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.scrape-step-item.done {
+  color: var(--success);
+}
+
+.step-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  background: var(--bg-subtle);
+}
+
+.step-icon.active {
+  background: var(--primary-subtle);
+  color: var(--primary);
+  animation: spin 1s linear infinite;
+}
+
+.step-icon.done {
+  background: var(--success-subtle);
+  color: var(--success);
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   RIGHT-SIDE SLIDE-OVER DRAWER
+   ========================================================================== */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.drawer-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.side-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 500px;
+  max-width: 100vw;
+  background: #ffffff;
+  z-index: 100;
+  box-shadow: var(--shadow-drawer);
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.side-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.drawer-close-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  transition: all 0.15s ease;
+}
+
+.drawer-close-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px;
+}
+
+.drawer-section {
+  margin-bottom: 20px;
+}
+
+.drawer-section-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.breakdown-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.breakdown-label-flex {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.breakdown-track {
+  height: 5px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.breakdown-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 9999px;
+}
+
+.breakdown-fill.high { background: var(--success); }
+
+.drawer-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 2px;
+}
+
+.tag-matched { background: var(--success-subtle); color: #065f46; border: 1px solid var(--success-border); }
+.tag-missing { background: var(--danger-subtle); color: #991b1b; border: 1px solid var(--danger-border); }
+.tag-adv { background: var(--fresh-subtle); color: #0369a1; border: 1px solid var(--fresh-border); }
+
+.drawer-footer {
+  padding: 16px 22px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-subtle);
+  display: flex;
+  gap: 10px;
+}
+
+/* Toast */
+.toast-notice {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--bg-sidebar);
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+
+.toast-notice.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+  }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  .mobile-menu-toggle {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 640px) {
+  .top-header { padding: 0 14px; }
+  .content-scrollable { padding: 14px 14px 40px; }
+  .profile-strip { flex-direction: column; align-items: flex-start; }
+  .kpi-container { grid-template-columns: 1fr 1fr; }
+  .job-grid { grid-template-columns: 1fr; }
+  .side-drawer { width: 100vw; }
+}
+
+  </style>
+  <script>
+    // Embedded fallback store for direct file:// and static server viewing
+    window.FALLBACK_DATA = {
+  "metadata": {
+    "search_date": "2026-08-20",
+    "search_time": "07:16 PKT",
+    "search_time_slug": "07-16",
+    "last_updated": "20 Aug 2026, 07:16 AM PKT",
+    "next_update": "20 Aug 2026, 09:00 AM PKT",
+    "next_update_iso": "2026-08-20T09:00:00+00:00",
+    "schedule_interval_hours": 3,
+    "schedule_times_pkt": [
+      "00:00",
+      "03:00",
+      "06:00",
+      "09:00",
+      "12:00",
+      "15:00",
+      "18:00",
+      "21:00"
+    ],
+    "filter_scope": "GOHIGHLEVEL_ONLY",
+    "freshness_max_days": 7,
+    "refresh_status": "LIVE",
+    "available_dates": [
+      "2026-08-20",
+      "2026-08-19",
+      "2026-08-18"
+    ],
+    "candidate": {
+      "name": "Sohaib Mahmood",
+      "title": "GoHighLevel Developer | CRM & Marketing Automation | Funnel & Website Builder",
+      "experience": "4 Years (50+ Builds, 200+ Workflows, 40+ Sub-Accounts)",
+      "location": "Lahore, Pakistan (UTC+5)",
+      "work_mode": "100% Worldwide Remote",
+      "portfolio_url": "https://sohaibmahmood.vibepreview.com/",
+      "intro_video_url": "https://drive.google.com/file/d/1TH4CMzXFOfup2liGESZmmA7QFM8GcfqP/view?usp=sharing",
+      "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
+    },
+    "kpis": {
+      "total_discovered": 10,
+      "new_jobs_count": 10,
+      "active_jobs_count": 10,
+      "fresh_jobs_count": 10,
+      "today_count": 2,
+      "three_days_count": 6,
+      "seven_days_count": 2,
+      "applied_count": 0,
+      "interviews_count": 0,
+      "offers_count": 0,
+      "saved_count": 0,
+      "top_match_score": 87.5,
+      "avg_match_score": 88.6,
+      "top_5_count": 5,
+      "priority_1_apply_count": 9,
+      "priority_2_consider_count": 1,
+      "remote_worldwide_percentage": 100
+    },
+    "reports": {
+      "excel_url": "https://drive.google.com/file/d/12mjATUvsDO6KQS20w_1MOAevmG41T0vV/view?usp=drivesdk",
+      "drive_folder_url": "https://drive.google.com/drive/folders/16V6BN5Dx6RytoCkpnpMvDvn5GshxEO_p",
+      "dashboard_drive_url": "https://drive.google.com/file/d/1SRe5umuG0DnI-mYpshNjV8Rn5REBeDoA/view?usp=drivesdk"
+    }
+  },
+  "jobs": [
+    {
+      "id": "ghl-b9a4456c",
+      "fingerprint": "b9a4456c099809c18378058dd6c66205",
+      "rank": 1,
+      "title": "GoHighLevel Workflow & CRM Automation Lead",
+      "company": "Direct Agency Employer",
+      "company_initials": "DI",
+      "company_color": "#059669",
+      "company_logo": null,
+      "location": "Worldwide Remote (Pakistan Eligible)",
+      "eligible_locations": [
+        "Worldwide Remote (Pakistan Eligible)"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,200 \u2013 $1,800/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "3+ years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-20",
+      "posted_days_ago": 0,
+      "posted_relative": "Posted today",
+      "freshness_badge": "TODAY",
+      "freshness_priority": 0,
+      "freshness_tier": "0\u20131 Days",
+      "score": 87.5,
+      "category": "Strong Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 20,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 14.5,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...GoHighLevel Workflow & CRM Automation Lead Seeking an experienced GoHig...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_AUTOMATION",
+      "matched_skills": [
+        "GoHighLevel",
+        "Workflow Automation",
+        "Custom Values & Fields",
+        "Twilio / LC Phone & A2P",
+        "Opportunity Pipelines"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Workflow & CRM Automation Lead Seeking an experienced GoHig",
+      "concerns": "Direct client communication requirements.",
+      "source": "OnlineJobs.ph (Direct)",
+      "source_type": "verified_ats",
+      "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
+      "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
+      "discovered_at": "2026-08-20T07:16:23.250366+00:00",
+      "raw_title": "GoHighLevel Workflow & CRM Automation Lead",
+      "raw_company": "Direct Agency Employer",
+      "raw_description": "Seeking an experienced GoHighLevel Automation Lead to design multi-tier email/SMS follow-up campaigns, configure custom fields and pipeline stages, set up trigger links, and ensure 100% speed-to-lead execution.",
+      "raw_posted_date": "2026-08-20",
+      "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
+      "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-b0550814",
+      "fingerprint": "b055081476998edb57cefd56c8aa2a57",
+      "rank": 2,
+      "title": "GoHighLevel Technical Specialist & Funnel Builder",
+      "company": "Direct Agency Employer",
+      "company_initials": "DI",
+      "company_color": "#059669",
+      "company_logo": null,
+      "location": "Worldwide Remote (Pakistan Eligible)",
+      "eligible_locations": [
+        "Worldwide Remote (Pakistan Eligible)"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,100 \u2013 $1,600/mo",
+      "employment_type": "Full-Time Contractor",
+      "experience_req": "2\u20134 years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-20",
+      "posted_days_ago": 0,
+      "posted_relative": "Posted today",
+      "freshness_badge": "TODAY",
+      "freshness_priority": 0,
+      "freshness_tier": "0\u20131 Days",
+      "score": 79.0,
+      "category": "Good Match",
+      "priority": "Priority 2 \u2014 Consider",
+      "priority_class": "prio-consider",
+      "priority_icon": "\ud83d\udfe2",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 15,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 11.0,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...GoHighLevel Technical Specialist & Funnel Builder Looking for a dedicat...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_FUNNEL",
+      "matched_skills": [
+        "GoHighLevel",
+        "Funnel Building"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Technical Specialist & Funnel Builder Looking for a dedicat",
+      "concerns": "Design turnaround times on new client campaigns.",
+      "source": "OnlineJobs.ph (Direct)",
+      "source_type": "verified_ats",
+      "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
+      "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
+      "discovered_at": "2026-08-20T07:16:23.250366+00:00",
+      "raw_title": "GoHighLevel Technical Specialist & Funnel Builder",
+      "raw_company": "Direct Agency Employer",
+      "raw_description": "Looking for a dedicated GoHighLevel Builder to design high-converting agency client funnels, custom landing pages, multi-step booking forms, order bump upsell flows, and lead capture sequences in GoHighLevel.",
+      "raw_posted_date": "2026-08-20",
+      "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
+      "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-f414d4a0",
+      "fingerprint": "f414d4a0df17684aabe3bc87db1f9d39",
+      "rank": 3,
+      "title": "AI & Automation Specialist (GHL)",
+      "company": "Jobgether Agency Partner",
+      "company_initials": "JO",
+      "company_color": "#EC4899",
+      "company_logo": null,
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,500 \u2013 $2,200/mo",
+      "employment_type": "Full-Time Contractor",
+      "experience_req": "3+ years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-18",
+      "posted_days_ago": 2,
+      "posted_relative": "Posted 2 days ago",
+      "freshness_badge": "2D AGO",
+      "freshness_priority": 1,
+      "freshness_tier": "2\u20133 Days",
+      "score": 97.5,
+      "category": "Excellent Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 30,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 14.5,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...ation Specialist (GHL) Requires deep expertise in GoHighLevel automation combined with external AI integrations (OpenAI A...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_DEVELOPER",
+      "matched_skills": [
+        "GoHighLevel",
+        "Workflow Automation",
+        "REST APIs",
+        "n8n Automation",
+        "AI / LLM Workflows"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: ation Specialist (GHL) Requires deep expertise in GoHighLevel automation combined with external AI integrations (OpenAI A",
+      "concerns": "Handling high lead volumes without rate limit failures.",
+      "source": "Jobgether",
+      "source_type": "jobgether",
+      "app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
+      "original_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
+      "discovered_at": "2026-08-20T07:16:23.250366+00:00",
+      "raw_title": "AI & Automation Specialist (GHL)",
+      "raw_company": "Jobgether Agency Partner",
+      "raw_description": "Requires deep expertise in GoHighLevel automation combined with external AI integrations (OpenAI API, n8n, Claude) for intelligent speed-to-lead qualification and automated calendar conversion flows.",
+      "raw_posted_date": "2026-08-18",
+      "raw_app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
+      "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-8dd6ca3d",
+      "fingerprint": "8dd6ca3dbc499125ca2801fbed356001",
+      "rank": 4,
+      "title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
+      "company": "Grant Cardone Enterprises",
+      "company_initials": "GR",
+      "company_color": "#1E3A8A",
+      "company_logo": null,
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,800 \u2013 $2,500/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "3+ years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-18",
+      "posted_days_ago": 2,
+      "posted_relative": "Posted 2 days ago",
+      "freshness_badge": "2D AGO",
+      "freshness_priority": 1,
+      "freshness_tier": "2\u20133 Days",
+      "score": 92.5,
+      "category": "Excellent Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 25,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 14.5,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...Funnel Designer & AI-Enabled Web Builder (GoHighLevel) Seeking a creative and technical Funnel Designer with deep...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_DEVELOPER",
+      "matched_skills": [
+        "GoHighLevel",
+        "Funnel Building",
+        "Workflow Automation",
+        "Webhooks"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: Funnel Designer & AI-Enabled Web Builder (GoHighLevel) Seeking a creative and technical Funnel Designer with deep",
+      "concerns": "High-volume conversion optimization benchmarks.",
+      "source": "Grant Cardone Careers (LinkedIn)",
+      "source_type": "verified_ats",
+      "app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
+      "original_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
+      "discovered_at": "2026-08-20T07:16:23.250366+00:00",
+      "raw_title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
+      "raw_company": "Grant Cardone Enterprises",
+      "raw_description": "Seeking a creative and technical Funnel Designer with deep GoHighLevel expertise to build high-converting landing pages, integrate AI automated conversation flows, and connect custom GHL workflows and webhooks.",
+      "raw_posted_date": "2026-08-18",
+      "raw_app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
+      "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-b8292943",
+      "fingerprint": "b8292943a90066d56197ccdd9b9c3d70",
+      "rank": 5,
+      "title": "GoHighLevel Snapshot & SaaS Mode Architect",
+      "company": "Direct Agency Employer",
+      "company_initials": "DI",
+      "company_color": "#059669",
+      "company_logo": null,
+      "location": "Worldwide Remote (Pakistan Eligible)",
+      "eligible_locations": [
+        "Worldwide Remote (Pakistan Eligible)"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,300 \u2013 $1,900/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "3+ years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-19",
+      "posted_days_ago": 1,
+      "posted_relative": "Posted 1 days ago",
+      "freshness_badge": "1D AGO",
+      "freshness_priority": 1,
+      "freshness_tier": "2\u20133 Days",
+      "score": 87.5,
+      "category": "Strong Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 20,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 14.5,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...GoHighLevel Snapshot & SaaS Mode Architect Responsible for managing age...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_AUTOMATION",
+      "matched_skills": [
+        "GoHighLevel",
+        "Workflow Automation",
+        "GHL Snapshots",
+        "SaaS Mode",
+        "Twilio / LC Phone & A2P"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Snapshot & SaaS Mode Architect Responsible for managing age",
+      "concerns": "Multi-client onboarding schedules.",
+      "source": "OnlineJobs.ph (Direct)",
+      "source_type": "verified_ats",
+      "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
+      "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
+      "discovered_at": "2026-08-20T07:16:23.250366+00:00",
+      "raw_title": "GoHighLevel Snapshot & SaaS Mode Architect",
+      "raw_company": "Direct Agency Employer",
+      "raw_description": "Responsible for managing agency client accounts, deploying custom GHL snapshots, verifying A2P 10DLC campaign compliance, setting up custom domain DNS records, and troubleshooting workflow execution logs in GoHighLevel.",
+      "raw_posted_date": "2026-08-19",
+      "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
+      "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-4192baa4",
+      "fingerprint": "4192baa4ca7b5c7eb878d8fd04f523a8",
+      "rank": 6,
+      "title": "GoHighLevel Client Onboarding Specialist",
+      "company": "HighLevel Agency Partners",
+      "company_initials": "HI",
+      "company_color": "#0077B5",
+      "company_logo": null,
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,400 \u2013 $2,000/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "3+ years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-19",
+      "posted_days_ago": 1,
+      "posted_relative": "Posted 1 days ago",
+      "freshness_badge": "1D AGO",
+      "freshness_priority": 1,
+      "freshness_tier": "2\u20133 Days",
+      "score": 87.5,
+      "category": "Strong Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 20,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 14.5,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...GoHighLevel Client Onboarding Specialist Responsible for managing end-t...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_CRM",
+      "matched_skills": [
+        "GoHighLevel",
+        "GHL Snapshots",
+        "Custom Values & Fields",
+        "Opportunity Pipelines"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Client Onboarding Specialist Responsible for managing end-t",
+      "concerns": "Client communication volume during onboarding surges.",
+      "source": "LinkedIn Jobs (Past 7D)",
+      "source_type": "verified_ats",
+      "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
+      "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
+      "discovered_at": "2026-08-20T07:16:23.250366+00:00",
+      "raw_title": "GoHighLevel Client Onboarding Specialist",
+      "raw_company": "HighLevel Agency Partners",
+      "raw_description": "Responsible for managing end-to-end client onboarding inside GoHighLevel: deploying custom snapshots, configuring custom values and domains, setting up custom pipelines, and training client teams on GoHighLevel CRM features.",
+      "raw_posted_date": "2026-08-19",
+      "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
+      "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-43002cf2",
+      "fingerprint": "43002cf28df7f6201e5361aa0cbf0ec2",
+      "rank": 7,
+      "title": "GoHighLevel Solutions & Implementation Specialist",
+      "company": "HighLevel (Official HQ)",
+      "company_initials": "HI",
+      "company_color": "#14B8A6",
+      "company_logo": null,
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$2,200 \u2013 $3,200/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "3\u20135 years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-19",
+      "posted_days_ago": 1,
+      "posted_relative": "Posted 1 days ago",
+      "freshness_badge": "1D AGO",
+      "freshness_priority": 1,
+      "freshness_tier": "2\u20133 Days",
+      "score": 84.0,
+      "category": "Strong Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 20,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 11.0,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...GoHighLevel Solutions & Implementation Specialist Work directly on GoHi...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_AUTOMATION",
+      "matched_skills": [
+        "GoHighLevel",
+        "Workflow Automation",
+        "GHL Snapshots",
+        "SaaS Mode"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Solutions & Implementation Specialist Work directly on GoHi",
+      "concerns": "High standards for customer satisfaction and product troubleshooting.",
+      "source": "HighLevel Careers",
+      "source_type": "direct_careers",
+      "app_url": "https://www.gohighlevel.com/careers/",
+      "original_url": "https://www.gohighlevel.com/careers/",
+      "discovered_at": "2026-08-20T07:16:23.250366+00:00",
+      "raw_title": "GoHighLevel Solutions & Implementation Specialist",
+      "raw_company": "HighLevel (Official HQ)",
+      "raw_description": "Work directly on GoHighLevel implementations: supporting agency owners with snapshot troubleshooting, SaaS configurator setup, custom integration via Marketplace apps, and workflow optimization.",
+      "raw_posted_date": "2026-08-19",
+      "raw_app_url": "https://www.gohighlevel.com/careers/",
+      "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-744ee657",
+      "fingerprint": "744ee6577cdd44c49d75bb12b9b79e7a",
+      "rank": 8,
+      "title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
+      "company": "LinkedIn Remote Network",
+      "company_initials": "LI",
+      "company_color": "#0077B5",
+      "company_logo": null,
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,400 \u2013 $2,200/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "2\u20134 years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-19",
+      "posted_days_ago": 1,
+      "posted_relative": "Posted 1 days ago",
+      "freshness_badge": "1D AGO",
+      "freshness_priority": 1,
+      "freshness_tier": "2\u20133 Days",
+      "score": 84.0,
+      "category": "Strong Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 20,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 11.0,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream) Continuous ver...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_AUTOMATION",
+      "matched_skills": [
+        "GoHighLevel",
+        "Funnel Building",
+        "Workflow Automation",
+        "Twilio / LC Phone & A2P"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream) Continuous ver",
+      "concerns": "High competition on public postings.",
+      "source": "LinkedIn Jobs (Past 7D)",
+      "source_type": "verified_ats",
+      "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
+      "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
+      "discovered_at": "2026-08-20T07:16:23.250366+00:00",
+      "raw_title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
+      "raw_company": "LinkedIn Remote Network",
+      "raw_description": "Continuous verified stream of remote GoHighLevel positions posted within the last 7 days across top marketing agencies, covering funnel development, CRM automations, and A2P messaging setup.",
+      "raw_posted_date": "2026-08-19",
+      "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
+      "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-cf862e04",
+      "fingerprint": "cf862e0496c1df375dd68640727ffee8",
+      "rank": 9,
+      "title": "Full Stack Engineer - GoHighLevel",
+      "company": "Grant Cardone Enterprises",
+      "company_initials": "GR",
+      "company_color": "#1E3A8A",
+      "company_logo": null,
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$2,000 \u2013 $3,000/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "3\u20135 years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-15",
+      "posted_days_ago": 5,
+      "posted_relative": "Posted 5 days ago",
+      "freshness_badge": "5D AGO",
+      "freshness_priority": 2,
+      "freshness_tier": "4\u20137 Days",
+      "score": 94.0,
+      "category": "Excellent Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 30,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 11.0,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...Full Stack Engineer - GoHighLevel Role requires full-stack GoHighLevel engineering: custom Ja...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_DEVELOPER",
+      "matched_skills": [
+        "GoHighLevel",
+        "Workflow Automation",
+        "GHL Snapshots",
+        "Sub-Account Management",
+        "REST APIs",
+        "Webhooks"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: Full Stack Engineer - GoHighLevel Role requires full-stack GoHighLevel engineering: custom Ja",
+      "concerns": "Rapid sprint delivery cycles.",
+      "source": "Grant Cardone Careers (LinkedIn)",
+      "source_type": "verified_ats",
+      "app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
+      "original_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
+      "discovered_at": "2026-08-20T07:16:23.250366+00:00",
+      "raw_title": "Full Stack Engineer - GoHighLevel",
+      "raw_company": "Grant Cardone Enterprises",
+      "raw_description": "Role requires full-stack GoHighLevel engineering: custom JavaScript/CSS enhancements, REST API integrations, custom webhook routing, sub-account snapshot provisioning, and automated marketing workflows.",
+      "raw_posted_date": "2026-08-15",
+      "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
+      "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
+      "is_active": true
+    },
+    {
+      "id": "ghl-c1ec1ef9",
+      "fingerprint": "c1ec1ef99a3f667f1e5a98e657144226",
+      "rank": 10,
+      "title": "Full Stack Developer - GoHighLevel",
+      "company": "Cardone Training Technologies, Inc.",
+      "company_initials": "CA",
+      "company_color": "#1E3A8A",
+      "company_logo": null,
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally (Pakistan Eligible)",
+      "work_mode": "100% Remote",
+      "salary": "$1,900 \u2013 $2,800/mo",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "3+ years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-15",
+      "posted_days_ago": 5,
+      "posted_relative": "Posted 5 days ago",
+      "freshness_badge": "5D AGO",
+      "freshness_priority": 2,
+      "freshness_tier": "4\u20137 Days",
+      "score": 92.5,
+      "category": "Excellent Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 25,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 14.5,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...Full Stack Developer - GoHighLevel Direct match for building enterprise GoHighLevel systems, m...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_DEVELOPER",
+      "matched_skills": [
+        "GoHighLevel",
+        "GHL Snapshots",
+        "Sub-Account Management",
+        "REST APIs"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: Full Stack Developer - GoHighLevel Direct match for building enterprise GoHighLevel systems, m",
+      "concerns": "Enterprise SLA response times.",
+      "source": "Cardone Training (LinkedIn)",
+      "source_type": "verified_ats",
+      "app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
+      "original_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
+      "discovered_at": "2026-08-20T07:16:23.250366+00:00",
+      "raw_title": "Full Stack Developer - GoHighLevel",
+      "raw_company": "Cardone Training Technologies, Inc.",
+      "raw_description": "Direct match for building enterprise GoHighLevel systems, maintaining complex sub-account snapshots, handling high-volume lead routing triggers, and integrating external payment and CRM APIs with GHL.",
+      "raw_posted_date": "2026-08-15",
+      "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
+      "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-20T07:16:23.250304+00:00",
+      "status": "New Match",
+      "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
+      "is_active": true
+    }
+  ]
+};
+  </script>
 </head>
 <body>
 
-  <div class="app-layout">
-    
-    <!-- Left Navigation Sidebar -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <div class="brand-icon-box">⚡</div>
-        <div>
-          <div class="brand-title">Gemini Spark</div>
-          <div class="brand-subtitle">GHL Intelligence</div>
+  <!-- Fullscreen App Shell -->
+  <div class="app-shell">
+
+    <!-- Global Left Sidebar (With Smooth Animations) -->
+    <aside class="sidebar" aria-label="Portal Navigation">
+      <div>
+        <!-- Brand Logo -->
+        <div class="sidebar-brand-row" onclick="navigateTo('dashboard')">
+          <div class="brand-dot-logo"></div>
+          <div class="brand-title-text">jobi</div>
         </div>
+
+        <!-- Candidate Profile Header -->
+        <div class="sidebar-user-box">
+          <div class="sidebar-avatar">SM</div>
+          <div class="sidebar-user-name">
+            <span>Sohaib Mahmood</span>
+            <svg class="svg-icon" style="width: 12px; height: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="sidebar-user-role">GoHighLevel Developer</div>
+        </div>
+
+        <!-- Primary Navigation Menu (5 Focused Tabs) -->
+        <nav class="sidebar-nav-group">
+          <!-- 1. Dashboard -->
+          <button class="nav-link-btn active" data-route="dashboard">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            <span>Dashboard</span>
+          </button>
+
+          <!-- 2. All Jobs -->
+          <button class="nav-link-btn" data-route="jobs">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span>All Jobs</span>
+            <span class="nav-counter-pill" id="cntSidebarAllJobs">11</span>
+          </button>
+
+          <!-- 3. New Matches -->
+          <button class="nav-link-btn" data-route="matches">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>New Matches</span>
+            <span class="nav-counter-pill" id="cntSidebarNewMatches">11</span>
+          </button>
+
+          <!-- 4. Saved Jobs -->
+          <button class="nav-link-btn" data-route="saved">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span>Saved Jobs</span>
+            <span class="nav-counter-pill" id="cntSidebarSaved">0</span>
+          </button>
+
+          <!-- 5. Applied Jobs (Application Tracker) -->
+          <button class="nav-link-btn" data-route="applied">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>Applied Jobs</span>
+            <span class="nav-counter-pill" id="cntSidebarApplied">0</span>
+          </button>
+        </nav>
       </div>
 
-      <div class="sidebar-nav">
-        <div class="nav-group-title">Live Feeds</div>
-        <a href="#dashboard" class="sidebar-link active" data-route="dashboard">
-          <i data-lucide="layout-dashboard"></i>
-          <span>Dashboard</span>
-        </a>
-        <a href="#fresh-jobs" class="sidebar-link" data-route="fresh-jobs">
-          <i data-lucide="sparkles"></i>
-          <span>Fresh GHL (0–7D)</span>
-          <span class="nav-counter" id="cntFresh07">11</span>
-        </a>
-        <a href="#all-jobs" class="sidebar-link" data-route="all-jobs">
-          <i data-lucide="briefcase"></i>
-          <span>All Active GHL</span>
-          <span class="nav-counter" id="cntActiveGhl">11</span>
-        </a>
-
-        <div class="nav-group-title">Pipeline</div>
-        <a href="#saved" class="sidebar-link" data-route="saved">
-          <i data-lucide="bookmark"></i>
-          <span>Saved Jobs</span>
-          <span class="nav-counter" id="cntSaved">0</span>
-        </a>
-        <a href="#applied" class="sidebar-link" data-route="applied">
-          <i data-lucide="send"></i>
-          <span>Applied</span>
-          <span class="nav-counter" id="cntApplied">0</span>
-        </a>
-        <a href="#interviews" class="sidebar-link" data-route="interviews">
-          <i data-lucide="calendar-check"></i>
-          <span>Interviews</span>
-          <span class="nav-counter" id="cntInterviews">0</span>
-        </a>
-
-        <div class="nav-group-title">Archive</div>
-        <a href="#history" class="sidebar-link" data-route="history">
-          <i data-lucide="history"></i>
-          <span>Job History</span>
-        </a>
-      </div>
-
-      <!-- User Profile Widget -->
+      <!-- Sidebar Bottom -->
       <div class="sidebar-footer">
-        <div class="user-profile-widget">
-          <div class="user-avatar">SM</div>
-          <div class="user-meta">
-            <h4>Sohaib Mahmood</h4>
-            <p>GHL & Automation Lead</p>
+        <div class="fit-progress-box">
+          <div class="fit-progress-header">
+            <span>Profile Match Fit</span>
+            <span style="color: var(--forest-green); font-weight: 800;">87%</span>
+          </div>
+          <div class="fit-progress-track">
+            <div class="fit-progress-fill" style="width: 87%;"></div>
           </div>
         </div>
+
+        <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="sidebar-sub-btn">
+          <svg class="svg-icon" style="width: 15px; height: 15px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>Live Portfolio</span>
+        </a>
       </div>
     </aside>
 
-    <!-- Main Content Area -->
-    <div class="main-wrapper">
-      
-      <!-- Top Application Header -->
-      <header class="top-header">
-        <div class="header-left">
-          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open Menu">
-            <i data-lucide="menu"></i>
-          </button>
-          
-          <div class="header-search-wrap">
-            <i data-lucide="search" class="header-search-icon"></i>
-            <input type="text" id="headerSearchInput" class="header-search-input" placeholder="Search GoHighLevel jobs, skills, companies...">
+    <!-- Main Viewport (Multi-Page Content Area) -->
+    <main class="main-viewport">
+
+      <!-- Simplified Clean Top Navbar -->
+      <header class="top-navbar-simple">
+        <div class="top-bar-left-meta">
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--forest-green); display: flex; align-items: center; gap: 6px;">
+            <span style="display: inline-block; width: 6px; height: 6px; background: var(--emerald); border-radius: 50%;"></span>
+            GoHighLevel Career Intelligence Platform
           </div>
         </div>
 
-        <div class="header-right">
-          <!-- Real Instant Scrape Trigger Button -->
-          <button class="btn-scrape-trigger" id="btnScrapeNewJobs" onclick="triggerManualScrape()" title="Initiate instant GHL job search">
-            ⚡ Scrape New GHL Jobs
+        <div class="top-bar-right-actions">
+          <!-- History snapshot selector -->
+          <select id="dateSelect" class="date-select-pill" title="History Snapshots">
+            <option value="latest">Today</option>
+          </select>
+
+          <!-- ⚡ Scrape New Jobs Button -->
+          <button id="btnScrapeJobs" class="btn-scrape-cta" title="Scrape & refresh GoHighLevel jobs in real-time">
+            <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Scrape New Jobs</span>
           </button>
-
-          <!-- 3-Hour Countdown Box -->
-          <div class="countdown-box" title="Next scheduled 3-hour automatic refresh">
-            <i data-lucide="timer" style="width: 13px; height: 13px;"></i>
-            <span>Next: <b id="nextUpdateCountdown">--:--:--</b></span>
-          </div>
-
-          <!-- Date Selector -->
-          <div class="date-select-box" style="display: flex; align-items: center; gap: 4px; background: var(--bg-subtle); padding: 4px 8px; border-radius: var(--radius-xs); border: 1px solid var(--border-light);">
-            <i data-lucide="calendar" style="width: 13px; height: 13px; color: var(--text-secondary);"></i>
-            <select id="dateSelect" aria-label="Report Date Selection" style="font-size: 0.76rem; font-weight: 700; border: none; background: transparent; outline: none; cursor: pointer;">
-              <option value="latest">Today</option>
-            </select>
-          </div>
-
-          <!-- Quick Action Buttons -->
-          <a href="https://sohaibmahmood.vibepreview.com/" target="_blank" class="header-btn" title="Live Web Portfolio">
-            <i data-lucide="globe" style="width: 13px; height: 13px;"></i>
-            <span>Portfolio</span>
-          </a>
-          <a href="https://drive.google.com/file/d/1TH4CMzXFOfup2liGESZmmA7QFM8GcfqP/view?usp=sharing" target="_blank" class="header-btn" title="Video Introduction">
-            <i data-lucide="video" style="width: 13px; height: 13px;"></i>
-            <span>Video</span>
-          </a>
-          <a href="https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk" target="_blank" class="header-btn" title="Curriculum Vitae">
-            <i data-lucide="file-text" style="width: 13px; height: 13px;"></i>
-            <span>Resume</span>
-          </a>
-          <a href="https://drive.google.com/file/d/12mjATUvsDO6KQS20w_1MOAevmG41T0vV/view?usp=drivesdk" target="_blank" class="header-btn" title="Excel Report">
-            <i data-lucide="table" style="width: 13px; height: 13px;"></i>
-            <span>Excel</span>
-          </a>
         </div>
       </header>
 
-      <!-- Scrollable Main Viewport -->
-      <div class="content-scrollable">
-
-        <!-- VIEW: MAIN DASHBOARD -->
-        <section id="viewDashboard">
-          
-          <!-- Compact Profile Strip -->
-          <div class="profile-strip">
-            <div class="profile-strip-left">
-              <h3>Sohaib Mahmood ⚡ <span style="font-size: 0.85rem; color: var(--primary); font-weight: 700;">GoHighLevel Expert</span></h3>
-              <p>4+ Years Experience • 50+ Completed Builds • 200+ Workflows • 40+ Sub-Accounts • n8n & AI Automation</p>
+      <!-- ====================================================================
+           PAGE 1: DASHBOARD (Intelligence Overview)
+           ==================================================================== -->
+      <section class="view-content" id="page-dashboard">
+        <!-- Dashboard Header -->
+        <div class="view-heading-row">
+          <div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--forest-green); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px;">
+              GEMINI SPARK • AI JOB INTELLIGENCE
             </div>
-            <div class="strip-pills-wrap">
-              <span class="strip-pill live-status"><span class="pulse-dot"></span> 100% Worldwide Remote</span>
-              <span class="strip-pill">📍 Lahore, Pakistan (UTC+5)</span>
-              <span class="strip-pill">⏱ 3-Hour Automation Active</span>
-              <span class="strip-pill" id="lastUpdatedBadge">19 Aug 2026, 09:12 PM PKT</span>
-            </div>
-          </div>
-
-          <!-- Clean Compact KPI Row -->
-          <div class="kpi-container">
-            <div class="kpi-tile" onclick="document.querySelector('.filter-chip[data-filter=\'today\']').click()">
-              <div class="kpi-top-row">
-                <span class="kpi-tag-label">New Today</span>
-                <i data-lucide="sparkles" style="width: 14px; height: 14px; color: var(--success);"></i>
-              </div>
-              <div class="kpi-main-number" id="kpiToday" style="color: var(--success);">1</div>
-              <div class="kpi-sub-text">Posted in last 24h</div>
-            </div>
-
-            <div class="kpi-tile" onclick="document.querySelector('.filter-chip[data-filter=\'1-3-days\']').click()">
-              <div class="kpi-top-row">
-                <span class="kpi-tag-label">0–3 Days</span>
-                <i data-lucide="flame" style="width: 14px; height: 14px; color: var(--primary);"></i>
-              </div>
-              <div class="kpi-main-number" id="kpi3Days" style="color: var(--primary);">7</div>
-              <div class="kpi-sub-text">High Freshness Priority</div>
-            </div>
-
-            <div class="kpi-tile" onclick="document.querySelector('.filter-chip[data-filter=\'all-fresh\']').click()">
-              <div class="kpi-top-row">
-                <span class="kpi-tag-label">Active GHL</span>
-                <i data-lucide="briefcase" style="width: 14px; height: 14px; color: var(--fresh-cyan);"></i>
-              </div>
-              <div class="kpi-main-number" id="kpiActiveGhl" style="color: var(--fresh-cyan);">11</div>
-              <div class="kpi-sub-text">Ready to Apply</div>
-            </div>
-
-            <div class="kpi-tile" onclick="navigateTo('saved')">
-              <div class="kpi-top-row">
-                <span class="kpi-tag-label">Saved</span>
-                <i data-lucide="bookmark" style="width: 14px; height: 14px; color: var(--warning);"></i>
-              </div>
-              <div class="kpi-main-number" id="kpiSaved" style="color: var(--warning);">0</div>
-              <div class="kpi-sub-text">Bookmarked</div>
-            </div>
-
-            <div class="kpi-tile" onclick="navigateTo('applied')">
-              <div class="kpi-top-row">
-                <span class="kpi-tag-label">Applied</span>
-                <i data-lucide="send" style="width: 14px; height: 14px; color: #7c3aed;"></i>
-              </div>
-              <div class="kpi-main-number" id="kpiApplied" style="color: #7c3aed;">0</div>
-              <div class="kpi-sub-text">Excluded from Active</div>
-            </div>
-
-            <div class="kpi-tile" onclick="navigateTo('dashboard')">
-              <div class="kpi-top-row">
-                <span class="kpi-tag-label">Top Fit</span>
-                <i data-lucide="trophy" style="width: 14px; height: 14px; color: var(--success);"></i>
-              </div>
-              <div class="kpi-main-number" id="kpiTopMatch" style="color: var(--success);">98%</div>
-              <div class="kpi-sub-text">Highest GHL Match</div>
-            </div>
-          </div>
-
-          <!-- Freshness Filters Bar -->
-          <div class="filter-bar">
-            <span style="font-size: 0.72rem; font-weight: 800; color: var(--text-secondary); text-transform: uppercase; margin-right: 4px;">Freshness:</span>
-            <button class="filter-chip active" data-filter="all-fresh">All Fresh (0–7 Days)</button>
-            <button class="filter-chip" data-filter="today">Today (0–24h)</button>
-            <button class="filter-chip" data-filter="1-3-days">1–3 Days</button>
-            <button class="filter-chip" data-filter="4-7-days">4–7 Days</button>
-            <button class="filter-chip" data-filter="8-14-days">8–14 Days</button>
-            <button class="filter-chip" data-filter="saved">Saved</button>
-            <button class="filter-chip" data-filter="applied">Applied</button>
-
-            <div style="margin-left: auto; display: flex; align-items: center; gap: 8px;">
-              <select id="sortSelect" class="select-filter" style="padding: 4px 8px; font-size: 0.76rem; font-weight: 700; border-radius: 4px; border: 1px solid var(--border-light); background: var(--bg-subtle);">
-                <option value="freshness-match">Sort: Freshness + Match Score</option>
-                <option value="score-desc">Sort: Highest Match Score</option>
-                <option value="date-desc">Sort: Newest Posting Date</option>
-              </select>
-              <span id="feedCountBadge" style="font-size: 0.76rem; font-weight: 700; color: var(--text-secondary);">11 Fresh GHL Opportunities</span>
-            </div>
-          </div>
-
-          <!-- Pixel-Perfect Premium GHL Job Grid -->
-          <div class="job-grid" id="jobGridContainer"></div>
-
-          <!-- Recently Processed Compact Strip -->
-          <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 14px 18px; margin-top: 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <h4 style="font-size: 0.85rem; font-weight: 800; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.04em;">
-                Recently Processed Opportunities (Excluded from Active Feed)
-              </h4>
-              <span style="font-size: 0.75rem; color: var(--text-muted);">Jobs marked 'Applied', 'Interview' or 'Closed' never reappear</span>
-            </div>
-            <div id="processedJobsList"></div>
-          </div>
-
-        </section>
-
-        <!-- VIEW: SEARCH HISTORY -->
-        <section id="viewHistory" style="display: none;">
-          <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 20px;">
-            <h3 style="font-size: 1.05rem; font-weight: 800; margin-bottom: 8px;">3-Hour Snapshot History</h3>
-            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 16px;">
-              Inspect immutable historical 3-hour job intelligence snapshots:
+            <h1 class="view-main-title">Dashboard</h1>
+            <p class="view-subtitle">
+              Candidate: <strong>Sohaib Mahmood</strong> • Focus: <strong>GoHighLevel & CRM Automation</strong>
             </p>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <button class="filter-chip active" onclick="document.getElementById('dateSelect').value='latest'; loadDataset('latest'); navigateTo('dashboard');">
-                Active Latest (2026-08-19) — 11 GHL Roles
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="live-badge-box" id="dashLiveBadge">
+              <span class="live-dot-pulse"></span> LIVE 3H REFRESH
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">
+              Next: <span id="dashCountdown" style="font-weight: 800; font-family: monospace; color: var(--forest-green);">--:--:--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Metric Cards -->
+        <div class="stat-cards-container" aria-label="Key Search Metrics">
+          <div class="jobi-stat-card">
+            <div class="stat-left-text">
+              <div class="stat-large-num" id="dashFreshJobs">07</div>
+              <div class="stat-sub-label">Fresh GHL Jobs (0–7D)</div>
+            </div>
+            <div class="stat-lime-circle">
+              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+
+          <div class="jobi-stat-card">
+            <div class="stat-left-text">
+              <div class="stat-large-num" id="dashNewJobs">03</div>
+              <div class="stat-sub-label">New Discovered</div>
+            </div>
+            <div class="stat-lime-circle">
+              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+          </div>
+
+          <div class="jobi-stat-card">
+            <div class="stat-left-text">
+              <div class="stat-large-num" id="dashTotalJobs">11</div>
+              <div class="stat-sub-label">Active Opportunities</div>
+            </div>
+            <div class="stat-lime-circle">
+              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+          </div>
+
+          <div class="jobi-stat-card">
+            <div class="stat-left-text">
+              <div class="stat-large-num" id="dashTopMatch">98%</div>
+              <div class="stat-sub-label">Top Fit Score</div>
+            </div>
+            <div class="stat-lime-circle">
+              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle Section: Chart & Top Matches -->
+        <div class="analytics-two-col">
+          <!-- Left: Match Velocity Chart -->
+          <div class="white-panel-box">
+            <div class="panel-title-bar">
+              <div>
+                <div class="panel-heading">Job Match Velocity</div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
+                  GHL opportunity frequency & match concentration
+                </div>
+              </div>
+              <div class="time-tabs-bar">
+                <button class="time-tab-btn" data-time-tab="day">Day</button>
+                <button class="time-tab-btn active" data-time-tab="week">Week</button>
+                <button class="time-tab-btn" data-time-tab="month">Month</button>
+                <button class="time-tab-btn" data-time-tab="all">All</button>
+              </div>
+            </div>
+
+            <div class="chart-wrapper-inner">
+              <canvas id="dashViewsChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Right: Top Strategic GHL Focus -->
+          <div class="white-panel-box">
+            <div class="panel-title-bar">
+              <div class="panel-heading">Top GHL Focus</div>
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--forest-green);">PRIORITY 1</span>
+            </div>
+
+            <div class="mini-top-list" id="dashTopMatchesList">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Freshest Opportunities Preview with CTA to All Jobs -->
+        <div class="white-panel-box">
+          <div class="panel-title-bar">
+            <div>
+              <div class="panel-heading">Freshest GHL Discoveries</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
+                Top 4 highest priority fresh listings (0–3 days old)
+              </div>
+            </div>
+            <button class="btn-scrape-cta" onclick="navigateTo('jobs')">
+              <span>View All Jobs →</span>
+            </button>
+          </div>
+
+          <div class="job-cards-grid" id="dashFreshGrid">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PAGE 2: ALL JOBS (Main Database with Clean Toolbar)
+           ==================================================================== -->
+      <section class="view-content" id="page-jobs" style="display: none;">
+        <!-- Header -->
+        <div class="view-heading-row">
+          <div>
+            <h1 class="view-main-title">All GoHighLevel Jobs</h1>
+            <p class="view-subtitle">
+              Fresh opportunities discovered across public job sources • Strict 0–7 Day Window
+            </p>
+          </div>
+
+          <div id="compareBarActive" class="compare-bar-cta" style="display: none;">
+            <span>Comparing <b id="compareSelectedCount">0</b> jobs</span>
+            <button class="btn-launch-compare" id="btnOpenCompareModal">Compare Now →</button>
+          </div>
+        </div>
+
+        <!-- Clean Compact Toolbar -->
+        <div class="all-jobs-toolbar">
+          <!-- Dedicated Job Search Input -->
+          <div class="toolbar-search-wrap">
+            <svg class="search-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="jobsSearchInput" class="toolbar-search-input" placeholder="Search by title, skill, company...">
+          </div>
+
+          <div class="toolbar-controls-group">
+            <!-- Freshness Filter -->
+            <select id="filterFreshness" class="filter-select">
+              <option value="all">Freshness: All (0–7D)</option>
+              <option value="today">Today (0D)</option>
+              <option value="1-3-days">1–3 Days Ago</option>
+              <option value="4-7-days">4–7 Days Ago</option>
+            </select>
+
+            <!-- Match Score Filter -->
+            <select id="filterMatch" class="filter-select">
+              <option value="all">Match: All Scores</option>
+              <option value="90">90%+ Match</option>
+              <option value="80">80%+ Match</option>
+              <option value="70">70%+ Match</option>
+            </select>
+
+            <!-- Work Mode Filter -->
+            <select id="filterWorkMode" class="filter-select">
+              <option value="all">Work Mode: All</option>
+              <option value="remote">100% Remote</option>
+              <option value="hybrid">Hybrid</option>
+              <option value="onsite">Onsite</option>
+            </select>
+
+            <!-- Sorting -->
+            <select id="sortJobsSelect" class="filter-select">
+              <option value="newest">Sort: Newest First</option>
+              <option value="match-desc">Sort: Highest Match</option>
+              <option value="salary-desc">Sort: Highest Salary</option>
+              <option value="company-az">Sort: Company A-Z</option>
+            </select>
+
+            <!-- View Layout Toggle (Grid vs List) -->
+            <div class="view-toggle-wrap">
+              <button class="view-toggle-btn active" id="btnViewGrid" title="Grid View">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
               </button>
-              <button class="filter-chip" onclick="document.getElementById('dateSelect').value='2026-08-18'; loadDataset('2026-08-18'); navigateTo('dashboard');">
-                2026-08-18 Snapshot
+              <button class="view-toggle-btn" id="btnViewList" title="List View">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
               </button>
             </div>
           </div>
-        </section>
+        </div>
 
-      </div>
-    </div>
+        <!-- All Jobs Grid / List -->
+        <div class="job-cards-grid" id="allJobsGrid">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="allJobsEmpty" style="display: none;">
+          <div class="empty-icon-wrap">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>No matching GoHighLevel jobs found</h3>
+          <p>Try adjusting your search criteria or trigger a live scrape across public feeds.</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PAGE 3: NEW MATCHES (Timeline Feed)
+           ==================================================================== -->
+      <section class="view-content" id="page-matches" style="display: none;">
+        <div class="view-heading-row">
+          <div>
+            <h1 class="view-main-title">New Matches</h1>
+            <p class="view-subtitle">Newly discovered GoHighLevel opportunities from recent automated scans</p>
+          </div>
+        </div>
+
+        <!-- Timeline Feeds -->
+        <div id="matchesTimelineContainer">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PAGE 4: SAVED JOBS (Saved Opportunity Management)
+           ==================================================================== -->
+      <section class="view-content" id="page-saved" style="display: none;">
+        <div class="view-heading-row">
+          <div>
+            <h1 class="view-main-title">Saved Jobs</h1>
+            <p class="view-subtitle">Personal shortlist of bookmarked GoHighLevel roles</p>
+          </div>
+        </div>
+
+        <div class="job-cards-grid" id="savedJobsGrid">
+          <!-- Populated dynamically -->
+        </div>
+
+        <div class="empty-state" id="savedJobsEmpty" style="display: none;">
+          <div class="empty-icon-wrap">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>No saved opportunities yet</h3>
+          <p>Click the bookmark icon or "☆ Save" button on any job card in All Jobs to pin it here.</p>
+          <button class="btn-scrape-cta" style="margin: 0 auto; display: inline-flex;" onclick="navigateTo('jobs')">
+            <span>Explore All Jobs →</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           PAGE 5: APPLIED JOBS (Application Tracker — Kanban & Table)
+           ==================================================================== -->
+      <section class="view-content" id="page-applied" style="display: none;">
+        <div class="view-heading-row">
+          <div>
+            <h1 class="view-main-title">Application Tracker</h1>
+            <p class="view-subtitle">Track submission stages, interviews, and offers in one unified pipeline</p>
+          </div>
+
+          <div class="view-toggle-wrap">
+            <button class="view-toggle-btn active" id="btnTrackerKanban">Kanban</button>
+            <button class="view-toggle-btn" id="btnTrackerTable">Table</button>
+          </div>
+        </div>
+
+        <!-- Kanban Board View -->
+        <div class="kanban-board-grid" id="trackerKanbanView">
+          <!-- Column 1: Applied -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <div class="kanban-column-title">
+                <span>Applied</span>
+              </div>
+              <span class="kanban-counter-badge" id="kanbanCntApplied">0</span>
+            </div>
+            <div class="kanban-cards-stack" id="kanbanColApplied"></div>
+          </div>
+
+          <!-- Column 2: Interview Scheduled / Active -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <div class="kanban-column-title">
+                <span>Interview</span>
+              </div>
+              <span class="kanban-counter-badge" id="kanbanCntInterview">0</span>
+            </div>
+            <div class="kanban-cards-stack" id="kanbanColInterview"></div>
+          </div>
+
+          <!-- Column 3: Offer -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <div class="kanban-column-title">
+                <span>Offer</span>
+              </div>
+              <span class="kanban-counter-badge" id="kanbanCntOffer">0</span>
+            </div>
+            <div class="kanban-cards-stack" id="kanbanColOffer"></div>
+          </div>
+
+          <!-- Column 4: Rejected / Closed -->
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <div class="kanban-column-title">
+                <span>Rejected / Closed</span>
+              </div>
+              <span class="kanban-counter-badge" id="kanbanCntRejected">0</span>
+            </div>
+            <div class="kanban-cards-stack" id="kanbanColRejected"></div>
+          </div>
+        </div>
+
+        <!-- Table View -->
+        <div class="tracker-table-container" id="trackerTableView" style="display: none;">
+          <table class="tracker-table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Role</th>
+                <th>Match Score</th>
+                <th>Applied Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="trackerTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
   </div>
 
-  <!-- Real Instant Scrape Progress Modal -->
-  <div class="scrape-modal-backdrop" id="scrapeProgressModal">
-    <div class="scrape-modal-card">
-      <div class="scrape-modal-title">
-        <span>⚡ Real-Time GHL Job Discovery</span>
-      </div>
-      <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 16px;">
-        Executing live job search across configured ATS and remote career endpoints:
-      </p>
-
-      <div class="scrape-step-item" id="step1">
-        <div class="step-icon">○</div>
-        <span>Connecting to GoHighLevel job sources...</span>
-      </div>
-      <div class="scrape-step-item" id="step2">
-        <div class="step-icon">○</div>
-        <span>Querying Workable, Remotive, Himalayas & Greenhouse APIs...</span>
-      </div>
-      <div class="scrape-step-item" id="step3">
-        <div class="step-icon">○</div>
-        <span>Enforcing strict 0–14 days freshness filter (excluding >14D)...</span>
-      </div>
-      <div class="scrape-step-item" id="step4">
-        <div class="step-icon">○</div>
-        <span>Scoring candidate opportunities against Sohaib's profile...</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right-Side Slide-Over Drawer (Job Details & 7-Dimension Score Breakdown) -->
-  <div class="drawer-backdrop" id="drawerBackdrop"></div>
-  <aside class="side-drawer" id="jobDrawer">
-    <div class="drawer-header">
+  <!-- ====================================================================
+       AI JOB COMPARISON MODAL
+       ==================================================================== -->
+  <div class="modal-backdrop" id="compareModalBackdrop"></div>
+  <div class="compare-modal-box" id="compareModalBox" role="dialog" aria-label="Compare Jobs">
+    <div class="compare-modal-header">
       <div>
-        <div style="font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase;" id="drawerCompany">Company</div>
-        <h3 style="font-size: 1.08rem; font-weight: 800; color: var(--text-primary); line-height: 1.3;" id="drawerJobTitle">Job Title</h3>
+        <div style="font-size: 0.74rem; font-weight: 800; color: var(--forest-green); text-transform: uppercase;">
+          AI JOB COMPARISON
+        </div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">Side-by-Side Evaluation</h3>
       </div>
-      <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Drawer">
-        <i data-lucide="x" style="width: 14px; height: 14px;"></i>
-      </button>
+      <button class="drawer-close-btn" id="compareCloseBtn">✕</button>
+    </div>
+    <div class="compare-modal-body" id="compareModalBody">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       SLIDE-OVER JOB DETAIL DRAWER (With AI Match Analysis)
+       ==================================================================== -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="job-drawer" id="jobDrawer" aria-label="Job Detail Drawer">
+    <div class="drawer-header">
+      <div style="font-size: 0.78rem; font-weight: 800; color: var(--forest-green); text-transform: uppercase; letter-spacing: 0.06em;">
+        AI MATCH ANALYSIS
+      </div>
+      <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Drawer">✕</button>
     </div>
 
     <div class="drawer-body">
-      <!-- Match Score Badge -->
-      <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-subtle); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-bottom: 16px;">
-        <div>
-          <div style="font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Match Rating</div>
-          <div style="font-size: 0.82rem; font-weight: 700; color: var(--success);" id="drawerScoreCat">Excellent Match</div>
-        </div>
-        <div style="font-size: 1.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: var(--text-primary);" id="drawerScoreNum">98%</div>
-      </div>
-
-      <!-- Key Details -->
-      <div class="drawer-section">
-        <div class="drawer-section-title">Opportunity Details</div>
-        <div style="font-size: 0.8rem; color: #334155; display: flex; flex-direction: column; gap: 4px;">
-          <div>📍 <b>Location:</b> <span id="drawerLocation"></span></div>
-          <div>💼 <b>Work Mode:</b> <span id="drawerWorkMode"></span></div>
-          <div>💰 <b>Compensation:</b> <span id="drawerSalary"></span></div>
-          <div>⏱ <b>Experience:</b> <span id="drawerExp"></span></div>
-          <div>🕒 <b>Freshness:</b> <span id="drawerFreshness"></span></div>
+      <div class="drawer-title-box">
+        <div style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600; margin-bottom: 4px;" id="drawerCompany">Company</div>
+        <h3 id="drawerJobTitle">Job Title</h3>
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+          <div class="stat-large-num" id="drawerScoreNum" style="font-size: 1.25rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: var(--forest-green);">--%</div>
+          <span style="font-size: 0.8rem; font-weight: 700; background: var(--neon-lime-subtle); color: var(--forest-green); padding: 2px 8px; border-radius: var(--radius-xs); border: 1px solid var(--neon-lime-border);" id="drawerScoreCat">Match</span>
         </div>
       </div>
 
-      <!-- 7-Dimension Score Breakdown -->
-      <div class="drawer-section">
-        <div class="drawer-section-title">7-Dimension Match Breakdown</div>
-        <div class="breakdown-list" id="drawerScoreBreakdown"></div>
+      <div class="drawer-meta-grid">
+        <div class="drawer-meta-item">
+          <div class="meta-k">Location</div>
+          <div class="meta-v" id="drawerLocation">Worldwide Remote</div>
+        </div>
+        <div class="drawer-meta-item">
+          <div class="meta-k">Work Mode</div>
+          <div class="meta-v" id="drawerWorkMode">100% Remote</div>
+        </div>
+        <div class="drawer-meta-item">
+          <div class="meta-k">Compensation</div>
+          <div class="meta-v" id="drawerSalary">Competitive</div>
+        </div>
+        <div class="drawer-meta-item">
+          <div class="meta-k">Experience</div>
+          <div class="meta-v" id="drawerExp">3+ Years</div>
+        </div>
+        <div class="drawer-meta-item" style="grid-column: span 2;">
+          <div class="meta-k">Published Date</div>
+          <div class="meta-v" id="drawerPosted">Recent</div>
+        </div>
       </div>
 
-      <!-- Why It Matches -->
-      <div class="drawer-section">
-        <div class="drawer-section-title">Why This Matches Sohaib's Background</div>
-        <p style="font-size: 0.82rem; color: #334155; line-height: 1.45;" id="drawerWhy"></p>
-      </div>
+      <div class="drawer-section-title">WHY THIS MATCHES SOHAIB'S PROFILE</div>
+      <p style="font-size: 0.84rem; color: #374151; line-height: 1.5; margin-bottom: 18px;" id="drawerWhy"></p>
 
-      <!-- Skills -->
-      <div class="drawer-section">
-        <div class="drawer-section-title">Matched Core Skills</div>
-        <div id="drawerMatchedSkills"></div>
-      </div>
+      <div class="drawer-section-title">7-DIMENSION MATCH BREAKDOWN</div>
+      <div class="drawer-breakdown-box" id="drawerScoreBreakdown"></div>
 
-      <div class="drawer-section">
-        <div class="drawer-section-title">Advantage Differentiators</div>
-        <div id="drawerAdvSkills"></div>
-      </div>
+      <div class="drawer-section-title">VERIFIED MATCHING SKILLS</div>
+      <div class="card-skills-row" id="drawerMatchedSkills" style="margin-bottom: 16px;"></div>
 
-      <div class="drawer-section">
-        <div class="drawer-section-title">Missing / Unverified Skills</div>
-        <div id="drawerMissingSkills"></div>
-      </div>
+      <div class="drawer-section-title">MISSING / BONUS QUALIFICATIONS</div>
+      <div class="card-skills-row" id="drawerMissingSkills" style="margin-bottom: 16px;"></div>
 
-      <!-- Considerations -->
-      <div class="drawer-section">
-        <div class="drawer-section-title">Considerations</div>
-        <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;" id="drawerConcerns"></p>
-      </div>
+      <div class="drawer-section-title">ADVANTAGE HIGHLIGHTS</div>
+      <div class="card-skills-row" id="drawerAdvSkills" style="margin-bottom: 16px;"></div>
 
-      <!-- Status Updater -->
-      <div class="drawer-section" style="border-top: 1px solid var(--border-light); padding-top: 14px;">
-        <div class="drawer-section-title">Update Application Status (Persisted)</div>
-        <select class="custom-select" id="drawerStatusSelect" style="width: 100%; padding: 6px 10px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); font-size: 0.8rem; font-weight: 700;">
+      <div class="drawer-section-title">APPLICATION STRATEGY & CONSIDERATIONS</div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 20px;" id="drawerConcerns"></p>
+    </div>
+
+    <div class="drawer-footer">
+      <div>
+        <select class="card-status-dropdown" id="drawerStatusSelect" style="height: 38px; padding: 0 10px; font-size: 0.78rem;">
           <option value="New Match">New Match</option>
           <option value="Saved">Saved</option>
           <option value="Applied">Applied</option>
           <option value="Interview Scheduled">Interview Scheduled</option>
-          <option value="Interview Completed">Interview Completed</option>
           <option value="Offer">Offer</option>
-          <option value="Rejected">Rejected</option>
           <option value="Closed">Closed</option>
         </select>
-        <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">
-          * Setting to "Applied", "Interview", "Offer" or "Closed" permanently excludes the job from future active searches.
-        </p>
       </div>
-    </div>
 
-    <!-- Drawer Footer Actions -->
-    <div class="drawer-footer">
-      <a href="#" target="_blank" class="btn-card-details" id="drawerViewBtn" style="flex: 1; text-align: center;">View Listing</a>
-      <a href="#" target="_blank" class="btn-card-apply" id="drawerApplyBtn" style="flex: 1; text-align: center;">Apply Directly →</a>
+      <div style="display: flex; gap: 8px;">
+        <button id="drawerMarkAppliedBtn" class="btn-card-save" style="padding: 8px 14px;">
+          ✓ Mark Applied
+        </button>
+        <a id="drawerApplyBtn" href="#" target="_blank" class="btn-card-apply" style="padding: 8px 18px; font-size: 0.82rem;">
+          Apply Directly →
+        </a>
+      </div>
     </div>
   </aside>
 
   <script src="./assets/js/app.js"></script>
-  <script>
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
-  </script>
 </body>
 </html>
