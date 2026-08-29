@@ -1,11 +1,11 @@
 {
   "metadata": {
     "search_date": "2026-08-30",
-    "search_time": "00:13 PKT",
-    "search_time_slug": "00-13",
-    "last_updated": "30 Aug 2026, 12:13 AM PKT",
-    "next_update": "30 Aug 2026, 03:00 AM PKT",
-    "next_update_iso": "2026-08-30T03:00:00+00:00",
+    "search_time": "04:54 PKT",
+    "search_time_slug": "04-54",
+    "last_updated": "30 Aug 2026, 04:54 AM PKT",
+    "next_update": "30 Aug 2026, 06:00 AM PKT",
+    "next_update_iso": "2026-08-30T06:00:00+00:00",
     "schedule_interval_hours": 3,
     "schedule_times_pkt": [
       "00:00",
@@ -46,21 +46,21 @@
       "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
     },
     "kpis": {
-      "total_discovered": 12,
-      "new_jobs_count": 2,
-      "active_jobs_count": 12,
-      "fresh_jobs_count": 12,
-      "today_count": 2,
-      "three_days_count": 8,
+      "total_discovered": 11,
+      "new_jobs_count": 1,
+      "active_jobs_count": 11,
+      "fresh_jobs_count": 11,
+      "today_count": 3,
+      "three_days_count": 6,
       "seven_days_count": 2,
       "applied_count": 0,
       "interviews_count": 0,
       "offers_count": 0,
       "saved_count": 0,
       "top_match_score": 87.5,
-      "avg_match_score": 88.2,
+      "avg_match_score": 88.5,
       "top_5_count": 5,
-      "priority_1_apply_count": 11,
+      "priority_1_apply_count": 10,
       "priority_2_consider_count": 1,
       "remote_worldwide_percentage": 100
     },
@@ -163,7 +163,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
       "raw_title": "GoHighLevel Workflow & CRM Automation Lead",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Seeking an experienced GoHighLevel Automation Lead to design multi-tier email/SMS follow-up campaigns, configure custom fields and pipeline stages, set up trigger links, and ensure 100% speed-to-lead execution.",
@@ -171,15 +171,119 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
     },
     {
+      "id": "ghl-d6e53a90",
+      "fingerprint": "d6e53a9092d70a98bef5c984ef74a359",
+      "rank": 2,
+      "title": "GoHighLevel Demo Specialist / Sales Representative",
+      "company": "The Plum Tree Group",
+      "company_initials": "TH",
+      "company_color": "#2563EB",
+      "company_logo": "",
+      "location": "Worldwide Remote",
+      "eligible_locations": [
+        "Worldwide Remote"
+      ],
+      "remote_eligibility": "Open Globally",
+      "work_mode": "100% Remote",
+      "salary": "Competitive / Disclosed on Application",
+      "employment_type": "Full-Time Remote",
+      "experience_req": "2\u20134 years",
+      "candidate_exp": "4 years",
+      "posted_date": "2026-08-30",
+      "posted_days_ago": 0,
+      "posted_relative": "Posted today",
+      "freshness_badge": "TODAY",
+      "freshness_priority": 0,
+      "freshness_tier": "0\u20131 Days",
+      "score": 87.0,
+      "category": "Strong Match",
+      "priority": "Priority 1 \u2014 Apply",
+      "priority_class": "prio-apply",
+      "priority_icon": "\ud83d\udd25",
+      "score_breakdown": {
+        "technical_skills": {
+          "score": 20,
+          "max": 30,
+          "label": "Technical Skills (GHL, n8n, APIs)"
+        },
+        "experience": {
+          "score": 19.0,
+          "max": 20,
+          "label": "Relevant Experience (4 Yrs GHL)"
+        },
+        "role_alignment": {
+          "score": 15.0,
+          "max": 15,
+          "label": "Role Alignment (GHL Lead)"
+        },
+        "ai_relevance": {
+          "score": 14.5,
+          "max": 15,
+          "label": "AI & Automation Relevance"
+        },
+        "location": {
+          "score": 10.0,
+          "max": 10,
+          "label": "Remote Compatibility"
+        },
+        "compensation": {
+          "score": 4.0,
+          "max": 5,
+          "label": "Compensation"
+        },
+        "career_potential": {
+          "score": 4.5,
+          "max": 5,
+          "label": "Career Potential"
+        }
+      },
+      "ghl_evidence": "...GoHighLevel Demo Specialist / Sales Representative <p>GoHighLevel Demo...",
+      "ghl_evidence_source": "job_description",
+      "role_category": "GHL_AUTOMATION",
+      "matched_skills": [
+        "GoHighLevel",
+        "Workflow Automation",
+        "SaaS Mode",
+        "Opportunity Pipelines"
+      ],
+      "missing_skills": [
+        "None identified in listed technical scope"
+      ],
+      "advantage_skills": [
+        "4 Years GHL Experience",
+        "50+ Built Funnels",
+        "n8n & Webhooks",
+        "Portfolio (sohaibmahmood.vibepreview.com)"
+      ],
+      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Demo Specialist / Sales Representative <p>GoHighLevel Demo",
+      "concerns": "Verify timezone overlap during initial call.",
+      "source": "Himalayas",
+      "source_type": "himalayas_api",
+      "app_url": "https://himalayas.app/jobs/",
+      "original_url": "https://himalayas.app/jobs/",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "raw_title": "GoHighLevel Demo Specialist / Sales Representative",
+      "raw_company": "The Plum Tree Group",
+      "raw_description": "<p>GoHighLevel Demo Specialist / Sales Representative</p><h3>Company Overview:</h3><p>Launchpad is an innovative SaaS platform that transforms how businesses streamline operations and drive growth. We are a white-label version of GoHighLevel, and we are looking for a dynamic and results-driven GoHighLevel Demo Specialist / Sales Representative to join our expanding sales team.</p><h3>Job Description:</h3><p>We are looking for an experienced GoHighLevel Demo Specialist / Sales Representative who can effectively present GoHighLevel (GHL) and its white-label version to prospective clients. If you have a proven track record of delivering compelling product demos and have experience selling similar platforms, this could be the perfect opportunity for you. In this role, you\u2019ll showcase the value of our platform to potential clients, helping them understand how it can address their unique business needs.</p><h3>Key Responsibilities:</h3><ul>\n<li>Deliver engaging and insightful product demos of GoHighLevel (White-label version) to prospective clients, highlighting key features and benefits.</li>\n<li>Collaborate with the sales team to tailor demos based on client-specific needs and challenges.</li>\n<li>Address client questions and concerns during demos, providing clear explanations and practical solutions.</li>\n<li>Stay up-to-date with the latest product updates to ensure accurate and relevant demos.</li>\n<li>Follow up with leads post-demo to gather feedback, resolve any additional queries, and advance the sales process.</li>\n<li>Maintain detailed records of demo activities and client interactions in CRM systems.</li>\n</ul><h3>Qualifications:</h3><ul>\n<li>Solid experience in sales, specifically with a focus on conducting product demos.</li>\n<li>Strong presentation skills with the ability to engage and inform diverse audiences.</li>\n<li>Experience in presenting software solutions and platforms (experience with GoHighLevel or similar platforms is a significant plus).</li>\n<li>Excellent communication and interpersonal skills.</li>\n<li>Ability to effectively manage time and prioritize demo sessions.</li>\n</ul><h3>Desirable Skills:</h3><ul>\n<li>Experience in lead generation and driving the sales process.</li>\n<li>Knowledge of CRM tools and sales tracking systems.</li>\n<li>Strong problem-solving skills, particularly during live demo scenarios.</li>\n</ul><h3>What We Offer:</h3><ul>\n<li>Remote working environment with a global team, providing flexibility and work-life balance.</li>\n<li>Above-market total compensation including base salary + performance bonuses.</li>\n<li>Opportunity to learn and grow in the field of AI and Automation, one of the hottest industries right now.</li>\n<li>Flexible vacation policy to ensure you can recharge when needed.</li>\n<li>A collaborative and innovative team environment, focused on growth and success.</li>\n</ul><p>Originally posted on <a href=\"https://himalayas.app\">Himalayas</a></p>",
+      "raw_posted_date": 1788040845,
+      "raw_app_url": "https://himalayas.app/jobs/",
+      "first_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "is_new": true,
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "status": "New Match",
+      "status_updated_at": "24 Aug 2026, 03:20 AM PKT",
+      "is_active": true
+    },
+    {
       "id": "ghl-b0550814",
       "fingerprint": "b055081476998edb57cefd56c8aa2a57",
-      "rank": 2,
+      "rank": 3,
       "title": "GoHighLevel Technical Specialist & Funnel Builder",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -265,7 +369,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
       "raw_title": "GoHighLevel Technical Specialist & Funnel Builder",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Looking for a dedicated GoHighLevel Builder to design high-converting agency client funnels, custom landing pages, multi-step booking forms, order bump upsell flows, and lead capture sequences in GoHighLevel.",
@@ -273,7 +377,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -281,7 +385,7 @@
     {
       "id": "ghl-f414d4a0",
       "fingerprint": "f414d4a0df17684aabe3bc87db1f9d39",
-      "rank": 3,
+      "rank": 4,
       "title": "AI & Automation Specialist (GHL)",
       "company": "Jobgether Agency Partner",
       "company_initials": "JO",
@@ -370,7 +474,7 @@
       "source_type": "jobgether",
       "app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "original_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
       "raw_title": "AI & Automation Specialist (GHL)",
       "raw_company": "Jobgether Agency Partner",
       "raw_description": "Requires deep expertise in GoHighLevel automation combined with external AI integrations (OpenAI API, n8n, Claude) for intelligent speed-to-lead qualification and automated calendar conversion flows.",
@@ -378,7 +482,7 @@
       "raw_app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
@@ -386,7 +490,7 @@
     {
       "id": "ghl-8dd6ca3d",
       "fingerprint": "8dd6ca3dbc499125ca2801fbed356001",
-      "rank": 4,
+      "rank": 5,
       "title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
       "company": "Grant Cardone Enterprises",
       "company_initials": "GR",
@@ -474,7 +578,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
       "original_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
       "raw_title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
       "raw_company": "Grant Cardone Enterprises",
       "raw_description": "Seeking a creative and technical Funnel Designer with deep GoHighLevel expertise to build high-converting landing pages, integrate AI automated conversation flows, and connect custom GHL workflows and webhooks.",
@@ -482,7 +586,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -490,7 +594,7 @@
     {
       "id": "ghl-b8292943",
       "fingerprint": "b8292943a90066d56197ccdd9b9c3d70",
-      "rank": 5,
+      "rank": 6,
       "title": "GoHighLevel Snapshot & SaaS Mode Architect",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -579,7 +683,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
       "raw_title": "GoHighLevel Snapshot & SaaS Mode Architect",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Responsible for managing agency client accounts, deploying custom GHL snapshots, verifying A2P 10DLC campaign compliance, setting up custom domain DNS records, and troubleshooting workflow execution logs in GoHighLevel.",
@@ -587,7 +691,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -595,7 +699,7 @@
     {
       "id": "ghl-4192baa4",
       "fingerprint": "4192baa4ca7b5c7eb878d8fd04f523a8",
-      "rank": 6,
+      "rank": 7,
       "title": "GoHighLevel Client Onboarding Specialist",
       "company": "HighLevel Agency Partners",
       "company_initials": "HI",
@@ -683,7 +787,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
       "raw_title": "GoHighLevel Client Onboarding Specialist",
       "raw_company": "HighLevel Agency Partners",
       "raw_description": "Responsible for managing end-to-end client onboarding inside GoHighLevel: deploying custom snapshots, configuring custom values and domains, setting up custom pipelines, and training client teams on GoHighLevel CRM features.",
@@ -691,223 +795,15 @@
       "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
     },
     {
-      "id": "ghl-7d71cd43",
-      "fingerprint": "7d71cd43ed06b339d3fea09ee6caee6f",
-      "rank": 7,
-      "title": "SEO Specialist with GoHighLevel (GHL) Experience | Project-Based",
-      "company": "Level 9 Virtual",
-      "company_initials": "LE",
-      "company_color": "#2563EB",
-      "company_logo": "",
-      "location": "Worldwide Remote",
-      "eligible_locations": [
-        "Worldwide Remote"
-      ],
-      "remote_eligibility": "Open Globally",
-      "work_mode": "100% Remote",
-      "salary": "Competitive / Disclosed on Application",
-      "employment_type": "Full-Time Remote",
-      "experience_req": "2\u20134 years",
-      "candidate_exp": "4 years",
-      "posted_date": "2026-08-29",
-      "posted_days_ago": 1,
-      "posted_relative": "Posted 1 days ago",
-      "freshness_badge": "1D AGO",
-      "freshness_priority": 1,
-      "freshness_tier": "2\u20133 Days",
-      "score": 87.0,
-      "category": "Strong Match",
-      "priority": "Priority 1 \u2014 Apply",
-      "priority_class": "prio-apply",
-      "priority_icon": "\ud83d\udd25",
-      "score_breakdown": {
-        "technical_skills": {
-          "score": 20,
-          "max": 30,
-          "label": "Technical Skills (GHL, n8n, APIs)"
-        },
-        "experience": {
-          "score": 19.0,
-          "max": 20,
-          "label": "Relevant Experience (4 Yrs GHL)"
-        },
-        "role_alignment": {
-          "score": 15.0,
-          "max": 15,
-          "label": "Role Alignment (GHL Lead)"
-        },
-        "ai_relevance": {
-          "score": 14.5,
-          "max": 15,
-          "label": "AI & Automation Relevance"
-        },
-        "location": {
-          "score": 10.0,
-          "max": 10,
-          "label": "Remote Compatibility"
-        },
-        "compensation": {
-          "score": 4.0,
-          "max": 5,
-          "label": "Compensation"
-        },
-        "career_potential": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Career Potential"
-        }
-      },
-      "ghl_evidence": "...SEO Specialist with GoHighLevel (GHL) Experience | Project-Based <h3>SEO Specialist with GH...",
-      "ghl_evidence_source": "job_description",
-      "role_category": "GHL_FUNNEL",
-      "matched_skills": [
-        "GoHighLevel",
-        "Funnel Building",
-        "Opportunity Pipelines"
-      ],
-      "missing_skills": [
-        "None identified in listed technical scope"
-      ],
-      "advantage_skills": [
-        "4 Years GHL Experience",
-        "50+ Built Funnels",
-        "n8n & Webhooks",
-        "Portfolio (sohaibmahmood.vibepreview.com)"
-      ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: SEO Specialist with GoHighLevel (GHL) Experience | Project-Based <h3>SEO Specialist with GH",
-      "concerns": "Verify timezone overlap during initial call.",
-      "source": "Himalayas",
-      "source_type": "himalayas_api",
-      "app_url": "https://himalayas.app/jobs/",
-      "original_url": "https://himalayas.app/jobs/",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
-      "raw_title": "SEO Specialist with GoHighLevel (GHL) Experience | Project-Based",
-      "raw_company": "Level 9 Virtual",
-      "raw_description": "<h3>SEO Specialist with GHL Experience</h3><p>Project-Based | Remote | 9:00 AM\u20135:00 PM CST</p><p>We are looking for a results-driven SEO Specialist with hands-on GoHighLevel (GHL) experience to join us on a project-based engagement.</p><p>We\u2019re looking for someone who understands both SEO strategy and implementation and can work comfortably inside GHL to support website, funnel, and digital marketing projects.</p><h3>What You\u2019ll Do</h3><ul>\n<li>Develop and implement SEO strategies to improve organic visibility, rankings, and website traffic</li>\n<li>Perform keyword research, competitor analysis, and SEO audits</li>\n<li>Optimize website pages, landing pages, funnels, and content for search engines</li>\n<li>Work within GoHighLevel (GHL) to build and optimize websites, funnels, forms, and related assets</li>\n<li>Implement on-page SEO elements including meta titles, meta descriptions, headers, internal linking, and image optimization</li>\n<li>Identify technical and content-related SEO opportunities</li>\n<li>Monitor SEO performance and provide recommendations based on data</li>\n<li>Collaborate with project teams to ensure SEO best practices are incorporated into GHL projects</li>\n<li>Troubleshoot SEO issues and recommend practical solutions</li>\n<li>Provide clear project updates and meet agreed deadlines</li>\n</ul><h3>Requirements</h3><ul>\n<li>Proven experience as an SEO Specialist, SEO Analyst, or similar role</li>\n<li>Hands-on experience with GoHighLevel (GHL) is required</li>\n<li>Strong knowledge of on-page, off-page, and technical SEO fundamentals</li>\n<li>Experience with keyword research and SEO tools such as Google Search Console, Google Analytics, Ahrefs, SEMrush, or similar platforms</li>\n<li>Experience optimizing websites, landing pages, and funnels</li>\n<li>Strong understanding of search intent, keyword mapping, and content optimization</li>\n<li>Ability to analyze SEO performance and translate data into actionable recommendations</li>\n<li>Strong attention to detail and problem-solving skills</li>\n<li>Excellent written and verbal communication</li>\n<li>Able to work independently and manage project deadlines</li>\n</ul><h3>Schedule</h3><h3>Monday\u2013Friday | 9:00 AM\u20135:00 PM CST</h3><p>Applicants must be consistently available during the required CST working hours and able to communicate with the team throughout the project.</p><h3>Engagement &amp; Growth Opportunity</h3><p>Project-Based: This position will initially be project-based, with compensation and scope determined based on the project requirements.<br><br>Potential for Full-Time: Candidates who demonstrate strong performance, reliability, technical capability, and a good overall fit with the team may be considered for a full-time transition as business needs evolve.</p>Salary: $5 - $7 DoE<p>Originally posted on <a href=\"https://himalayas.app\">Himalayas</a></p>",
-      "raw_posted_date": 1788022769,
-      "raw_app_url": "https://himalayas.app/jobs/",
-      "first_seen_at": "2026-08-30T00:13:30.345258+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
-      "status": "New Match",
-      "status_updated_at": "24 Aug 2026, 03:20 AM PKT",
-      "is_active": true
-    },
-    {
-      "id": "ghl-d777bceb",
-      "fingerprint": "d777bcebcb1c402103e863460182ff49",
-      "rank": 8,
-      "title": "B2B Content and Growth Marketing Manager",
-      "company": "Bamboo Works",
-      "company_initials": "BA",
-      "company_color": "#2563EB",
-      "company_logo": "https://cdn-images.himalayas.app/d1993ofng58s01v3m2jjhtemaaq9",
-      "location": "Worldwide Remote",
-      "eligible_locations": [
-        "Worldwide Remote"
-      ],
-      "remote_eligibility": "Open Globally",
-      "work_mode": "100% Remote",
-      "salary": "Competitive / Disclosed on Application",
-      "employment_type": "Full-Time Remote",
-      "experience_req": "2\u20134 years",
-      "candidate_exp": "4 years",
-      "posted_date": "2026-08-29",
-      "posted_days_ago": 1,
-      "posted_relative": "Posted 1 days ago",
-      "freshness_badge": "1D AGO",
-      "freshness_priority": 1,
-      "freshness_tier": "2\u20133 Days",
-      "score": 85.5,
-      "category": "Strong Match",
-      "priority": "Priority 1 \u2014 Apply",
-      "priority_class": "prio-apply",
-      "priority_icon": "\ud83d\udd25",
-      "score_breakdown": {
-        "technical_skills": {
-          "score": 20,
-          "max": 30,
-          "label": "Technical Skills (GHL, n8n, APIs)"
-        },
-        "experience": {
-          "score": 19.0,
-          "max": 20,
-          "label": "Relevant Experience (4 Yrs GHL)"
-        },
-        "role_alignment": {
-          "score": 13.5,
-          "max": 15,
-          "label": "Role Alignment (GHL Lead)"
-        },
-        "ai_relevance": {
-          "score": 14.5,
-          "max": 15,
-          "label": "AI & Automation Relevance"
-        },
-        "location": {
-          "score": 10.0,
-          "max": 10,
-          "label": "Remote Compatibility"
-        },
-        "compensation": {
-          "score": 4.0,
-          "max": 5,
-          "label": "Compensation"
-        },
-        "career_potential": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Career Potential"
-        }
-      },
-      "ghl_evidence": "...and lead follow-up workflows using tools such as GoHighLevel.</p></li> <li><p>Help continuously improve our website as b...",
-      "ghl_evidence_source": "job_description",
-      "role_category": "GHL_AUTOMATION",
-      "matched_skills": [
-        "GoHighLevel",
-        "Funnel Building",
-        "Workflow Automation",
-        "SaaS Mode",
-        "Opportunity Pipelines"
-      ],
-      "missing_skills": [
-        "None identified in listed technical scope"
-      ],
-      "advantage_skills": [
-        "4 Years GHL Experience",
-        "50+ Built Funnels",
-        "n8n & Webhooks",
-        "Portfolio (sohaibmahmood.vibepreview.com)"
-      ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: and lead follow-up workflows using tools such as GoHighLevel.</p></li> <li><p>Help continuously improve our website as b",
-      "concerns": "Verify timezone overlap during initial call.",
-      "source": "Himalayas",
-      "source_type": "himalayas_api",
-      "app_url": "https://himalayas.app/jobs/",
-      "original_url": "https://himalayas.app/jobs/",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
-      "raw_title": "B2B Content and Growth Marketing Manager",
-      "raw_company": "Bamboo Works",
-      "raw_description": "<h3>About <a href=\"https://himalayas.app/companies/bambooworks\">Bamboo Works</a>\n</h3><p><a href=\"https://himalayas.app/companies/bambooworks\">Bamboo Works</a> helps companies build global teams through flexible workforce solutions. We are evolving from a traditional remote staffing company into a more strategic <strong>global workforce partner</strong>, helping businesses increase capacity, access international talent, reduce operational bottlenecks, and build flexible teams that support long-term growth.</p><p>With a newly launched website and refreshed positioning, we're entering the next stage of our growth. We're also developing focused strategies within specific B2B industries\u2014including accounting and professional services\u2014where we see an opportunity to become a specialist workforce partner.</p><p>We're now looking for a <strong>B2B Content &amp; Growth Marketing Manager</strong> to help turn that positioning into visibility, authority, and qualified demand.</p><h3>The Role</h3><p>This is a hands-on strategic marketing role for someone who can <strong>develop the strategy and execute it</strong>.</p><p>You won't simply receive a content calendar and be asked to publish posts. You'll work closely with our founders to understand <a href=\"https://himalayas.app/companies/bambooworks\">Bamboo Works</a>' commercial priorities, target markets, and positioning, then translate those into a clear and consistent organic marketing strategy.</p><p>Your initial focus will span <strong>content, SEO, GEO/AI search, social media, lead magnets, website optimization, email marketing, and organic lead generation</strong>.</p><p>Paid advertising and performance marketing are <strong>not</strong> a core part of this role. We're looking for someone who understands how high-quality content and organic marketing can compound over time to build authority and generate qualified B2B opportunities.</p><h3>Role Details</h3><p><strong>Commitment:</strong> Part-Time (20 hours/week)</p><p><strong>Working Hours:</strong> Philippine business hours</p><p><strong>Location:</strong> Fully Remote (PH-based candidates preferred)</p><p><strong>Engagement:</strong> Independent Contractor</p><p><strong>Start Date:</strong> ASAP</p><p><strong>Monthly Rate:</strong> USD $800\u2013$960/month (on a 20-hour workweek), can be higher (depending on experience)</p><h3>What You'll Do</h3><h3>Content Strategy &amp; Execution</h3><ul>\n<li><p>Develop and execute a consistent B2B content strategy aligned with <a href=\"https://himalayas.app/companies/bambooworks\">Bamboo Works</a>' positioning and commercial priorities.</p></li>\n<li><p>Create content around global teams, workforce strategy, international talent, AI-enabled teams, and the business challenges our target customers face.</p></li>\n<li><p>Build targeted content strategies for priority niches, particularly accounting and professional services.</p></li>\n<li><p>Write and edit LinkedIn posts, blogs, articles, educational resources, and other marketing assets.</p></li>\n<li><p>Research customer pain points, industry trends, questions, and topics that can be turned into valuable content.</p></li>\n<li><p>Repurpose high-performing ideas across multiple channels and formats.</p></li>\n<li><p>Maintain a clear, authoritative, and consistent <a href=\"https://himalayas.app/companies/bambooworks\">Bamboo Works</a> brand voice.</p></li>\n</ul><h3>SEO, GEO &amp; Organic Growth</h3><ul>\n<li><p>Develop and execute an SEO strategy aligned with our commercial priorities.</p></li>\n<li><p>Conduct keyword, competitor, audience, and topic research.</p></li>\n<li><p>Build topical authority through useful, high-quality content.</p></li>\n<li><p>Optimize existing website pages and identify opportunities for new search-focused content.</p></li>\n<li><p>Help develop our approach to <strong>GEO / AI search visibility</strong>, ensuring <a href=\"https://himalayas.app/companies/bambooworks\">Bamboo Works</a>' content is discoverable across both traditional and AI-powered search experiences.</p></li>\n<li><p>Monitor organic traffic, rankings, search visibility, and other relevant indicators.</p></li>\n<li><p>Continuously identify opportunities to strengthen our organic acquisition funnel.</p></li>\n</ul><h3>Lead Magnets &amp; Demand Generation</h3><p>Lead magnets will be an important part of our marketing strategy, and we're looking for someone who can help us create them at scale.</p><ul>\n<li><p>Develop high-value lead magnets such as guides, reports, checklists, templates, calculators, and other useful B2B resources.</p></li>\n<li><p>Research topics and formats that genuinely address the needs of our target audiences.</p></li>\n<li><p>Write and develop lead magnet content from concept through completion.</p></li>\n<li><p>Identify opportunities to integrate lead magnets across our website, social content, and marketing funnel.</p></li>\n<li><p>Develop supporting landing page copy and promotional content.</p></li>\n<li><p>Work closely with Sales to understand which topics and assets generate meaningful commercial interest.</p></li>\n<li><p>Continuously improve the journey from <strong>content \u2192 lead \u2192 sales conversation</strong>.</p></li>\n<li><p>Identify additional organic campaigns and channels that can generate qualified B2B leads.</p></li>\n</ul><h3>Social Media &amp; Brand Authority</h3><ul>\n<li><p>Take ownership of <a href=\"https://himalayas.app/companies/bambooworks\">Bamboo Works</a>' organic social media presence, with a particular focus on LinkedIn.</p></li>\n<li><p>Build content that establishes <a href=\"https://himalayas.app/companies/bambooworks\">Bamboo Works</a> as an authority in global workforce solutions and our priority niches.</p></li>\n<li><p>Identify opportunities to grow reach, engagement, and relevant audiences organically.</p></li>\n<li><p>Test different content formats, topics, and approaches based on performance.</p></li>\n<li><p>Focus on meaningful business outcomes rather than vanity metrics alone.</p></li>\n</ul><h3>Website, Email &amp; Marketing Automation</h3><ul>\n<li><p>Review website content and identify opportunities to improve messaging, CTAs, landing pages, and conversion paths.</p></li>\n<li><p>Identify content gaps based on customer questions, search demand, and commercial priorities.</p></li>\n<li><p>Develop email campaigns and nurture sequences for leads and prospects.</p></li>\n<li><p>Build and manage straightforward marketing automation and lead follow-up workflows using tools such as GoHighLevel.</p></li>\n<li><p>Help continuously improve our website as both a marketing and sales asset.</p></li>\n</ul><h3>Analytics &amp; Continuous Improvement</h3><ul>\n<li><p>Establish and track meaningful KPIs across content, SEO, GEO, social media, and lead generation.</p></li>\n<li><p>Monitor traffic, rankings, engagement, leads, and conversion performance.</p></li>\n<li><p>Identify which content and channels are genuinely contributing to growth.</p></li>\n<li><p>Regularly report on performance and recommend what we should do more, less, or differently.</p></li>\n<li><p>Continuously test and improve rather than simply producing more content.</p></li>\n</ul><h3>What We're Looking For</h3><h3>Must-Haves</h3><ul>\n<li><p>3+ years of relevant marketing experience, ideally within B2B.</p></li>\n<li><p>Strong experience developing <strong>and executing</strong> marketing strategies rather than working solely as an executor.</p></li>\n<li><p>Excellent content marketing and copywriting skills, with the ability to produce authoritative, engaging English-language content.</p></li>\n<li><p>Strong practical SEO knowledge and experience improving organic search performance.</p></li>\n<li><p>Experience using organic content to generate leads and support business growth.</p></li>\n<li><p>Experience creating B2B lead magnets, content assets, or conversion-focused resources.</p></li>\n<li><p>Strong understanding of B2B customer journeys and organic demand generation.</p></li>\n<li><p>Experience managing LinkedIn and other relevant social channels.</p></li>\n<li><p>Ability to conduct independent market, competitor, keyword, and audience research.</p></li>\n<li><p>Strong analytical skills and confidence using marketing data to guide decisions.</p></li>\n<li><p>Ability to use AI tools effectively for research, ideation, production, optimization, and analysis without sacrificing human judgment or content quality.</p></li>\n<li><p>Highly proactive and capable of independently taking ideas from strategy through execution.</p></li>\n<li><h3>Excellent written and spoken English.</h3></li>\n</ul><h3>Nice-to-Haves</h3><ul>\n<li><p>Experience within staffing, recruitment, outsourcing, professional services, accounting, SaaS, or another B2B environment.</p></li>\n<li><p>Understanding of GEO, AEO, AI search optimization, or how generative AI is changing organic discovery.</p></li>\n<li><p>Experience with GoHighLevel or similar CRM/marketing automation platforms.</p></li>\n<li><p>Experience with CMS, analytics, and common SEO tools.</p></li>\n<li><p>Email marketing and nurture sequence experience.</p></li>\n<li><p>Experience improving website content, landing pages, and conversion journeys.</p></li>\n</ul><h3>Portfolio &amp; Results</h3><p>We're particularly interested in candidates who can demonstrate <strong>measurable results from their previous work</strong>.</p><p>As part of your application, we'd love to see examples such as:</p><ul>\n<li><p>B2B campaigns that generated qualified leads.</p></li>\n<li><p>Organic or social accounts you've successfully grown.</p></li>\n<li><p>SEO improvements or rankings you've helped achieve.</p></li>\n<li><p>Blogs or long-form content you've personally written.</p></li>\n<li><p>Lead magnets, guides, reports, templates, or other resources you've created.</p></li>\n<li><p>Content strategies that contributed to measurable business growth.</p></li>\n</ul><p>We're less interested in how much content you've produced than in understanding <strong>what you did, why you did it, and what happened as a result</strong>.</p><h3>Ideal Candidate Profile</h3><p>This role is ideal for someone who combines the mindset of a <strong>strategist with the ability of a hands-on marketer</strong>.</p><p>You're commercially minded and understand that marketing should ultimately create awareness, authority, and qualified business opportunities. You're an excellent writer, but you also understand SEO, distribution, funnels, analytics, and how individual marketing activities work together.</p><p>You're curious enough to deeply understand an industry rather than producing generic content. You proactively bring ideas to the table, test them, measure what happens, and continuously improve.</p><p>You also embrace AI as an everyday marketing tool\u2014but you know that great marketing still requires strong human judgment, originality, and a genuine understanding of the customer.</p><h3>What Success Looks Like</h3><p>Within your first few months, we'd expect to see:</p><ul>\n<li><p>A clear and repeatable organic marketing strategy across our priority channels.</p></li>\n<li><p>A consistent, high-quality social media presence aligned with our new positioning.</p></li>\n<li><p>A structured content and blogging engine.</p></li>\n<li><h3>A measurable SEO and GEO strategy.</h3></li>\n<li><p>Increasing organic visibility for commercially relevant topics.</p></li>\n<li><p>A strong content foundation within our priority niches, particularly accounting.</p></li>\n<li><p>A growing library of high-quality lead magnets and marketing assets.</p></li>\n<li><p>Stronger website content and conversion paths.</p></li>\n<li><p>Clear marketing KPIs and regular performance reporting.</p></li>\n<li><p>Increasing qualified inbound interest and stronger marketing support for our Sales team.</p></li>\n</ul><p>Ultimately, we want marketing to become a <strong>compounding asset for <a href=\"https://himalayas.app/companies/bambooworks\">Bamboo Works</a></strong>\u2014where every piece of content, search ranking, resource, and piece of industry knowledge contributes to stronger brand authority and future demand generation.</p><h3>Recruitment Process</h3><ol>\n<li><h3>Application &amp; Portfolio Review</h3></li>\n<li><h3>Initial Interview</h3></li>\n<li><h3>Interview with <a href=\"https://himalayas.app/companies/bambooworks\">Bamboo Works</a> Leadership</h3></li>\n<li><h3>Practical Assessment (if required)</h3></li>\n<li><h3>Offer &amp; Onboarding</h3></li>\n</ol><p>Originally posted on <a href=\"https://himalayas.app\">Himalayas</a></p>",
-      "raw_posted_date": 1788022821,
-      "raw_app_url": "https://himalayas.app/jobs/",
-      "first_seen_at": "2026-08-30T00:13:30.345258+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
-      "status": "New Match",
-      "status_updated_at": "24 Aug 2026, 03:20 AM PKT",
-      "is_active": true
-    },
-    {
       "id": "ghl-43002cf2",
       "fingerprint": "43002cf28df7f6201e5361aa0cbf0ec2",
-      "rank": 9,
+      "rank": 8,
       "title": "GoHighLevel Solutions & Implementation Specialist",
       "company": "HighLevel (Official HQ)",
       "company_initials": "HI",
@@ -995,7 +891,7 @@
       "source_type": "direct_careers",
       "app_url": "https://www.gohighlevel.com/careers/",
       "original_url": "https://www.gohighlevel.com/careers/",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
       "raw_title": "GoHighLevel Solutions & Implementation Specialist",
       "raw_company": "HighLevel (Official HQ)",
       "raw_description": "Work directly on GoHighLevel implementations: supporting agency owners with snapshot troubleshooting, SaaS configurator setup, custom integration via Marketplace apps, and workflow optimization.",
@@ -1003,7 +899,7 @@
       "raw_app_url": "https://www.gohighlevel.com/careers/",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
@@ -1011,7 +907,7 @@
     {
       "id": "ghl-744ee657",
       "fingerprint": "744ee6577cdd44c49d75bb12b9b79e7a",
-      "rank": 10,
+      "rank": 9,
       "title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
       "company": "LinkedIn Remote Network",
       "company_initials": "LI",
@@ -1099,7 +995,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
       "raw_title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
       "raw_company": "LinkedIn Remote Network",
       "raw_description": "Continuous verified stream of remote GoHighLevel positions posted within the last 7 days across top marketing agencies, covering funnel development, CRM automations, and A2P messaging setup.",
@@ -1107,7 +1003,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -1115,7 +1011,7 @@
     {
       "id": "ghl-cf862e04",
       "fingerprint": "cf862e0496c1df375dd68640727ffee8",
-      "rank": 11,
+      "rank": 10,
       "title": "Full Stack Engineer - GoHighLevel",
       "company": "Grant Cardone Enterprises",
       "company_initials": "GR",
@@ -1205,7 +1101,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
       "original_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
       "raw_title": "Full Stack Engineer - GoHighLevel",
       "raw_company": "Grant Cardone Enterprises",
       "raw_description": "Role requires full-stack GoHighLevel engineering: custom JavaScript/CSS enhancements, REST API integrations, custom webhook routing, sub-account snapshot provisioning, and automated marketing workflows.",
@@ -1213,7 +1109,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -1221,7 +1117,7 @@
     {
       "id": "ghl-c1ec1ef9",
       "fingerprint": "c1ec1ef99a3f667f1e5a98e657144226",
-      "rank": 12,
+      "rank": 11,
       "title": "Full Stack Developer - GoHighLevel",
       "company": "Cardone Training Technologies, Inc.",
       "company_initials": "CA",
@@ -1309,7 +1205,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
       "original_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
-      "discovered_at": "2026-08-30T00:13:30.345309+00:00",
+      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
       "raw_title": "Full Stack Developer - GoHighLevel",
       "raw_company": "Cardone Training Technologies, Inc.",
       "raw_description": "Direct match for building enterprise GoHighLevel systems, maintaining complex sub-account snapshots, handling high-volume lead routing triggers, and integrating external payment and CRM APIs with GHL.",
@@ -1317,7 +1213,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T00:13:30.345258+00:00",
+      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
