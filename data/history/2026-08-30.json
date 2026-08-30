@@ -1,11 +1,11 @@
 {
   "metadata": {
     "search_date": "2026-08-30",
-    "search_time": "04:54 PKT",
-    "search_time_slug": "04-54",
-    "last_updated": "30 Aug 2026, 04:54 AM PKT",
-    "next_update": "30 Aug 2026, 06:00 AM PKT",
-    "next_update_iso": "2026-08-30T06:00:00+00:00",
+    "search_time": "11:15 PKT",
+    "search_time_slug": "11-15",
+    "last_updated": "30 Aug 2026, 11:15 AM PKT",
+    "next_update": "30 Aug 2026, 12:00 PM PKT",
+    "next_update_iso": "2026-08-30T12:00:00+00:00",
     "schedule_interval_hours": 3,
     "schedule_times_pkt": [
       "00:00",
@@ -46,11 +46,11 @@
       "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
     },
     "kpis": {
-      "total_discovered": 11,
-      "new_jobs_count": 1,
-      "active_jobs_count": 11,
-      "fresh_jobs_count": 11,
-      "today_count": 3,
+      "total_discovered": 10,
+      "new_jobs_count": 0,
+      "active_jobs_count": 10,
+      "fresh_jobs_count": 10,
+      "today_count": 2,
       "three_days_count": 6,
       "seven_days_count": 2,
       "applied_count": 0,
@@ -58,9 +58,9 @@
       "offers_count": 0,
       "saved_count": 0,
       "top_match_score": 87.5,
-      "avg_match_score": 88.5,
+      "avg_match_score": 88.6,
       "top_5_count": 5,
-      "priority_1_apply_count": 10,
+      "priority_1_apply_count": 9,
       "priority_2_consider_count": 1,
       "remote_worldwide_percentage": 100
     },
@@ -163,7 +163,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "discovered_at": "2026-08-30T11:15:44.281071+00:00",
       "raw_title": "GoHighLevel Workflow & CRM Automation Lead",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Seeking an experienced GoHighLevel Automation Lead to design multi-tier email/SMS follow-up campaigns, configure custom fields and pipeline stages, set up trigger links, and ensure 100% speed-to-lead execution.",
@@ -171,119 +171,15 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "last_seen_at": "2026-08-30T11:15:44.281009+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
     },
     {
-      "id": "ghl-d6e53a90",
-      "fingerprint": "d6e53a9092d70a98bef5c984ef74a359",
-      "rank": 2,
-      "title": "GoHighLevel Demo Specialist / Sales Representative",
-      "company": "The Plum Tree Group",
-      "company_initials": "TH",
-      "company_color": "#2563EB",
-      "company_logo": "",
-      "location": "Worldwide Remote",
-      "eligible_locations": [
-        "Worldwide Remote"
-      ],
-      "remote_eligibility": "Open Globally",
-      "work_mode": "100% Remote",
-      "salary": "Competitive / Disclosed on Application",
-      "employment_type": "Full-Time Remote",
-      "experience_req": "2\u20134 years",
-      "candidate_exp": "4 years",
-      "posted_date": "2026-08-30",
-      "posted_days_ago": 0,
-      "posted_relative": "Posted today",
-      "freshness_badge": "TODAY",
-      "freshness_priority": 0,
-      "freshness_tier": "0\u20131 Days",
-      "score": 87.0,
-      "category": "Strong Match",
-      "priority": "Priority 1 \u2014 Apply",
-      "priority_class": "prio-apply",
-      "priority_icon": "\ud83d\udd25",
-      "score_breakdown": {
-        "technical_skills": {
-          "score": 20,
-          "max": 30,
-          "label": "Technical Skills (GHL, n8n, APIs)"
-        },
-        "experience": {
-          "score": 19.0,
-          "max": 20,
-          "label": "Relevant Experience (4 Yrs GHL)"
-        },
-        "role_alignment": {
-          "score": 15.0,
-          "max": 15,
-          "label": "Role Alignment (GHL Lead)"
-        },
-        "ai_relevance": {
-          "score": 14.5,
-          "max": 15,
-          "label": "AI & Automation Relevance"
-        },
-        "location": {
-          "score": 10.0,
-          "max": 10,
-          "label": "Remote Compatibility"
-        },
-        "compensation": {
-          "score": 4.0,
-          "max": 5,
-          "label": "Compensation"
-        },
-        "career_potential": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Career Potential"
-        }
-      },
-      "ghl_evidence": "...GoHighLevel Demo Specialist / Sales Representative <p>GoHighLevel Demo...",
-      "ghl_evidence_source": "job_description",
-      "role_category": "GHL_AUTOMATION",
-      "matched_skills": [
-        "GoHighLevel",
-        "Workflow Automation",
-        "SaaS Mode",
-        "Opportunity Pipelines"
-      ],
-      "missing_skills": [
-        "None identified in listed technical scope"
-      ],
-      "advantage_skills": [
-        "4 Years GHL Experience",
-        "50+ Built Funnels",
-        "n8n & Webhooks",
-        "Portfolio (sohaibmahmood.vibepreview.com)"
-      ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: GoHighLevel Demo Specialist / Sales Representative <p>GoHighLevel Demo",
-      "concerns": "Verify timezone overlap during initial call.",
-      "source": "Himalayas",
-      "source_type": "himalayas_api",
-      "app_url": "https://himalayas.app/jobs/",
-      "original_url": "https://himalayas.app/jobs/",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
-      "raw_title": "GoHighLevel Demo Specialist / Sales Representative",
-      "raw_company": "The Plum Tree Group",
-      "raw_description": "<p>GoHighLevel Demo Specialist / Sales Representative</p><h3>Company Overview:</h3><p>Launchpad is an innovative SaaS platform that transforms how businesses streamline operations and drive growth. We are a white-label version of GoHighLevel, and we are looking for a dynamic and results-driven GoHighLevel Demo Specialist / Sales Representative to join our expanding sales team.</p><h3>Job Description:</h3><p>We are looking for an experienced GoHighLevel Demo Specialist / Sales Representative who can effectively present GoHighLevel (GHL) and its white-label version to prospective clients. If you have a proven track record of delivering compelling product demos and have experience selling similar platforms, this could be the perfect opportunity for you. In this role, you\u2019ll showcase the value of our platform to potential clients, helping them understand how it can address their unique business needs.</p><h3>Key Responsibilities:</h3><ul>\n<li>Deliver engaging and insightful product demos of GoHighLevel (White-label version) to prospective clients, highlighting key features and benefits.</li>\n<li>Collaborate with the sales team to tailor demos based on client-specific needs and challenges.</li>\n<li>Address client questions and concerns during demos, providing clear explanations and practical solutions.</li>\n<li>Stay up-to-date with the latest product updates to ensure accurate and relevant demos.</li>\n<li>Follow up with leads post-demo to gather feedback, resolve any additional queries, and advance the sales process.</li>\n<li>Maintain detailed records of demo activities and client interactions in CRM systems.</li>\n</ul><h3>Qualifications:</h3><ul>\n<li>Solid experience in sales, specifically with a focus on conducting product demos.</li>\n<li>Strong presentation skills with the ability to engage and inform diverse audiences.</li>\n<li>Experience in presenting software solutions and platforms (experience with GoHighLevel or similar platforms is a significant plus).</li>\n<li>Excellent communication and interpersonal skills.</li>\n<li>Ability to effectively manage time and prioritize demo sessions.</li>\n</ul><h3>Desirable Skills:</h3><ul>\n<li>Experience in lead generation and driving the sales process.</li>\n<li>Knowledge of CRM tools and sales tracking systems.</li>\n<li>Strong problem-solving skills, particularly during live demo scenarios.</li>\n</ul><h3>What We Offer:</h3><ul>\n<li>Remote working environment with a global team, providing flexibility and work-life balance.</li>\n<li>Above-market total compensation including base salary + performance bonuses.</li>\n<li>Opportunity to learn and grow in the field of AI and Automation, one of the hottest industries right now.</li>\n<li>Flexible vacation policy to ensure you can recharge when needed.</li>\n<li>A collaborative and innovative team environment, focused on growth and success.</li>\n</ul><p>Originally posted on <a href=\"https://himalayas.app\">Himalayas</a></p>",
-      "raw_posted_date": 1788040845,
-      "raw_app_url": "https://himalayas.app/jobs/",
-      "first_seen_at": "2026-08-30T04:54:16.204888+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
-      "status": "New Match",
-      "status_updated_at": "24 Aug 2026, 03:20 AM PKT",
-      "is_active": true
-    },
-    {
       "id": "ghl-b0550814",
       "fingerprint": "b055081476998edb57cefd56c8aa2a57",
-      "rank": 3,
+      "rank": 2,
       "title": "GoHighLevel Technical Specialist & Funnel Builder",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -369,7 +265,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "discovered_at": "2026-08-30T11:15:44.281071+00:00",
       "raw_title": "GoHighLevel Technical Specialist & Funnel Builder",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Looking for a dedicated GoHighLevel Builder to design high-converting agency client funnels, custom landing pages, multi-step booking forms, order bump upsell flows, and lead capture sequences in GoHighLevel.",
@@ -377,7 +273,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "last_seen_at": "2026-08-30T11:15:44.281009+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -385,7 +281,7 @@
     {
       "id": "ghl-f414d4a0",
       "fingerprint": "f414d4a0df17684aabe3bc87db1f9d39",
-      "rank": 4,
+      "rank": 3,
       "title": "AI & Automation Specialist (GHL)",
       "company": "Jobgether Agency Partner",
       "company_initials": "JO",
@@ -474,7 +370,7 @@
       "source_type": "jobgether",
       "app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "original_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "discovered_at": "2026-08-30T11:15:44.281071+00:00",
       "raw_title": "AI & Automation Specialist (GHL)",
       "raw_company": "Jobgether Agency Partner",
       "raw_description": "Requires deep expertise in GoHighLevel automation combined with external AI integrations (OpenAI API, n8n, Claude) for intelligent speed-to-lead qualification and automated calendar conversion flows.",
@@ -482,7 +378,7 @@
       "raw_app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "last_seen_at": "2026-08-30T11:15:44.281009+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
@@ -490,7 +386,7 @@
     {
       "id": "ghl-8dd6ca3d",
       "fingerprint": "8dd6ca3dbc499125ca2801fbed356001",
-      "rank": 5,
+      "rank": 4,
       "title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
       "company": "Grant Cardone Enterprises",
       "company_initials": "GR",
@@ -578,7 +474,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
       "original_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "discovered_at": "2026-08-30T11:15:44.281071+00:00",
       "raw_title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
       "raw_company": "Grant Cardone Enterprises",
       "raw_description": "Seeking a creative and technical Funnel Designer with deep GoHighLevel expertise to build high-converting landing pages, integrate AI automated conversation flows, and connect custom GHL workflows and webhooks.",
@@ -586,7 +482,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "last_seen_at": "2026-08-30T11:15:44.281009+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -594,7 +490,7 @@
     {
       "id": "ghl-b8292943",
       "fingerprint": "b8292943a90066d56197ccdd9b9c3d70",
-      "rank": 6,
+      "rank": 5,
       "title": "GoHighLevel Snapshot & SaaS Mode Architect",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -683,7 +579,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "discovered_at": "2026-08-30T11:15:44.281071+00:00",
       "raw_title": "GoHighLevel Snapshot & SaaS Mode Architect",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Responsible for managing agency client accounts, deploying custom GHL snapshots, verifying A2P 10DLC campaign compliance, setting up custom domain DNS records, and troubleshooting workflow execution logs in GoHighLevel.",
@@ -691,7 +587,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "last_seen_at": "2026-08-30T11:15:44.281009+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -699,7 +595,7 @@
     {
       "id": "ghl-4192baa4",
       "fingerprint": "4192baa4ca7b5c7eb878d8fd04f523a8",
-      "rank": 7,
+      "rank": 6,
       "title": "GoHighLevel Client Onboarding Specialist",
       "company": "HighLevel Agency Partners",
       "company_initials": "HI",
@@ -787,7 +683,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "discovered_at": "2026-08-30T11:15:44.281071+00:00",
       "raw_title": "GoHighLevel Client Onboarding Specialist",
       "raw_company": "HighLevel Agency Partners",
       "raw_description": "Responsible for managing end-to-end client onboarding inside GoHighLevel: deploying custom snapshots, configuring custom values and domains, setting up custom pipelines, and training client teams on GoHighLevel CRM features.",
@@ -795,7 +691,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "last_seen_at": "2026-08-30T11:15:44.281009+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -803,7 +699,7 @@
     {
       "id": "ghl-43002cf2",
       "fingerprint": "43002cf28df7f6201e5361aa0cbf0ec2",
-      "rank": 8,
+      "rank": 7,
       "title": "GoHighLevel Solutions & Implementation Specialist",
       "company": "HighLevel (Official HQ)",
       "company_initials": "HI",
@@ -891,7 +787,7 @@
       "source_type": "direct_careers",
       "app_url": "https://www.gohighlevel.com/careers/",
       "original_url": "https://www.gohighlevel.com/careers/",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "discovered_at": "2026-08-30T11:15:44.281071+00:00",
       "raw_title": "GoHighLevel Solutions & Implementation Specialist",
       "raw_company": "HighLevel (Official HQ)",
       "raw_description": "Work directly on GoHighLevel implementations: supporting agency owners with snapshot troubleshooting, SaaS configurator setup, custom integration via Marketplace apps, and workflow optimization.",
@@ -899,7 +795,7 @@
       "raw_app_url": "https://www.gohighlevel.com/careers/",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "last_seen_at": "2026-08-30T11:15:44.281009+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
@@ -907,7 +803,7 @@
     {
       "id": "ghl-744ee657",
       "fingerprint": "744ee6577cdd44c49d75bb12b9b79e7a",
-      "rank": 9,
+      "rank": 8,
       "title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
       "company": "LinkedIn Remote Network",
       "company_initials": "LI",
@@ -995,7 +891,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "discovered_at": "2026-08-30T11:15:44.281071+00:00",
       "raw_title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
       "raw_company": "LinkedIn Remote Network",
       "raw_description": "Continuous verified stream of remote GoHighLevel positions posted within the last 7 days across top marketing agencies, covering funnel development, CRM automations, and A2P messaging setup.",
@@ -1003,7 +899,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "last_seen_at": "2026-08-30T11:15:44.281009+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -1011,7 +907,7 @@
     {
       "id": "ghl-cf862e04",
       "fingerprint": "cf862e0496c1df375dd68640727ffee8",
-      "rank": 10,
+      "rank": 9,
       "title": "Full Stack Engineer - GoHighLevel",
       "company": "Grant Cardone Enterprises",
       "company_initials": "GR",
@@ -1101,7 +997,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
       "original_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "discovered_at": "2026-08-30T11:15:44.281071+00:00",
       "raw_title": "Full Stack Engineer - GoHighLevel",
       "raw_company": "Grant Cardone Enterprises",
       "raw_description": "Role requires full-stack GoHighLevel engineering: custom JavaScript/CSS enhancements, REST API integrations, custom webhook routing, sub-account snapshot provisioning, and automated marketing workflows.",
@@ -1109,7 +1005,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "last_seen_at": "2026-08-30T11:15:44.281009+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -1117,7 +1013,7 @@
     {
       "id": "ghl-c1ec1ef9",
       "fingerprint": "c1ec1ef99a3f667f1e5a98e657144226",
-      "rank": 11,
+      "rank": 10,
       "title": "Full Stack Developer - GoHighLevel",
       "company": "Cardone Training Technologies, Inc.",
       "company_initials": "CA",
@@ -1205,7 +1101,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
       "original_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
-      "discovered_at": "2026-08-30T04:54:16.204947+00:00",
+      "discovered_at": "2026-08-30T11:15:44.281071+00:00",
       "raw_title": "Full Stack Developer - GoHighLevel",
       "raw_company": "Cardone Training Technologies, Inc.",
       "raw_description": "Direct match for building enterprise GoHighLevel systems, maintaining complex sub-account snapshots, handling high-volume lead routing triggers, and integrating external payment and CRM APIs with GHL.",
@@ -1213,7 +1109,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-08-30T04:54:16.204888+00:00",
+      "last_seen_at": "2026-08-30T11:15:44.281009+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-30T04:54:16.204947+00:00",
+  "timestamp": "2026-08-30T11:15:44.281071+00:00",
   "sources": {
     "RapidAPI JSearch": {
       "status": "OK",
@@ -27,10 +27,10 @@
     }
   },
   "raw_harvested": 11,
-  "verified_ghl": 11,
+  "verified_ghl": 10,
   "rejected_non_ghl": 0,
-  "rejected_forbidden_titles": 0,
+  "rejected_forbidden_titles": 1,
   "rejected_expired": 0,
   "duplicates_collapsed": 0,
-  "final_verified_ghl_jobs": 11
+  "final_verified_ghl_jobs": 10
 }
