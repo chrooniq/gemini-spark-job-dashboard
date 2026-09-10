@@ -1,11 +1,11 @@
 {
   "metadata": {
     "search_date": "2026-09-10",
-    "search_time": "17:04 PKT",
-    "search_time_slug": "17-04",
-    "last_updated": "10 Sep 2026, 05:04 PM PKT",
-    "next_update": "10 Sep 2026, 06:00 PM PKT",
-    "next_update_iso": "2026-09-10T18:00:00+00:00",
+    "search_time": "21:54 PKT",
+    "search_time_slug": "21-54",
+    "last_updated": "10 Sep 2026, 09:54 PM PKT",
+    "next_update": "11 Sep 2026, 12:00 AM PKT",
+    "next_update_iso": "2026-09-11T00:00:00+00:00",
     "schedule_interval_hours": 3,
     "schedule_times_pkt": [
       "00:00",
@@ -57,11 +57,11 @@
       "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
     },
     "kpis": {
-      "total_discovered": 11,
-      "new_jobs_count": 1,
-      "active_jobs_count": 11,
-      "fresh_jobs_count": 11,
-      "today_count": 3,
+      "total_discovered": 10,
+      "new_jobs_count": 0,
+      "active_jobs_count": 10,
+      "fresh_jobs_count": 10,
+      "today_count": 2,
       "three_days_count": 6,
       "seven_days_count": 2,
       "applied_count": 0,
@@ -69,9 +69,9 @@
       "offers_count": 0,
       "saved_count": 0,
       "top_match_score": 87.5,
-      "avg_match_score": 88.3,
+      "avg_match_score": 88.6,
       "top_5_count": 5,
-      "priority_1_apply_count": 10,
+      "priority_1_apply_count": 9,
       "priority_2_consider_count": 1,
       "remote_worldwide_percentage": 100
     },
@@ -174,7 +174,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
+      "discovered_at": "2026-09-10T21:54:12.238749+00:00",
       "raw_title": "GoHighLevel Workflow & CRM Automation Lead",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Seeking an experienced GoHighLevel Automation Lead to design multi-tier email/SMS follow-up campaigns, configure custom fields and pipeline stages, set up trigger links, and ensure 100% speed-to-lead execution.",
@@ -182,118 +182,15 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
+      "last_seen_at": "2026-09-10T21:54:12.238675+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
     },
     {
-      "id": "ghl-4b93c4cc",
-      "fingerprint": "4b93c4cc65a982cc1f7e2c28d712c59a",
-      "rank": 2,
-      "title": "Admissions Sales Consultant (FT) Remote - OH",
-      "company": "Vanguard College Prep",
-      "company_initials": "VA",
-      "company_color": "#2563EB",
-      "company_logo": "",
-      "location": "Worldwide Remote",
-      "eligible_locations": [
-        "Worldwide Remote"
-      ],
-      "remote_eligibility": "Open Globally",
-      "work_mode": "100% Remote",
-      "salary": "Competitive / Disclosed on Application",
-      "employment_type": "Full-Time Remote",
-      "experience_req": "2\u20134 years",
-      "candidate_exp": "4 years",
-      "posted_date": "2026-09-10",
-      "posted_days_ago": 0,
-      "posted_relative": "Posted today",
-      "freshness_badge": "TODAY",
-      "freshness_priority": 0,
-      "freshness_tier": "0\u20131 Days",
-      "score": 85.5,
-      "category": "Strong Match",
-      "priority": "Priority 1 \u2014 Apply",
-      "priority_class": "prio-apply",
-      "priority_icon": "\ud83d\udd25",
-      "score_breakdown": {
-        "technical_skills": {
-          "score": 20,
-          "max": 30,
-          "label": "Technical Skills (GHL, n8n, APIs)"
-        },
-        "experience": {
-          "score": 19.0,
-          "max": 20,
-          "label": "Relevant Experience (4 Yrs GHL)"
-        },
-        "role_alignment": {
-          "score": 13.5,
-          "max": 15,
-          "label": "Role Alignment (GHL Lead)"
-        },
-        "ai_relevance": {
-          "score": 14.5,
-          "max": 15,
-          "label": "AI & Automation Relevance"
-        },
-        "location": {
-          "score": 10.0,
-          "max": 10,
-          "label": "Remote Compatibility"
-        },
-        "compensation": {
-          "score": 4.0,
-          "max": 5,
-          "label": "Compensation"
-        },
-        "career_potential": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Career Potential"
-        }
-      },
-      "ghl_evidence": "...oogle Workspace, CRM platforms such as HubSpot or GoHighLevel, Zoom, and other cloud-based business tools</li> </ul> <h3>...",
-      "ghl_evidence_source": "job_description",
-      "role_category": "GHL_CRM",
-      "matched_skills": [
-        "GoHighLevel",
-        "AI / LLM Workflows",
-        "Opportunity Pipelines"
-      ],
-      "missing_skills": [
-        "None identified in listed technical scope"
-      ],
-      "advantage_skills": [
-        "4 Years GHL Experience",
-        "50+ Built Funnels",
-        "n8n & Webhooks",
-        "Portfolio (sohaibmahmood.vibepreview.com)"
-      ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: oogle Workspace, CRM platforms such as HubSpot or GoHighLevel, Zoom, and other cloud-based business tools</li> </ul> <h3>",
-      "concerns": "Verify timezone overlap during initial call.",
-      "source": "Himalayas",
-      "source_type": "himalayas_api",
-      "app_url": "https://himalayas.app/jobs/",
-      "original_url": "https://himalayas.app/jobs/",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
-      "raw_title": "Admissions Sales Consultant (FT) Remote - OH",
-      "raw_company": "Vanguard College Prep",
-      "raw_description": "<div class=\"description\">\n<h3>About:</h3>\n<p><strong>Are you a high-performing sales professional who thrives in a consultative, mission-driven environment? At <a href=\"https://himalayas.app/companies/vanguard-college-prep\">Vanguard College Prep</a>, our families invest $3,000 to $15,000+ because our curriculum, elite admissions results, and academic coaching are best-in-class. In this role, you won\u2019t be pushing transactional software or cold-pitching products\u2014you will serve as a respected Enrollment Advisor, guiding ambitious students and parents through one of the most critical journeys of their academic lives while earning an uncapped, performance-driven income.</strong></p>\n<h3><strong>Compensation:</strong></h3>\n<ul>\n<li>\n<strong>Base Salary:</strong><em>$45,000 - 55,000 / year</em>\n</li>\n<li>\n<em>On-Target Earnings: $70,000\u2013$90,000+ </em><ul><li><em>Uncapped performance-based commission </em></li></ul>\n</li>\n<li>\n<strong>Comprehensive Benefits:</strong><em>Health, Dental, and Vision insurance coverage</em>\n</li>\n<li>\n<strong>Time Off: </strong><em>Paid Time Off (PTO), paid sick days, plus fully paid winter vacations</em>\n</li>\n</ul>\n<p><strong>As an Admissions Sales Consultant, you will be expected to:</strong></p>\n<h3><strong>1. Enrollment Consultations &amp; Closing</strong></h3>\n<ul>\n<li>Conduct consultative enrollment meetings with prospective students and parents to understand their academic goals, challenges, timelines, and priorities</li>\n<li>Evaluate each family's needs and confidently recommend the Vanguard program or pathway best suited to the student</li>\n<li>Clearly communicate Vanguard's methodology, program structure, pricing, expected outcomes, and value</li>\n<li>Build trust and credibility with families while guiding them through a high-consideration enrollment decision</li>\n<li>Effectively identify and address questions, concerns, and objections throughout the decision-making process</li>\n<li>Confidently ask qualified families for their enrollment and guide them through the next steps</li>\n<li>Achieve monthly enrollment, revenue, and conversion goals through effective consultative selling</li>\n<li>Maintain a strong understanding of Vanguard's programs, industry trends, and competitor offerings</li>\n</ul>\n<h3><strong>2. Pipeline &amp; CRM Management</strong></h3>\n<ul>\n<li>Own qualified opportunities from initial contact through enrollment and successful handoff</li>\n<li>Maintain accurate and detailed CRM records of consultations, communications, follow-ups, next steps, and sales activity</li>\n<li>Consistently follow up with prospective families who have not yet made an enrollment decision</li>\n<li>Re-engage qualified leads who previously expressed interest in Vanguard's programs</li>\n<li>Maintain an organized sales pipeline and proactively move prospective families through each stage of the enrollment process</li>\n<li>Monitor individual sales performance, conversion rates, pipeline value, and progress toward monthly revenue goals</li>\n<li>Ensure enrolled families experience a professional and seamless transition from the sales process into onboarding</li>\n</ul>\n<h3><strong>3. Sales Development &amp; Collaboration</strong></h3>\n<ul>\n<li>Collaborate with marketing and leadership to provide feedback on lead quality, common objections, competitor activity, and prospective family needs</li>\n<li>Identify referral opportunities and encourage satisfied families to introduce Vanguard to others who may benefit from our programs</li>\n<li>Support select webinars, informational events, and community outreach initiatives that generate qualified enrollment opportunities</li>\n<li>Stay informed about changes in standardized testing, college admissions, and the broader college preparation industry</li>\n</ul>\n<h3><strong>Requirements:</strong></h3>\n<ul>\n<li>\n<strong>Education:</strong> Bachelor\u2019s degree or higher</li>\n<li>\n<strong>Sales Experience:</strong> 3+ years of consultative sales experience, including demonstrated success closing high-ticket products or services</li>\n<li>\n<strong>Closing Performance:</strong> Proven track record of meeting or exceeding sales and revenue targets; candidates should be prepared to discuss prior quotas, close rates, average deal size, and revenue generated</li>\n<li>\n<strong>Communication Skills:</strong> Exceptional written and verbal communication skills, with the ability to quickly build trust and rapport with students and parents</li>\n<li>\n<strong>Consultative Selling:</strong> Strong discovery, presentation, objection-handling, negotiation, and closing skills</li>\n<li>\n<strong>Work Setup:</strong> Reliable high-speed internet connection and a professional, distraction-free workspace suitable for video consultations</li>\n<li>\n<strong>Tech Proficiency:</strong> Strong proficiency with Google Workspace, CRM platforms such as HubSpot or GoHighLevel, Zoom, and other cloud-based business tools</li>\n</ul>\n<h3><strong>The ideal candidate will also possess: </strong></h3>\n<ul>\n<li>The ability to work both independently and in a team environment</li>\n<li>Excellent presentation skills</li>\n<li>Ability to explain educational services offered in a clear and impactful way</li>\n<li>Strong organizational and time-management abilities to be able to meet enrollment goals</li>\n<li>Experience with meeting revenue goals set by organizations</li>\n<li>Experience in the college preparation service industry </li>\n</ul>\n<h3><strong>Why you want to be an Admissions Sales Consultant with <a href=\"https://himalayas.app/companies/vanguard-college-prep\">Vanguard College Prep</a>:</strong></h3>\n<ul>\n<li>\n<strong>Positioned as an Expert, Not a \"Sales Rep\":</strong> Parents respect your insights, seek your guidance, and value your expertise.</li>\n<li>\n<strong>Career Growth:</strong> Opportunities for leadership and long-term career growth</li>\n<li>\n<strong>Uncapped Earning Potential:</strong> Competitive compensation structure that includes commission with benefits</li>\n<li>\n<strong>Fully Remote Flexibility:</strong> Enjoy the autonomy of working from home with regular team collaboration and support.</li>\n<li>\n<strong>Comprehensive Paid Onboarding:</strong> We invest heavily in your success with structured training covering our academic frameworks, objection handling, and consultative sales strategies.</li>\n</ul>\n<h3><strong>About <a href=\"https://himalayas.app/companies/vanguard-college-prep\">Vanguard College Prep</a>:</strong></h3>\n<p><a href=\"https://himalayas.app/companies/vanguard-college-prep\">Vanguard College Prep</a> is a premier, results-driven education company serving high-achieving families across the country. Our programs are built for students who want to compete at the highest levels of academic performance \u2014 from top SAT/ACT scores to elite college admissions.</p>\n<p>Founded on a simple belief \u2014 students rise when they are coached with precision, intention, and mastery \u2014 Vanguard has grown into one of the most trusted boutique education firms for families seeking real, measurable outcomes.</p>\n<ul>\n<li>We don\u2019t do cookie-cutter tutoring.</li>\n<li>We don\u2019t offer generic \u201ctest prep packages.\u201d</li>\n<li>We build transformational academic pathways tailored to each student.</li>\n</ul>\n</div>Salary: $45,000 \u2013 $55,000 / year<p>Originally posted on <a href=\"https://himalayas.app\">Himalayas</a></p>",
-      "raw_posted_date": 1789040314,
-      "raw_app_url": "https://himalayas.app/jobs/",
-      "first_seen_at": "2026-09-10T17:04:01.959036+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
-      "status": "New Match",
-      "status_updated_at": "24 Aug 2026, 03:20 AM PKT",
-      "is_active": true
-    },
-    {
       "id": "ghl-b0550814",
       "fingerprint": "b055081476998edb57cefd56c8aa2a57",
-      "rank": 3,
+      "rank": 2,
       "title": "GoHighLevel Technical Specialist & Funnel Builder",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -379,7 +276,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
+      "discovered_at": "2026-09-10T21:54:12.238749+00:00",
       "raw_title": "GoHighLevel Technical Specialist & Funnel Builder",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Looking for a dedicated GoHighLevel Builder to design high-converting agency client funnels, custom landing pages, multi-step booking forms, order bump upsell flows, and lead capture sequences in GoHighLevel.",
@@ -387,7 +284,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
+      "last_seen_at": "2026-09-10T21:54:12.238675+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -395,7 +292,7 @@
     {
       "id": "ghl-f414d4a0",
       "fingerprint": "f414d4a0df17684aabe3bc87db1f9d39",
-      "rank": 4,
+      "rank": 3,
       "title": "AI & Automation Specialist (GHL)",
       "company": "Jobgether Agency Partner",
       "company_initials": "JO",
@@ -484,7 +381,7 @@
       "source_type": "jobgether",
       "app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "original_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
+      "discovered_at": "2026-09-10T21:54:12.238749+00:00",
       "raw_title": "AI & Automation Specialist (GHL)",
       "raw_company": "Jobgether Agency Partner",
       "raw_description": "Requires deep expertise in GoHighLevel automation combined with external AI integrations (OpenAI API, n8n, Claude) for intelligent speed-to-lead qualification and automated calendar conversion flows.",
@@ -492,7 +389,7 @@
       "raw_app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
+      "last_seen_at": "2026-09-10T21:54:12.238675+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
@@ -500,7 +397,7 @@
     {
       "id": "ghl-8dd6ca3d",
       "fingerprint": "8dd6ca3dbc499125ca2801fbed356001",
-      "rank": 5,
+      "rank": 4,
       "title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
       "company": "Grant Cardone Enterprises",
       "company_initials": "GR",
@@ -588,7 +485,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
       "original_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
+      "discovered_at": "2026-09-10T21:54:12.238749+00:00",
       "raw_title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
       "raw_company": "Grant Cardone Enterprises",
       "raw_description": "Seeking a creative and technical Funnel Designer with deep GoHighLevel expertise to build high-converting landing pages, integrate AI automated conversation flows, and connect custom GHL workflows and webhooks.",
@@ -596,7 +493,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
+      "last_seen_at": "2026-09-10T21:54:12.238675+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -604,7 +501,7 @@
     {
       "id": "ghl-b8292943",
       "fingerprint": "b8292943a90066d56197ccdd9b9c3d70",
-      "rank": 6,
+      "rank": 5,
       "title": "GoHighLevel Snapshot & SaaS Mode Architect",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -693,7 +590,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
+      "discovered_at": "2026-09-10T21:54:12.238749+00:00",
       "raw_title": "GoHighLevel Snapshot & SaaS Mode Architect",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Responsible for managing agency client accounts, deploying custom GHL snapshots, verifying A2P 10DLC campaign compliance, setting up custom domain DNS records, and troubleshooting workflow execution logs in GoHighLevel.",
@@ -701,7 +598,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
+      "last_seen_at": "2026-09-10T21:54:12.238675+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -709,7 +606,7 @@
     {
       "id": "ghl-4192baa4",
       "fingerprint": "4192baa4ca7b5c7eb878d8fd04f523a8",
-      "rank": 7,
+      "rank": 6,
       "title": "GoHighLevel Client Onboarding Specialist",
       "company": "HighLevel Agency Partners",
       "company_initials": "HI",
@@ -797,7 +694,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
+      "discovered_at": "2026-09-10T21:54:12.238749+00:00",
       "raw_title": "GoHighLevel Client Onboarding Specialist",
       "raw_company": "HighLevel Agency Partners",
       "raw_description": "Responsible for managing end-to-end client onboarding inside GoHighLevel: deploying custom snapshots, configuring custom values and domains, setting up custom pipelines, and training client teams on GoHighLevel CRM features.",
@@ -805,7 +702,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
+      "last_seen_at": "2026-09-10T21:54:12.238675+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -813,7 +710,7 @@
     {
       "id": "ghl-43002cf2",
       "fingerprint": "43002cf28df7f6201e5361aa0cbf0ec2",
-      "rank": 8,
+      "rank": 7,
       "title": "GoHighLevel Solutions & Implementation Specialist",
       "company": "HighLevel (Official HQ)",
       "company_initials": "HI",
@@ -901,7 +798,7 @@
       "source_type": "direct_careers",
       "app_url": "https://www.gohighlevel.com/careers/",
       "original_url": "https://www.gohighlevel.com/careers/",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
+      "discovered_at": "2026-09-10T21:54:12.238749+00:00",
       "raw_title": "GoHighLevel Solutions & Implementation Specialist",
       "raw_company": "HighLevel (Official HQ)",
       "raw_description": "Work directly on GoHighLevel implementations: supporting agency owners with snapshot troubleshooting, SaaS configurator setup, custom integration via Marketplace apps, and workflow optimization.",
@@ -909,7 +806,7 @@
       "raw_app_url": "https://www.gohighlevel.com/careers/",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
+      "last_seen_at": "2026-09-10T21:54:12.238675+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
@@ -917,7 +814,7 @@
     {
       "id": "ghl-744ee657",
       "fingerprint": "744ee6577cdd44c49d75bb12b9b79e7a",
-      "rank": 9,
+      "rank": 8,
       "title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
       "company": "LinkedIn Remote Network",
       "company_initials": "LI",
@@ -1005,7 +902,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
+      "discovered_at": "2026-09-10T21:54:12.238749+00:00",
       "raw_title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
       "raw_company": "LinkedIn Remote Network",
       "raw_description": "Continuous verified stream of remote GoHighLevel positions posted within the last 7 days across top marketing agencies, covering funnel development, CRM automations, and A2P messaging setup.",
@@ -1013,7 +910,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
+      "last_seen_at": "2026-09-10T21:54:12.238675+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -1021,7 +918,7 @@
     {
       "id": "ghl-cf862e04",
       "fingerprint": "cf862e0496c1df375dd68640727ffee8",
-      "rank": 10,
+      "rank": 9,
       "title": "Full Stack Engineer - GoHighLevel",
       "company": "Grant Cardone Enterprises",
       "company_initials": "GR",
@@ -1111,7 +1008,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
       "original_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
+      "discovered_at": "2026-09-10T21:54:12.238749+00:00",
       "raw_title": "Full Stack Engineer - GoHighLevel",
       "raw_company": "Grant Cardone Enterprises",
       "raw_description": "Role requires full-stack GoHighLevel engineering: custom JavaScript/CSS enhancements, REST API integrations, custom webhook routing, sub-account snapshot provisioning, and automated marketing workflows.",
@@ -1119,7 +1016,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
+      "last_seen_at": "2026-09-10T21:54:12.238675+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -1127,7 +1024,7 @@
     {
       "id": "ghl-c1ec1ef9",
       "fingerprint": "c1ec1ef99a3f667f1e5a98e657144226",
-      "rank": 11,
+      "rank": 10,
       "title": "Full Stack Developer - GoHighLevel",
       "company": "Cardone Training Technologies, Inc.",
       "company_initials": "CA",
@@ -1215,7 +1112,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
       "original_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
-      "discovered_at": "2026-09-10T17:04:01.959092+00:00",
+      "discovered_at": "2026-09-10T21:54:12.238749+00:00",
       "raw_title": "Full Stack Developer - GoHighLevel",
       "raw_company": "Cardone Training Technologies, Inc.",
       "raw_description": "Direct match for building enterprise GoHighLevel systems, maintaining complex sub-account snapshots, handling high-volume lead routing triggers, and integrating external payment and CRM APIs with GHL.",
@@ -1223,7 +1120,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-10T17:04:01.959036+00:00",
+      "last_seen_at": "2026-09-10T21:54:12.238675+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
