@@ -1,11 +1,11 @@
 {
   "metadata": {
     "search_date": "2026-09-13",
-    "search_time": "04:46 PKT",
-    "search_time_slug": "04-46",
-    "last_updated": "13 Sep 2026, 04:46 AM PKT",
-    "next_update": "13 Sep 2026, 06:00 AM PKT",
-    "next_update_iso": "2026-09-13T06:00:00+00:00",
+    "search_time": "10:41 PKT",
+    "search_time_slug": "10-41",
+    "last_updated": "13 Sep 2026, 10:41 AM PKT",
+    "next_update": "13 Sep 2026, 12:00 PM PKT",
+    "next_update_iso": "2026-09-13T12:00:00+00:00",
     "schedule_interval_hours": 3,
     "schedule_times_pkt": [
       "00:00",
@@ -60,21 +60,21 @@
       "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
     },
     "kpis": {
-      "total_discovered": 11,
-      "new_jobs_count": 1,
-      "active_jobs_count": 11,
-      "fresh_jobs_count": 11,
-      "today_count": 3,
+      "total_discovered": 10,
+      "new_jobs_count": 0,
+      "active_jobs_count": 10,
+      "fresh_jobs_count": 10,
+      "today_count": 2,
       "three_days_count": 6,
       "seven_days_count": 2,
       "applied_count": 0,
       "interviews_count": 0,
       "offers_count": 0,
       "saved_count": 0,
-      "top_match_score": 90.5,
-      "avg_match_score": 88.8,
+      "top_match_score": 87.5,
+      "avg_match_score": 88.6,
       "top_5_count": 5,
-      "priority_1_apply_count": 10,
+      "priority_1_apply_count": 9,
       "priority_2_consider_count": 1,
       "remote_worldwide_percentage": 100
     },
@@ -86,114 +86,9 @@
   },
   "jobs": [
     {
-      "id": "ghl-5d2d17e5",
-      "fingerprint": "5d2d17e5ac1875ed38ac6aeadc8d87b3",
-      "rank": 1,
-      "title": "Sr. Manager, Product Design",
-      "company": "HighLevel",
-      "company_initials": "HI",
-      "company_color": "#2563EB",
-      "company_logo": "https://cdn-images.himalayas.app/en0qex9edeqfo3uqtxi3l25uudv0",
-      "location": "Worldwide Remote",
-      "eligible_locations": [
-        "Worldwide Remote"
-      ],
-      "remote_eligibility": "Open Globally",
-      "work_mode": "100% Remote",
-      "salary": "Competitive / Disclosed on Application",
-      "employment_type": "Full-Time Remote",
-      "experience_req": "2\u20134 years",
-      "candidate_exp": "4 years",
-      "posted_date": "2026-09-13",
-      "posted_days_ago": 0,
-      "posted_relative": "Posted today",
-      "freshness_badge": "TODAY",
-      "freshness_priority": 0,
-      "freshness_tier": "0\u20131 Days",
-      "score": 90.5,
-      "category": "Excellent Match",
-      "priority": "Priority 1 \u2014 Apply",
-      "priority_class": "prio-apply",
-      "priority_icon": "\ud83d\udd25",
-      "score_breakdown": {
-        "technical_skills": {
-          "score": 25,
-          "max": 30,
-          "label": "Technical Skills (GHL, n8n, APIs)"
-        },
-        "experience": {
-          "score": 19.0,
-          "max": 20,
-          "label": "Relevant Experience (4 Yrs GHL)"
-        },
-        "role_alignment": {
-          "score": 13.5,
-          "max": 15,
-          "label": "Role Alignment (GHL Lead)"
-        },
-        "ai_relevance": {
-          "score": 14.5,
-          "max": 15,
-          "label": "AI & Automation Relevance"
-        },
-        "location": {
-          "score": 10.0,
-          "max": 10,
-          "label": "Remote Compatibility"
-        },
-        "compensation": {
-          "score": 4.0,
-          "max": 5,
-          "label": "Compensation"
-        },
-        "career_potential": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Career Potential"
-        }
-      },
-      "ghl_evidence": "...h3>About <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a> </h3> <p><a href=\"https://himalayas.app/comp...",
-      "ghl_evidence_source": "job_description",
-      "role_category": "GHL_DEVELOPER",
-      "matched_skills": [
-        "GoHighLevel",
-        "Workflow Automation",
-        "SaaS Mode",
-        "REST APIs",
-        "Opportunity Pipelines"
-      ],
-      "missing_skills": [
-        "None identified in listed technical scope"
-      ],
-      "advantage_skills": [
-        "4 Years GHL Experience",
-        "50+ Built Funnels",
-        "n8n & Webhooks",
-        "Portfolio (sohaibmahmood.vibepreview.com)"
-      ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: h3>About <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a> </h3> <p><a href=\"https://himalayas.app/comp",
-      "concerns": "Verify timezone overlap during initial call.",
-      "source": "Himalayas",
-      "source_type": "himalayas_api",
-      "app_url": "https://himalayas.app/jobs/",
-      "original_url": "https://himalayas.app/jobs/",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
-      "raw_title": "Sr. Manager, Product Design",
-      "raw_company": "HighLevel",
-      "raw_description": "<div>\n<h3>About <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a>\n</h3>\n<p><a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a> is an AI-powered business operating system that gives agencies, entrepreneurs and SMBs the infrastructure to build, automate and scale. Today, <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a> supports businesses across 150+ countries and powers more than 4 billion API hits and 2.5 billion message events daily.</p>\n<p>With over 2,000 team members across 10+ countries, <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a> operates as a global, remote-first organization built for speed, ownership and customer impact. Every month, <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a> enables more than 1.5 billion messages, 200 million leads and 20 million conversations for the more than 1 million businesses we support.</p>\n<h3>Role overview</h3>\n<p>We are seeking a Senior Manager, Product Design to lead design for <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a>'s core platform experiences, mobile experiences for native platforms and design system team. This role will report to the Senior Director, Product Design and manage approximately 8 product designers across the United States and India.</p>\n<p>This is a craft-driven senior design manager role for someone who can help create a step change in <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a>'s design practice. The ideal candidate brings exceptional aesthetic judgment, visual craft and interaction-design taste, plus the leadership ability to turn those standards into better work from the team.</p>\n<p>A major part of this role will be line managing the design system team and helping level up design system strategy and execution, in partnership with the Senior Director, Product Design, who owns the design system as part of their broader portfolio. The goal is not only better internal tooling, but major improvements to the UX/UI our customers experience every day.</p>\n<p><a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a> values velocity, ownership and practical innovation. We are actively adopting AI-assisted production workflows, including tools such as Cursor and Claude Code, and we are looking for design leaders who are curious about new ways of working and eager to help teams get to better results more quickly.</p>\n<h3>Product and design scope</h3>\n<p>You will lead design execution and quality across three connected areas:</p>\n<ul>\n<li><p>Core platform experiences that help agencies and SMBs manage customers, work across accounts, navigate the product, configure settings and complete essential business workflows</p></li>\n<li><p>Mobile experiences for native platforms that make <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a>'s most important workflows accessible, focused and effective for customers on the go</p></li>\n<li><p>Design system strategy, execution and team practices, including AI-assisted production workflows, that help designers and engineers deliver a vastly better, more consistent customer experience</p></li>\n</ul>\n<h3>What you will lead</h3>\n<ul>\n<li><p>A team of approximately 8 product designers across US and India teams, including coaching, career development, performance management, prioritization and staffing</p></li>\n<li><p>Design quality and execution across core platform experiences, native mobile surfaces and design system work</p></li>\n<li><p>Line management for the design system team, in partnership with the Senior Director on design system strategy, priorities and adoption</p></li>\n<li><p>A high-velocity operating rhythm for critiques, reviews, planning, feedback loops and cross-functional alignment</p></li>\n<li><p>A meaningfully higher bar for aesthetic quality, visual design, interaction design, information architecture, product thinking and end-to-end usability</p></li>\n<li><p>Talent development, including elevating strong performers and supporting designers who need clearer expectations or additional coaching</p></li>\n</ul>\n<h3>Key responsibilities</h3>\n<h3>1. Team leadership and management</h3>\n<ul>\n<li><p>Manage, coach and develop approximately 8 product designers across US and India teams</p></li>\n<li><p>Set clear expectations for quality, ownership, collaboration and delivery</p></li>\n<li><p>Hire excellent talent, onboard new designers and help the team grow with intention</p></li>\n<li><p>Elevate designers through coaching, stretch opportunities and clear development plans</p></li>\n<li><p>Performance manage thoughtfully and directly when designers need additional support, sharper expectations or role calibration</p></li>\n<li><p>Build a team culture that values speed, ownership, craft and customer impact</p></li>\n</ul>\n<h3>2. Craft, aesthetic quality and product excellence</h3>\n<ul>\n<li><p>Raise the bar for design output across aesthetic quality, visual craft, interaction quality, product design thinking and customer-centered execution</p></li>\n<li><p>Help create a step change in <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a>'s design practice by making quality standards sharper, more visible and more consistently applied</p></li>\n<li><p>Lead critiques and quality reviews that improve the work before it reaches customers</p></li>\n<li><p>Ensure major releases are grounded in clear user needs, thoughtful flows, durable interaction patterns and refined visual execution</p></li>\n<li><p>Encourage responsible use of AI-assisted tools and workflows to accelerate exploration, prototyping, documentation and production collaboration</p></li>\n</ul>\n<h3>3. Core platform and mobile design leadership</h3>\n<ul>\n<li><p>Lead design execution across core platform experiences that support navigation, account management, configuration, workflow execution and customer operations</p></li>\n<li><p>Guide mobile design for native platforms, ensuring the experience is focused, useful and appropriately adapted to mobile customer needs</p></li>\n<li><p>Partner with Product and Engineering to clarify priorities, shape roadmaps, identify tradeoffs and maintain a high-quality customer experience</p></li>\n<li><p>Connect work across desktop, mobile and shared platform surfaces so customers experience <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a> as one coherent product</p></li>\n</ul>\n<h3>4. Design system leadership</h3>\n<ul>\n<li><p>Line manage the design system team and help evolve <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a>'s bespoke design system into a strategic accelerator for product quality, execution speed and customer experience</p></li>\n<li><p>Partner with the Senior Director on design system strategy, priorities, governance and adoption across the broader product portfolio</p></li>\n<li><p>Work horizontally across product, design and engineering teams to drive adoption of shared components, patterns and interaction standards</p></li>\n<li><p>Reduce pattern drift across core platform and mobile experiences through clear guidance, reusable patterns and strong examples of the desired UX/UI quality</p></li>\n</ul>\n<p><strong>5. Cross-functional collaboration and business impact</strong></p>\n<ul>\n<li><p>Build strong operating partnerships with Product, Engineering, Data, Support and Customer Success</p></li>\n<li><p>Represent design in planning, roadmap and delivery conversations with clarity and sound product judgment</p></li>\n<li><p>Work effectively across time zones and cultures, especially between US and India teams</p></li>\n<li><p>Model the pace, ownership and adaptability expected in a high-velocity product environment</p></li>\n</ul>\n<h3>Qualifications</h3>\n<ul>\n<li><p>9+ years of experience in product design, UX or related product experience disciplines, including 3+ years managing product designers</p></li>\n<li><p>Proven experience managing designers across complex B2B SaaS, platform, mobile or multi-product environments</p></li>\n<li><p>Exceptional aesthetic judgment, visual craft and interaction-design taste, with the ability to raise the quality of work across a team</p></li>\n<li><p>Experience leading critique, coaching designers and helping teams make strong design decisions</p></li>\n<li><p>Experience leading or line managing design system work, including component libraries, shared patterns, contribution models, documentation, governance or adoption across product teams</p></li>\n<li><p>Experience managing distributed teams and working across time zones; experience working closely with India-based teams is a strong plus</p></li>\n<li><p>Demonstrated ability to hire strong designers, develop existing talent and performance manage team members who need additional support</p></li>\n<li><p>Strong product judgment and comfort balancing customer needs, business outcomes, technical constraints and speed of execution</p></li>\n<li><p>Familiarity with AI-assisted production tools such as Cursor, Claude Code or exploratory \"vibe coding\" workflows, and enthusiasm for using them thoughtfully to improve design velocity and collaboration</p></li>\n<li><p>Comfort operating in fast-paced, ambiguous environments with high ownership expectations</p></li>\n</ul>\n<h3>What success looks like</h3>\n<ul>\n<li><p>Core platform and mobile experiences become more cohesive, intuitive and polished across the customer journey</p></li>\n<li><p><a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a>'s bespoke design system becomes a major force for better UX/UI, with clearer strategy, stronger execution, broader adoption and visible improvements to customer-facing quality</p></li>\n<li><p>The team's design output shows a step change in aesthetic quality, visual craft, interaction models, information architecture and end-to-end product thinking</p></li>\n<li><p>Designers receive clearer feedback, stronger coaching and better development support across both US and India teams</p></li>\n<li><p>The team embraces AI-assisted workflows to explore faster, communicate ideas more clearly and deliver better outcomes without compromising quality</p></li>\n<li><p>Product, Engineering and other partners experience Design as a clear, reliable and high-quality partner in shaping and shipping product work</p></li>\n</ul>\n<h3>Why <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a>\n</h3>\n<ul>\n<li><p>Lead design for foundational product experiences used by millions of businesses</p></li>\n<li><p>Manage and grow a talented team across US and India</p></li>\n<li><p>Help level up design system strategy and execution across a broad product platform</p></li>\n<li><p>Raise the bar for aesthetic quality, craft, interaction quality and product design excellence</p></li>\n<li><p>Work with modern AI-assisted production tools and workflows in a culture that values velocity, ownership and practical experimentation</p></li>\n<li><p>Competitive compensation, benefits and flexibility</p></li>\n</ul>\n</div><h3>EEO statement</h3><p>The company is an Equal Opportunity Employer. As an employer subject to affirmative action regulations, we invite you to voluntarily provide demographic information. This information is used solely for compliance with government recordkeeping, reporting and other legal requirements. Providing this information is voluntary and refusal to do so will not affect your application status. This data will be kept separate from your application and will not be used in the hiring decision.</p><p>We encourage you to review our Privacy Policy before submitting your application.</p><p>The salary range for this position is to be confirmed by <a href=\"https://himalayas.app/companies/highlevel\">HighLevel</a>'s People and Compensation teams.</p><p>Originally posted on <a href=\"https://himalayas.app\">Himalayas</a></p>",
-      "raw_posted_date": 1789245285,
-      "raw_app_url": "https://himalayas.app/jobs/",
-      "first_seen_at": "2026-09-13T04:46:21.705085+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
-      "status": "New Match",
-      "status_updated_at": "24 Aug 2026, 03:20 AM PKT",
-      "is_active": true
-    },
-    {
       "id": "ghl-b9a4456c",
       "fingerprint": "b9a4456c099809c18378058dd6c66205",
-      "rank": 2,
+      "rank": 1,
       "title": "GoHighLevel Workflow & CRM Automation Lead",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -282,7 +177,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
+      "discovered_at": "2026-09-13T10:41:20.607066+00:00",
       "raw_title": "GoHighLevel Workflow & CRM Automation Lead",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Seeking an experienced GoHighLevel Automation Lead to design multi-tier email/SMS follow-up campaigns, configure custom fields and pipeline stages, set up trigger links, and ensure 100% speed-to-lead execution.",
@@ -290,7 +185,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
+      "last_seen_at": "2026-09-13T10:41:20.607026+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -298,7 +193,7 @@
     {
       "id": "ghl-b0550814",
       "fingerprint": "b055081476998edb57cefd56c8aa2a57",
-      "rank": 3,
+      "rank": 2,
       "title": "GoHighLevel Technical Specialist & Funnel Builder",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -384,7 +279,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
+      "discovered_at": "2026-09-13T10:41:20.607066+00:00",
       "raw_title": "GoHighLevel Technical Specialist & Funnel Builder",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Looking for a dedicated GoHighLevel Builder to design high-converting agency client funnels, custom landing pages, multi-step booking forms, order bump upsell flows, and lead capture sequences in GoHighLevel.",
@@ -392,7 +287,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
+      "last_seen_at": "2026-09-13T10:41:20.607026+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -400,7 +295,7 @@
     {
       "id": "ghl-f414d4a0",
       "fingerprint": "f414d4a0df17684aabe3bc87db1f9d39",
-      "rank": 4,
+      "rank": 3,
       "title": "AI & Automation Specialist (GHL)",
       "company": "Jobgether Agency Partner",
       "company_initials": "JO",
@@ -489,7 +384,7 @@
       "source_type": "jobgether",
       "app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "original_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
+      "discovered_at": "2026-09-13T10:41:20.607066+00:00",
       "raw_title": "AI & Automation Specialist (GHL)",
       "raw_company": "Jobgether Agency Partner",
       "raw_description": "Requires deep expertise in GoHighLevel automation combined with external AI integrations (OpenAI API, n8n, Claude) for intelligent speed-to-lead qualification and automated calendar conversion flows.",
@@ -497,7 +392,7 @@
       "raw_app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
+      "last_seen_at": "2026-09-13T10:41:20.607026+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
@@ -505,7 +400,7 @@
     {
       "id": "ghl-8dd6ca3d",
       "fingerprint": "8dd6ca3dbc499125ca2801fbed356001",
-      "rank": 5,
+      "rank": 4,
       "title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
       "company": "Grant Cardone Enterprises",
       "company_initials": "GR",
@@ -593,7 +488,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
       "original_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
+      "discovered_at": "2026-09-13T10:41:20.607066+00:00",
       "raw_title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
       "raw_company": "Grant Cardone Enterprises",
       "raw_description": "Seeking a creative and technical Funnel Designer with deep GoHighLevel expertise to build high-converting landing pages, integrate AI automated conversation flows, and connect custom GHL workflows and webhooks.",
@@ -601,7 +496,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
+      "last_seen_at": "2026-09-13T10:41:20.607026+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -609,7 +504,7 @@
     {
       "id": "ghl-b8292943",
       "fingerprint": "b8292943a90066d56197ccdd9b9c3d70",
-      "rank": 6,
+      "rank": 5,
       "title": "GoHighLevel Snapshot & SaaS Mode Architect",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -698,7 +593,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
+      "discovered_at": "2026-09-13T10:41:20.607066+00:00",
       "raw_title": "GoHighLevel Snapshot & SaaS Mode Architect",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Responsible for managing agency client accounts, deploying custom GHL snapshots, verifying A2P 10DLC campaign compliance, setting up custom domain DNS records, and troubleshooting workflow execution logs in GoHighLevel.",
@@ -706,7 +601,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
+      "last_seen_at": "2026-09-13T10:41:20.607026+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -714,7 +609,7 @@
     {
       "id": "ghl-4192baa4",
       "fingerprint": "4192baa4ca7b5c7eb878d8fd04f523a8",
-      "rank": 7,
+      "rank": 6,
       "title": "GoHighLevel Client Onboarding Specialist",
       "company": "HighLevel Agency Partners",
       "company_initials": "HI",
@@ -802,7 +697,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
+      "discovered_at": "2026-09-13T10:41:20.607066+00:00",
       "raw_title": "GoHighLevel Client Onboarding Specialist",
       "raw_company": "HighLevel Agency Partners",
       "raw_description": "Responsible for managing end-to-end client onboarding inside GoHighLevel: deploying custom snapshots, configuring custom values and domains, setting up custom pipelines, and training client teams on GoHighLevel CRM features.",
@@ -810,7 +705,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
+      "last_seen_at": "2026-09-13T10:41:20.607026+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -818,7 +713,7 @@
     {
       "id": "ghl-43002cf2",
       "fingerprint": "43002cf28df7f6201e5361aa0cbf0ec2",
-      "rank": 8,
+      "rank": 7,
       "title": "GoHighLevel Solutions & Implementation Specialist",
       "company": "HighLevel (Official HQ)",
       "company_initials": "HI",
@@ -906,7 +801,7 @@
       "source_type": "direct_careers",
       "app_url": "https://www.gohighlevel.com/careers/",
       "original_url": "https://www.gohighlevel.com/careers/",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
+      "discovered_at": "2026-09-13T10:41:20.607066+00:00",
       "raw_title": "GoHighLevel Solutions & Implementation Specialist",
       "raw_company": "HighLevel (Official HQ)",
       "raw_description": "Work directly on GoHighLevel implementations: supporting agency owners with snapshot troubleshooting, SaaS configurator setup, custom integration via Marketplace apps, and workflow optimization.",
@@ -914,7 +809,7 @@
       "raw_app_url": "https://www.gohighlevel.com/careers/",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
+      "last_seen_at": "2026-09-13T10:41:20.607026+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
@@ -922,7 +817,7 @@
     {
       "id": "ghl-744ee657",
       "fingerprint": "744ee6577cdd44c49d75bb12b9b79e7a",
-      "rank": 9,
+      "rank": 8,
       "title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
       "company": "LinkedIn Remote Network",
       "company_initials": "LI",
@@ -1010,7 +905,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
+      "discovered_at": "2026-09-13T10:41:20.607066+00:00",
       "raw_title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
       "raw_company": "LinkedIn Remote Network",
       "raw_description": "Continuous verified stream of remote GoHighLevel positions posted within the last 7 days across top marketing agencies, covering funnel development, CRM automations, and A2P messaging setup.",
@@ -1018,7 +913,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
+      "last_seen_at": "2026-09-13T10:41:20.607026+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -1026,7 +921,7 @@
     {
       "id": "ghl-cf862e04",
       "fingerprint": "cf862e0496c1df375dd68640727ffee8",
-      "rank": 10,
+      "rank": 9,
       "title": "Full Stack Engineer - GoHighLevel",
       "company": "Grant Cardone Enterprises",
       "company_initials": "GR",
@@ -1116,7 +1011,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
       "original_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
+      "discovered_at": "2026-09-13T10:41:20.607066+00:00",
       "raw_title": "Full Stack Engineer - GoHighLevel",
       "raw_company": "Grant Cardone Enterprises",
       "raw_description": "Role requires full-stack GoHighLevel engineering: custom JavaScript/CSS enhancements, REST API integrations, custom webhook routing, sub-account snapshot provisioning, and automated marketing workflows.",
@@ -1124,7 +1019,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
+      "last_seen_at": "2026-09-13T10:41:20.607026+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -1132,7 +1027,7 @@
     {
       "id": "ghl-c1ec1ef9",
       "fingerprint": "c1ec1ef99a3f667f1e5a98e657144226",
-      "rank": 11,
+      "rank": 10,
       "title": "Full Stack Developer - GoHighLevel",
       "company": "Cardone Training Technologies, Inc.",
       "company_initials": "CA",
@@ -1220,7 +1115,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
       "original_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
-      "discovered_at": "2026-09-13T04:46:21.705136+00:00",
+      "discovered_at": "2026-09-13T10:41:20.607066+00:00",
       "raw_title": "Full Stack Developer - GoHighLevel",
       "raw_company": "Cardone Training Technologies, Inc.",
       "raw_description": "Direct match for building enterprise GoHighLevel systems, maintaining complex sub-account snapshots, handling high-volume lead routing triggers, and integrating external payment and CRM APIs with GHL.",
@@ -1228,7 +1123,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-13T04:46:21.705085+00:00",
+      "last_seen_at": "2026-09-13T10:41:20.607026+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
