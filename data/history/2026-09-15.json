@@ -1,11 +1,11 @@
 {
   "metadata": {
     "search_date": "2026-09-15",
-    "search_time": "01:09 PKT",
-    "search_time_slug": "01-09",
-    "last_updated": "15 Sep 2026, 01:09 AM PKT",
-    "next_update": "15 Sep 2026, 03:00 AM PKT",
-    "next_update_iso": "2026-09-15T03:00:00+00:00",
+    "search_time": "05:20 PKT",
+    "search_time_slug": "05-20",
+    "last_updated": "15 Sep 2026, 05:20 AM PKT",
+    "next_update": "15 Sep 2026, 06:00 AM PKT",
+    "next_update_iso": "2026-09-15T06:00:00+00:00",
     "schedule_interval_hours": 3,
     "schedule_times_pkt": [
       "00:00",
@@ -62,21 +62,21 @@
       "resume_url": "https://drive.google.com/file/d/1wCat1irNe710A_9gWgVQ0h0ljtbX_c2k/view?usp=drivesdk"
     },
     "kpis": {
-      "total_discovered": 11,
-      "new_jobs_count": 1,
-      "active_jobs_count": 11,
-      "fresh_jobs_count": 11,
-      "today_count": 3,
+      "total_discovered": 10,
+      "new_jobs_count": 0,
+      "active_jobs_count": 10,
+      "fresh_jobs_count": 10,
+      "today_count": 2,
       "three_days_count": 6,
       "seven_days_count": 2,
       "applied_count": 0,
       "interviews_count": 0,
       "offers_count": 0,
       "saved_count": 0,
-      "top_match_score": 95.5,
-      "avg_match_score": 89.2,
+      "top_match_score": 87.5,
+      "avg_match_score": 88.6,
       "top_5_count": 5,
-      "priority_1_apply_count": 10,
+      "priority_1_apply_count": 9,
       "priority_2_consider_count": 1,
       "remote_worldwide_percentage": 100
     },
@@ -88,116 +88,9 @@
   },
   "jobs": [
     {
-      "id": "ghl-27692262",
-      "fingerprint": "2769226252c895efd8010aac249ab385",
-      "rank": 1,
-      "title": "Full Stack Engineer",
-      "company": "Pavago",
-      "company_initials": "PA",
-      "company_color": "#2563EB",
-      "company_logo": "https://cdn-images.himalayas.app/q1g70vrjd2dhofu56e7xj9wodx8e",
-      "location": "Worldwide Remote",
-      "eligible_locations": [
-        "Worldwide Remote"
-      ],
-      "remote_eligibility": "Open Globally",
-      "work_mode": "100% Remote",
-      "salary": "Competitive / Disclosed on Application",
-      "employment_type": "Full-Time Remote",
-      "experience_req": "2\u20134 years",
-      "candidate_exp": "4 years",
-      "posted_date": "2026-09-15",
-      "posted_days_ago": 0,
-      "posted_relative": "Posted today",
-      "freshness_badge": "TODAY",
-      "freshness_priority": 0,
-      "freshness_tier": "0\u20131 Days",
-      "score": 95.5,
-      "category": "Excellent Match",
-      "priority": "Priority 1 \u2014 Apply",
-      "priority_class": "prio-apply",
-      "priority_icon": "\ud83d\udd25",
-      "score_breakdown": {
-        "technical_skills": {
-          "score": 30,
-          "max": 30,
-          "label": "Technical Skills (GHL, n8n, APIs)"
-        },
-        "experience": {
-          "score": 19.0,
-          "max": 20,
-          "label": "Relevant Experience (4 Yrs GHL)"
-        },
-        "role_alignment": {
-          "score": 13.5,
-          "max": 15,
-          "label": "Role Alignment (GHL Lead)"
-        },
-        "ai_relevance": {
-          "score": 14.5,
-          "max": 15,
-          "label": "AI & Automation Relevance"
-        },
-        "location": {
-          "score": 10.0,
-          "max": 10,
-          "label": "Remote Compatibility"
-        },
-        "compensation": {
-          "score": 4.0,
-          "max": 5,
-          "label": "Compensation"
-        },
-        "career_potential": {
-          "score": 4.5,
-          "max": 5,
-          "label": "Career Potential"
-        }
-      },
-      "ghl_evidence": "...rations with CRM platforms such as:</li> <ul> <li>GoHighLevel</li> <li>Close CRM</li> <li>HubSpot</li> <li>Similar platfo...",
-      "ghl_evidence_source": "job_description",
-      "role_category": "GHL_DEVELOPER",
-      "matched_skills": [
-        "GoHighLevel",
-        "Workflow Automation",
-        "REST APIs",
-        "Webhooks",
-        "Zapier",
-        "AI / LLM Workflows",
-        "Opportunity Pipelines"
-      ],
-      "missing_skills": [
-        "None identified in listed technical scope"
-      ],
-      "advantage_skills": [
-        "4 Years GHL Experience",
-        "50+ Built Funnels",
-        "n8n & Webhooks",
-        "Portfolio (sohaibmahmood.vibepreview.com)"
-      ],
-      "why_matches": "Explicitly requires GoHighLevel expertise: rations with CRM platforms such as:</li> <ul> <li>GoHighLevel</li> <li>Close CRM</li> <li>HubSpot</li> <li>Similar platfo",
-      "concerns": "Verify timezone overlap during initial call.",
-      "source": "Himalayas",
-      "source_type": "himalayas_api",
-      "app_url": "https://himalayas.app/jobs/",
-      "original_url": "https://himalayas.app/jobs/",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
-      "raw_title": "Full Stack Engineer",
-      "raw_company": "Pavago",
-      "raw_description": "<h3><strong>Full Stack Engineer (Next.js, React, Python, AI &amp; Marketing Tech) \u2013 Remote | EST Hours</strong></h3><p><strong>Position Type:</strong> Full-Time, Remote<br><strong>Working Hours:</strong> U.S. Business Hours \u2013 EST</p><h3><strong>About the Role</strong></h3><p>At <a href=\"https://himalayas.app/companies/pavago\">Pavago</a>, one of our clients \u2014 a fast-growing marketing agency serving <strong>150+ home service businesses</strong> \u2014 is hiring a hands-on <strong>Full Stack Engineer</strong> to build internal tools, marketing technology, AI-powered workflows, and automation systems.</p><p>This is a <strong>builder role, not a strategy-only position</strong>.</p><h3>You\u2019ll work directly across:</h3><ul>\n<li>Full-stack application development</li>\n<li>Marketing data and attribution</li>\n<li>Meta Pixel &amp; Conversion API (CAPI)</li>\n<li>CRM integrations and automation</li>\n<li>AI-powered marketing workflows</li>\n<li>Internal dashboards and reporting tools</li>\n</ul><p>You\u2019ll collaborate closely with leadership, media buyers, and operators to turn operational challenges into production-ready systems that directly improve campaign performance, lead conversion, and efficiency.</p><h3><strong>What You\u2019ll Own</strong></h3><h3><strong>Full Stack &amp; Internal Tool Development</strong></h3><ul>\n<li>Build and deploy production-ready internal tools using:</li>\n<ul>\n<li>Next.js</li>\n<li>React</li>\n<li>Python</li>\n</ul>\n<li>Develop:</li>\n<ul>\n<li>Marketing dashboards</li>\n<li>Reporting systems</li>\n<li>Internal operational tools</li>\n<li>Workflow automation</li>\n</ul>\n<li>Replace repetitive manual processes with scalable software solutions</li>\n<li>Build reliable systems used directly by media buyers and operational teams</li>\n</ul><h3><strong>Marketing Tracking, Data &amp; Attribution</strong></h3><ul>\n<li>Implement and optimize:</li>\n<ul>\n<li>Meta Pixel</li>\n<li>Meta Conversion API (CAPI)</li>\n</ul>\n<li>Manage:</li>\n<ul>\n<li>Event tracking</li>\n<li>Event deduplication</li>\n<li>Conversion attribution</li>\n<li>Offline conversion syncing</li>\n</ul>\n<li>Build data pipelines connecting:</li>\n<ul>\n<li>Ad platforms</li>\n<li>Backend systems</li>\n<li>CRMs</li>\n<li>Reporting dashboards</li>\n</ul>\n<li>Ensure campaign data remains accurate and actionable</li>\n<li>Support reporting across metrics such as:</li>\n<ul>\n<li>ROAS</li>\n<li>CPL</li>\n<li>CAC</li>\n<li>Conversion rates</li>\n<li>Lead quality</li>\n</ul>\n</ul><h3><strong>CRM &amp; Lead Lifecycle Automation</strong></h3><ul>\n<li>Build integrations with CRM platforms such as:</li>\n<ul>\n<li>GoHighLevel</li>\n<li>Close CRM</li>\n<li>HubSpot</li>\n<li>Similar platforms</li>\n</ul>\n<li>Connect the full lead lifecycle:</li>\n<ul>\n<li>Lead capture</li>\n<li>CRM entry</li>\n<li>Lead routing</li>\n<li>Follow-ups</li>\n<li>Pipeline progression</li>\n<li>Conversion tracking</li>\n</ul>\n<li>Build automations using APIs and webhooks</li>\n<li>Sync CRM outcomes back to advertising platforms for attribution and optimization</li>\n<li>Maintain data consistency across CRM, marketing, and reporting systems</li>\n</ul><h3><strong>AI Integration &amp; Automation</strong></h3><ul>\n<li>Integrate AI into real-world marketing workflows</li>\n<li>Work with APIs such as OpenAI and similar AI platforms</li>\n<li>Build AI-powered systems for:</li>\n<ul>\n<li>Ad copy generation</li>\n<li>Creative generation workflows</li>\n<li>Lead scoring</li>\n<li>Lead qualification</li>\n<li>Campaign analysis</li>\n<li>Automated reporting and insights</li>\n</ul>\n<li>Embed AI capabilities into production marketing and operational systems</li>\n<li>Identify opportunities to reduce manual work through intelligent automation</li>\n</ul><h3><strong>Rapid Development &amp; Iteration</strong></h3><ul>\n<li>Ship working solutions quickly and iterate based on real-world usage</li>\n<li>Work directly with media buyers to identify campaign bottlenecks</li>\n<li>Troubleshoot technical issues affecting:</li>\n<ul>\n<li>Tracking</li>\n<li>Attribution</li>\n<li>CRM workflows</li>\n<li>Reporting</li>\n<li>Lead conversion</li>\n</ul>\n<li>Continuously improve internal systems based on campaign data and team feedback</li>\n</ul><h3><strong>Required Experience &amp; Skills</strong></h3><h3><strong>Non-Negotiables</strong></h3><ul>\n<li><strong>4\u20136+ years of hands-on software engineering experience</strong></li>\n<li>Strong full-stack development experience with:</li>\n<ul>\n<li>React</li>\n<li>Next.js</li>\n<li>Python</li>\n</ul>\n<li>Proven experience building and deploying <strong>production-level applications or internal tools</strong>\n</li>\n<li>Strong experience with:</li>\n<ul>\n<li>APIs</li>\n<li>Webhooks</li>\n<li>System integrations</li>\n<li>Automation workflows</li>\n</ul>\n<li>Active use of AI tools in day-to-day engineering work</li>\n<li>Hands-on experience in a <strong>marketing, advertising, or ad-tech environment</strong>\n</li>\n<li>Experience with <strong>Meta Pixel and/or Conversion API (CAPI)</strong>, including:</li>\n<ul>\n<li>Event tracking</li>\n<li>Deduplication</li>\n<li>Attribution</li>\n</ul>\n<li>Experience building marketing dashboards or reporting systems</li>\n<li>Hands-on CRM integration experience with platforms such as:</li>\n<ul>\n<li>GoHighLevel</li>\n<li>Close</li>\n<li>HubSpot</li>\n</ul>\n<li>Experience automating:</li>\n<ul>\n<li>Lead capture</li>\n<li>Lead routing</li>\n<li>Pipeline management</li>\n<li>Conversion tracking</li>\n</ul>\n<li>Experience connecting advertising platforms with CRM systems for attribution and reporting</li>\n<li>Strong builder mindset with a bias toward execution</li>\n</ul><h3><strong>Nice to Have</strong></h3><ul>\n<li>Performance marketing agency experience</li>\n<li>Experience supporting high-volume paid advertising campaigns</li>\n<li>Understanding of:</li>\n<ul>\n<li>ROAS</li>\n<li>CPL</li>\n<li>CAC</li>\n<li>Conversion rates</li>\n<li>Lead quality</li>\n</ul>\n<li>Experience with:</li>\n<ul>\n<li>Zapier</li>\n<li>Make</li>\n<li>Similar automation platforms</li>\n</ul>\n<li>Understanding of marketing data pipelines</li>\n<li>Familiarity with attribution challenges related to:</li>\n<ul>\n<li>iOS privacy changes</li>\n<li>Browser tracking limitations</li>\n<li>Server-side tracking</li>\n</ul>\n<li>Experience developing AI-powered internal tools</li>\n</ul><h3><strong>What Makes You a Strong Fit</strong></h3><ul>\n<li>You\u2019re an engineer who enjoys <strong>building and shipping</strong>, not just planning architecture</li>\n<li>You understand both software engineering and the realities of performance marketing</li>\n<li>You know how marketing data moves between ad platforms, backend systems, and CRMs</li>\n<li>You can troubleshoot attribution and tracking problems</li>\n<li>You\u2019re comfortable integrating APIs and automating complex workflows</li>\n<li>You actively use AI to improve engineering speed and business processes</li>\n<li>You can work directly with non-technical teams such as media buyers and marketers</li>\n<li>You move quickly without sacrificing reliability</li>\n</ul><h3><strong>What a Typical Day Looks Like</strong></h3><p>You might start by reviewing tracking data and investigating an attribution discrepancy between Meta Ads and the CRM.</p><p>Later, you could build a new Next.js dashboard for media buyers, implement a Python service that scores incoming leads using AI, or create a webhook integration that sends CRM conversion outcomes back through Meta CAPI.</p><p>You\u2019ll work closely with media buyers and leadership to identify bottlenecks, build solutions, deploy them, and iterate based on real campaign performance.</p><p><strong>In short:</strong> you build the technology connecting advertising, CRM, AI, data, and operations \u2014 helping the agency run faster and make better marketing decisions.</p><h3><strong>Key Metrics for Success</strong></h3><ul>\n<li>Internal tools actively adopted by media buyers and operators</li>\n<li>Accurate Meta Pixel/CAPI tracking and attribution</li>\n<li>Reliable CRM and advertising-platform data synchronization</li>\n<li>Reduction in manual marketing and operational workflows</li>\n<li>Faster campaign reporting and execution</li>\n<li>Improved lead tracking and conversion visibility</li>\n<li>Successful deployment of AI-powered workflows</li>\n<li>Reliability and scalability of production systems</li>\n</ul><h3><strong>Why This Role Stands Out</strong></h3><ul>\n<li>Build technology directly tied to marketing performance and revenue</li>\n<li>Work across <strong>software engineering + AI + ad tech</strong>\n</li>\n<li>High ownership over internal products and systems</li>\n<li>Direct collaboration with leadership and performance marketing teams</li>\n<li>Opportunity to build AI systems used in real production workflows</li>\n<li>Work with marketing operations supporting <strong>150+ home service businesses</strong>\n</li>\n<li>Fully remote environment with significant autonomy</li>\n</ul><h3><strong>Interview Process</strong></h3><ol>\n<li>Initial Application Review</li>\n<li><strong>Spark Hire Intro Video</strong></li>\n<li>Video Interview with <a href=\"https://himalayas.app/companies/pavago\">Pavago</a> Recruiter</li>\n<li>Client Interview</li>\n<li>Offer &amp; Background Verification</li>\n</ol><h3><strong>Apply Now</strong></h3><p>If you\u2019re a <strong>Full Stack Engineer with strong React, Next.js, and Python skills</strong> who has hands-on experience with <strong>marketing technology, Meta CAPI, CRM integrations, attribution, and AI-powered automation</strong>, we\u2019d love to hear from you.</p><p>Apply today and build systems that directly improve <strong>campaign performance, lead conversion, and operational efficiency</strong>.</p><p><strong>#FullStackEngineer #NextJS #ReactJS #PythonDeveloper #SoftwareEngineer #AdTech #MarTech #MetaCAPI #AIEngineer #CRMIntegration #MarketingTechnology #RemoteDeveloper #RemoteJobs</strong></p><p>Originally posted on <a href=\"https://himalayas.app\">Himalayas</a></p>",
-      "raw_posted_date": 1789414492,
-      "raw_app_url": "https://himalayas.app/jobs/",
-      "first_seen_at": "2026-09-15T01:09:34.176098+00:00",
-      "is_new": true,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
-      "status": "New Match",
-      "status_updated_at": "24 Aug 2026, 03:20 AM PKT",
-      "is_active": true
-    },
-    {
       "id": "ghl-b9a4456c",
       "fingerprint": "b9a4456c099809c18378058dd6c66205",
-      "rank": 2,
+      "rank": 1,
       "title": "GoHighLevel Workflow & CRM Automation Lead",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -286,7 +179,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
+      "discovered_at": "2026-09-15T05:20:12.310669+00:00",
       "raw_title": "GoHighLevel Workflow & CRM Automation Lead",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Seeking an experienced GoHighLevel Automation Lead to design multi-tier email/SMS follow-up campaigns, configure custom fields and pipeline stages, set up trigger links, and ensure 100% speed-to-lead execution.",
@@ -294,7 +187,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
+      "last_seen_at": "2026-09-15T05:20:12.310615+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -302,7 +195,7 @@
     {
       "id": "ghl-b0550814",
       "fingerprint": "b055081476998edb57cefd56c8aa2a57",
-      "rank": 3,
+      "rank": 2,
       "title": "GoHighLevel Technical Specialist & Funnel Builder",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -388,7 +281,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
+      "discovered_at": "2026-09-15T05:20:12.310669+00:00",
       "raw_title": "GoHighLevel Technical Specialist & Funnel Builder",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Looking for a dedicated GoHighLevel Builder to design high-converting agency client funnels, custom landing pages, multi-step booking forms, order bump upsell flows, and lead capture sequences in GoHighLevel.",
@@ -396,7 +289,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
+      "last_seen_at": "2026-09-15T05:20:12.310615+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -404,7 +297,7 @@
     {
       "id": "ghl-f414d4a0",
       "fingerprint": "f414d4a0df17684aabe3bc87db1f9d39",
-      "rank": 4,
+      "rank": 3,
       "title": "AI & Automation Specialist (GHL)",
       "company": "Jobgether Agency Partner",
       "company_initials": "JO",
@@ -493,7 +386,7 @@
       "source_type": "jobgether",
       "app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "original_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
+      "discovered_at": "2026-09-15T05:20:12.310669+00:00",
       "raw_title": "AI & Automation Specialist (GHL)",
       "raw_company": "Jobgether Agency Partner",
       "raw_description": "Requires deep expertise in GoHighLevel automation combined with external AI integrations (OpenAI API, n8n, Claude) for intelligent speed-to-lead qualification and automated calendar conversion flows.",
@@ -501,7 +394,7 @@
       "raw_app_url": "https://jobgether.com/offer/69dfbd57c646310ee38fbfac-ai-automation-specialist-ghl",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
+      "last_seen_at": "2026-09-15T05:20:12.310615+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
@@ -509,7 +402,7 @@
     {
       "id": "ghl-8dd6ca3d",
       "fingerprint": "8dd6ca3dbc499125ca2801fbed356001",
-      "rank": 5,
+      "rank": 4,
       "title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
       "company": "Grant Cardone Enterprises",
       "company_initials": "GR",
@@ -597,7 +490,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
       "original_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
+      "discovered_at": "2026-09-15T05:20:12.310669+00:00",
       "raw_title": "Funnel Designer & AI-Enabled Web Builder (GoHighLevel)",
       "raw_company": "Grant Cardone Enterprises",
       "raw_description": "Seeking a creative and technical Funnel Designer with deep GoHighLevel expertise to build high-converting landing pages, integrate AI automated conversation flows, and connect custom GHL workflows and webhooks.",
@@ -605,7 +498,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/funnel-designer-ai-enabled-web-builder-at-grant-cardone-enterprises-4455368636",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
+      "last_seen_at": "2026-09-15T05:20:12.310615+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -613,7 +506,7 @@
     {
       "id": "ghl-b8292943",
       "fingerprint": "b8292943a90066d56197ccdd9b9c3d70",
-      "rank": 6,
+      "rank": 5,
       "title": "GoHighLevel Snapshot & SaaS Mode Architect",
       "company": "Direct Agency Employer",
       "company_initials": "DI",
@@ -702,7 +595,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "original_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
+      "discovered_at": "2026-09-15T05:20:12.310669+00:00",
       "raw_title": "GoHighLevel Snapshot & SaaS Mode Architect",
       "raw_company": "Direct Agency Employer",
       "raw_description": "Responsible for managing agency client accounts, deploying custom GHL snapshots, verifying A2P 10DLC campaign compliance, setting up custom domain DNS records, and troubleshooting workflow execution logs in GoHighLevel.",
@@ -710,7 +603,7 @@
       "raw_app_url": "https://www.onlinejobs.ph/jobseekers/jobsearch?jobkeyword=GoHighLevel",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
+      "last_seen_at": "2026-09-15T05:20:12.310615+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -718,7 +611,7 @@
     {
       "id": "ghl-4192baa4",
       "fingerprint": "4192baa4ca7b5c7eb878d8fd04f523a8",
-      "rank": 7,
+      "rank": 6,
       "title": "GoHighLevel Client Onboarding Specialist",
       "company": "HighLevel Agency Partners",
       "company_initials": "HI",
@@ -806,7 +699,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
+      "discovered_at": "2026-09-15T05:20:12.310669+00:00",
       "raw_title": "GoHighLevel Client Onboarding Specialist",
       "raw_company": "HighLevel Agency Partners",
       "raw_description": "Responsible for managing end-to-end client onboarding inside GoHighLevel: deploying custom snapshots, configuring custom values and domains, setting up custom pipelines, and training client teams on GoHighLevel CRM features.",
@@ -814,7 +707,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
+      "last_seen_at": "2026-09-15T05:20:12.310615+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -822,7 +715,7 @@
     {
       "id": "ghl-43002cf2",
       "fingerprint": "43002cf28df7f6201e5361aa0cbf0ec2",
-      "rank": 8,
+      "rank": 7,
       "title": "GoHighLevel Solutions & Implementation Specialist",
       "company": "HighLevel (Official HQ)",
       "company_initials": "HI",
@@ -910,7 +803,7 @@
       "source_type": "direct_careers",
       "app_url": "https://www.gohighlevel.com/careers/",
       "original_url": "https://www.gohighlevel.com/careers/",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
+      "discovered_at": "2026-09-15T05:20:12.310669+00:00",
       "raw_title": "GoHighLevel Solutions & Implementation Specialist",
       "raw_company": "HighLevel (Official HQ)",
       "raw_description": "Work directly on GoHighLevel implementations: supporting agency owners with snapshot troubleshooting, SaaS configurator setup, custom integration via Marketplace apps, and workflow optimization.",
@@ -918,7 +811,7 @@
       "raw_app_url": "https://www.gohighlevel.com/careers/",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
+      "last_seen_at": "2026-09-15T05:20:12.310615+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 03:19 AM PKT",
       "is_active": true
@@ -926,7 +819,7 @@
     {
       "id": "ghl-744ee657",
       "fingerprint": "744ee6577cdd44c49d75bb12b9b79e7a",
-      "rank": 9,
+      "rank": 8,
       "title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
       "company": "LinkedIn Remote Network",
       "company_initials": "LI",
@@ -1014,7 +907,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "original_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
+      "discovered_at": "2026-09-15T05:20:12.310669+00:00",
       "raw_title": "GoHighLevel CRM & Funnel Specialist (Past 7 Days Stream)",
       "raw_company": "LinkedIn Remote Network",
       "raw_description": "Continuous verified stream of remote GoHighLevel positions posted within the last 7 days across top marketing agencies, covering funnel development, CRM automations, and A2P messaging setup.",
@@ -1022,7 +915,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/search/?keywords=GoHighLevel&f_TPR=r604800&f_WT=2",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
+      "last_seen_at": "2026-09-15T05:20:12.310615+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -1030,7 +923,7 @@
     {
       "id": "ghl-cf862e04",
       "fingerprint": "cf862e0496c1df375dd68640727ffee8",
-      "rank": 10,
+      "rank": 9,
       "title": "Full Stack Engineer - GoHighLevel",
       "company": "Grant Cardone Enterprises",
       "company_initials": "GR",
@@ -1120,7 +1013,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
       "original_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
+      "discovered_at": "2026-09-15T05:20:12.310669+00:00",
       "raw_title": "Full Stack Engineer - GoHighLevel",
       "raw_company": "Grant Cardone Enterprises",
       "raw_description": "Role requires full-stack GoHighLevel engineering: custom JavaScript/CSS enhancements, REST API integrations, custom webhook routing, sub-account snapshot provisioning, and automated marketing workflows.",
@@ -1128,7 +1021,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-engineer-gohighlevel-at-grant-cardone-enterprises-4454584202",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
+      "last_seen_at": "2026-09-15T05:20:12.310615+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
@@ -1136,7 +1029,7 @@
     {
       "id": "ghl-c1ec1ef9",
       "fingerprint": "c1ec1ef99a3f667f1e5a98e657144226",
-      "rank": 11,
+      "rank": 10,
       "title": "Full Stack Developer - GoHighLevel",
       "company": "Cardone Training Technologies, Inc.",
       "company_initials": "CA",
@@ -1224,7 +1117,7 @@
       "source_type": "verified_ats",
       "app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
       "original_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
-      "discovered_at": "2026-09-15T01:09:34.176158+00:00",
+      "discovered_at": "2026-09-15T05:20:12.310669+00:00",
       "raw_title": "Full Stack Developer - GoHighLevel",
       "raw_company": "Cardone Training Technologies, Inc.",
       "raw_description": "Direct match for building enterprise GoHighLevel systems, maintaining complex sub-account snapshots, handling high-volume lead routing triggers, and integrating external payment and CRM APIs with GHL.",
@@ -1232,7 +1125,7 @@
       "raw_app_url": "https://www.linkedin.com/jobs/view/full-stack-developer-gohighlevel-at-cardone-training-technologies-inc-4454800361",
       "first_seen_at": "2026-08-20T07:16:23.250304+00:00",
       "is_new": false,
-      "last_seen_at": "2026-09-15T01:09:34.176098+00:00",
+      "last_seen_at": "2026-09-15T05:20:12.310615+00:00",
       "status": "New Match",
       "status_updated_at": "20 Aug 2026, 07:16 AM PKT",
       "is_active": true
