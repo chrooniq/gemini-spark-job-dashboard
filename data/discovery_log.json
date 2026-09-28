@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-28T19:58:53.080036+00:00",
+  "timestamp": "2026-09-29T02:36:18.185345+00:00",
   "sources": {
     "RapidAPI JSearch": {
       "status": "OK",
@@ -15,7 +15,7 @@
     },
     "Himalayas API": {
       "status": "OK",
-      "raw_count": 1
+      "raw_count": 0
     },
     "Remote Jobs Directory (PDF Companies)": {
       "status": "OK",
@@ -26,11 +26,11 @@
       "raw_count": 10
     }
   },
-  "raw_harvested": 11,
-  "verified_ghl": 11,
+  "raw_harvested": 10,
+  "verified_ghl": 10,
   "rejected_non_ghl": 0,
   "rejected_forbidden_titles": 0,
   "rejected_expired": 0,
   "duplicates_collapsed": 0,
-  "final_verified_ghl_jobs": 11
+  "final_verified_ghl_jobs": 10
 }
